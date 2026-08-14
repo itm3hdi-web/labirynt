@@ -7,9 +7,9 @@
 <title>Labyrinthe Hardcore</title>
 
 <style>
+
 * {
     box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
 }
 
 html,
@@ -18,361 +18,563 @@ body {
     padding: 0;
     width: 100%;
     min-height: 100%;
-    overflow-x: hidden;
-    font-family: Arial, sans-serif;
-    background:
-        radial-gradient(circle at top, #26345f 0%, #111525 40%, #05070d 100%);
-    color: white;
 }
 
-/* =========================
-   ACCUEIL
-========================= */
+body {
+    background:
+        radial-gradient(circle at 20% 20%, #18294a 0%, transparent 35%),
+        radial-gradient(circle at 80% 80%, #32183f 0%, transparent 35%),
+        linear-gradient(135deg, #050814, #10182c, #080b16);
 
-#home {
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    overflow-x: hidden;
+}
+
+
+/* =====================================================
+   ACCUEIL
+===================================================== */
+
+#homeScreen {
+
     position: fixed;
+
     inset: 0;
+
     z-index: 100;
+
     display: flex;
+
     justify-content: center;
+
     align-items: center;
+
     padding: 20px;
 
     background:
-        radial-gradient(circle at 20% 20%, rgba(0, 140, 255, .25), transparent 30%),
-        radial-gradient(circle at 80% 80%, rgba(120, 0, 255, .25), transparent 30%),
-        linear-gradient(135deg, #050812, #10182e, #050812);
+        radial-gradient(circle at 50% 0%, rgba(52,152,255,.20), transparent 40%),
+        radial-gradient(circle at 0% 100%, rgba(0,255,150,.12), transparent 35%),
+        linear-gradient(135deg, #050814, #0b1224, #130b20);
+
 }
 
-.home-box {
+
+.homeBox {
+
     width: min(500px, 95vw);
-    padding: 35px;
+
+    padding: 40px 30px;
+
     border-radius: 25px;
 
-    background: rgba(15, 20, 38, .92);
-    border: 2px solid rgba(255,255,255,.15);
+    background: rgba(15, 22, 40, .92);
+
+    border: 1px solid rgba(255,255,255,.15);
 
     box-shadow:
-        0 0 50px rgba(0, 140, 255, .25),
-        inset 0 0 30px rgba(255,255,255,.03);
+        0 0 40px rgba(0,0,0,.6),
+        0 0 80px rgba(52,152,255,.10);
 
-    text-align: center;
+    backdrop-filter: blur(15px);
+
 }
+
 
 .logo {
-    font-size: 65px;
-    margin-bottom: 5px;
+
+    width: 90px;
+
+    height: 90px;
+
+    margin: 0 auto 20px;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(135deg, #3498ff, #00ff99);
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    font-size: 48px;
+
+    box-shadow:
+        0 0 30px rgba(52,152,255,.4);
+
 }
 
-.home-box h1 {
-    margin: 0;
+
+#homeTitle {
+
     font-size: 42px;
-    color: #54b8ff;
-    text-shadow: 0 0 20px rgba(84,184,255,.6);
+
+    margin: 10px 0;
+
 }
 
-.subtitle {
-    color: #bfc8e8;
-    font-size: 17px;
-    margin: 10px 0 30px;
+
+#homeWelcome {
+
+    color: #bfc8dc;
+
+    font-size: 18px;
+
+    margin-bottom: 30px;
+
 }
 
-.input {
+
+.languageTitle {
+
+    margin-bottom: 10px;
+
+    color: #aaa;
+
+}
+
+
+.languages {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    margin-bottom: 25px;
+
+}
+
+
+.languageButton {
+
+    padding: 10px 18px;
+
+    border-radius: 10px;
+
+    border: 1px solid #444;
+
+    background: #171e31;
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 16px;
+
+}
+
+
+.languageButton.active {
+
+    background: #3498ff;
+
+    border-color: #3498ff;
+
+}
+
+
+#nickname {
+
     width: 100%;
+
     padding: 15px;
-    margin: 8px 0;
 
     border-radius: 12px;
-    border: 2px solid #303b60;
 
-    background: #080c18;
+    border: 2px solid #303a52;
+
+    background: #080d1b;
+
     color: white;
 
     font-size: 18px;
+
     outline: none;
+
+    text-align: center;
+
 }
 
-.input:focus {
+
+#nickname:focus {
+
     border-color: #3498ff;
-    box-shadow: 0 0 15px rgba(52,152,255,.3);
+
+    box-shadow: 0 0 15px rgba(52,152,255,.2);
+
 }
 
-.language-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin: 15px 0;
-}
-
-.lang-btn {
-    padding: 10px 18px;
-    border-radius: 10px;
-    border: 1px solid #44517d;
-    background: #161d35;
-    color: white;
-    cursor: pointer;
-}
-
-.lang-btn.active {
-    background: #3498ff;
-    border-color: #6bc6ff;
-}
 
 #playButton {
+
     width: 100%;
-    margin-top: 18px;
+
+    margin-top: 20px;
+
     padding: 16px;
 
     border: none;
-    border-radius: 14px;
 
-    background: linear-gradient(135deg, #1687ff, #6845ff);
+    border-radius: 12px;
+
+    background: linear-gradient(135deg, #3498ff, #2674d9);
+
     color: white;
 
     font-size: 22px;
+
     font-weight: bold;
+
     cursor: pointer;
 
-    box-shadow: 0 8px 25px rgba(30,100,255,.3);
+    transition: .2s;
+
 }
+
 
 #playButton:hover {
-    transform: scale(1.02);
+
+    transform: scale(1.03);
+
+    box-shadow: 0 0 25px rgba(52,152,255,.4);
+
 }
 
-/* =========================
+
+#errorMessage {
+
+    min-height: 22px;
+
+    margin-top: 12px;
+
+    color: #ff5c5c;
+
+}
+
+
+/* =====================================================
    JEU
-========================= */
+===================================================== */
 
 #gameScreen {
+
     display: none;
+
     min-height: 100vh;
-    background:
-        radial-gradient(circle at center, #101827, #05070d);
+
 }
 
+
 #top {
-    min-height: 72px;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-
-    gap: 18px;
+    min-height: 70px;
 
     padding: 10px;
 
-    background: rgba(15,15,25,.96);
-    border-bottom: 2px solid #28314c;
+    display: flex;
 
-    font-size: 17px;
+    justify-content: center;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 20px;
+
+    background: rgba(15,15,15,.95);
+
+    font-size: 19px;
+
 }
+
 
 .info {
-    padding: 8px 13px;
-    border-radius: 10px;
-    background: #171c2d;
-    border: 1px solid #2c3756;
+
+    white-space: nowrap;
+
 }
+
 
 canvas {
-    display: block;
-    margin: 12px auto;
 
-    max-width: calc(100vw - 20px);
+    display: block;
+
+    width: min(900px, 96vw);
+
     height: auto;
 
-    border: 4px solid white;
-    border-radius: 5px;
+    margin: 15px auto;
 
-    background: #151515;
+    border: 4px solid white;
+
+    background: #222;
 
     touch-action: none;
+
 }
 
-/* =========================
+
+/* =====================================================
    MESSAGE
-========================= */
+===================================================== */
 
 #message {
+
     position: fixed;
+
     inset: 0;
 
     display: none;
 
     justify-content: center;
+
     align-items: center;
+
     flex-direction: column;
 
-    background: rgba(0,0,0,.88);
+    background: rgba(0,0,0,.92);
 
     z-index: 50;
 
-    text-align: center;
     padding: 20px;
+
 }
+
 
 #message h1 {
-    font-size: clamp(40px, 8vw, 75px);
+
+    font-size: clamp(40px, 10vw, 70px);
+
     margin: 10px;
+
 }
+
 
 #message p {
+
     font-size: 22px;
-    max-width: 600px;
+
+    max-width: 700px;
+
 }
 
-.message-button {
-    padding: 14px 28px;
-    font-size: 19px;
-    border: none;
-    border-radius: 10px;
+
+.gameButton {
+
+    padding: 14px 30px;
+
+    font-size: 20px;
+
     cursor: pointer;
-}
 
-/* =========================
-   TOUCHES TELEPHONE
-========================= */
+    border: none;
 
-#mobileControls {
-    display: none;
+    border-radius: 10px;
 
-    width: 210px;
-    margin: 10px auto 25px;
-
-    user-select: none;
-    touch-action: none;
-}
-
-.control-row {
-    display: flex;
-    justify-content: center;
-}
-
-.control {
-    width: 65px;
-    height: 55px;
-
-    margin: 3px;
-
-    border: 2px solid #53628e;
-    border-radius: 12px;
-
-    background: linear-gradient(145deg, #202b49, #11182d);
+    background: #3498ff;
 
     color: white;
-    font-size: 28px;
 
-    cursor: pointer;
-
-    box-shadow: 0 5px 12px rgba(0,0,0,.4);
 }
+
+
+/* =====================================================
+   COMMANDES TELEPHONE
+===================================================== */
+
+#mobileControls {
+
+    display: none;
+
+    width: 230px;
+
+    margin: 5px auto 25px;
+
+    position: relative;
+
+    height: 190px;
+
+    touch-action: none;
+
+}
+
+
+.control {
+
+    position: absolute;
+
+    width: 65px;
+
+    height: 65px;
+
+    border-radius: 15px;
+
+    border: 2px solid rgba(255,255,255,.25);
+
+    background: rgba(52,152,255,.75);
+
+    color: white;
+
+    font-size: 30px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    user-select: none;
+
+    -webkit-user-select: none;
+
+    touch-action: none;
+
+}
+
 
 .control:active {
-    transform: scale(.92);
-    background: #3498ff;
+
+    background: #00aaff;
+
+    transform: scale(.94);
+
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
+
+#upButton {
+
+    top: 0;
+
+    left: 82px;
+
+}
+
+
+#leftButton {
+
+    top: 70px;
+
+    left: 10px;
+
+}
+
+
+#downButton {
+
+    top: 70px;
+
+    left: 82px;
+
+}
+
+
+#rightButton {
+
+    top: 70px;
+
+    right: 10px;
+
+}
+
 
 @media (max-width: 700px) {
 
     #top {
-        gap: 6px;
-        font-size: 13px;
-    }
 
-    .info {
-        padding: 6px 8px;
+        font-size: 14px;
+
+        gap: 8px 15px;
+
+        padding: 10px 5px;
+
     }
 
     canvas {
+
         margin-top: 8px;
-        border-width: 3px;
+
     }
 
     #mobileControls {
+
         display: block;
+
     }
 
-    .home-box {
-        padding: 25px 20px;
-    }
-
-    .home-box h1 {
-        font-size: 34px;
-    }
-
-    .logo {
-        font-size: 50px;
-    }
 }
 
-@media (min-width: 701px) {
-    #mobileControls {
-        display: none !important;
-    }
-}
+
 </style>
 </head>
 
+
 <body>
+
 
 <!-- =====================================================
      ACCUEIL
 ===================================================== -->
 
-<div id="home">
+<div id="homeScreen">
 
-    <div class="home-box">
+    <div class="homeBox">
 
-        <div class="logo">🧩</div>
-
-        <h1>Labyrinthe Hardcore</h1>
-
-        <div class="subtitle" id="welcomeText">
-            Bienvenue dans le jeu !
+        <div class="logo">
+            🧩
         </div>
 
-        <div class="language-buttons">
+        <h1 id="homeTitle">
+            Labyrinthe Hardcore
+        </h1>
 
-            <button
-                class="lang-btn active"
-                id="frBtn"
-                onclick="setLanguage('fr')">
+        <p id="homeWelcome">
+            Bienvenue dans le jeu !
+        </p>
+
+
+        <div class="languageTitle">
+            Langue / Language / اللغة
+        </div>
+
+
+        <div class="languages">
+
+            <button class="languageButton active" data-lang="fr">
                 🇫🇷 Français
             </button>
 
-            <button
-                class="lang-btn"
-                id="enBtn"
-                onclick="setLanguage('en')">
+            <button class="languageButton" data-lang="en">
                 🇬🇧 English
+            </button>
+
+            <button class="languageButton" data-lang="ar">
+                🇸🇦 العربية
             </button>
 
         </div>
 
+
         <input
-            id="pseudoInput"
-            class="input"
+            id="nickname"
             type="text"
             maxlength="20"
-            placeholder="Ton pseudo">
+            autocomplete="off"
+            placeholder="Entre ton pseudo"
+            dir="auto"
+        >
 
-        <input
-            id="schoolInput"
-            class="input"
-            type="text"
-            maxlength="40"
-            placeholder="Ton école">
 
-        <button
-            id="playButton"
-            onclick="startGame()">
-            🎮 Jouer
+        <div id="errorMessage"></div>
+
+
+        <button id="playButton">
+            Jouer
         </button>
 
     </div>
@@ -380,42 +582,39 @@ canvas {
 </div>
 
 
+
 <!-- =====================================================
-     ÉCRAN DU JEU
+     JEU
 ===================================================== -->
 
 <div id="gameScreen">
 
+
     <div id="top">
 
         <div class="info">
-            Niveau :
+            <span id="levelLabel">Niveau</span> :
             <span id="level">1</span>/23
         </div>
 
         <div class="info">
-            Score :
+            <span id="scoreLabel">Score</span> :
             <span id="score">0</span>
         </div>
 
         <div class="info">
-            Joueur :
-            <span id="playerName">-</span>
+            <span id="playerLabel">Joueur</span> :
+            <span id="playerName"></span>
         </div>
 
         <div class="info">
-            École :
-            <span id="schoolName">-</span>
+            <span id="playerSpeedLabel">Vitesse joueur</span> :
+            <span id="playerSpeed">6</span>
         </div>
 
         <div class="info">
-            Vitesse :
-            <span id="playerSpeed">5</span>
-        </div>
-
-        <div class="info">
-            Robots :
-            <span id="robotSpeed">0.8</span>
+            <span id="robotSpeedLabel">Vitesse robots</span> :
+            <span id="robotSpeed">0</span>
         </div>
 
     </div>
@@ -428,42 +627,38 @@ canvas {
     </canvas>
 
 
-    <!-- =========================
-         TOUCHES MOBILE
-    ========================== -->
+    <!-- =================================================
+         BOUTONS TELEPHONE
+    ================================================== -->
 
     <div id="mobileControls">
 
-        <div class="control-row">
-
-            <button
-                class="control"
-                data-key="up">
-                ▲
-            </button>
-
+        <div
+            class="control"
+            id="upButton"
+            data-direction="up">
+            ▲
         </div>
 
-        <div class="control-row">
+        <div
+            class="control"
+            id="leftButton"
+            data-direction="left">
+            ◀
+        </div>
 
-            <button
-                class="control"
-                data-key="left">
-                ◀
-            </button>
+        <div
+            class="control"
+            id="downButton"
+            data-direction="down">
+            ▼
+        </div>
 
-            <button
-                class="control"
-                data-key="down">
-                ▼
-            </button>
-
-            <button
-                class="control"
-                data-key="right">
-                ▶
-            </button>
-
+        <div
+            class="control"
+            id="rightButton"
+            data-direction="right">
+            ▶
         </div>
 
     </div>
@@ -471,8 +666,9 @@ canvas {
 </div>
 
 
+
 <!-- =====================================================
-     MESSAGE FIN
+     MESSAGE MORT / VICTOIRE
 ===================================================== -->
 
 <div id="message">
@@ -482,46 +678,371 @@ canvas {
     <p id="messageText"></p>
 
     <button
-        class="message-button"
-        onclick="restartLevel()">
+        class="gameButton"
+        id="restartButton">
         Recommencer
     </button>
 
 </div>
 
 
+
 <script>
 
+
 /* =====================================================
-   VARIABLES PRINCIPALES
+   TRADUCTIONS
 ===================================================== */
 
-const canvas = document.getElementById("game");
-const ctx = canvas.getContext("2d");
+const translations = {
 
-const home = document.getElementById("home");
-const gameScreen = document.getElementById("gameScreen");
+    fr: {
 
-const levelText = document.getElementById("level");
-const scoreText = document.getElementById("score");
+        title: "Labyrinthe Hardcore",
 
-const playerNameText = document.getElementById("playerName");
-const schoolNameText = document.getElementById("schoolName");
+        welcome:
+            "Bienvenue dans le jeu !",
 
-const playerSpeedText = document.getElementById("playerSpeed");
-const robotSpeedText = document.getElementById("robotSpeed");
+        nickname:
+            "Entre ton pseudo",
 
-const message = document.getElementById("message");
-const messageTitle = document.getElementById("messageTitle");
-const messageText = document.getElementById("messageText");
+        play:
+            "Jouer",
 
-const pseudoInput = document.getElementById("pseudoInput");
-const schoolInput = document.getElementById("schoolInput");
+        level:
+            "Niveau",
 
-const welcomeText = document.getElementById("welcomeText");
-const playButton = document.getElementById("playButton");
+        score:
+            "Score",
 
-let language = "fr";
+        player:
+            "Joueur",
+
+        playerSpeed:
+            "Vitesse joueur",
+
+        robotSpeed:
+            "Vitesse robots",
+
+        restart:
+            "Recommencer le niveau",
+
+        winner:
+            "🏆 VICTOIRE !",
+
+        winnerText:
+            "Tu as terminé les 23 niveaux ! Score :",
+
+        loser:
+            "LOOSERRRR 😈",
+
+        wall:
+            "💥 TU AS TOUCHÉ UN MUR !",
+
+        robot:
+            "🤖 UN ROBOT T'A TOUCHÉ !",
+
+        error:
+            "Entre un pseudo avant de jouer."
+
+    },
+
+
+    en: {
+
+        title: "Hardcore Maze",
+
+        welcome:
+            "Welcome to the game!",
+
+        nickname:
+            "Enter your nickname",
+
+        play:
+            "Play",
+
+        level:
+            "Level",
+
+        score:
+            "Score",
+
+        player:
+            "Player",
+
+        playerSpeed:
+            "Player speed",
+
+        robotSpeed:
+            "Robot speed",
+
+        restart:
+            "Restart level",
+
+        winner:
+            "🏆 VICTORY!",
+
+        winnerText:
+            "You completed all 23 levels! Score:",
+
+        loser:
+            "LOOSERRRR 😈",
+
+        wall:
+            "💥 YOU HIT A WALL!",
+
+        robot:
+            "🤖 A ROBOT TOUCHED YOU!",
+
+        error:
+            "Enter a nickname before playing."
+
+    },
+
+
+    ar: {
+
+        title: "متاهة الهاردكور",
+
+        welcome:
+            "مرحباً بك في اللعبة!",
+
+        nickname:
+            "اكتب اسمك",
+
+        play:
+            "لعب",
+
+        level:
+            "المستوى",
+
+        score:
+            "النقاط",
+
+        player:
+            "اللاعب",
+
+        playerSpeed:
+            "سرعة اللاعب",
+
+        robotSpeed:
+            "سرعة الروبوتات",
+
+        restart:
+            "إعادة المستوى",
+
+        winner:
+            "🏆 فوز!",
+
+        winnerText:
+            "لقد أنهيت جميع المستويات الـ23! النقاط:",
+
+        loser:
+            "خسرت 😈",
+
+        wall:
+            "💥 لقد اصطدمت بالجدار!",
+
+        robot:
+            "🤖 لقد لمسك روبوت!",
+
+        error:
+            "اكتب اسمك قبل اللعب."
+
+    }
+
+};
+
+
+let currentLanguage = "fr";
+
+let nickname = "";
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const homeScreen =
+    document.getElementById("homeScreen");
+
+const gameScreen =
+    document.getElementById("gameScreen");
+
+const nicknameInput =
+    document.getElementById("nickname");
+
+const playButton =
+    document.getElementById("playButton");
+
+const errorMessage =
+    document.getElementById("errorMessage");
+
+const homeTitle =
+    document.getElementById("homeTitle");
+
+const homeWelcome =
+    document.getElementById("homeWelcome");
+
+const playerName =
+    document.getElementById("playerName");
+
+const message =
+    document.getElementById("message");
+
+const messageTitle =
+    document.getElementById("messageTitle");
+
+const messageText =
+    document.getElementById("messageText");
+
+const restartButton =
+    document.getElementById("restartButton");
+
+
+
+/* =====================================================
+   LANGUE
+===================================================== */
+
+function setLanguage(language) {
+
+    currentLanguage = language;
+
+    const t = translations[language];
+
+    document.documentElement.lang =
+        language;
+
+
+    homeTitle.textContent =
+        t.title;
+
+    homeWelcome.textContent =
+        t.welcome;
+
+    nicknameInput.placeholder =
+        t.nickname;
+
+    playButton.textContent =
+        t.play;
+
+    document.getElementById("levelLabel").textContent =
+        t.level;
+
+    document.getElementById("scoreLabel").textContent =
+        t.score;
+
+    document.getElementById("playerLabel").textContent =
+        t.player;
+
+    document.getElementById("playerSpeedLabel").textContent =
+        t.playerSpeed;
+
+    document.getElementById("robotSpeedLabel").textContent =
+        t.robotSpeed;
+
+    restartButton.textContent =
+        t.restart;
+
+
+    if(language === "ar") {
+
+        nicknameInput.dir = "rtl";
+
+        homeBoxDirection(true);
+
+    }
+
+    else {
+
+        nicknameInput.dir = "auto";
+
+        homeBoxDirection(false);
+
+    }
+
+
+    document.querySelectorAll(".languageButton")
+        .forEach(button => {
+
+            button.classList.toggle(
+                "active",
+                button.dataset.lang === language
+            );
+
+        });
+
+
+    errorMessage.textContent = "";
+
+    updateInterface();
+
+}
+
+
+function homeBoxDirection(arabic) {
+
+    const box =
+        document.querySelector(".homeBox");
+
+    if(arabic) {
+
+        box.style.direction = "rtl";
+
+    }
+
+    else {
+
+        box.style.direction = "ltr";
+
+    }
+
+}
+
+
+document.querySelectorAll(".languageButton")
+    .forEach(button => {
+
+        button.addEventListener("click", function() {
+
+            setLanguage(
+                this.dataset.lang
+            );
+
+        });
+
+    });
+
+
+
+/* =====================================================
+   CANVAS
+===================================================== */
+
+const canvas =
+    document.getElementById("game");
+
+const ctx =
+    canvas.getContext("2d");
+
+const levelText =
+    document.getElementById("level");
+
+const scoreText =
+    document.getElementById("score");
+
+const playerSpeedText =
+    document.getElementById("playerSpeed");
+
+const robotSpeedText =
+    document.getElementById("robotSpeed");
+
+
+
+/* =====================================================
+   VARIABLES
+===================================================== */
 
 let level = 1;
 
@@ -535,7 +1056,16 @@ let walls = [];
 
 let robots = [];
 
-let maze = null;
+let exit = {
+
+    x: 0,
+
+    y: 0,
+
+    size: 18
+
+};
+
 
 
 /* =====================================================
@@ -545,98 +1075,133 @@ let maze = null;
 const player = {
 
     x: 0,
+
     y: 0,
 
     size: 12,
 
-    speed: 5
+    speed: 6
 
 };
 
-
-/* =====================================================
-   SORTIE
-===================================================== */
-
-const exit = {
-
-    x: 0,
-    y: 0,
-
-    size: 18
-
-};
 
 
 /* =====================================================
    TOUCHES
 ===================================================== */
 
-const keys = {
-
-    up: false,
-    down: false,
-    left: false,
-    right: false
-
-};
+const keys = {};
 
 
-/* =====================================================
-   LANGUE
-===================================================== */
+/*
+   IMPORTANT :
 
-function setLanguage(lang) {
+   On utilise e.code au lieu de seulement e.key.
 
-    language = lang;
+   Cela permet de gérer correctement :
 
-    document.documentElement.lang = lang;
+   AZERTY
+   QWERTY
+   ZQSD
+   WASD
+   flèches
 
-    if(lang === "fr") {
+   Et surtout, le clavier du pseudo
+   n'est PAS bloqué.
+*/
 
-        welcomeText.textContent =
-            "Bienvenue dans le jeu !";
+document.addEventListener("keydown", function(e) {
 
-        pseudoInput.placeholder =
-            "Ton pseudo";
 
-        schoolInput.placeholder =
-            "Ton école";
+    /*
+       Si l'utilisateur écrit dans le pseudo,
+       on ne touche absolument pas à la touche.
+    */
 
-        playButton.textContent =
-            "🎮 Jouer";
+    if(
+        document.activeElement === nicknameInput
+    ) {
 
-        document.getElementById("frBtn")
-            .classList.add("active");
-
-        document.getElementById("enBtn")
-            .classList.remove("active");
+        return;
 
     }
 
-    else {
 
-        welcomeText.textContent =
-            "Welcome to the game!";
+    if(!gameRunning) {
 
-        pseudoInput.placeholder =
-            "Your username";
-
-        schoolInput.placeholder =
-            "Your school";
-
-        playButton.textContent =
-            "🎮 Play";
-
-        document.getElementById("enBtn")
-            .classList.add("active");
-
-        document.getElementById("frBtn")
-            .classList.remove("active");
+        return;
 
     }
 
-}
+
+    switch(e.code) {
+
+        case "ArrowUp":
+        case "KeyW":
+        case "KeyZ":
+            keys.up = true;
+            e.preventDefault();
+            break;
+
+
+        case "ArrowDown":
+        case "KeyS":
+            keys.down = true;
+            e.preventDefault();
+            break;
+
+
+        case "ArrowLeft":
+        case "KeyA":
+        case "KeyQ":
+            keys.left = true;
+            e.preventDefault();
+            break;
+
+
+        case "ArrowRight":
+        case "KeyD":
+            keys.right = true;
+            e.preventDefault();
+            break;
+
+    }
+
+});
+
+
+document.addEventListener("keyup", function(e) {
+
+    switch(e.code) {
+
+        case "ArrowUp":
+        case "KeyW":
+        case "KeyZ":
+            keys.up = false;
+            break;
+
+
+        case "ArrowDown":
+        case "KeyS":
+            keys.down = false;
+            break;
+
+
+        case "ArrowLeft":
+        case "KeyA":
+        case "KeyQ":
+            keys.left = false;
+            break;
+
+
+        case "ArrowRight":
+        case "KeyD":
+            keys.right = false;
+            break;
+
+    }
+
+});
 
 
 /* =====================================================
@@ -650,7 +1215,8 @@ function randomGenerator(seed) {
     return function() {
 
         value =
-            (value * 9301 + 49297) % 233280;
+            (value * 9301 + 49297)
+            % 233280;
 
         return value / 233280;
 
@@ -659,130 +1225,46 @@ function randomGenerator(seed) {
 }
 
 
-/* =====================================================
-   DIFFICULTE
-===================================================== */
-
-/*
-   Les niveaux 1 à 5 sont faciles.
-
-   Les niveaux 6 à 12 deviennent progressivement
-   plus difficiles.
-
-   Les niveaux 13 à 18 sont difficiles.
-
-   Les niveaux 19 à 23 sont hardcore.
-*/
-
-function getDifficulty(levelNumber) {
-
-    if(levelNumber <= 5) {
-
-        return {
-
-            cols: 9 + levelNumber,
-            rows: 6 + Math.floor(levelNumber / 2),
-
-            robotCount:
-                levelNumber === 1
-                    ? 0
-                    : Math.floor(levelNumber / 3),
-
-            robotSpeed:
-                0.65 +
-                levelNumber * 0.08
-
-        };
-
-    }
-
-
-    if(levelNumber <= 12) {
-
-        return {
-
-            cols:
-                14 +
-                Math.floor((levelNumber - 6) * 0.7),
-
-            rows:
-                9 +
-                Math.floor((levelNumber - 6) * 0.45),
-
-            robotCount:
-                1 +
-                Math.floor((levelNumber - 5) / 2),
-
-            robotSpeed:
-                1.05 +
-                (levelNumber - 5) * 0.11
-
-        };
-
-    }
-
-
-    if(levelNumber <= 18) {
-
-        return {
-
-            cols:
-                20 +
-                Math.floor((levelNumber - 13) * 0.6),
-
-            rows:
-                12 +
-                Math.floor((levelNumber - 13) * 0.45),
-
-            robotCount:
-                4 +
-                Math.floor((levelNumber - 13) / 2),
-
-            robotSpeed:
-                1.8 +
-                (levelNumber - 13) * 0.16
-
-        };
-
-    }
-
-
-    return {
-
-        cols:
-            24 +
-            Math.floor((levelNumber - 19) * 0.7),
-
-        rows:
-            15 +
-            Math.floor((levelNumber - 19) * 0.5),
-
-        robotCount:
-            7 +
-            Math.floor((levelNumber - 19) / 2),
-
-        robotSpeed:
-            2.8 +
-            (levelNumber - 19) * 0.22
-
-    };
-
-}
-
 
 /* =====================================================
-   CREATION DU LABYRINTHE
+   GENERATION DU LABYRINTHE
 ===================================================== */
 
 function generateMaze(levelNumber) {
 
     walls = [];
 
-    const difficulty =
-        getDifficulty(levelNumber);
+    /*
+       DIFFICULTE PROGRESSIVE
 
-    const cols = difficulty.cols;
-    const rows = difficulty.rows;
+       Niveau 1 :
+       8 x 5
+
+       Niveau 2 :
+       9 x 5
+
+       Niveau 3 :
+       10 x 6
+
+       ...
+
+       Niveaux 19-23 :
+       très grands labyrinthes.
+    */
+
+    const cols =
+        Math.min(
+            8 + Math.floor((levelNumber - 1) * 0.95),
+            30
+        );
+
+
+    const rows =
+        Math.min(
+            5 + Math.floor((levelNumber - 1) * 0.65),
+            20
+        );
+
 
     const cellW =
         canvas.width / cols;
@@ -790,17 +1272,15 @@ function generateMaze(levelNumber) {
     const cellH =
         canvas.height / rows;
 
+
     const random =
         randomGenerator(
             levelNumber * 98431 + 17
         );
 
 
-    /*
-       Création des cellules
-    */
+    let cells = [];
 
-    const cells = [];
 
     for(let y = 0; y < rows; y++) {
 
@@ -815,8 +1295,11 @@ function generateMaze(levelNumber) {
                 walls: {
 
                     top: true,
+
                     right: true,
+
                     bottom: true,
+
                     left: true
 
                 }
@@ -830,16 +1313,19 @@ function generateMaze(levelNumber) {
 
     /*
        DFS
-       Création d'un vrai labyrinthe.
     */
 
-    const stack = [];
+    let stack = [];
+
 
     cells[0][0].visited = true;
 
     stack.push({
+
         x: 0,
+
         y: 0
+
     });
 
 
@@ -848,7 +1334,8 @@ function generateMaze(levelNumber) {
         const current =
             stack[stack.length - 1];
 
-        const neighbours = [];
+
+        let neighbours = [];
 
 
         if(
@@ -859,7 +1346,9 @@ function generateMaze(levelNumber) {
             neighbours.push({
 
                 x: current.x,
+
                 y: current.y - 1,
+
                 direction: "top"
 
             });
@@ -875,7 +1364,9 @@ function generateMaze(levelNumber) {
             neighbours.push({
 
                 x: current.x + 1,
+
                 y: current.y,
+
                 direction: "right"
 
             });
@@ -891,7 +1382,9 @@ function generateMaze(levelNumber) {
             neighbours.push({
 
                 x: current.x,
+
                 y: current.y + 1,
+
                 direction: "bottom"
 
             });
@@ -907,7 +1400,9 @@ function generateMaze(levelNumber) {
             neighbours.push({
 
                 x: current.x - 1,
+
                 y: current.y,
+
                 direction: "left"
 
             });
@@ -915,93 +1410,95 @@ function generateMaze(levelNumber) {
         }
 
 
-        if(neighbours.length === 0) {
+        if(neighbours.length > 0) {
 
-            stack.pop();
-
-            continue;
-
-        }
-
-
-        const next =
-            neighbours[
-                Math.floor(
-                    random() *
-                    neighbours.length
-                )
-            ];
+            const next =
+                neighbours[
+                    Math.floor(
+                        random() *
+                        neighbours.length
+                    )
+                ];
 
 
-        const currentCell =
-            cells[current.y][current.x];
-
-        const nextCell =
-            cells[next.y][next.x];
+            const currentCell =
+                cells[current.y][current.x];
 
 
-        if(next.direction === "top") {
+            const nextCell =
+                cells[next.y][next.x];
 
-            currentCell.walls.top = false;
-            nextCell.walls.bottom = false;
 
-        }
+            if(next.direction === "top") {
 
-        else if(next.direction === "right") {
+                currentCell.walls.top = false;
 
-            currentCell.walls.right = false;
-            nextCell.walls.left = false;
+                nextCell.walls.bottom = false;
 
-        }
+            }
 
-        else if(next.direction === "bottom") {
 
-            currentCell.walls.bottom = false;
-            nextCell.walls.top = false;
+            if(next.direction === "right") {
+
+                currentCell.walls.right = false;
+
+                nextCell.walls.left = false;
+
+            }
+
+
+            if(next.direction === "bottom") {
+
+                currentCell.walls.bottom = false;
+
+                nextCell.walls.top = false;
+
+            }
+
+
+            if(next.direction === "left") {
+
+                currentCell.walls.left = false;
+
+                nextCell.walls.right = false;
+
+            }
+
+
+            nextCell.visited = true;
+
+
+            stack.push({
+
+                x: next.x,
+
+                y: next.y
+
+            });
 
         }
 
         else {
 
-            currentCell.walls.left = false;
-            nextCell.walls.right = false;
+            stack.pop();
 
         }
-
-
-        nextCell.visited = true;
-
-        stack.push({
-
-            x: next.x,
-            y: next.y
-
-        });
 
     }
 
 
-    maze = {
-
-        cells,
-        cols,
-        rows,
-        cellW,
-        cellH
-
-    };
-
-
     /*
        Murs.
+
+       Plus le niveau avance,
+       plus les murs deviennent fins.
     */
 
     const wallThickness =
-        levelNumber < 6
-            ? 5
-            : levelNumber < 13
-                ? 4
-                : 3;
+        Math.max(
+            3,
+            7 - levelNumber * 0.12
+        );
 
 
     for(let y = 0; y < rows; y++) {
@@ -1010,6 +1507,7 @@ function generateMaze(levelNumber) {
 
             const cell =
                 cells[y][x];
+
 
             const px =
                 x * cellW;
@@ -1023,9 +1521,11 @@ function generateMaze(levelNumber) {
                 walls.push({
 
                     x: px,
+
                     y: py,
 
                     w: cellW + wallThickness,
+
                     h: wallThickness
 
                 });
@@ -1038,9 +1538,11 @@ function generateMaze(levelNumber) {
                 walls.push({
 
                     x: px,
+
                     y: py,
 
                     w: wallThickness,
+
                     h: cellH + wallThickness
 
                 });
@@ -1056,9 +1558,11 @@ function generateMaze(levelNumber) {
                 walls.push({
 
                     x: px + cellW,
+
                     y: py,
 
                     w: wallThickness,
+
                     h: cellH
 
                 });
@@ -1074,9 +1578,11 @@ function generateMaze(levelNumber) {
                 walls.push({
 
                     x: px,
+
                     y: py + cellH,
 
                     w: cellW,
+
                     h: wallThickness
 
                 });
@@ -1089,13 +1595,7 @@ function generateMaze(levelNumber) {
 
 
     /*
-       Départ.
-
-       Niveau 1 :
-       joueur assez grand par rapport aux cases.
-
-       Plus tard :
-       cases plus petites.
+       DEPART
     */
 
     player.x =
@@ -1105,104 +1605,129 @@ function generateMaze(levelNumber) {
         cellH * 0.25;
 
 
-    player.size =
-        Math.max(
-            10,
-            Math.min(
-                14,
-                Math.min(cellW, cellH) * 0.45
-            )
-        );
-
-
     /*
-       Sortie en bas à droite.
+       SORTIE
     */
 
     exit.x =
         (cols - 1) * cellW +
-        cellW * 0.30;
+        cellW * 0.35;
+
 
     exit.y =
         (rows - 1) * cellH +
-        cellH * 0.30;
+        cellH * 0.35;
+
 
     exit.size =
         Math.max(
             12,
-            Math.min(cellW, cellH) * 0.40
+            Math.min(cellW, cellH) * 0.30
         );
 
 
     /*
-       Robots.
+       ROBOTS
+
+       On évite les robots aux premiers niveaux.
+       La difficulté arrive progressivement.
     */
 
     robots = [];
 
-    const robotCount =
-        difficulty.robotCount;
+
+    let robotCount = 0;
 
 
-    for(let i = 0; i < robotCount; i++) {
+    if(levelNumber >= 4) {
 
-        let rx;
-        let ry;
+        robotCount =
+            1 +
+            Math.floor(
+                (levelNumber - 4) / 2
+            );
 
-        /*
-           On évite de mettre les robots directement
-           au départ.
-        */
+    }
 
-        do {
 
-            const cellX =
+    robotCount =
+        Math.min(
+            robotCount,
+            10
+        );
+
+
+    const robotSpeed =
+        levelNumber < 4
+
+        ? 0
+
+        : Math.min(
+            0.8 +
+            (levelNumber - 4) * 0.12,
+            3.2
+        );
+
+
+    for(
+        let i = 0;
+        i < robotCount;
+        i++
+    ) {
+
+
+        let rx =
+            cellW *
+            (
                 2 +
                 Math.floor(
                     random() *
-                    Math.max(1, cols - 3)
-                );
+                    Math.max(
+                        1,
+                        cols - 4
+                    )
+                )
+            );
 
-            const cellY =
+
+        let ry =
+            cellH *
+            (
+                1 +
                 Math.floor(
                     random() *
-                    Math.max(1, rows)
-                );
-
-            rx =
-                cellX * cellW +
-                cellW * 0.25;
-
-            ry =
-                cellY * cellH +
-                cellH * 0.25;
-
-        } while(
-            Math.abs(rx - player.x) < cellW * 3
-        );
+                    Math.max(
+                        1,
+                        rows - 3
+                    )
+                )
+            );
 
 
         robots.push({
 
             x: rx,
+
             y: ry,
 
             size:
                 Math.max(
-                    9,
-                    Math.min(cellW, cellH) * 0.35
+                    10,
+                    Math.min(
+                        cellW,
+                        cellH
+                    ) * 0.30
                 ),
 
-            speed:
-                difficulty.robotSpeed,
+            speed: robotSpeed,
 
             direction:
-                random() > 0.5
-                    ? 1
-                    : -1,
+                random() > .5
+                ? 1
+                : -1,
 
             horizontal:
-                random() > 0.5
+                random() > .5
 
         });
 
@@ -1211,8 +1736,9 @@ function generateMaze(levelNumber) {
 }
 
 
+
 /* =====================================================
-   COLLISION RECTANGLES
+   COLLISION
 ===================================================== */
 
 function isColliding(a, b) {
@@ -1232,135 +1758,149 @@ function isColliding(a, b) {
 }
 
 
+
 /* =====================================================
-   DEPLACEMENT JOUEUR
+   DEPLACEMENT
 ===================================================== */
 
 function movePlayer() {
 
-    if(!gameRunning)
+    if(!gameRunning) {
+
         return;
+
+    }
 
 
     let dx = 0;
+
     let dy = 0;
 
 
-    if(keys.right)
+    if(keys.right) {
+
         dx += player.speed;
 
-    if(keys.left)
+    }
+
+
+    if(keys.left) {
+
         dx -= player.speed;
 
-    if(keys.down)
+    }
+
+
+    if(keys.down) {
+
         dy += player.speed;
 
-    if(keys.up)
+    }
+
+
+    if(keys.up) {
+
         dy -= player.speed;
 
+    }
 
-    /*
-       Empêche le déplacement diagonal d'être plus rapide.
-    */
 
-    if(dx !== 0 && dy !== 0) {
+    if(dx === 0 && dy === 0) {
 
-        dx *= 0.707;
-        dy *= 0.707;
+        return;
 
     }
 
 
     /*
-       Déplacement X indépendant.
-       Cela permet de glisser le long des murs.
+       On traite X puis Y séparément.
+
+       Cela rend le déplacement beaucoup
+       plus propre contre les murs.
     */
 
-    const oldX = player.x;
+    const oldX =
+        player.x;
+
+    const oldY =
+        player.y;
+
 
     player.x += dx;
 
 
-    if(collidesWithWall()) {
-
-        player.x = oldX;
-
-    }
+    let hitWallX = false;
 
 
-    /*
-       Déplacement Y indépendant.
-    */
+    for(let wall of walls) {
 
-    const oldY = player.y;
-
-    player.y += dy;
-
-
-    if(collidesWithWall()) {
-
-        player.y = oldY;
-
-    }
-
-
-    /*
-       Limites de sécurité.
-    */
-
-    player.x =
-        Math.max(
-            0,
-            Math.min(
-                canvas.width - player.size,
-                player.x
+        if(
+            isColliding(
+                player,
+                wall
             )
-        );
+        ) {
 
-    player.y =
-        Math.max(
-            0,
-            Math.min(
-                canvas.height - player.size,
-                player.y
-            )
-        );
+            hitWallX = true;
 
-}
-
-
-/* =====================================================
-   COLLISION AVEC LES MURS
-===================================================== */
-
-function collidesWithWall() {
-
-    for(const wall of walls) {
-
-        if(isColliding(
-
-            player,
-
-            {
-
-                x: wall.x,
-                y: wall.y,
-                w: wall.w,
-                h: wall.h
-
-            }
-
-        )) {
-
-            return true;
+            break;
 
         }
 
     }
 
-    return false;
+
+    if(hitWallX) {
+
+        player.x = oldX;
+
+        lose(
+            translations[currentLanguage].wall
+        );
+
+        return;
+
+    }
+
+
+    player.y += dy;
+
+
+    let hitWallY = false;
+
+
+    for(let wall of walls) {
+
+        if(
+            isColliding(
+                player,
+                wall
+            )
+        ) {
+
+            hitWallY = true;
+
+            break;
+
+        }
+
+    }
+
+
+    if(hitWallY) {
+
+        player.y = oldY;
+
+        lose(
+            translations[currentLanguage].wall
+        );
+
+        return;
+
+    }
 
 }
+
 
 
 /* =====================================================
@@ -1369,11 +1909,15 @@ function collidesWithWall() {
 
 function updateRobots() {
 
-    if(!gameRunning)
+    if(!gameRunning) {
+
         return;
 
+    }
 
-    for(const robot of robots) {
+
+    for(let robot of robots) {
+
 
         if(robot.horizontal) {
 
@@ -1383,9 +1927,11 @@ function updateRobots() {
 
 
             if(
-                robot.x < 5 ||
+                robot.x < 20 ||
                 robot.x >
-                canvas.width - robot.size - 5
+                canvas.width -
+                robot.size -
+                20
             ) {
 
                 robot.direction *= -1;
@@ -1402,9 +1948,11 @@ function updateRobots() {
 
 
             if(
-                robot.y < 5 ||
+                robot.y < 20 ||
                 robot.y >
-                canvas.height - robot.size - 5
+                canvas.height -
+                robot.size -
+                20
             ) {
 
                 robot.direction *= -1;
@@ -1414,12 +1962,14 @@ function updateRobots() {
         }
 
 
-        const robotRect = {
+        const r = {
 
             x: robot.x,
+
             y: robot.y,
 
             w: robot.size,
+
             h: robot.size
 
         };
@@ -1428,14 +1978,12 @@ function updateRobots() {
         if(
             isColliding(
                 player,
-                robotRect
+                r
             )
         ) {
 
             lose(
-                language === "fr"
-                    ? "🤖 Un robot t'a touché !"
-                    : "🤖 A robot touched you!"
+                translations[currentLanguage].robot
             );
 
             return;
@@ -1447,22 +1995,28 @@ function updateRobots() {
 }
 
 
+
 /* =====================================================
    SORTIE
 ===================================================== */
 
 function checkExit() {
 
-    if(!gameRunning)
+    if(!gameRunning) {
+
         return;
 
+    }
 
-    const exitRect = {
+
+    const e = {
 
         x: exit.x,
+
         y: exit.y,
 
         w: exit.size,
+
         h: exit.size
 
     };
@@ -1471,7 +2025,7 @@ function checkExit() {
     if(
         isColliding(
             player,
-            exitRect
+            e
         )
     ) {
 
@@ -1482,26 +2036,19 @@ function checkExit() {
 }
 
 
+
 /* =====================================================
    NIVEAU TERMINE
 ===================================================== */
 
 function levelComplete() {
 
-    if(!gameRunning)
-        return;
-
-
-    /*
-       Les premiers niveaux rapportent plus.
-    */
-
     const gain =
         Math.max(
             1,
             5 -
             Math.floor(
-                (level - 1) / 6
+                (level - 1) / 5
             )
         );
 
@@ -1525,44 +2072,52 @@ function levelComplete() {
 }
 
 
+
 /* =====================================================
-   DEFAITE
+   MORT
 ===================================================== */
 
 function lose(reason) {
 
-    if(!gameRunning)
+    if(!gameRunning) {
+
         return;
+
+    }
 
 
     const penalty =
         Math.min(
             6,
-            1 +
-            Math.floor(level / 6)
+            2 +
+            Math.floor(
+                level / 5
+            )
         );
 
 
     score -= penalty;
 
-    if(score < 0)
+
+    if(score < 0) {
+
         score = 0;
+
+    }
 
 
     gameRunning = false;
 
 
     messageTitle.textContent =
-        language === "fr"
-            ? "💀 PERDU !"
-            : "💀 GAME OVER!";
+        translations[currentLanguage].loser;
 
 
     messageText.textContent =
         reason +
         "  -" +
         penalty +
-        " point(s)";
+        " points";
 
 
     message.style.display =
@@ -1574,8 +2129,9 @@ function lose(reason) {
 }
 
 
+
 /* =====================================================
-   RECOMMENCER LE NIVEAU
+   RECOMMENCER
 ===================================================== */
 
 function restartLevel() {
@@ -1583,11 +2139,31 @@ function restartLevel() {
     message.style.display =
         "none";
 
+
+    /*
+       On remet les touches à zéro
+       pour éviter qu'une touche reste bloquée.
+    */
+
+    keys.up = false;
+    keys.down = false;
+    keys.left = false;
+    keys.right = false;
+
+
     gameRunning = true;
+
 
     loadLevel();
 
 }
+
+
+restartButton.addEventListener(
+    "click",
+    restartLevel
+);
+
 
 
 /* =====================================================
@@ -1599,30 +2175,25 @@ function winGame() {
     gameRunning = false;
 
 
+    const t =
+        translations[currentLanguage];
+
+
     messageTitle.textContent =
-        language === "fr"
-            ? "🏆 VICTOIRE !"
-            : "🏆 VICTORY!";
+        t.winner;
 
 
     messageText.textContent =
-        language === "fr"
-
-            ? "Félicitations " +
-              playerNameText.textContent +
-              " ! Tu as terminé les 23 niveaux ! Score : " +
-              score
-
-            : "Congratulations " +
-              playerNameText.textContent +
-              "! You completed all 23 levels! Score: " +
-              score;
+        t.winnerText +
+        " " +
+        score;
 
 
     message.style.display =
         "flex";
 
 }
+
 
 
 /* =====================================================
@@ -1634,43 +2205,36 @@ function updateInterface() {
     levelText.textContent =
         level;
 
+
     scoreText.textContent =
         score;
 
-    playerNameText.textContent =
-        pseudoInput.value || "-";
 
-    schoolNameText.textContent =
-        schoolInput.value || "-";
+    playerSpeedText.textContent =
+        player.speed;
 
 
-    const difficulty =
-        getDifficulty(level);
+    const speed =
+        level < 4
 
+        ? 0
 
-    /*
-       La vitesse du joueur augmente légèrement
-       au fur et à mesure.
-    */
-
-    player.speed =
-        Math.min(
-            7,
-            5 +
-            Math.floor(
-                (level - 1) / 8
-            ) * 0.5
+        : Math.min(
+            0.8 +
+            (level - 4) * 0.12,
+            3.2
         );
 
 
-    playerSpeedText.textContent =
-        player.speed.toFixed(1);
-
-
     robotSpeedText.textContent =
-        difficulty.robotSpeed.toFixed(1);
+        speed.toFixed(1);
+
+
+    playerName.textContent =
+        nickname;
 
 }
+
 
 
 /* =====================================================
@@ -1688,11 +2252,11 @@ function draw() {
 
 
     /*
-       Fond.
+       FOND
     */
 
     ctx.fillStyle =
-        "#202020";
+        "#222";
 
     ctx.fillRect(
         0,
@@ -1703,13 +2267,11 @@ function draw() {
 
 
     /*
-       Petit effet grille.
+       Petits points décoratifs
     */
 
-    ctx.strokeStyle =
+    ctx.fillStyle =
         "rgba(255,255,255,.025)";
-
-    ctx.lineWidth = 1;
 
 
     for(
@@ -1718,63 +2280,33 @@ function draw() {
         x += 30
     ) {
 
-        ctx.beginPath();
+        for(
+            let y = 0;
+            y < canvas.height;
+            y += 30
+        ) {
 
-        ctx.moveTo(x, 0);
-        ctx.lineTo(x, canvas.height);
+            ctx.fillRect(
+                x,
+                y,
+                2,
+                2
+            );
 
-        ctx.stroke();
-
-    }
-
-
-    for(
-        let y = 0;
-        y < canvas.height;
-        y += 30
-    ) {
-
-        ctx.beginPath();
-
-        ctx.moveTo(0, y);
-        ctx.lineTo(canvas.width, y);
-
-        ctx.stroke();
+        }
 
     }
 
 
     /*
-       Sortie.
-    */
-
-    ctx.fillStyle =
-        "#00ff66";
-
-    ctx.shadowColor =
-        "#00ff66";
-
-    ctx.shadowBlur = 15;
-
-    ctx.fillRect(
-        exit.x,
-        exit.y,
-        exit.size,
-        exit.size
-    );
-
-    ctx.shadowBlur = 0;
-
-
-    /*
-       Murs.
+       MURS
     */
 
     ctx.fillStyle =
         "#eeeeee";
 
 
-    for(const wall of walls) {
+    for(let wall of walls) {
 
         ctx.fillRect(
             wall.x,
@@ -1787,18 +2319,47 @@ function draw() {
 
 
     /*
-       Robots.
+       SORTIE
     */
 
-    for(const robot of robots) {
+    ctx.fillStyle =
+        "#00ff66";
+
+
+    ctx.shadowColor =
+        "#00ff66";
+
+    ctx.shadowBlur =
+        15;
+
+
+    ctx.fillRect(
+        exit.x,
+        exit.y,
+        exit.size,
+        exit.size
+    );
+
+
+    ctx.shadowBlur = 0;
+
+
+    /*
+       ROBOTS
+    */
+
+    for(let robot of robots) {
 
         ctx.fillStyle =
             "#ff3030";
 
+
         ctx.shadowColor =
             "#ff3030";
 
-        ctx.shadowBlur = 10;
+        ctx.shadowBlur =
+            10;
+
 
         ctx.fillRect(
             robot.x,
@@ -1807,18 +2368,19 @@ function draw() {
             robot.size
         );
 
+
         ctx.shadowBlur = 0;
 
 
         /*
-           Yeux.
+           Yeux
         */
 
         ctx.fillStyle =
             "white";
 
 
-        const eye =
+        const eyeSize =
             Math.max(
                 2,
                 robot.size * .18
@@ -1833,8 +2395,8 @@ function draw() {
             robot.y +
             robot.size * .20,
 
-            eye,
-            eye
+            eyeSize,
+            eyeSize
 
         );
 
@@ -1847,8 +2409,8 @@ function draw() {
             robot.y +
             robot.size * .20,
 
-            eye,
-            eye
+            eyeSize,
+            eyeSize
 
         );
 
@@ -1856,34 +2418,41 @@ function draw() {
 
 
     /*
-       Joueur bleu.
+       JOUEUR
     */
 
     ctx.fillStyle =
         "#3498ff";
 
+
     ctx.shadowColor =
         "#3498ff";
 
-    ctx.shadowBlur = 15;
+    ctx.shadowBlur =
+        12;
+
 
     ctx.fillRect(
 
         player.x,
+
         player.y,
 
         player.size,
+
         player.size
 
     );
+
 
     ctx.shadowBlur = 0;
 
 }
 
 
+
 /* =====================================================
-   BOUCLE PRINCIPALE
+   BOUCLE
 ===================================================== */
 
 function gameLoop() {
@@ -1901,6 +2470,7 @@ function gameLoop() {
 
     draw();
 
+
     requestAnimationFrame(
         gameLoop
     );
@@ -1908,8 +2478,9 @@ function gameLoop() {
 }
 
 
+
 /* =====================================================
-   CHARGER LE NIVEAU
+   CHARGEMENT NIVEAU
 ===================================================== */
 
 function loadLevel() {
@@ -1921,284 +2492,228 @@ function loadLevel() {
 }
 
 
+
 /* =====================================================
-   DEMARRER LE JEU
+   BOUTONS TELEPHONE
 ===================================================== */
 
-function startGame() {
-
-    let pseudo =
-        pseudoInput.value.trim();
-
-    let school =
-        schoolInput.value.trim();
+function setupMobileButton(
+    element,
+    direction
+) {
 
 
-    if(pseudo === "") {
+    function start(e) {
 
-        pseudo =
-            language === "fr"
-                ? "Joueur"
-                : "Player";
+        e.preventDefault();
 
-        pseudoInput.value =
-            pseudo;
+        if(!gameRunning) {
 
-    }
+            return;
 
+        }
 
-    if(school === "") {
-
-        school =
-            language === "fr"
-                ? "Non renseignée"
-                : "Not specified";
-
-        schoolInput.value =
-            school;
+        keys[direction] = true;
 
     }
 
 
-    level = 1;
+    function stop(e) {
 
-    score = 0;
+        e.preventDefault();
 
-    gameRunning = true;
+        keys[direction] = false;
 
-
-    home.style.display =
-        "none";
-
-    gameScreen.style.display =
-        "block";
+    }
 
 
-    message.style.display =
-        "none";
+    element.addEventListener(
+        "touchstart",
+        start,
+        { passive: false }
+    );
 
 
-    loadLevel();
+    element.addEventListener(
+        "touchend",
+        stop,
+        { passive: false }
+    );
+
+
+    element.addEventListener(
+        "touchcancel",
+        stop,
+        { passive: false }
+    );
+
+
+    /*
+       Fonctionne aussi avec la souris
+       si tu testes les boutons sur PC.
+    */
+
+    element.addEventListener(
+        "mousedown",
+        start
+    );
+
+
+    element.addEventListener(
+        "mouseup",
+        stop
+    );
+
+
+    element.addEventListener(
+        "mouseleave",
+        stop
+    );
 
 }
 
 
-/* =====================================================
-   CLAVIER PC
-===================================================== */
-
-document.addEventListener(
-    "keydown",
-    function(e) {
-
-        const key =
-            e.key.toLowerCase();
-
-
-        if(
-            key === "arrowup" ||
-            key === "z" ||
-            key === "w"
-        ) {
-
-            keys.up = true;
-
-            e.preventDefault();
-
-        }
-
-
-        if(
-            key === "arrowdown" ||
-            key === "s"
-        ) {
-
-            keys.down = true;
-
-            e.preventDefault();
-
-        }
-
-
-        if(
-            key === "arrowleft" ||
-            key === "q" ||
-            key === "a"
-        ) {
-
-            keys.left = true;
-
-            e.preventDefault();
-
-        }
-
-
-        if(
-            key === "arrowright" ||
-            key === "d"
-        ) {
-
-            keys.right = true;
-
-            e.preventDefault();
-
-        }
-
-    }
+setupMobileButton(
+    document.getElementById("upButton"),
+    "up"
 );
 
 
-document.addEventListener(
-    "keyup",
-    function(e) {
-
-        const key =
-            e.key.toLowerCase();
-
-
-        if(
-            key === "arrowup" ||
-            key === "z" ||
-            key === "w"
-        ) {
-
-            keys.up = false;
-
-        }
-
-
-        if(
-            key === "arrowdown" ||
-            key === "s"
-        ) {
-
-            keys.down = false;
-
-        }
-
-
-        if(
-            key === "arrowleft" ||
-            key === "q" ||
-            key === "a"
-        ) {
-
-            keys.left = false;
-
-        }
-
-
-        if(
-            key === "arrowright" ||
-            key === "d"
-        ) {
-
-            keys.right = false;
-
-        }
-
-    }
+setupMobileButton(
+    document.getElementById("downButton"),
+    "down"
 );
 
 
+setupMobileButton(
+    document.getElementById("leftButton"),
+    "left"
+);
+
+
+setupMobileButton(
+    document.getElementById("rightButton"),
+    "right"
+);
+
+
+
 /* =====================================================
-   TOUCHES TELEPHONE
+   DEMARRAGE DU JEU
 ===================================================== */
 
-const mobileButtons =
-    document.querySelectorAll(
-        ".control"
-    );
-
-
-mobileButtons.forEach(
-    function(button) {
-
-        const direction =
-            button.dataset.key;
-
-
-        function press(e) {
-
-            e.preventDefault();
-
-            keys[direction] = true;
-
-        }
-
-
-        function release(e) {
-
-            e.preventDefault();
-
-            keys[direction] = false;
-
-        }
-
-
-        button.addEventListener(
-            "touchstart",
-            press,
-            {
-                passive: false
-            }
-        );
-
-
-        button.addEventListener(
-            "touchend",
-            release,
-            {
-                passive: false
-            }
-        );
-
-
-        button.addEventListener(
-            "touchcancel",
-            release,
-            {
-                passive: false
-            }
-        );
+playButton.addEventListener(
+    "click",
+    function() {
 
 
         /*
-           Également utile pour certains navigateurs.
+           On récupère le pseudo.
+
+           trim() enlève seulement les espaces
+           au début et à la fin.
+
+           Les lettres A, Q, W, etc.
+           restent parfaitement autorisées.
         */
 
-        button.addEventListener(
-            "mousedown",
-            press
-        );
+        const name =
+            nicknameInput.value.trim();
 
 
-        button.addEventListener(
-            "mouseup",
-            release
-        );
+        if(name.length < 1) {
+
+            errorMessage.textContent =
+                translations[currentLanguage].error;
+
+            nicknameInput.focus();
+
+            return;
+
+        }
 
 
-        button.addEventListener(
-            "mouseleave",
-            release
-        );
+        nickname = name;
+
+
+        /*
+           Sauvegarde du pseudo.
+        */
+
+        try {
+
+            localStorage.setItem(
+                "labyrinthNickname",
+                nickname
+            );
+
+        }
+
+        catch(e) {}
+
+
+        homeScreen.style.display =
+            "none";
+
+
+        gameScreen.style.display =
+            "block";
+
+
+        level = 1;
+
+        score = 0;
+
+        gameRunning = true;
+
+
+        loadLevel();
 
     }
 );
 
 
+
 /* =====================================================
-   INITIALISATION
+   RECUPERATION ANCIEN PSEUDO
+===================================================== */
+
+try {
+
+    const savedName =
+        localStorage.getItem(
+            "labyrinthNickname"
+        );
+
+
+    if(savedName) {
+
+        nicknameInput.value =
+            savedName;
+
+    }
+
+}
+
+catch(e) {}
+
+
+
+/* =====================================================
+   LANGUE PAR DEFAUT
 ===================================================== */
 
 setLanguage("fr");
 
-updateInterface();
 
-draw();
+/* =====================================================
+   LANCEMENT DE LA BOUCLE
+===================================================== */
+
+loadLevel();
 
 gameLoop();
+
 
 </script>
 
