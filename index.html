@@ -7,27 +7,20 @@
 <title>Labyrinthe Hardcore</title>
 
 <style>
+
 * {
     box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
     margin: 0;
+    padding: 0;
+    width: 100%;
     min-height: 100%;
     font-family: Arial, sans-serif;
-    background: #070b16;
+    background: #080b14;
     color: white;
-}
-
-body {
-    overflow-x: hidden;
-    touch-action: manipulation;
-}
-
-button,
-input,
-select {
-    font: inherit;
 }
 
 /* =========================
@@ -37,126 +30,138 @@ select {
 #menu {
     position: fixed;
     inset: 0;
-    z-index: 100;
+
     display: flex;
-    align-items: center;
     justify-content: center;
-    padding: 20px;
+    align-items: center;
 
     background:
-        radial-gradient(
-            circle at 20% 20%,
-            rgba(52,152,255,.25),
-            transparent 30%
-        ),
-        radial-gradient(
-            circle at 80% 80%,
-            rgba(0,255,102,.15),
-            transparent 28%
-        ),
-        linear-gradient(
-            135deg,
-            #050816,
-            #10182b 55%,
-            #050816
-        );
+        radial-gradient(circle at 20% 20%, #174a7c 0%, transparent 30%),
+        radial-gradient(circle at 80% 80%, #124c36 0%, transparent 30%),
+        linear-gradient(135deg, #050713, #101a30, #050713);
+
+    z-index: 100;
 }
 
-#menuCard {
-    width: min(520px, 94vw);
-    padding: 34px;
-    border: 1px solid rgba(255,255,255,.16);
-    border-radius: 24px;
-    background: rgba(10,14,28,.94);
-    box-shadow: 0 25px 80px rgba(0,0,0,.55);
+.menu-box {
+    width: 90%;
+    max-width: 500px;
+
+    padding: 35px;
+
+    background: rgba(15, 20, 35, 0.97);
+
+    border: 2px solid #293650;
+    border-radius: 25px;
+
     text-align: center;
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,0.6);
 }
 
 .logo {
-    font-size: 55px;
+    font-size: 60px;
 }
 
-#menuCard h1 {
-    margin: 8px 0;
-    font-size: 38px;
+.menu-box h1 {
+    margin: 10px 0;
+    font-size: 34px;
 }
 
-.subtitle {
-    color: #b9c3d8;
-    margin: 10px 0 25px;
+.description {
+    color: #bfc9dc;
     line-height: 1.5;
+    margin-bottom: 25px;
 }
 
-.formRow {
+.form-group {
     text-align: left;
-    margin: 14px 0;
+    margin-bottom: 15px;
 }
 
-.formRow label {
+.form-group label {
     display: block;
     margin-bottom: 7px;
-    color: #dbe4f5;
     font-weight: bold;
 }
 
 input,
 select {
     width: 100%;
-    padding: 13px 14px;
-    border-radius: 12px;
-    border: 1px solid #3a4661;
-    background: #161e31;
+
+    padding: 13px;
+
+    background: #182137;
     color: white;
+
+    border: 1px solid #3b4b6d;
+
+    border-radius: 10px;
+
     outline: none;
 }
 
 input:focus,
 select:focus {
     border-color: #3498ff;
-    box-shadow: 0 0 0 3px rgba(52,152,255,.16);
 }
 
-.modeRow {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+.mode-buttons {
+    display: flex;
     gap: 10px;
 }
 
-.modeBtn {
-    padding: 14px;
-    border: 1px solid #3a4661;
-    border-radius: 12px;
-    background: #141b2c;
+.mode-button {
+    flex: 1;
+
+    padding: 13px;
+
+    border: 1px solid #3b4b6d;
+    border-radius: 10px;
+
+    background: #182137;
     color: white;
-    font-weight: bold;
+
     cursor: pointer;
+    font-weight: bold;
 }
 
-.modeBtn.active {
+.mode-button.active {
     background: #3498ff;
     border-color: #3498ff;
 }
 
-#player2Row {
+#pseudo2Container {
     display: none;
 }
 
-#startBtn {
+#startButton {
     width: 100%;
+
     padding: 15px;
-    border: 0;
-    border-radius: 13px;
-    background: linear-gradient(135deg,#3498ff,#1474dc);
+
+    margin-top: 10px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: #3498ff;
     color: white;
-    font-weight: bold;
+
     font-size: 20px;
-    margin-top: 12px;
+    font-weight: bold;
+
     cursor: pointer;
 }
 
+#startButton:hover {
+    background: #217dcc;
+}
+
 #error {
-    min-height: 20px;
-    color: #ff7777;
+    min-height: 22px;
+    color: #ff5555;
     margin-top: 10px;
 }
 
@@ -164,119 +169,149 @@ select:focus {
    JEU
 ========================= */
 
-#gameUI {
+#gameContainer {
     display: none;
 }
 
-#top {
-    min-height: 90px;
+#topBar {
+    width: 100%;
+
+    padding: 10px;
+
+    background: #121827;
+
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 18px;
-    background: #121722;
+
+    gap: 15px;
+
     flex-wrap: wrap;
-    padding: 10px 14px;
 }
 
-.playersBox {
+/* JOUEURS */
+
+.players {
     display: flex;
     gap: 10px;
 }
 
-.playerCard {
+.player-card {
     width: 150px;
-    min-height: 76px;
-    padding: 8px 10px;
+
+    padding: 9px;
+
+    background: #1b2334;
+
+    border: 2px solid #34415e;
 
     border-radius: 12px;
 
-    background: #1b2230;
-
-    border: 2px solid #3a4661;
-
     text-align: center;
 
-    font-size: 14px;
-
-    box-shadow: 0 4px 15px rgba(0,0,0,.25);
+    font-size: 13px;
 }
 
-.playerCardName {
+.player-name {
     font-size: 17px;
     font-weight: bold;
     margin-bottom: 4px;
 }
 
-.playerTurn {
+.turn {
+    margin-top: 5px;
     font-weight: bold;
-    margin-top: 4px;
 }
 
-.playerTurn.active {
+.turn.active {
     color: #00ff66;
 }
 
-.playerTurn.inactive {
-    color: #ff4040;
+.turn.inactive {
+    color: #ff4444;
 }
 
-.gameStats {
+/* INFOS */
+
+.info {
     display: flex;
-    gap: 16px;
-    align-items: center;
+
+    gap: 15px;
+
     flex-wrap: wrap;
-    font-size: 15px;
+
+    justify-content: center;
+
+    font-size: 14px;
 }
 
-.gameStats span {
+.info span {
     font-weight: bold;
 }
 
-canvas {
+/* CANVAS */
+
+#gameCanvas {
     display: block;
-    margin: 10px auto;
-    border: 4px solid white;
-    background: #222;
-    max-width: 95vw;
+
+    width: 900px;
+    height: 600px;
+
+    max-width: 96vw;
     height: auto;
+
+    margin: 10px auto;
+
+    background: #222;
+
+    border: 4px solid white;
 }
 
 /* =========================
-   TOUCHES TELEPHONE
+   BOUTONS TELEPHONE
 ========================= */
 
 #mobileControls {
     display: none;
+
     width: 220px;
+
     margin: 10px auto 25px;
-    user-select: none;
+
     touch-action: none;
 }
 
-.mobileRow {
+.mobile-row {
     display: flex;
+
     justify-content: center;
+
     gap: 8px;
+
+    margin-bottom: 8px;
 }
 
-.mobileButton {
+.mobile-button {
     width: 65px;
     height: 65px;
-    padding: 0;
+
     border: 2px solid white;
+
     border-radius: 12px;
-    background: #333;
+
+    background: #292929;
+
     color: white;
-    font-size: 30px;
-    user-select: none;
+
+    font-size: 28px;
+
     touch-action: none;
-    -webkit-tap-highlight-color: transparent;
+
+    user-select: none;
 }
 
-.mobileButton:active {
-    background: #666;
-    transform: scale(.95);
+.mobile-button:active {
+    background: #555;
 }
 
 /* =========================
@@ -284,37 +319,51 @@ canvas {
 ========================= */
 
 #message {
-    position: fixed;
-    inset: 0;
     display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 200;
+
+    background: rgba(0,0,0,0.94);
+
     justify-content: center;
     align-items: center;
+
     flex-direction: column;
-    background: rgba(0,0,0,.93);
-    z-index: 110;
+
     text-align: center;
+
     padding: 20px;
 }
 
 #message h1 {
-    font-size: 58px;
-    margin: 10px;
+    font-size: 55px;
 }
 
 #message p {
-    font-size: 22px;
-    max-width: 700px;
+    font-size: 20px;
+
+    max-width: 600px;
+
     white-space: pre-line;
-    line-height: 1.5;
 }
 
 #messageButton {
     padding: 14px 25px;
-    border: 0;
+
+    border: none;
+
     border-radius: 10px;
+
     background: #3498ff;
+
     color: white;
-    font-weight: bold;
+
+    font-size: 18px;
+
     cursor: pointer;
 }
 
@@ -324,84 +373,66 @@ canvas {
 
 @media (max-width: 700px) {
 
-    #top {
-        gap: 7px 10px;
-        font-size: 12px;
+    #topBar {
+        gap: 7px;
     }
 
-    .playersBox {
+    .players {
         width: 100%;
+
         justify-content: center;
     }
 
-    .playerCard {
+    .player-card {
         width: 135px;
-        min-height: 70px;
-        font-size: 12px;
     }
 
-    .playerCardName {
-        font-size: 15px;
-    }
-
-    .gameStats {
+    .info {
         width: 100%;
-        justify-content: center;
-        gap: 8px 14px;
         font-size: 12px;
-    }
-
-    canvas {
-        width: 96vw;
-        margin: 8px auto;
-        border-width: 3px;
+        gap: 8px;
     }
 
     #mobileControls {
         display: block;
     }
 
-    #menuCard {
+    .menu-box {
         padding: 25px;
     }
 
-    #menuCard h1 {
-        font-size: 30px;
+    .menu-box h1 {
+        font-size: 28px;
     }
 
-    #message h1 {
-        font-size: 42px;
-    }
-
-    #message p {
-        font-size: 18px;
-    }
 }
+
 </style>
 </head>
 
 <body>
 
-<!-- =========================
+<!-- ==================================================
      ACCUEIL
-========================= -->
+================================================== -->
 
 <div id="menu">
 
-    <div id="menuCard">
+    <div class="menu-box">
 
         <div class="logo">🧩</div>
 
-        <h1 id="welcomeTitle">
+        <h1 id="welcome">
             Bienvenue dans le Labyrinthe
         </h1>
 
-        <div class="subtitle" id="welcomeText">
-            Entre ton pseudo, choisis ton mode
-            et tente de terminer les 23 niveaux.
+        <div class="description" id="description">
+            Entre ton pseudo et choisis ton mode de jeu.
         </div>
 
-        <div class="formRow">
+        <!-- LANGUE -->
+
+        <div class="form-group">
 
             <label id="languageLabel">
                 Langue
@@ -425,43 +456,47 @@ canvas {
 
         </div>
 
-        <div class="formRow">
+        <!-- PSEUDO -->
 
-            <label id="pseudo1Label">
+        <div class="form-group">
+
+            <label id="pseudoLabel">
                 Pseudo
             </label>
 
             <input
                 id="pseudo1"
                 type="text"
-                maxlength="18"
+                maxlength="20"
                 autocomplete="off"
                 placeholder="Ton pseudo"
             >
 
         </div>
 
-        <div class="formRow">
+        <!-- MODE -->
+
+        <div class="form-group">
 
             <label id="modeLabel">
                 Mode
             </label>
 
-            <div class="modeRow">
+            <div class="mode-buttons">
 
                 <button
-                    type="button"
-                    class="modeBtn active"
-                    id="soloBtn">
+                    id="soloButton"
+                    class="mode-button active"
+                    type="button">
 
                     🎮 Solo
 
                 </button>
 
                 <button
-                    type="button"
-                    class="modeBtn"
-                    id="duoBtn">
+                    id="duoButton"
+                    class="mode-button"
+                    type="button">
 
                     👥 Duo
 
@@ -471,9 +506,11 @@ canvas {
 
         </div>
 
+        <!-- DEUXIEME PSEUDO -->
+
         <div
-            class="formRow"
-            id="player2Row">
+            id="pseudo2Container"
+            class="form-group">
 
             <label id="pseudo2Label">
                 Pseudo du joueur 2
@@ -482,15 +519,19 @@ canvas {
             <input
                 id="pseudo2"
                 type="text"
-                maxlength="18"
+                maxlength="20"
                 autocomplete="off"
                 placeholder="Pseudo du joueur 2"
             >
 
         </div>
 
-        <button id="startBtn">
+        <button
+            id="startButton"
+            type="button">
+
             Jouer
+
         </button>
 
         <div id="error"></div>
@@ -500,21 +541,23 @@ canvas {
 </div>
 
 
-<!-- =========================
+<!-- ==================================================
      JEU
-========================= -->
+================================================== -->
 
-<div id="gameUI">
+<div id="gameContainer">
 
-    <div id="top">
+    <div id="topBar">
 
-        <div class="playersBox">
+        <!-- JOUEUR 1 -->
 
-            <div class="playerCard">
+        <div class="players">
+
+            <div class="player-card">
 
                 <div
-                    class="playerCardName"
-                    id="playerName0">
+                    id="playerName0"
+                    class="player-name">
 
                     Joueur 1
 
@@ -526,8 +569,8 @@ canvas {
                 </div>
 
                 <div
-                    class="playerTurn"
-                    id="playerTurn0">
+                    id="turn0"
+                    class="turn active">
 
                     Tour de Joueur 1
 
@@ -535,12 +578,13 @@ canvas {
 
             </div>
 
+            <!-- JOUEUR 2 -->
 
-            <div class="playerCard">
+            <div class="player-card">
 
                 <div
-                    class="playerCardName"
-                    id="playerName1">
+                    id="playerName1"
+                    class="player-name">
 
                     Joueur 2
 
@@ -552,8 +596,8 @@ canvas {
                 </div>
 
                 <div
-                    class="playerTurn"
-                    id="playerTurn1">
+                    id="turn1"
+                    class="turn inactive">
 
                     Tour de Joueur 2
 
@@ -564,7 +608,9 @@ canvas {
         </div>
 
 
-        <div class="gameStats">
+        <!-- INFOS -->
+
+        <div class="info">
 
             <div>
                 <span id="levelLabel">
@@ -577,7 +623,7 @@ canvas {
             </div>
 
             <div>
-                <span id="speedLabel">
+                <span id="playerSpeedLabel">
                     Vitesse joueur
                 </span>
                 :
@@ -587,12 +633,12 @@ canvas {
             </div>
 
             <div>
-                <span id="robotLabel">
+                <span id="robotSpeedLabel">
                     Vitesse robots
                 </span>
                 :
                 <span id="robotSpeed">
-                    1
+                    0
                 </span>
             </div>
 
@@ -601,8 +647,10 @@ canvas {
     </div>
 
 
+    <!-- CANVAS -->
+
     <canvas
-        id="game"
+        id="gameCanvas"
         width="900"
         height="600">
     </canvas>
@@ -612,34 +660,42 @@ canvas {
 
     <div id="mobileControls">
 
-        <div class="mobileRow">
+        <div class="mobile-row">
 
             <button
-                class="mobileButton"
-                data-key="arrowup">
+                class="mobile-button"
+                data-key="ArrowUp">
+
                 ⬆️
+
             </button>
 
         </div>
 
-        <div class="mobileRow">
+        <div class="mobile-row">
 
             <button
-                class="mobileButton"
-                data-key="arrowleft">
+                class="mobile-button"
+                data-key="ArrowLeft">
+
                 ⬅️
+
             </button>
 
             <button
-                class="mobileButton"
-                data-key="arrowdown">
+                class="mobile-button"
+                data-key="ArrowDown">
+
                 ⬇️
+
             </button>
 
             <button
-                class="mobileButton"
-                data-key="arrowright">
+                class="mobile-button"
+                data-key="ArrowRight">
+
                 ➡️
+
             </button>
 
         </div>
@@ -649,9 +705,9 @@ canvas {
 </div>
 
 
-<!-- =========================
+<!-- ==================================================
      MESSAGE
-========================= -->
+================================================== -->
 
 <div id="message">
 
@@ -673,7 +729,7 @@ canvas {
 ===================================================== */
 
 const canvas =
-    document.getElementById("game");
+    document.getElementById("gameCanvas");
 
 const ctx =
     canvas.getContext("2d");
@@ -681,8 +737,8 @@ const ctx =
 const menu =
     document.getElementById("menu");
 
-const gameUI =
-    document.getElementById("gameUI");
+const gameContainer =
+    document.getElementById("gameContainer");
 
 const languageSelect =
     document.getElementById("language");
@@ -693,19 +749,19 @@ const pseudo1 =
 const pseudo2 =
     document.getElementById("pseudo2");
 
-const player2Row =
-    document.getElementById("player2Row");
+const pseudo2Container =
+    document.getElementById("pseudo2Container");
 
-const soloBtn =
-    document.getElementById("soloBtn");
+const soloButton =
+    document.getElementById("soloButton");
 
-const duoBtn =
-    document.getElementById("duoBtn");
+const duoButton =
+    document.getElementById("duoButton");
 
-const startBtn =
-    document.getElementById("startBtn");
+const startButton =
+    document.getElementById("startButton");
 
-const errorText =
+const error =
     document.getElementById("error");
 
 const message =
@@ -729,41 +785,51 @@ let language = "fr";
 
 let mode = "solo";
 
-let names = [
-    "Joueur 1",
-    "Joueur 2"
-];
-
 let currentPlayer = 0;
 
 let level = 1;
 
 const MAX_LEVEL = 23;
 
-let scores = [
-    0,
-    0
-];
-
 let gameRunning = false;
+
+let scores = [0, 0];
+
+let playerNames = [
+    "Joueur 1",
+    "Joueur 2"
+];
 
 let walls = [];
 
 let robots = [];
 
+
+/* SORTIE */
+
 let exit = {
     x: 0,
     y: 0,
-    size: 16
+    size: 20
 };
+
+
+/* JOUEUR */
 
 const player = {
+
     x: 0,
+
     y: 0,
-    size: 12,
+
+    size: 14,
 
     speed: 6
+
 };
+
+
+/* TOUCHES */
 
 const keys = {};
 
@@ -772,14 +838,15 @@ const keys = {};
    TRADUCTIONS
 ===================================================== */
 
-const translations = {
+const text = {
 
     fr: {
+
         welcome:
             "Bienvenue dans le Labyrinthe",
 
-        welcomeText:
-            "Entre ton pseudo, choisis ton mode et tente de terminer les 23 niveaux.",
+        description:
+            "Entre ton pseudo et choisis ton mode de jeu.",
 
         language:
             "Langue",
@@ -805,10 +872,10 @@ const translations = {
         level:
             "Niveau",
 
-        speed:
+        playerSpeed:
             "Vitesse joueur",
 
-        robots:
+        robotSpeed:
             "Vitesse robots",
 
         turn:
@@ -821,33 +888,32 @@ const translations = {
             "LOOSERRRR 😈",
 
         wall:
-            "💥 TU AS TOUCHÉ UN MUR !",
+            "💥 Tu as touché un mur !",
 
         robot:
-            "🤖 UN ROBOT T'A TOUCHÉ !",
+            "🤖 Un robot t'a touché !",
 
-        switch:
-            "À %PLAYER% de jouer !",
-
-        win:
+        victory:
             "🏆 VICTOIRE !",
 
-        winText:
+        victoryText:
             "Tu as terminé les 23 niveaux !",
 
-        enter:
-            "Entre un pseudo.",
+        enterPseudo:
+            "Entre ton pseudo.",
 
         enterBoth:
             "Entre les deux pseudos."
+
     },
 
     en: {
+
         welcome:
             "Welcome to the Maze",
 
-        welcomeText:
-            "Enter your nickname, choose your mode and try to finish all 23 levels.",
+        description:
+            "Enter your nickname and choose your game mode.",
 
         language:
             "Language",
@@ -873,10 +939,10 @@ const translations = {
         level:
             "Level",
 
-        speed:
+        playerSpeed:
             "Player speed",
 
-        robots:
+        robotSpeed:
             "Robot speed",
 
         turn:
@@ -889,39 +955,38 @@ const translations = {
             "LOOSERRRR 😈",
 
         wall:
-            "💥 YOU HIT A WALL!",
+            "💥 You hit a wall!",
 
         robot:
-            "🤖 A ROBOT HIT YOU!",
+            "🤖 A robot hit you!",
 
-        switch:
-            "%PLAYER%'s turn!",
-
-        win:
+        victory:
             "🏆 VICTORY!",
 
-        winText:
+        victoryText:
             "You finished all 23 levels!",
 
-        enter:
-            "Enter a nickname.",
+        enterPseudo:
+            "Enter your nickname.",
 
         enterBoth:
             "Enter both nicknames."
+
     },
 
     ar: {
+
         welcome:
             "مرحباً بك في المتاهة",
 
-        welcomeText:
-            "اكتب اسمك، اختر الوضع وحاول إنهاء المراحل الـ23.",
+        description:
+            "اكتب اسمك واختر وضع اللعب.",
 
         language:
             "اللغة",
 
         pseudo:
-            "الاسم المستعار",
+            "الاسم",
 
         pseudo2:
             "اسم اللاعب الثاني",
@@ -941,10 +1006,10 @@ const translations = {
         level:
             "المستوى",
 
-        speed:
+        playerSpeed:
             "سرعة اللاعب",
 
-        robots:
+        robotSpeed:
             "سرعة الروبوتات",
 
         turn:
@@ -962,90 +1027,107 @@ const translations = {
         robot:
             "🤖 لقد لمسك روبوت!",
 
-        switch:
-            "حان دور %PLAYER%!",
-
-        win:
+        victory:
             "🏆 فوز!",
 
-        winText:
+        victoryText:
             "لقد أنهيت جميع المراحل الـ23!",
 
-        enter:
-            "اكتب اسماً مستعاراً.",
+        enterPseudo:
+            "اكتب اسمك.",
 
         enterBoth:
             "اكتب الاسمين."
+
     }
 
 };
 
 
 /* =====================================================
-   TRADUCTION
+   CHANGER LANGUE
 ===================================================== */
 
-function t(key) {
-
-    return translations[language][key];
-
-}
+languageSelect.addEventListener(
+    "change",
+    updateLanguage
+);
 
 
 function updateLanguage() {
 
-    const tr =
-        translations[language];
+    language =
+        languageSelect.value;
+
+    const t =
+        text[language];
+
 
     document.getElementById(
-        "welcomeTitle"
-    ).textContent = tr.welcome;
+        "welcome"
+    ).textContent =
+        t.welcome;
+
 
     document.getElementById(
-        "welcomeText"
-    ).textContent = tr.welcomeText;
+        "description"
+    ).textContent =
+        t.description;
+
 
     document.getElementById(
         "languageLabel"
-    ).textContent = tr.language;
+    ).textContent =
+        t.language;
+
 
     document.getElementById(
-        "pseudo1Label"
-    ).textContent = tr.pseudo;
+        "pseudoLabel"
+    ).textContent =
+        t.pseudo;
+
 
     document.getElementById(
         "pseudo2Label"
-    ).textContent = tr.pseudo2;
+    ).textContent =
+        t.pseudo2;
+
 
     document.getElementById(
         "modeLabel"
-    ).textContent = tr.mode;
+    ).textContent =
+        t.mode;
 
-    soloBtn.textContent = tr.solo;
 
-    duoBtn.textContent = tr.duo;
+    soloButton.textContent =
+        t.solo;
 
-    startBtn.textContent = tr.play;
+
+    duoButton.textContent =
+        t.duo;
+
+
+    startButton.textContent =
+        t.play;
+
 
     document.getElementById(
         "levelLabel"
-    ).textContent = tr.level;
+    ).textContent =
+        t.level;
+
 
     document.getElementById(
-        "speedLabel"
-    ).textContent = tr.speed;
+        "playerSpeedLabel"
+    ).textContent =
+        t.playerSpeed;
+
 
     document.getElementById(
-        "robotLabel"
-    ).textContent = tr.robots;
+        "robotSpeedLabel"
+    ).textContent =
+        t.robotSpeed;
 
-    document.getElementById(
-        "pseudo1"
-    ).placeholder = tr.pseudo;
-
-    document.getElementById(
-        "pseudo2"
-    ).placeholder = tr.pseudo2;
 
     updateInterface();
 
@@ -1053,69 +1135,56 @@ function updateLanguage() {
 
 
 /* =====================================================
-   LANGUE
+   SOLO
 ===================================================== */
 
-languageSelect.addEventListener(
-    "change",
-    function() {
-
-        language =
-            languageSelect.value;
-
-        updateLanguage();
-
-    }
-);
-
-
-/* =====================================================
-   MODE SOLO / DUO
-===================================================== */
-
-soloBtn.addEventListener(
+soloButton.addEventListener(
     "click",
     function() {
 
         mode = "solo";
 
-        soloBtn.classList.add("active");
+        soloButton.classList.add("active");
 
-        duoBtn.classList.remove("active");
+        duoButton.classList.remove("active");
 
-        player2Row.style.display =
+        pseudo2Container.style.display =
             "none";
 
-        errorText.textContent = "";
-
-    }
-);
-
-
-duoBtn.addEventListener(
-    "click",
-    function() {
-
-        mode = "duo";
-
-        duoBtn.classList.add("active");
-
-        soloBtn.classList.remove("active");
-
-        player2Row.style.display =
-            "block";
-
-        errorText.textContent = "";
+        error.textContent = "";
 
     }
 );
 
 
 /* =====================================================
-   DEMARRER
+   DUO
 ===================================================== */
 
-startBtn.addEventListener(
+duoButton.addEventListener(
+    "click",
+    function() {
+
+        mode = "duo";
+
+        duoButton.classList.add("active");
+
+        soloButton.classList.remove("active");
+
+        pseudo2Container.style.display =
+            "block";
+
+        error.textContent = "";
+
+    }
+);
+
+
+/* =====================================================
+   DEMARRER LE JEU
+===================================================== */
+
+startButton.addEventListener(
     "click",
     startGame
 );
@@ -1123,17 +1192,17 @@ startBtn.addEventListener(
 
 function startGame() {
 
-    const p1 =
+    const name1 =
         pseudo1.value.trim();
 
-    const p2 =
+    const name2 =
         pseudo2.value.trim();
 
 
-    if(!p1) {
+    if(name1 === "") {
 
-        errorText.textContent =
-            t("enter");
+        error.textContent =
+            text[language].enterPseudo;
 
         return;
 
@@ -1142,46 +1211,67 @@ function startGame() {
 
     if(
         mode === "duo" &&
-        !p2
+        name2 === ""
     ) {
 
-        errorText.textContent =
-            t("enterBoth");
+        error.textContent =
+            text[language].enterBoth;
 
         return;
 
     }
 
 
-    names[0] =
-        p1;
-
-    names[1] =
-        mode === "duo"
-            ? p2
-            : "—";
+    playerNames[0] =
+        name1;
 
 
-    currentPlayer = 0;
+    if(mode === "duo") {
 
-    level = 1;
+        playerNames[1] =
+            name2;
+
+    }
+    else {
+
+        playerNames[1] =
+            "—";
+
+    }
+
 
     scores[0] = 0;
 
     scores[1] = 0;
 
+    currentPlayer = 0;
+
+    level = 1;
+
     gameRunning = true;
+
+
+    /*
+       IMPORTANT :
+       On affiche le jeu AVANT
+       de dessiner le labyrinthe.
+    */
 
     menu.style.display =
         "none";
 
-    gameUI.style.display =
+    gameContainer.style.display =
         "block";
 
-    message.style.display =
-        "none";
+
+    /*
+       Création du premier niveau.
+    */
 
     loadLevel();
+
+
+    updateInterface();
 
 }
 
@@ -1208,7 +1298,7 @@ function randomGenerator(seed) {
 
 
 /* =====================================================
-   GENERATION DU LABYRINTHE
+   GENERER LE LABYRINTHE
 ===================================================== */
 
 function generateMaze(levelNumber) {
@@ -1219,8 +1309,13 @@ function generateMaze(levelNumber) {
 
 
     /*
-       Niveau 1 très facile.
-       Puis difficulté progressive.
+       DIFFICULTE PROGRESSIVE
+
+       Niveau 1 :
+       très facile
+
+       Niveau 23 :
+       très difficile
     */
 
     let cols;
@@ -1228,34 +1323,49 @@ function generateMaze(levelNumber) {
     let rows;
 
 
-    if(levelNumber <= 3) {
+    if(levelNumber === 1) {
 
-        cols =
-            12 + levelNumber * 2;
+        cols = 10;
+        rows = 7;
 
-        rows =
-            8 + levelNumber;
+    }
+
+    else if(levelNumber === 2) {
+
+        cols = 12;
+        rows = 8;
+
+    }
+
+    else if(levelNumber === 3) {
+
+        cols = 14;
+        rows = 9;
 
     }
 
     else {
 
         cols =
-            18 +
-            Math.floor(levelNumber * 0.55);
+            Math.min(
+                14 +
+                Math.floor(
+                    levelNumber * 0.7
+                ),
+                30
+            );
+
 
         rows =
-            12 +
-            Math.floor(levelNumber * 0.30);
+            Math.min(
+                9 +
+                Math.floor(
+                    levelNumber * 0.35
+                ),
+                18
+            );
 
     }
-
-
-    cols =
-        Math.min(cols, 31);
-
-    rows =
-        Math.min(rows, 19);
 
 
     const cellW =
@@ -1267,9 +1377,13 @@ function generateMaze(levelNumber) {
 
     const random =
         randomGenerator(
-            levelNumber * 98431 + 17
+            levelNumber * 12345 + 77
         );
 
+
+    /*
+       CELLULES
+    */
 
     const cells = [];
 
@@ -1284,17 +1398,13 @@ function generateMaze(levelNumber) {
 
                 visited: false,
 
-                walls: {
+                top: true,
 
-                    top: true,
+                right: true,
 
-                    right: true,
+                bottom: true,
 
-                    bottom: true,
-
-                    left: true
-
-                }
+                left: true
 
             };
 
@@ -1304,10 +1414,11 @@ function generateMaze(levelNumber) {
 
 
     /*
-       DFS
+       ALGORITHME DFS
     */
 
     const stack = [];
+
 
     cells[0][0].visited = true;
 
@@ -1317,20 +1428,28 @@ function generateMaze(levelNumber) {
     });
 
 
-    while(stack.length) {
+    while(stack.length > 0) {
 
         const current =
             stack[stack.length - 1];
 
-        const neighbours = [];
+        const neighbors = [];
 
+
+        /*
+           HAUT
+        */
 
         if(
             current.y > 0 &&
-            !cells[current.y - 1][current.x].visited
+            !cells[
+                current.y - 1
+            ][
+                current.x
+            ].visited
         ) {
 
-            neighbours.push({
+            neighbors.push({
                 x: current.x,
                 y: current.y - 1,
                 direction: "top"
@@ -1339,12 +1458,20 @@ function generateMaze(levelNumber) {
         }
 
 
+        /*
+           DROITE
+        */
+
         if(
             current.x < cols - 1 &&
-            !cells[current.y][current.x + 1].visited
+            !cells[
+                current.y
+            ][
+                current.x + 1
+            ].visited
         ) {
 
-            neighbours.push({
+            neighbors.push({
                 x: current.x + 1,
                 y: current.y,
                 direction: "right"
@@ -1353,12 +1480,20 @@ function generateMaze(levelNumber) {
         }
 
 
+        /*
+           BAS
+        */
+
         if(
             current.y < rows - 1 &&
-            !cells[current.y + 1][current.x].visited
+            !cells[
+                current.y + 1
+            ][
+                current.x
+            ].visited
         ) {
 
-            neighbours.push({
+            neighbors.push({
                 x: current.x,
                 y: current.y + 1,
                 direction: "bottom"
@@ -1367,12 +1502,20 @@ function generateMaze(levelNumber) {
         }
 
 
+        /*
+           GAUCHE
+        */
+
         if(
             current.x > 0 &&
-            !cells[current.y][current.x - 1].visited
+            !cells[
+                current.y
+            ][
+                current.x - 1
+            ].visited
         ) {
 
-            neighbours.push({
+            neighbors.push({
                 x: current.x - 1,
                 y: current.y,
                 direction: "left"
@@ -1381,56 +1524,65 @@ function generateMaze(levelNumber) {
         }
 
 
-        if(neighbours.length) {
+        if(neighbors.length > 0) {
 
             const next =
-                neighbours[
+                neighbors[
                     Math.floor(
                         random() *
-                        neighbours.length
+                        neighbors.length
                     )
                 ];
 
 
-            const cell =
-                cells[current.y][current.x];
+            const currentCell =
+                cells[
+                    current.y
+                ][
+                    current.x
+                ];
+
 
             const nextCell =
-                cells[next.y][next.x];
+                cells[
+                    next.y
+                ][
+                    next.x
+                ];
 
 
             if(next.direction === "top") {
 
-                cell.walls.top = false;
+                currentCell.top = false;
 
-                nextCell.walls.bottom = false;
+                nextCell.bottom = false;
 
             }
 
 
             if(next.direction === "right") {
 
-                cell.walls.right = false;
+                currentCell.right = false;
 
-                nextCell.walls.left = false;
+                nextCell.left = false;
 
             }
 
 
             if(next.direction === "bottom") {
 
-                cell.walls.bottom = false;
+                currentCell.bottom = false;
 
-                nextCell.walls.top = false;
+                nextCell.top = false;
 
             }
 
 
             if(next.direction === "left") {
 
-                cell.walls.left = false;
+                currentCell.left = false;
 
-                nextCell.walls.right = false;
+                nextCell.right = false;
 
             }
 
@@ -1454,20 +1606,14 @@ function generateMaze(levelNumber) {
 
 
     /*
-       Epaisseur des murs.
+       MURS
     */
 
-    const wallThickness =
-        Math.max(
-            3,
-            7 - levelNumber * 0.12
-        );
+    const wallSize =
+        levelNumber < 5
+            ? 6
+            : 5;
 
-
-    /*
-       Transformer les murs
-       en rectangles.
-    */
 
     for(let y = 0; y < rows; y++) {
 
@@ -1476,6 +1622,7 @@ function generateMaze(levelNumber) {
             const cell =
                 cells[y][x];
 
+
             const px =
                 x * cellW;
 
@@ -1483,7 +1630,7 @@ function generateMaze(levelNumber) {
                 y * cellH;
 
 
-            if(cell.walls.top) {
+            if(cell.top) {
 
                 walls.push({
 
@@ -1491,19 +1638,16 @@ function generateMaze(levelNumber) {
 
                     y: py,
 
-                    w:
-                        cellW +
-                        wallThickness,
+                    w: cellW + wallSize,
 
-                    h:
-                        wallThickness
+                    h: wallSize
 
                 });
 
             }
 
 
-            if(cell.walls.left) {
+            if(cell.left) {
 
                 walls.push({
 
@@ -1511,12 +1655,9 @@ function generateMaze(levelNumber) {
 
                     y: py,
 
-                    w:
-                        wallThickness,
+                    w: wallSize,
 
-                    h:
-                        cellH +
-                        wallThickness
+                    h: cellH + wallSize
 
                 });
 
@@ -1525,7 +1666,7 @@ function generateMaze(levelNumber) {
 
             if(
                 x === cols - 1 &&
-                cell.walls.right
+                cell.right
             ) {
 
                 walls.push({
@@ -1537,7 +1678,7 @@ function generateMaze(levelNumber) {
                         py,
 
                     w:
-                        wallThickness,
+                        wallSize,
 
                     h:
                         cellH
@@ -1549,7 +1690,7 @@ function generateMaze(levelNumber) {
 
             if(
                 y === rows - 1 &&
-                cell.walls.bottom
+                cell.bottom
             ) {
 
                 walls.push({
@@ -1564,7 +1705,7 @@ function generateMaze(levelNumber) {
                         cellW,
 
                     h:
-                        wallThickness
+                        wallSize
 
                 });
 
@@ -1576,18 +1717,18 @@ function generateMaze(levelNumber) {
 
 
     /*
-       Position du joueur.
+       JOUEUR
     */
 
     player.x =
-        cellW * 0.25;
+        cellW * 0.30;
 
     player.y =
-        cellH * 0.25;
+        cellH * 0.30;
 
 
     /*
-       Sortie.
+       SORTIE
     */
 
     exit.x =
@@ -1600,34 +1741,45 @@ function generateMaze(levelNumber) {
 
     exit.size =
         Math.max(
-            12,
+            16,
             Math.min(
                 cellW,
                 cellH
-            ) * .30
+            ) * 0.35
         );
 
 
     /*
        ROBOTS
 
-       Aucun robot au tout début.
-       Ils arrivent progressivement.
+       Niveau 1-3 :
+       aucun robot
+
+       Puis ils arrivent progressivement.
     */
 
-    const robotCount =
-        levelNumber < 4
-            ? 0
-            : Math.min(
-                Math.floor(
-                    (levelNumber - 2) / 2
-                ),
-                12
+    let robotCount = 0;
+
+
+    if(levelNumber >= 4) {
+
+        robotCount =
+            Math.floor(
+                (levelNumber - 2) / 2
             );
+
+    }
+
+
+    robotCount =
+        Math.min(
+            robotCount,
+            10
+        );
 
 
     const robotSpeed =
-        0.65 +
+        0.5 +
         levelNumber * 0.12;
 
 
@@ -1637,43 +1789,33 @@ function generateMaze(levelNumber) {
         i++
     ) {
 
-        const horizontal =
-            random() > .5;
-
-
-        const rx =
-            cellW *
-            (
-                2 +
-                Math.floor(
-                    random() *
-                    Math.max(
-                        1,
-                        cols - 4
-                    )
-                )
-            );
-
-
-        const ry =
-            cellH *
-            (
-                1 +
-                Math.floor(
-                    random() *
-                    Math.max(
-                        1,
-                        rows - 3
-                    )
-                )
-            );
-
-
         robots.push({
 
-            x: rx,
+            x:
+                cellW *
+                (
+                    2 +
+                    Math.floor(
+                        random() *
+                        Math.max(
+                            1,
+                            cols - 4
+                        )
+                    )
+                ),
 
-            y: ry,
+            y:
+                cellH *
+                (
+                    1 +
+                    Math.floor(
+                        random() *
+                        Math.max(
+                            1,
+                            rows - 3
+                        )
+                    )
+                ),
 
             size:
                 Math.max(
@@ -1681,19 +1823,19 @@ function generateMaze(levelNumber) {
                     Math.min(
                         cellW,
                         cellH
-                    ) * .30
+                    ) * 0.30
                 ),
 
             speed:
                 robotSpeed,
 
             direction:
-                random() > .5
+                random() > 0.5
                     ? 1
                     : -1,
 
             horizontal:
-                horizontal
+                random() > 0.5
 
         });
 
@@ -1706,16 +1848,13 @@ function generateMaze(levelNumber) {
    COLLISION
 ===================================================== */
 
-function isColliding(a, b) {
+function collision(a, b) {
 
     return (
 
         a.x < b.x + b.w &&
-
         a.x + a.size > b.x &&
-
         a.y < b.y + b.h &&
-
         a.y + a.size > b.y
 
     );
@@ -1724,7 +1863,7 @@ function isColliding(a, b) {
 
 
 /* =====================================================
-   DEPLACEMENT
+   DEPLACEMENT JOUEUR
 ===================================================== */
 
 function movePlayer() {
@@ -1738,9 +1877,15 @@ function movePlayer() {
     let dy = 0;
 
 
+    /*
+       TOUCHES
+    */
+
     if(
-        keys["arrowright"] ||
-        keys["d"]
+        keys["ArrowRight"] ||
+        keys["ArrowRight".toLowerCase()] ||
+        keys["d"] ||
+        keys["D"]
     ) {
 
         dx += player.speed;
@@ -1749,9 +1894,12 @@ function movePlayer() {
 
 
     if(
-        keys["arrowleft"] ||
+        keys["ArrowLeft"] ||
+        keys["ArrowLeft".toLowerCase()] ||
         keys["q"] ||
-        keys["a"]
+        keys["Q"] ||
+        keys["a"] ||
+        keys["A"]
     ) {
 
         dx -= player.speed;
@@ -1760,8 +1908,10 @@ function movePlayer() {
 
 
     if(
-        keys["arrowdown"] ||
-        keys["s"]
+        keys["ArrowDown"] ||
+        keys["ArrowDown".toLowerCase()] ||
+        keys["s"] ||
+        keys["S"]
     ) {
 
         dy += player.speed;
@@ -1770,9 +1920,12 @@ function movePlayer() {
 
 
     if(
-        keys["arrowup"] ||
+        keys["ArrowUp"] ||
+        keys["ArrowUp".toLowerCase()] ||
         keys["z"] ||
-        keys["w"]
+        keys["Z"] ||
+        keys["w"] ||
+        keys["W"]
     ) {
 
         dy -= player.speed;
@@ -1796,10 +1949,14 @@ function movePlayer() {
     player.y += dy;
 
 
+    /*
+       COLLISION MURS
+    */
+
     for(const wall of walls) {
 
         if(
-            isColliding(
+            collision(
                 player,
                 wall
             )
@@ -1810,12 +1967,47 @@ function movePlayer() {
             player.y = oldY;
 
             lose(
-                t("wall")
+                text[language].wall
             );
 
             return;
 
         }
+
+    }
+
+
+    /*
+       LIMITES
+    */
+
+    if(player.x < 0)
+        player.x = 0;
+
+    if(player.y < 0)
+        player.y = 0;
+
+    if(
+        player.x >
+        canvas.width -
+        player.size
+    ) {
+
+        player.x =
+            canvas.width -
+            player.size;
+
+    }
+
+    if(
+        player.y >
+        canvas.height -
+        player.size
+    ) {
+
+        player.y =
+            canvas.height -
+            player.size;
 
     }
 
@@ -1830,19 +2022,19 @@ document.addEventListener(
     "keydown",
     function(e) {
 
-        const key =
-            e.key.toLowerCase();
+        keys[e.key] = true;
 
-        keys[key] = true;
+        /*
+           Empêche la page de défiler
+           avec les flèches.
+        */
 
         if(
-            [
-                "arrowup",
-                "arrowdown",
-                "arrowleft",
-                "arrowright",
-                " "
-            ].includes(key)
+            e.key === "ArrowUp" ||
+            e.key === "ArrowDown" ||
+            e.key === "ArrowLeft" ||
+            e.key === "ArrowRight" ||
+            e.key === " "
         ) {
 
             e.preventDefault();
@@ -1857,81 +2049,88 @@ document.addEventListener(
     "keyup",
     function(e) {
 
-        keys[
-            e.key.toLowerCase()
-        ] = false;
+        keys[e.key] = false;
 
     }
 );
 
 
 /* =====================================================
-   TOUCHES TELEPHONE
+   BOUTONS TELEPHONE
 ===================================================== */
 
-document.querySelectorAll(
-    ".mobileButton"
-).forEach(
-    button => {
+document
+.querySelectorAll(".mobile-button")
+.forEach(function(button) {
 
-        const key =
-            button.dataset.key;
+    const key =
+        button.dataset.key;
 
 
-        function press(e) {
+    button.addEventListener(
+        "touchstart",
+        function(e) {
 
             e.preventDefault();
 
             keys[key] = true;
 
+        },
+        {
+            passive: false
         }
+    );
 
 
-        function release(e) {
+    button.addEventListener(
+        "touchend",
+        function(e) {
 
             e.preventDefault();
 
             keys[key] = false;
 
+        },
+        {
+            passive: false
         }
+    );
 
 
-        button.addEventListener(
-            "touchstart",
-            press,
-            { passive: false }
-        );
+    button.addEventListener(
+        "touchcancel",
+        function() {
 
-        button.addEventListener(
-            "touchend",
-            release,
-            { passive: false }
-        );
+            keys[key] = false;
 
-        button.addEventListener(
-            "touchcancel",
-            release,
-            { passive: false }
-        );
+        }
+    );
 
 
-        button.addEventListener(
-            "mousedown",
-            press
-        );
+    /*
+       Pour ordinateur aussi.
+    */
 
-        button.addEventListener(
-            "mouseup",
-            release
-        );
+    button.addEventListener(
+        "mousedown",
+        function() {
 
-        button.addEventListener(
-            "mouseleave",
-            release
-        );
+            keys[key] = true;
 
-    }
-);
+        }
+    );
+
+
+    button.addEventListener(
+        "mouseup",
+        function() {
+
+            keys[key] = false;
+
+        }
+    );
+
+});
 
 
 /* =====================================================
@@ -1949,16 +2148,16 @@ function updateRobots() {
         if(robot.horizontal) {
 
             robot.x +=
-                robot.direction *
-                robot.speed;
+                robot.speed *
+                robot.direction;
 
 
             if(
-                robot.x < 20 ||
-                robot.x >
+                robot.x <= 10 ||
+                robot.x >=
                 canvas.width -
                 robot.size -
-                20
+                10
             ) {
 
                 robot.direction *= -1;
@@ -1966,20 +2165,19 @@ function updateRobots() {
             }
 
         }
-
         else {
 
             robot.y +=
-                robot.direction *
-                robot.speed;
+                robot.speed *
+                robot.direction;
 
 
             if(
-                robot.y < 20 ||
-                robot.y >
+                robot.y <= 10 ||
+                robot.y >=
                 canvas.height -
                 robot.size -
-                20
+                10
             ) {
 
                 robot.direction *= -1;
@@ -2003,14 +2201,14 @@ function updateRobots() {
 
 
         if(
-            isColliding(
+            collision(
                 player,
                 r
             )
         ) {
 
             lose(
-                t("robot")
+                text[language].robot
             );
 
             return;
@@ -2028,11 +2226,7 @@ function updateRobots() {
 
 function checkExit() {
 
-    if(!gameRunning)
-        return;
-
-
-    const e = {
+    const exitBox = {
 
         x: exit.x,
 
@@ -2046,9 +2240,9 @@ function checkExit() {
 
 
     if(
-        isColliding(
+        collision(
             player,
-            e
+            exitBox
         )
     ) {
 
@@ -2060,16 +2254,16 @@ function checkExit() {
 
 
 /* =====================================================
-   NIVEAU TERMINE
+   FIN DU NIVEAU
 ===================================================== */
 
 function levelComplete() {
 
     /*
-       Gain qui diminue avec les niveaux.
+       Score gagné.
     */
 
-    const gain =
+    const points =
         Math.max(
             1,
             5 -
@@ -2079,8 +2273,13 @@ function levelComplete() {
         );
 
 
-    scores[currentPlayer] += gain;
+    scores[currentPlayer] +=
+        points;
 
+
+    /*
+       DERNIER NIVEAU
+    */
 
     if(level >= MAX_LEVEL) {
 
@@ -2111,8 +2310,7 @@ function lose(reason) {
 
     /*
        -2 au début.
-       Puis la pénalité augmente
-       progressivement.
+       Peut augmenter avec le niveau.
     */
 
     const penalty =
@@ -2126,9 +2324,7 @@ function lose(reason) {
 
 
     /*
-       IMPORTANT :
-       PAS de Math.max(0,...)
-       Le score peut donc être négatif.
+       Le score peut être négatif.
     */
 
     scores[currentPlayer] -=
@@ -2139,20 +2335,20 @@ function lose(reason) {
 
 
     messageTitle.textContent =
-        t("lose");
+        text[language].lose;
 
 
     messageText.textContent =
         reason +
-        "\n" +
-        names[currentPlayer] +
+        "\n\n" +
+        playerNames[currentPlayer] +
         " : -" +
         penalty +
         " points";
 
 
     messageButton.textContent =
-        t("continue");
+        text[language].continue;
 
 
     message.style.display =
@@ -2165,7 +2361,7 @@ function lose(reason) {
 
 
 /* =====================================================
-   BOUTON APRES DEFAITE
+   CONTINUER APRES DEFAITE
 ===================================================== */
 
 messageButton.addEventListener(
@@ -2177,11 +2373,11 @@ messageButton.addEventListener(
 
 
         /*
-           SOLO :
-           le même joueur recommence.
+           En Duo :
+           changement de joueur.
 
-           DUO :
-           on passe au joueur suivant.
+           En Solo :
+           même joueur.
         */
 
         if(mode === "duo") {
@@ -2196,10 +2392,6 @@ messageButton.addEventListener(
 
         gameRunning = true;
 
-
-        /*
-           Le niveau reste le même.
-        */
 
         loadLevel();
 
@@ -2217,32 +2409,31 @@ function winGame() {
 
 
     messageTitle.textContent =
-        t("win");
+        text[language].victory;
 
 
     if(mode === "duo") {
 
         messageText.textContent =
-            names[currentPlayer] +
+            playerNames[currentPlayer] +
             " : " +
             scores[currentPlayer] +
             " points\n\n" +
-            t("winText");
+            text[language].victoryText;
 
     }
-
     else {
 
         messageText.textContent =
             scores[0] +
             " points\n\n" +
-            t("winText");
+            text[language].victoryText;
 
     }
 
 
     messageButton.textContent =
-        t("continue");
+        text[language].continue;
 
 
     message.style.display =
@@ -2263,11 +2454,6 @@ function updateInterface() {
         level;
 
 
-    /*
-       SCORES
-       Ils peuvent être négatifs.
-    */
-
     document.getElementById(
         "score0"
     ).textContent =
@@ -2283,36 +2469,40 @@ function updateInterface() {
     document.getElementById(
         "playerName0"
     ).textContent =
-        names[0];
+        playerNames[0];
 
 
     document.getElementById(
         "playerName1"
     ).textContent =
-        names[1];
+        playerNames[1];
+
+
+    document.getElementById(
+        "turn0"
+    ).textContent =
+        text[language].turn +
+        " " +
+        playerNames[0];
+
+
+    document.getElementById(
+        "turn1"
+    ).textContent =
+        text[language].turn +
+        " " +
+        playerNames[1];
 
 
     const turn0 =
         document.getElementById(
-            "playerTurn0"
+            "turn0"
         );
 
     const turn1 =
         document.getElementById(
-            "playerTurn1"
+            "turn1"
         );
-
-
-    turn0.textContent =
-        t("turn") +
-        " " +
-        names[0];
-
-
-    turn1.textContent =
-        t("turn") +
-        " " +
-        names[1];
 
 
     turn0.classList.remove(
@@ -2326,12 +2516,18 @@ function updateInterface() {
     );
 
 
-    /*
-       Le joueur actif = VERT.
-       L'autre = ROUGE.
-    */
+    if(mode === "solo") {
 
-    if(mode === "duo") {
+        turn0.classList.add(
+            "active"
+        );
+
+        turn1.classList.add(
+            "inactive"
+        );
+
+    }
+    else {
 
         if(currentPlayer === 0) {
 
@@ -2344,7 +2540,6 @@ function updateInterface() {
             );
 
         }
-
         else {
 
             turn0.classList.add(
@@ -2359,28 +2554,26 @@ function updateInterface() {
 
     }
 
-    else {
 
-        turn0.classList.add(
-            "active"
-        );
-
-        turn1.classList.add(
-            "inactive"
-        );
-
-    }
-
-
-    playerSpeedText.textContent =
+    document.getElementById(
+        "playerSpeed"
+    ).textContent =
         player.speed;
 
 
-    robotSpeedText.textContent =
-        (
-            .65 +
-            level * .12
-        ).toFixed(1);
+    const robotSpeed =
+        level < 4
+            ? 0
+            : (
+                0.5 +
+                level * 0.12
+            );
+
+
+    document.getElementById(
+        "robotSpeed"
+    ).textContent =
+        robotSpeed.toFixed(1);
 
 }
 
@@ -2391,20 +2584,12 @@ function updateInterface() {
 
 function draw() {
 
-    ctx.clearRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
-
-
     /*
-       Fond
+       FOND
     */
 
     ctx.fillStyle =
-        "#222";
+        "#222222";
 
     ctx.fillRect(
         0,
@@ -2415,11 +2600,11 @@ function draw() {
 
 
     /*
-       Murs
+       MURS
     */
 
     ctx.fillStyle =
-        "#eeeeee";
+        "#ffffff";
 
 
     for(const wall of walls) {
@@ -2435,7 +2620,7 @@ function draw() {
 
 
     /*
-       Sortie
+       SORTIE VERTE
     */
 
     ctx.fillStyle =
@@ -2450,7 +2635,7 @@ function draw() {
 
 
     /*
-       Robots
+       ROBOTS ROUGES
     */
 
     for(const robot of robots) {
@@ -2467,26 +2652,26 @@ function draw() {
 
 
         /*
-           Yeux
+           YEUX
         */
 
         ctx.fillStyle =
-            "white";
+            "#ffffff";
 
 
         const eye =
             Math.max(
                 2,
-                robot.size * .18
+                robot.size * 0.18
             );
 
 
         ctx.fillRect(
             robot.x +
-            robot.size * .20,
+            robot.size * 0.20,
 
             robot.y +
-            robot.size * .20,
+            robot.size * 0.20,
 
             eye,
             eye
@@ -2495,10 +2680,10 @@ function draw() {
 
         ctx.fillRect(
             robot.x +
-            robot.size * .62,
+            robot.size * 0.62,
 
             robot.y +
-            robot.size * .20,
+            robot.size * 0.20,
 
             eye,
             eye
@@ -2508,7 +2693,7 @@ function draw() {
 
 
     /*
-       Joueur bleu
+       JOUEUR BLEU
     */
 
     ctx.fillStyle =
@@ -2525,7 +2710,7 @@ function draw() {
 
 
 /* =====================================================
-   CHARGER NIVEAU
+   CHARGER LE NIVEAU
 ===================================================== */
 
 function loadLevel() {
@@ -2538,7 +2723,7 @@ function loadLevel() {
 
 
 /* =====================================================
-   BOUCLE
+   BOUCLE DU JEU
 ===================================================== */
 
 function gameLoop() {
@@ -2553,7 +2738,13 @@ function gameLoop() {
 
     }
 
+
+    /*
+       DESSIN TOUJOURS ACTIF
+    */
+
     draw();
+
 
     requestAnimationFrame(
         gameLoop
@@ -2563,10 +2754,17 @@ function gameLoop() {
 
 
 /* =====================================================
-   DEMARRAGE
+   INITIALISATION
 ===================================================== */
 
 updateLanguage();
+
+/*
+   Le canvas est déjà dessiné une première fois.
+   Cela évite un écran vide.
+*/
+
+draw();
 
 gameLoop();
 
