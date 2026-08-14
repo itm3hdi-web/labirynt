@@ -2,6 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Labyrinthe Hardcore</title>
 
 <style>
@@ -15,17 +16,21 @@ body {
     color: white;
     font-family: Arial, sans-serif;
     text-align: center;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
+    touch-action: manipulation;
 }
 
 #top {
-    height: 70px;
+    min-height: 70px;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 55px;
     background: #181818;
     font-size: 22px;
+    flex-wrap: wrap;
+    padding: 8px;
 }
 
 canvas {
@@ -33,6 +38,8 @@ canvas {
     margin: 10px auto;
     border: 4px solid white;
     background: #222;
+    max-width: 95vw;
+    height: auto;
 }
 
 #message {
@@ -62,6 +69,81 @@ button {
     border: none;
     border-radius: 8px;
 }
+
+
+/* =====================================================
+   COMMANDES TACTILES
+===================================================== */
+
+#mobileControls {
+    display: none;
+    width: 220px;
+    margin: 10px auto 25px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+}
+
+.mobileRow {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.mobileButton {
+    width: 65px;
+    height: 65px;
+    padding: 0;
+    border: 2px solid white;
+    border-radius: 12px;
+    background: #333;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.mobileButton:active {
+    background: #666;
+    transform: scale(0.95);
+}
+
+
+/* =====================================================
+   AFFICHAGE SUR TELEPHONE
+===================================================== */
+
+@media (max-width: 700px) {
+
+    #top {
+        min-height: 60px;
+        gap: 8px 18px;
+        font-size: 14px;
+    }
+
+    canvas {
+        width: 96vw;
+        height: auto;
+        margin: 8px auto;
+        border-width: 3px;
+    }
+
+    #mobileControls {
+        display: block;
+    }
+
+    #message h1 {
+        font-size: 45px;
+    }
+
+    #message p {
+        font-size: 18px;
+        padding: 0 20px;
+    }
+}
 </style>
 </head>
 
@@ -76,10 +158,56 @@ button {
 
 <canvas id="game" width="900" height="600"></canvas>
 
+
+<!-- =====================================================
+     COMMANDES POUR TELEPHONE
+===================================================== -->
+
+<div id="mobileControls">
+
+    <div class="mobileRow">
+        <button
+            class="mobileButton"
+            data-key="arrowup"
+            aria-label="Avancer">
+            ⬆️
+        </button>
+    </div>
+
+    <div class="mobileRow">
+
+        <button
+            class="mobileButton"
+            data-key="arrowleft"
+            aria-label="Gauche">
+            ⬅️
+        </button>
+
+        <button
+            class="mobileButton"
+            data-key="arrowdown"
+            aria-label="Reculer">
+            ⬇️
+        </button>
+
+        <button
+            class="mobileButton"
+            data-key="arrowright"
+            aria-label="Droite">
+            ➡️
+        </button>
+
+    </div>
+
+</div>
+
+
 <div id="message">
     <h1 id="messageTitle"></h1>
     <p id="messageText"></p>
-    <button onclick="restartLevel()">Recommencer le niveau</button>
+    <button onclick="restartLevel()">
+        Recommencer le niveau
+    </button>
 </div>
 
 
@@ -130,11 +258,6 @@ const player = {
     x: 0,
     y: 0,
     size: 12,
-
-    /*
-       Le joueur est volontairement beaucoup plus rapide
-       que dans l'ancienne version.
-    */
     speed: 6
 };
 
@@ -145,36 +268,128 @@ const player = {
 
 const keys = {};
 
+
+/* =====================================================
+   CLAVIER PC
+===================================================== */
+
 document.addEventListener("keydown", function(e) {
 
-    keys[e.key.toLowerCase()] = true;
+    const key = e.key.toLowerCase();
+
+    keys[key] = true;
 
     /*
-       Chaque pression de touche provoque aussi un petit
-       déplacement immédiat.
+       Empêche les flèches de faire défiler
+       la page sur ordinateur.
     */
 
-    movePlayer();
+    if([
+        "arrowup",
+        "arrowdown",
+        "arrowleft",
+        "arrowright",
+        " "
+    ].includes(key)) {
+        e.preventDefault();
+    }
 
 });
 
+
 document.addEventListener("keyup", function(e) {
-    keys[e.key.toLowerCase()] = false;
+
+    const key = e.key.toLowerCase();
+
+    keys[key] = false;
+
 });
 
 
 /* =====================================================
-   GÉNÉRATEUR DE NOMBRES ALÉATOIRES
+   COMMANDES TACTILES
 ===================================================== */
 
-/*
-   On utilise un générateur avec une graine différente
-   pour chaque niveau.
+const mobileButtons =
+    document.querySelectorAll(".mobileButton");
 
-   Résultat :
-   chaque niveau possède un labyrinthe différent,
-   mais le même niveau reste toujours identique.
-*/
+
+mobileButtons.forEach(function(button) {
+
+    const key = button.dataset.key;
+
+
+    /*
+       Quand le doigt appuie
+    */
+
+    button.addEventListener(
+        "touchstart",
+        function(e) {
+
+            e.preventDefault();
+
+            keys[key] = true;
+
+        },
+        { passive: false }
+    );
+
+
+    /*
+       Quand le doigt est retiré
+    */
+
+    button.addEventListener(
+        "touchend",
+        function(e) {
+
+            e.preventDefault();
+
+            keys[key] = false;
+
+        },
+        { passive: false }
+    );
+
+
+    /*
+       Si le doigt quitte le bouton
+    */
+
+    button.addEventListener(
+        "touchcancel",
+        function(e) {
+
+            e.preventDefault();
+
+            keys[key] = false;
+
+        },
+        { passive: false }
+    );
+
+
+    /*
+       Si le doigt glisse hors du bouton
+    */
+
+    button.addEventListener(
+        "touchmove",
+        function(e) {
+
+            e.preventDefault();
+
+        },
+        { passive: false }
+    );
+
+});
+
+
+/* =====================================================
+   GÉNÉRATEUR ALÉATOIRE
+===================================================== */
 
 function randomGenerator(seed) {
 
@@ -182,9 +397,11 @@ function randomGenerator(seed) {
 
     return function() {
 
-        value = (value * 9301 + 49297) % 233280;
+        value =
+            (value * 9301 + 49297) % 233280;
 
         return value / 233280;
+
     };
 }
 
@@ -197,25 +414,33 @@ function generateMaze(levelNumber) {
 
     walls = [];
 
-    /*
-       Plus le niveau avance, plus les cases deviennent
-       petites -> passages plus étroits.
-    */
 
-    const cols = 25 + Math.min(levelNumber, 10);
-    const rows = 15 + Math.min(Math.floor(levelNumber / 2), 7);
+    const cols =
+        25 + Math.min(levelNumber, 10);
 
-    const cellW = canvas.width / cols;
-    const cellH = canvas.height / rows;
+    const rows =
+        15 +
+        Math.min(
+            Math.floor(levelNumber / 2),
+            7
+        );
 
-    const random = randomGenerator(levelNumber * 98431 + 17);
 
-    /*
-       Chaque cellule possède 4 murs :
-       haut, droite, bas, gauche
-    */
+    const cellW =
+        canvas.width / cols;
+
+    const cellH =
+        canvas.height / rows;
+
+
+    const random =
+        randomGenerator(
+            levelNumber * 98431 + 17
+        );
+
 
     let cells = [];
+
 
     for(let y = 0; y < rows; y++) {
 
@@ -224,13 +449,16 @@ function generateMaze(levelNumber) {
         for(let x = 0; x < cols; x++) {
 
             cells[y][x] = {
+
                 visited: false,
+
                 walls: {
                     top: true,
                     right: true,
                     bottom: true,
                     left: true
                 }
+
             };
 
         }
@@ -238,20 +466,14 @@ function generateMaze(levelNumber) {
     }
 
 
-    /*
-       Création d'un labyrinthe parfait avec DFS.
-
-       Important :
-       il n'y a qu'un chemin logique entre le départ
-       et la sortie.
-    */
-
     let stack = [];
 
     let startX = 0;
     let startY = 0;
 
+
     cells[startY][startX].visited = true;
+
 
     stack.push({
         x: startX,
@@ -261,68 +483,73 @@ function generateMaze(levelNumber) {
 
     while(stack.length > 0) {
 
-        const current = stack[stack.length - 1];
+        const current =
+            stack[stack.length - 1];
 
         let neighbours = [];
 
-        /*
-           Haut
-        */
+
+        /* HAUT */
 
         if(
             current.y > 0 &&
             !cells[current.y - 1][current.x].visited
         ) {
+
             neighbours.push({
                 x: current.x,
                 y: current.y - 1,
                 direction: "top"
             });
+
         }
 
-        /*
-           Droite
-        */
+
+        /* DROITE */
 
         if(
             current.x < cols - 1 &&
             !cells[current.y][current.x + 1].visited
         ) {
+
             neighbours.push({
                 x: current.x + 1,
                 y: current.y,
                 direction: "right"
             });
+
         }
 
-        /*
-           Bas
-        */
+
+        /* BAS */
 
         if(
             current.y < rows - 1 &&
             !cells[current.y + 1][current.x].visited
         ) {
+
             neighbours.push({
                 x: current.x,
                 y: current.y + 1,
                 direction: "bottom"
             });
+
         }
 
-        /*
-           Gauche
-        */
+
+        /* GAUCHE */
 
         if(
             current.x > 0 &&
             !cells[current.y][current.x - 1].visited
         ) {
+
             neighbours.push({
                 x: current.x - 1,
                 y: current.y,
                 direction: "left"
             });
+
         }
 
 
@@ -330,8 +557,12 @@ function generateMaze(levelNumber) {
 
             const next =
                 neighbours[
-                    Math.floor(random() * neighbours.length)
+                    Math.floor(
+                        random() *
+                        neighbours.length
+                    )
                 ];
+
 
             const cell =
                 cells[current.y][current.x];
@@ -347,6 +578,7 @@ function generateMaze(levelNumber) {
 
             }
 
+
             else if(next.direction === "right") {
 
                 cell.walls.right = false;
@@ -354,12 +586,14 @@ function generateMaze(levelNumber) {
 
             }
 
+
             else if(next.direction === "bottom") {
 
                 cell.walls.bottom = false;
                 nextCell.walls.top = false;
 
             }
+
 
             else if(next.direction === "left") {
 
@@ -370,6 +604,7 @@ function generateMaze(levelNumber) {
 
 
             nextCell.visited = true;
+
 
             stack.push({
                 x: next.x,
@@ -387,10 +622,9 @@ function generateMaze(levelNumber) {
     }
 
 
-    /*
-       Épaisseur des murs.
-       Les niveaux avancés sont plus serrés.
-    */
+    /* =================================================
+       MURS
+    ================================================= */
 
     const wallThickness =
         Math.max(
@@ -399,28 +633,35 @@ function generateMaze(levelNumber) {
         );
 
 
-    /*
-       Transformation des murs des cellules
-       en rectangles dessinables.
-    */
-
     for(let y = 0; y < rows; y++) {
 
         for(let x = 0; x < cols; x++) {
 
-            const cell = cells[y][x];
+            const cell =
+                cells[y][x];
 
-            const px = x * cellW;
-            const py = y * cellH;
+
+            const px =
+                x * cellW;
+
+            const py =
+                y * cellH;
 
 
             if(cell.walls.top) {
 
                 walls.push({
+
                     x: px,
                     y: py,
-                    w: cellW + wallThickness,
-                    h: wallThickness
+
+                    w:
+                        cellW +
+                        wallThickness,
+
+                    h:
+                        wallThickness
+
                 });
 
             }
@@ -429,34 +670,63 @@ function generateMaze(levelNumber) {
             if(cell.walls.left) {
 
                 walls.push({
+
                     x: px,
                     y: py,
-                    w: wallThickness,
-                    h: cellH + wallThickness
+
+                    w:
+                        wallThickness,
+
+                    h:
+                        cellH +
+                        wallThickness
+
                 });
 
             }
 
 
-            if(x === cols - 1 && cell.walls.right) {
+            if(
+                x === cols - 1 &&
+                cell.walls.right
+            ) {
 
                 walls.push({
-                    x: px + cellW,
+
+                    x:
+                        px + cellW,
+
                     y: py,
-                    w: wallThickness,
-                    h: cellH
+
+                    w:
+                        wallThickness,
+
+                    h:
+                        cellH
+
                 });
 
             }
 
 
-            if(y === rows - 1 && cell.walls.bottom) {
+            if(
+                y === rows - 1 &&
+                cell.walls.bottom
+            ) {
 
                 walls.push({
+
                     x: px,
-                    y: py + cellH,
-                    w: cellW,
-                    h: wallThickness
+
+                    y:
+                        py + cellH,
+
+                    w:
+                        cellW,
+
+                    h:
+                        wallThickness
+
                 });
 
             }
@@ -466,46 +736,56 @@ function generateMaze(levelNumber) {
     }
 
 
-    /*
-       Départ
-    */
+    /* =================================================
+       DÉPART
+    ================================================= */
 
-    player.x = cellW * 0.25;
-    player.y = cellH * 0.25;
+    player.x =
+        cellW * 0.25;
+
+    player.y =
+        cellH * 0.25;
 
 
-    /*
-       Sortie : coin opposé.
-    */
+    /* =================================================
+       SORTIE
+    ================================================= */
 
     exit.x =
-        (cols - 1) * cellW +
+        (cols - 1) *
+        cellW +
         cellW * 0.35;
 
+
     exit.y =
-        (rows - 1) * cellH +
+        (rows - 1) *
+        cellH +
         cellH * 0.35;
 
+
     exit.size =
-        Math.max(12, Math.min(cellW, cellH) * 0.30);
+        Math.max(
+            12,
+            Math.min(
+                cellW,
+                cellH
+            ) * 0.30
+        );
 
 
-    /*
-       Création des robots.
-    */
+    /* =================================================
+       ROBOTS
+    ================================================= */
 
     robots = [];
 
 
-    /*
-       Plus le niveau augmente :
-       - plus de robots
-       - plus rapides
-    */
-
     const robotCount =
         Math.min(
-            1 + Math.floor(levelNumber / 2),
+            1 +
+            Math.floor(
+                levelNumber / 2
+            ),
             12
         );
 
@@ -515,26 +795,39 @@ function generateMaze(levelNumber) {
         levelNumber * 0.20;
 
 
-    for(let i = 0; i < robotCount; i++) {
-
-        /*
-           On place les robots à différents endroits
-           du labyrinthe.
-        */
+    for(
+        let i = 0;
+        i < robotCount;
+        i++
+    ) {
 
         let rx =
             cellW *
-            (2 + Math.floor(random() * Math.max(1, cols - 4)));
+            (
+                2 +
+                Math.floor(
+                    random() *
+                    Math.max(
+                        1,
+                        cols - 4
+                    )
+                )
+            );
+
 
         let ry =
             cellH *
-            (1 + Math.floor(random() * Math.max(1, rows - 3)));
+            (
+                1 +
+                Math.floor(
+                    random() *
+                    Math.max(
+                        1,
+                        rows - 3
+                    )
+                )
+            );
 
-
-        /*
-           Les robots suivent des lignes horizontales
-           ou verticales.
-        */
 
         const horizontal =
             random() > 0.5;
@@ -548,14 +841,19 @@ function generateMaze(levelNumber) {
             size:
                 Math.max(
                     10,
-                    Math.min(cellW, cellH) * 0.32
+                    Math.min(
+                        cellW,
+                        cellH
+                    ) * 0.32
                 ),
 
             speed:
                 robotSpeed,
 
             direction:
-                random() > 0.5 ? 1 : -1,
+                random() > 0.5
+                    ? 1
+                    : -1,
 
             horizontal:
                 horizontal
@@ -574,17 +872,26 @@ function generateMaze(levelNumber) {
 function isColliding(a, b) {
 
     return (
-        a.x < b.x + b.w &&
-        a.x + a.size > b.x &&
-        a.y < b.y + b.h &&
-        a.y + a.size > b.y
+
+        a.x <
+        b.x + b.w &&
+
+        a.x + a.size >
+        b.x &&
+
+        a.y <
+        b.y + b.h &&
+
+        a.y + a.size >
+        b.y
+
     );
 
 }
 
 
 /* =====================================================
-   DÉPLACEMENT
+   DÉPLACEMENT DU JOUEUR
 ===================================================== */
 
 function movePlayer() {
@@ -592,12 +899,6 @@ function movePlayer() {
     if(!gameRunning)
         return;
 
-
-    /*
-       Vitesse augmentée.
-
-       Chaque touche fait avancer le carré bleu.
-    */
 
     let dx = 0;
     let dy = 0;
@@ -607,7 +908,9 @@ function movePlayer() {
         keys["arrowright"] ||
         keys["d"]
     ) {
+
         dx += player.speed;
+
     }
 
 
@@ -616,7 +919,9 @@ function movePlayer() {
         keys["q"] ||
         keys["a"]
     ) {
+
         dx -= player.speed;
+
     }
 
 
@@ -624,7 +929,9 @@ function movePlayer() {
         keys["arrowdown"] ||
         keys["s"]
     ) {
+
         dy += player.speed;
+
     }
 
 
@@ -633,32 +940,53 @@ function movePlayer() {
         keys["z"] ||
         keys["w"]
     ) {
+
         dy -= player.speed;
+
     }
 
 
-    const oldX = player.x;
-    const oldY = player.y;
+    /*
+       Empêche le joueur d'aller plus vite
+       en diagonale.
+    */
+
+    if(dx !== 0 && dy !== 0) {
+
+        dx *= 0.7071;
+        dy *= 0.7071;
+
+    }
+
+
+    const oldX =
+        player.x;
+
+    const oldY =
+        player.y;
 
 
     player.x += dx;
     player.y += dy;
 
 
-    /*
-       Collision avec les murs.
-    */
-
     for(let wall of walls) {
 
-        if(isColliding(player, wall)) {
+        if(
+            isColliding(
+                player,
+                wall
+            )
+        ) {
 
             player.x = oldX;
             player.y = oldY;
 
+
             lose(
                 "💥 TU AS TOUCHÉ UN MUR !"
             );
+
 
             return;
 
@@ -687,13 +1015,11 @@ function updateRobots() {
                 robot.direction *
                 robot.speed;
 
-            /*
-               Ils rebondissent sur les bords.
-            */
 
             if(
                 robot.x < 25 ||
-                robot.x > canvas.width - 30
+                robot.x >
+                canvas.width - 30
             ) {
 
                 robot.direction *= -1;
@@ -711,7 +1037,8 @@ function updateRobots() {
 
             if(
                 robot.y < 25 ||
-                robot.y > canvas.height - 30
+                robot.y >
+                canvas.height - 30
             ) {
 
                 robot.direction *= -1;
@@ -732,7 +1059,12 @@ function updateRobots() {
         };
 
 
-        if(isColliding(player, r)) {
+        if(
+            isColliding(
+                player,
+                r
+            )
+        ) {
 
             lose(
                 "🤖 UN ROBOT T'A TOUCHÉ !"
@@ -766,7 +1098,12 @@ function checkExit() {
     };
 
 
-    if(isColliding(player, e)) {
+    if(
+        isColliding(
+            player,
+            e
+        )
+    ) {
 
         levelComplete();
 
@@ -781,14 +1118,13 @@ function checkExit() {
 
 function levelComplete() {
 
-    /*
-       Le gain diminue progressivement.
-    */
-
     const gain =
         Math.max(
             1,
-            5 - Math.floor((level - 1) / 5)
+            5 -
+            Math.floor(
+                (level - 1) / 5
+            )
         );
 
 
@@ -821,15 +1157,13 @@ function lose(reason) {
         return;
 
 
-    /*
-       La perte devient plus importante
-       dans les niveaux avancés.
-    */
-
     const penalty =
         Math.min(
             6,
-            2 + Math.floor(level / 5)
+            2 +
+            Math.floor(
+                level / 5
+            )
         );
 
 
@@ -872,7 +1206,9 @@ function restartLevel() {
     message.style.display =
         "none";
 
+
     gameRunning = true;
+
 
     loadLevel();
 
@@ -922,8 +1258,10 @@ function updateInterface() {
 
 
     robotSpeedText.textContent =
-        (1 + level * 0.20)
-        .toFixed(1);
+        (
+            1 +
+            level * 0.20
+        ).toFixed(1);
 
 }
 
@@ -942,9 +1280,7 @@ function draw() {
     );
 
 
-    /*
-       Fond
-    */
+    /* FOND */
 
     ctx.fillStyle =
         "#222";
@@ -957,9 +1293,7 @@ function draw() {
     );
 
 
-    /*
-       Murs
-    */
+    /* MURS */
 
     ctx.fillStyle =
         "#eeeeee";
@@ -977,9 +1311,7 @@ function draw() {
     }
 
 
-    /*
-       Sortie
-    */
+    /* SORTIE */
 
     ctx.fillStyle =
         "#00ff66";
@@ -993,9 +1325,7 @@ function draw() {
     );
 
 
-    /*
-       Robots
-    */
+    /* ROBOTS */
 
     for(let robot of robots) {
 
@@ -1011,10 +1341,6 @@ function draw() {
         );
 
 
-        /*
-           Yeux
-        */
-
         ctx.fillStyle =
             "white";
 
@@ -1027,16 +1353,24 @@ function draw() {
 
 
         ctx.fillRect(
-            robot.x + robot.size * 0.20,
-            robot.y + robot.size * 0.20,
+            robot.x +
+            robot.size * 0.20,
+
+            robot.y +
+            robot.size * 0.20,
+
             eyeSize,
             eyeSize
         );
 
 
         ctx.fillRect(
-            robot.x + robot.size * 0.62,
-            robot.y + robot.size * 0.20,
+            robot.x +
+            robot.size * 0.62,
+
+            robot.y +
+            robot.size * 0.20,
+
             eyeSize,
             eyeSize
         );
@@ -1044,9 +1378,7 @@ function draw() {
     }
 
 
-    /*
-       Joueur bleu
-    */
+    /* JOUEUR */
 
     ctx.fillStyle =
         "#3498ff";
@@ -1070,11 +1402,6 @@ function gameLoop() {
 
     if(gameRunning) {
 
-        /*
-           Permet aussi le déplacement continu
-           quand on garde une touche appuyée.
-        */
-
         movePlayer();
 
         updateRobots();
@@ -1085,6 +1412,7 @@ function gameLoop() {
 
 
     draw();
+
 
     requestAnimationFrame(
         gameLoop
