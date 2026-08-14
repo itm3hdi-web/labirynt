@@ -1,24 +1,17 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0,
-maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 <title>Labyrinthe Hardcore</title>
 
 <style>
-
 * {
     box-sizing: border-box;
 }
 
-html,
-body {
+html, body {
     margin: 0;
     min-height: 100%;
     font-family: Arial, sans-serif;
@@ -37,43 +30,30 @@ select {
     font: inherit;
 }
 
-
-/* =====================================================
+/* =========================
    ACCUEIL
-===================================================== */
+========================= */
 
 #menu {
-
     position: fixed;
-
     inset: 0;
-
     z-index: 100;
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
     padding: 20px;
 
-    overflow: auto;
-
     background:
-
         radial-gradient(
             circle at 20% 20%,
-            rgba(52,152,255,.20),
+            rgba(52,152,255,.25),
             transparent 30%
         ),
-
         radial-gradient(
             circle at 80% 80%,
-            rgba(0,255,102,.13),
+            rgba(0,255,102,.15),
             transparent 28%
         ),
-
         linear-gradient(
             135deg,
             #050816,
@@ -82,491 +62,350 @@ select {
         );
 }
 
-
 #menuCard {
-
     width: min(520px, 94vw);
-
     padding: 34px;
-
     border: 1px solid rgba(255,255,255,.16);
-
     border-radius: 24px;
-
-    background: rgba(10,14,28,.90);
-
-    box-shadow:
-        0 25px 80px rgba(0,0,0,.55);
-
-    backdrop-filter: blur(12px);
-
+    background: rgba(10,14,28,.94);
+    box-shadow: 0 25px 80px rgba(0,0,0,.55);
     text-align: center;
 }
 
-
 .logo {
-
-    font-size: 50px;
-
-    margin-bottom: 6px;
+    font-size: 55px;
 }
 
-
 #menuCard h1 {
-
-    margin: 0;
-
+    margin: 8px 0;
     font-size: 38px;
 }
 
-
 .subtitle {
-
     color: #b9c3d8;
-
     margin: 10px 0 25px;
-
     line-height: 1.5;
 }
 
-
 .formRow {
-
     text-align: left;
-
     margin: 14px 0;
 }
 
-
 .formRow label {
-
     display: block;
-
     margin-bottom: 7px;
-
     color: #dbe4f5;
-
     font-weight: bold;
 }
-
 
 input,
 select {
-
     width: 100%;
-
     padding: 13px 14px;
-
     border-radius: 12px;
-
     border: 1px solid #3a4661;
-
     background: #161e31;
-
     color: white;
-
     outline: none;
 }
 
-
 input:focus,
 select:focus {
-
     border-color: #3498ff;
-
-    box-shadow:
-        0 0 0 3px rgba(52,152,255,.16);
+    box-shadow: 0 0 0 3px rgba(52,152,255,.16);
 }
-
-
-/* =====================================================
-   SOLO / DUO
-===================================================== */
 
 .modeRow {
-
     display: grid;
-
     grid-template-columns: 1fr 1fr;
-
     gap: 10px;
-
-    margin: 15px 0;
 }
 
-
 .modeBtn {
-
     padding: 14px;
-
     border: 1px solid #3a4661;
-
     border-radius: 12px;
-
     background: #141b2c;
-
     color: white;
-
     font-weight: bold;
-
     cursor: pointer;
 }
 
-
 .modeBtn.active {
-
     background: #3498ff;
-
     border-color: #3498ff;
 }
 
-
 #player2Row {
-
     display: none;
 }
 
-
 #startBtn {
-
     width: 100%;
-
     padding: 15px;
-
     border: 0;
-
     border-radius: 13px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #3498ff,
-            #1474dc
-        );
-
+    background: linear-gradient(135deg,#3498ff,#1474dc);
     color: white;
-
     font-weight: bold;
-
     font-size: 20px;
-
     margin-top: 12px;
-
     cursor: pointer;
 }
 
-
-#startBtn:active {
-
-    transform: scale(.98);
-}
-
-
 #error {
-
     min-height: 20px;
-
     color: #ff7777;
-
     margin-top: 10px;
 }
 
-
-/* =====================================================
+/* =========================
    JEU
-===================================================== */
+========================= */
 
 #gameUI {
-
     display: none;
 }
 
-
 #top {
-
-    min-height: 70px;
-
+    min-height: 90px;
     display: flex;
-
     justify-content: center;
-
     align-items: center;
-
-    gap: 28px;
-
+    gap: 18px;
     background: #121722;
-
-    font-size: 20px;
-
     flex-wrap: wrap;
-
     padding: 10px 14px;
 }
 
-
-#top span {
-
-    font-weight: bold;
-}
-
-
-#turnInfo {
-
-    color: #7ec1ff;
-
-    font-weight: bold;
-}
-
-
-canvas {
-
-    display: block;
-
-    margin: 10px auto;
-
-    border: 4px solid white;
-
-    background: #222;
-
-    max-width: 95vw;
-
-    height: auto;
-}
-
-
-/* =====================================================
-   TOUCHES TELEPHONE
-===================================================== */
-
-#mobileControls {
-
-    display: none;
-
-    width: 220px;
-
-    margin: 10px auto 25px;
-
-    user-select: none;
-
-    touch-action: none;
-}
-
-
-.mobileRow {
-
+.playersBox {
     display: flex;
-
-    justify-content: center;
-
-    gap: 8px;
+    gap: 10px;
 }
 
-
-.mobileButton {
-
-    width: 65px;
-
-    height: 65px;
-
-    padding: 0;
-
-    border: 2px solid white;
+.playerCard {
+    width: 150px;
+    min-height: 76px;
+    padding: 8px 10px;
 
     border-radius: 12px;
 
-    background: #333;
+    background: #1b2230;
 
-    color: white;
-
-    font-size: 30px;
-
-    user-select: none;
-
-    touch-action: none;
-
-    -webkit-tap-highlight-color: transparent;
-}
-
-
-.mobileButton:active {
-
-    background: #666;
-
-    transform: scale(.95);
-}
-
-
-/* =====================================================
-   MESSAGE
-===================================================== */
-
-#message {
-
-    position: fixed;
-
-    inset: 0;
-
-    display: none;
-
-    justify-content: center;
-
-    align-items: center;
-
-    flex-direction: column;
-
-    background: rgba(0,0,0,.92);
-
-    z-index: 110;
+    border: 2px solid #3a4661;
 
     text-align: center;
 
+    font-size: 14px;
+
+    box-shadow: 0 4px 15px rgba(0,0,0,.25);
+}
+
+.playerCardName {
+    font-size: 17px;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.playerTurn {
+    font-weight: bold;
+    margin-top: 4px;
+}
+
+.playerTurn.active {
+    color: #00ff66;
+}
+
+.playerTurn.inactive {
+    color: #ff4040;
+}
+
+.gameStats {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: 15px;
+}
+
+.gameStats span {
+    font-weight: bold;
+}
+
+canvas {
+    display: block;
+    margin: 10px auto;
+    border: 4px solid white;
+    background: #222;
+    max-width: 95vw;
+    height: auto;
+}
+
+/* =========================
+   TOUCHES TELEPHONE
+========================= */
+
+#mobileControls {
+    display: none;
+    width: 220px;
+    margin: 10px auto 25px;
+    user-select: none;
+    touch-action: none;
+}
+
+.mobileRow {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.mobileButton {
+    width: 65px;
+    height: 65px;
+    padding: 0;
+    border: 2px solid white;
+    border-radius: 12px;
+    background: #333;
+    color: white;
+    font-size: 30px;
+    user-select: none;
+    touch-action: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.mobileButton:active {
+    background: #666;
+    transform: scale(.95);
+}
+
+/* =========================
+   MESSAGE
+========================= */
+
+#message {
+    position: fixed;
+    inset: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: rgba(0,0,0,.93);
+    z-index: 110;
+    text-align: center;
     padding: 20px;
 }
 
-
 #message h1 {
-
     font-size: 58px;
-
     margin: 10px;
 }
 
-
 #message p {
-
     font-size: 22px;
-
     max-width: 700px;
-
     white-space: pre-line;
-
     line-height: 1.5;
 }
 
-
-#message button {
-
+#messageButton {
     padding: 14px 25px;
-
     border: 0;
-
     border-radius: 10px;
-
     background: #3498ff;
-
     color: white;
-
     font-weight: bold;
-
     cursor: pointer;
 }
 
-
-/* =====================================================
+/* =========================
    TELEPHONE
-===================================================== */
+========================= */
 
 @media (max-width: 700px) {
 
     #top {
-
-        min-height: 60px;
-
-        gap: 7px 14px;
-
-        font-size: 13px;
+        gap: 7px 10px;
+        font-size: 12px;
     }
 
+    .playersBox {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .playerCard {
+        width: 135px;
+        min-height: 70px;
+        font-size: 12px;
+    }
+
+    .playerCardName {
+        font-size: 15px;
+    }
+
+    .gameStats {
+        width: 100%;
+        justify-content: center;
+        gap: 8px 14px;
+        font-size: 12px;
+    }
 
     canvas {
-
         width: 96vw;
-
         margin: 8px auto;
-
         border-width: 3px;
     }
 
-
     #mobileControls {
-
         display: block;
     }
 
-
-    #message h1 {
-
-        font-size: 42px;
-    }
-
-
-    #message p {
-
-        font-size: 18px;
-    }
-
-
     #menuCard {
-
         padding: 25px;
     }
 
-
     #menuCard h1 {
-
         font-size: 30px;
     }
 
+    #message h1 {
+        font-size: 42px;
+    }
+
+    #message p {
+        font-size: 18px;
+    }
 }
-
 </style>
-
 </head>
-
 
 <body>
 
-
-<!-- =====================================================
+<!-- =========================
      ACCUEIL
-===================================================== -->
+========================= -->
 
 <div id="menu">
 
     <div id="menuCard">
 
-        <div class="logo">
-            🧩
-        </div>
-
+        <div class="logo">🧩</div>
 
         <h1 id="welcomeTitle">
             Bienvenue dans le Labyrinthe
         </h1>
 
-
-        <div
-            class="subtitle"
-            id="welcomeText">
-
+        <div class="subtitle" id="welcomeText">
             Entre ton pseudo, choisis ton mode
             et tente de terminer les 23 niveaux.
-
         </div>
-
-
-        <!-- LANGUE -->
 
         <div class="formRow">
 
-            <label
-                id="languageLabel"
-                for="language">
-
+            <label id="languageLabel">
                 Langue
-
             </label>
-
 
             <select id="language">
 
@@ -586,38 +425,27 @@ canvas {
 
         </div>
 
-
-        <!-- PSEUDO JOUEUR 1 -->
-
         <div class="formRow">
 
-            <label
-                id="pseudo1Label"
-                for="pseudo1">
-
+            <label id="pseudo1Label">
                 Pseudo
-
             </label>
-
 
             <input
                 id="pseudo1"
                 type="text"
                 maxlength="18"
                 autocomplete="off"
-                placeholder="Ton pseudo">
+                placeholder="Ton pseudo"
+            >
 
         </div>
-
-
-        <!-- MODE -->
 
         <div class="formRow">
 
             <label id="modeLabel">
                 Mode
             </label>
-
 
             <div class="modeRow">
 
@@ -629,7 +457,6 @@ canvas {
                     🎮 Solo
 
                 </button>
-
 
                 <button
                     type="button"
@@ -644,38 +471,27 @@ canvas {
 
         </div>
 
-
-        <!-- PSEUDO JOUEUR 2 -->
-
         <div
             class="formRow"
             id="player2Row">
 
-            <label
-                id="pseudo2Label"
-                for="pseudo2">
-
+            <label id="pseudo2Label">
                 Pseudo du joueur 2
-
             </label>
-
 
             <input
                 id="pseudo2"
                 type="text"
                 maxlength="18"
                 autocomplete="off"
-                placeholder="Pseudo du joueur 2">
+                placeholder="Pseudo du joueur 2"
+            >
 
         </div>
 
-
         <button id="startBtn">
-
             Jouer
-
         </button>
-
 
         <div id="error"></div>
 
@@ -684,97 +500,105 @@ canvas {
 </div>
 
 
-
-<!-- =====================================================
-     INTERFACE DU JEU
-===================================================== -->
+<!-- =========================
+     JEU
+========================= -->
 
 <div id="gameUI">
 
-
     <div id="top">
 
-        <div>
+        <div class="playersBox">
 
-            <span id="levelLabel">
-                Niveau
-            </span>
+            <div class="playerCard">
 
-            :
+                <div
+                    class="playerCardName"
+                    id="playerName0">
 
-            <span id="level">
-                1
-            </span>
+                    Joueur 1
 
-            /23
+                </div>
 
-        </div>
+                <div>
+                    Score :
+                    <span id="score0">0</span>
+                </div>
 
+                <div
+                    class="playerTurn"
+                    id="playerTurn0">
 
-        <div>
+                    Tour de Joueur 1
 
-            <span id="scoreLabel">
-                Score
-            </span>
+                </div>
 
-            :
-
-            <span id="score">
-                0
-            </span>
-
-        </div>
+            </div>
 
 
-        <div>
+            <div class="playerCard">
 
-            <span id="playerLabel">
-                Joueur
-            </span>
+                <div
+                    class="playerCardName"
+                    id="playerName1">
 
-            :
+                    Joueur 2
 
-            <span id="playerName">
-                -
-            </span>
+                </div>
 
-        </div>
+                <div>
+                    Score :
+                    <span id="score1">0</span>
+                </div>
 
+                <div
+                    class="playerTurn"
+                    id="playerTurn1">
 
-        <div>
+                    Tour de Joueur 2
 
-            <span id="speedLabel">
-                Vitesse joueur
-            </span>
+                </div>
 
-            :
-
-            <span id="playerSpeed">
-                6
-            </span>
+            </div>
 
         </div>
 
 
-        <div>
+        <div class="gameStats">
 
-            <span id="robotLabel">
-                Vitesse robots
-            </span>
+            <div>
+                <span id="levelLabel">
+                    Niveau
+                </span>
+                :
+                <span id="level">
+                    1
+                </span>/23
+            </div>
 
-            :
+            <div>
+                <span id="speedLabel">
+                    Vitesse joueur
+                </span>
+                :
+                <span id="playerSpeed">
+                    6
+                </span>
+            </div>
 
-            <span id="robotSpeed">
-                1
-            </span>
+            <div>
+                <span id="robotLabel">
+                    Vitesse robots
+                </span>
+                :
+                <span id="robotSpeed">
+                    1
+                </span>
+            </div>
 
         </div>
-
-
-        <div id="turnInfo"></div>
 
     </div>
-
 
 
     <canvas
@@ -784,10 +608,7 @@ canvas {
     </canvas>
 
 
-
-    <!-- =================================================
-         TOUCHES TELEPHONE
-    ================================================= -->
+    <!-- TOUCHES TELEPHONE -->
 
     <div id="mobileControls">
 
@@ -796,40 +617,29 @@ canvas {
             <button
                 class="mobileButton"
                 data-key="arrowup">
-
                 ⬆️
-
             </button>
 
         </div>
-
 
         <div class="mobileRow">
 
             <button
                 class="mobileButton"
                 data-key="arrowleft">
-
                 ⬅️
-
             </button>
-
 
             <button
                 class="mobileButton"
                 data-key="arrowdown">
-
                 ⬇️
-
             </button>
-
 
             <button
                 class="mobileButton"
                 data-key="arrowright">
-
                 ➡️
-
             </button>
 
         </div>
@@ -839,10 +649,9 @@ canvas {
 </div>
 
 
-
-<!-- =====================================================
+<!-- =========================
      MESSAGE
-===================================================== -->
+========================= -->
 
 <div id="message">
 
@@ -857,7 +666,6 @@ canvas {
 </div>
 
 
-
 <script>
 
 /* =====================================================
@@ -870,32 +678,11 @@ const canvas =
 const ctx =
     canvas.getContext("2d");
 
-
-const levelText =
-    document.getElementById("level");
-
-const scoreText =
-    document.getElementById("score");
-
-const playerNameText =
-    document.getElementById("playerName");
-
-const playerSpeedText =
-    document.getElementById("playerSpeed");
-
-const robotSpeedText =
-    document.getElementById("robotSpeed");
-
-const turnInfo =
-    document.getElementById("turnInfo");
-
-
 const menu =
     document.getElementById("menu");
 
 const gameUI =
     document.getElementById("gameUI");
-
 
 const languageSelect =
     document.getElementById("language");
@@ -909,7 +696,6 @@ const pseudo2 =
 const player2Row =
     document.getElementById("player2Row");
 
-
 const soloBtn =
     document.getElementById("soloBtn");
 
@@ -921,7 +707,6 @@ const startBtn =
 
 const errorText =
     document.getElementById("error");
-
 
 const message =
     document.getElementById("message");
@@ -936,90 +721,60 @@ const messageButton =
     document.getElementById("messageButton");
 
 
-
 /* =====================================================
-   VARIABLES DU JEU
+   VARIABLES
 ===================================================== */
 
 let language = "fr";
 
 let mode = "solo";
 
-
 let names = [
     "Joueur 1",
     "Joueur 2"
 ];
 
-
 let currentPlayer = 0;
-
 
 let level = 1;
 
 const MAX_LEVEL = 23;
-
 
 let scores = [
     0,
     0
 ];
 
-
 let gameRunning = false;
-
 
 let walls = [];
 
 let robots = [];
 
-
 let exit = {
-
     x: 0,
-
     y: 0,
-
     size: 16
-
 };
 
-
-
-/* =====================================================
-   JOUEUR
-===================================================== */
-
 const player = {
-
     x: 0,
-
     y: 0,
-
     size: 12,
 
     speed: 6
-
 };
-
-
-
-/* =====================================================
-   TOUCHES
-===================================================== */
 
 const keys = {};
 
 
-
 /* =====================================================
-   LANGUES
+   TRADUCTIONS
 ===================================================== */
 
 const translations = {
 
     fr: {
-
         welcome:
             "Bienvenue dans le Labyrinthe",
 
@@ -1050,12 +805,6 @@ const translations = {
         level:
             "Niveau",
 
-        score:
-            "Score",
-
-        player:
-            "Joueur",
-
         speed:
             "Vitesse joueur",
 
@@ -1068,19 +817,16 @@ const translations = {
         continue:
             "Continuer",
 
-        restart:
-            "Recommencer le niveau",
-
         lose:
             "LOOSERRRR 😈",
 
         wall:
             "💥 TU AS TOUCHÉ UN MUR !",
 
-        robotHit:
+        robot:
             "🤖 UN ROBOT T'A TOUCHÉ !",
 
-        switchDuo:
+        switch:
             "À %PLAYER% de jouer !",
 
         win:
@@ -1089,20 +835,14 @@ const translations = {
         winText:
             "Tu as terminé les 23 niveaux !",
 
-        duoWinText:
-            "%PLAYER% a terminé les 23 niveaux !",
-
-        enterPseudo:
+        enter:
             "Entre un pseudo.",
 
         enterBoth:
             "Entre les deux pseudos."
-
     },
 
-
     en: {
-
         welcome:
             "Welcome to the Maze",
 
@@ -1133,12 +873,6 @@ const translations = {
         level:
             "Level",
 
-        score:
-            "Score",
-
-        player:
-            "Player",
-
         speed:
             "Player speed",
 
@@ -1146,13 +880,10 @@ const translations = {
             "Robot speed",
 
         turn:
-            "Turn:",
+            "Turn of",
 
         continue:
             "Continue",
-
-        restart:
-            "Restart level",
 
         lose:
             "LOOSERRRR 😈",
@@ -1160,10 +891,10 @@ const translations = {
         wall:
             "💥 YOU HIT A WALL!",
 
-        robotHit:
+        robot:
             "🤖 A ROBOT HIT YOU!",
 
-        switchDuo:
+        switch:
             "%PLAYER%'s turn!",
 
         win:
@@ -1172,20 +903,14 @@ const translations = {
         winText:
             "You finished all 23 levels!",
 
-        duoWinText:
-            "%PLAYER% finished all 23 levels!",
-
-        enterPseudo:
+        enter:
             "Enter a nickname.",
 
         enterBoth:
             "Enter both nicknames."
-
     },
 
-
     ar: {
-
         welcome:
             "مرحباً بك في المتاهة",
 
@@ -1216,12 +941,6 @@ const translations = {
         level:
             "المستوى",
 
-        score:
-            "النقاط",
-
-        player:
-            "اللاعب",
-
         speed:
             "سرعة اللاعب",
 
@@ -1229,45 +948,37 @@ const translations = {
             "سرعة الروبوتات",
 
         turn:
-            "دور:",
+            "دور",
 
         continue:
             "متابعة",
-
-        restart:
-            "إعادة المرحلة",
 
         lose:
             "خسرت 😈",
 
         wall:
-            "💥 اصطدمت بجدار!",
+            "💥 لقد لمست الحائط!",
 
-        robotHit:
-            "🤖 اصطدم بك روبوت!",
+        robot:
+            "🤖 لقد لمسك روبوت!",
 
-        switchDuo:
-            "دور %PLAYER% الآن!",
+        switch:
+            "حان دور %PLAYER%!",
 
         win:
             "🏆 فوز!",
 
         winText:
-            "أنهيت جميع المراحل الـ23!",
+            "لقد أنهيت جميع المراحل الـ23!",
 
-        duoWinText:
-            "%PLAYER% أنهى جميع المراحل الـ23!",
-
-        enterPseudo:
+        enter:
             "اكتب اسماً مستعاراً.",
 
         enterBoth:
             "اكتب الاسمين."
-
     }
 
 };
-
 
 
 /* =====================================================
@@ -1276,138 +987,90 @@ const translations = {
 
 function t(key) {
 
-    return (
-        translations[language][key]
-        || key
-    );
+    return translations[language][key];
 
 }
 
 
+function updateLanguage() {
 
-function applyLanguage() {
-
-    language =
-        languageSelect.value;
-
-
-    document.documentElement.lang =
-        language;
-
-
-    document.documentElement.dir =
-        language === "ar"
-        ? "rtl"
-        : "ltr";
-
+    const tr =
+        translations[language];
 
     document.getElementById(
         "welcomeTitle"
-    ).textContent =
-        t("welcome");
-
+    ).textContent = tr.welcome;
 
     document.getElementById(
         "welcomeText"
-    ).textContent =
-        t("welcomeText");
-
+    ).textContent = tr.welcomeText;
 
     document.getElementById(
         "languageLabel"
-    ).textContent =
-        t("language");
-
+    ).textContent = tr.language;
 
     document.getElementById(
         "pseudo1Label"
-    ).textContent =
-        t("pseudo");
-
+    ).textContent = tr.pseudo;
 
     document.getElementById(
         "pseudo2Label"
-    ).textContent =
-        t("pseudo2");
-
+    ).textContent = tr.pseudo2;
 
     document.getElementById(
         "modeLabel"
-    ).textContent =
-        t("mode");
+    ).textContent = tr.mode;
 
+    soloBtn.textContent = tr.solo;
 
-    soloBtn.textContent =
-        t("solo");
+    duoBtn.textContent = tr.duo;
 
-
-    duoBtn.textContent =
-        t("duo");
-
-
-    startBtn.textContent =
-        t("play");
-
+    startBtn.textContent = tr.play;
 
     document.getElementById(
         "levelLabel"
-    ).textContent =
-        t("level");
-
-
-    document.getElementById(
-        "scoreLabel"
-    ).textContent =
-        t("score");
-
-
-    document.getElementById(
-        "playerLabel"
-    ).textContent =
-        t("player");
-
+    ).textContent = tr.level;
 
     document.getElementById(
         "speedLabel"
-    ).textContent =
-        t("speed");
-
+    ).textContent = tr.speed;
 
     document.getElementById(
         "robotLabel"
-    ).textContent =
-        t("robots");
-
+    ).textContent = tr.robots;
 
     document.getElementById(
-        "messageButton"
-    ).textContent =
-        t("continue");
+        "pseudo1"
+    ).placeholder = tr.pseudo;
 
-
-    pseudo1.placeholder =
-        t("pseudo");
-
-
-    pseudo2.placeholder =
-        t("pseudo2");
-
+    document.getElementById(
+        "pseudo2"
+    ).placeholder = tr.pseudo2;
 
     updateInterface();
 
 }
 
 
+/* =====================================================
+   LANGUE
+===================================================== */
 
 languageSelect.addEventListener(
     "change",
-    applyLanguage
+    function() {
+
+        language =
+            languageSelect.value;
+
+        updateLanguage();
+
+    }
 );
 
 
-
 /* =====================================================
-   SOLO
+   MODE SOLO / DUO
 ===================================================== */
 
 soloBtn.addEventListener(
@@ -1416,28 +1079,18 @@ soloBtn.addEventListener(
 
         mode = "solo";
 
+        soloBtn.classList.add("active");
 
-        soloBtn.classList.add(
-            "active"
-        );
-
-
-        duoBtn.classList.remove(
-            "active"
-        );
-
+        duoBtn.classList.remove("active");
 
         player2Row.style.display =
             "none";
 
+        errorText.textContent = "";
+
     }
 );
 
-
-
-/* =====================================================
-   DUO
-===================================================== */
 
 duoBtn.addEventListener(
     "click",
@@ -1445,27 +1098,21 @@ duoBtn.addEventListener(
 
         mode = "duo";
 
+        duoBtn.classList.add("active");
 
-        duoBtn.classList.add(
-            "active"
-        );
-
-
-        soloBtn.classList.remove(
-            "active"
-        );
-
+        soloBtn.classList.remove("active");
 
         player2Row.style.display =
             "block";
+
+        errorText.textContent = "";
 
     }
 );
 
 
-
 /* =====================================================
-   DÉMARRER
+   DEMARRER
 ===================================================== */
 
 startBtn.addEventListener(
@@ -1474,51 +1121,19 @@ startBtn.addEventListener(
 );
 
 
-
-pseudo1.addEventListener(
-    "keydown",
-    function(e) {
-
-        if(e.key === "Enter") {
-
-            startGame();
-
-        }
-
-    }
-);
-
-
-
-pseudo2.addEventListener(
-    "keydown",
-    function(e) {
-
-        if(e.key === "Enter") {
-
-            startGame();
-
-        }
-
-    }
-);
-
-
-
 function startGame() {
 
-    const n1 =
+    const p1 =
         pseudo1.value.trim();
 
-
-    const n2 =
+    const p2 =
         pseudo2.value.trim();
 
 
-    if(!n1) {
+    if(!p1) {
 
         errorText.textContent =
-            t("enterPseudo");
+            t("enter");
 
         return;
 
@@ -1526,9 +1141,8 @@ function startGame() {
 
 
     if(
-        mode === "duo"
-        &&
-        !n2
+        mode === "duo" &&
+        !p2
     ) {
 
         errorText.textContent =
@@ -1539,162 +1153,132 @@ function startGame() {
     }
 
 
-    errorText.textContent =
-        "";
-
-
     names[0] =
-        n1;
-
+        p1;
 
     names[1] =
         mode === "duo"
-        ? n2
-        : "";
+            ? p2
+            : "—";
 
 
-    currentPlayer =
-        0;
+    currentPlayer = 0;
 
+    level = 1;
 
-    level =
-        1;
+    scores[0] = 0;
 
+    scores[1] = 0;
 
-    scores = [
-        0,
-        0
-    ];
-
-
-    gameRunning =
-        true;
-
+    gameRunning = true;
 
     menu.style.display =
         "none";
 
-
     gameUI.style.display =
         "block";
 
+    message.style.display =
+        "none";
 
     loadLevel();
 
 }
 
 
-
 /* =====================================================
-   GÉNÉRATEUR ALÉATOIRE
+   GENERATEUR ALEATOIRE
 ===================================================== */
 
 function randomGenerator(seed) {
 
-    let value =
-        seed;
-
+    let value = seed;
 
     return function() {
 
         value =
-            (
-                value * 9301
-                + 49297
-            )
+            (value * 9301 + 49297)
             % 233280;
 
-
-        return value /
-            233280;
+        return value / 233280;
 
     };
 
 }
 
 
-
 /* =====================================================
-   GÉNÉRATION DU LABYRINTHE
+   GENERATION DU LABYRINTHE
 ===================================================== */
 
 function generateMaze(levelNumber) {
 
     walls = [];
 
+    robots = [];
+
 
     /*
-       DIFFICULTÉ PROGRESSIVE
-
-       Niveau 1 :
-       très facile
-
-       Niveau 23 :
-       très difficile
-
-       La difficulté augmente
-       progressivement.
+       Niveau 1 très facile.
+       Puis difficulté progressive.
     */
 
-    const difficulty =
-        Math.min(
-            1,
-            Math.max(
-                0,
-                (levelNumber - 1) / 22
-            )
-        );
+    let cols;
+
+    let rows;
 
 
-    const cols =
-        Math.round(
-            9 +
-            difficulty * 20
-        );
+    if(levelNumber <= 3) {
+
+        cols =
+            12 + levelNumber * 2;
+
+        rows =
+            8 + levelNumber;
+
+    }
+
+    else {
+
+        cols =
+            18 +
+            Math.floor(levelNumber * 0.55);
+
+        rows =
+            12 +
+            Math.floor(levelNumber * 0.30);
+
+    }
 
 
-    const rows =
-        Math.round(
-            6 +
-            difficulty * 14
-        );
+    cols =
+        Math.min(cols, 31);
+
+    rows =
+        Math.min(rows, 19);
 
 
     const cellW =
-        canvas.width /
-        cols;
-
+        canvas.width / cols;
 
     const cellH =
-        canvas.height /
-        rows;
+        canvas.height / rows;
 
 
     const random =
         randomGenerator(
-            levelNumber *
-            98431 +
-            17
+            levelNumber * 98431 + 17
         );
 
 
-    let cells = [];
+    const cells = [];
 
 
-    for(
-        let y = 0;
-        y < rows;
-        y++
-    ) {
+    for(let y = 0; y < rows; y++) {
 
         cells[y] = [];
 
-
-        for(
-            let x = 0;
-            x < cols;
-            x++
-        ) {
+        for(let x = 0; x < cols; x++) {
 
             cells[y][x] = {
 
@@ -1719,178 +1303,85 @@ function generateMaze(levelNumber) {
     }
 
 
+    /*
+       DFS
+    */
 
-    /* =================================================
-       CRÉATION DU LABYRINTHE
-    ================================================= */
+    const stack = [];
 
-    let stack = [];
-
-
-    cells[0][0].visited =
-        true;
-
+    cells[0][0].visited = true;
 
     stack.push({
-
         x: 0,
-
         y: 0
-
     });
 
 
-
-    while(
-        stack.length > 0
-    ) {
+    while(stack.length) {
 
         const current =
-            stack[
-                stack.length - 1
-            ];
+            stack[stack.length - 1];
 
+        const neighbours = [];
 
-        let neighbours = [];
-
-
-        /* HAUT */
 
         if(
-
-            current.y > 0
-
-            &&
-
-            !cells[
-                current.y - 1
-            ][
-                current.x
-            ].visited
-
+            current.y > 0 &&
+            !cells[current.y - 1][current.x].visited
         ) {
 
             neighbours.push({
-
-                x:
-                    current.x,
-
-                y:
-                    current.y - 1,
-
-                direction:
-                    "top"
-
+                x: current.x,
+                y: current.y - 1,
+                direction: "top"
             });
 
         }
 
 
-
-        /* DROITE */
-
         if(
-
-            current.x <
-            cols - 1
-
-            &&
-
-            !cells[
-                current.y
-            ][
-                current.x + 1
-            ].visited
-
+            current.x < cols - 1 &&
+            !cells[current.y][current.x + 1].visited
         ) {
 
             neighbours.push({
-
-                x:
-                    current.x + 1,
-
-                y:
-                    current.y,
-
-                direction:
-                    "right"
-
+                x: current.x + 1,
+                y: current.y,
+                direction: "right"
             });
 
         }
 
 
-
-        /* BAS */
-
         if(
-
-            current.y <
-            rows - 1
-
-            &&
-
-            !cells[
-                current.y + 1
-            ][
-                current.x
-            ].visited
-
+            current.y < rows - 1 &&
+            !cells[current.y + 1][current.x].visited
         ) {
 
             neighbours.push({
-
-                x:
-                    current.x,
-
-                y:
-                    current.y + 1,
-
-                direction:
-                    "bottom"
-
+                x: current.x,
+                y: current.y + 1,
+                direction: "bottom"
             });
 
         }
 
 
-
-        /* GAUCHE */
-
         if(
-
-            current.x > 0
-
-            &&
-
-            !cells[
-                current.y
-            ][
-                current.x - 1
-            ].visited
-
+            current.x > 0 &&
+            !cells[current.y][current.x - 1].visited
         ) {
 
             neighbours.push({
-
-                x:
-                    current.x - 1,
-
-                y:
-                    current.y,
-
-                direction:
-                    "left"
-
+                x: current.x - 1,
+                y: current.y,
+                direction: "left"
             });
 
         }
 
 
-
-        if(
-            neighbours.length > 0
-        ) {
+        if(neighbours.length) {
 
             const next =
                 neighbours[
@@ -1902,94 +1393,56 @@ function generateMaze(levelNumber) {
 
 
             const cell =
-                cells[
-                    current.y
-                ][
-                    current.x
-                ];
-
+                cells[current.y][current.x];
 
             const nextCell =
-                cells[
-                    next.y
-                ][
-                    next.x
-                ];
+                cells[next.y][next.x];
 
 
+            if(next.direction === "top") {
 
-            if(
-                next.direction ===
-                "top"
-            ) {
+                cell.walls.top = false;
 
-                cell.walls.top =
-                    false;
-
-                nextCell.walls.bottom =
-                    false;
+                nextCell.walls.bottom = false;
 
             }
 
 
-            if(
-                next.direction ===
-                "right"
-            ) {
+            if(next.direction === "right") {
 
-                cell.walls.right =
-                    false;
+                cell.walls.right = false;
 
-                nextCell.walls.left =
-                    false;
+                nextCell.walls.left = false;
 
             }
 
 
-            if(
-                next.direction ===
-                "bottom"
-            ) {
+            if(next.direction === "bottom") {
 
-                cell.walls.bottom =
-                    false;
+                cell.walls.bottom = false;
 
-                nextCell.walls.top =
-                    false;
+                nextCell.walls.top = false;
 
             }
 
 
-            if(
-                next.direction ===
-                "left"
-            ) {
+            if(next.direction === "left") {
 
-                cell.walls.left =
-                    false;
+                cell.walls.left = false;
 
-                nextCell.walls.right =
-                    false;
+                nextCell.walls.right = false;
 
             }
 
 
-            nextCell.visited =
-                true;
-
+            nextCell.visited = true;
 
             stack.push({
-
-                x:
-                    next.x,
-
-                y:
-                    next.y
-
+                x: next.x,
+                y: next.y
             });
 
         }
-
 
         else {
 
@@ -2000,49 +1453,37 @@ function generateMaze(levelNumber) {
     }
 
 
-
-    /* =================================================
-       MURS
-    ================================================= */
+    /*
+       Epaisseur des murs.
+    */
 
     const wallThickness =
         Math.max(
             3,
-            7 -
-            levelNumber *
-            0.12
+            7 - levelNumber * 0.12
         );
 
 
+    /*
+       Transformer les murs
+       en rectangles.
+    */
 
-    for(
-        let y = 0;
-        y < rows;
-        y++
-    ) {
+    for(let y = 0; y < rows; y++) {
 
-        for(
-            let x = 0;
-            x < cols;
-            x++
-        ) {
+        for(let x = 0; x < cols; x++) {
 
             const cell =
                 cells[y][x];
 
-
             const px =
                 x * cellW;
-
 
             const py =
                 y * cellH;
 
 
-
-            if(
-                cell.walls.top
-            ) {
+            if(cell.walls.top) {
 
                 walls.push({
 
@@ -2062,10 +1503,7 @@ function generateMaze(levelNumber) {
             }
 
 
-
-            if(
-                cell.walls.left
-            ) {
+            if(cell.walls.left) {
 
                 walls.push({
 
@@ -2085,15 +1523,9 @@ function generateMaze(levelNumber) {
             }
 
 
-
             if(
-
-                x === cols - 1
-
-                &&
-
+                x === cols - 1 &&
                 cell.walls.right
-
             ) {
 
                 walls.push({
@@ -2101,7 +1533,8 @@ function generateMaze(levelNumber) {
                     x:
                         px + cellW,
 
-                    y: py,
+                    y:
+                        py,
 
                     w:
                         wallThickness,
@@ -2114,20 +1547,15 @@ function generateMaze(levelNumber) {
             }
 
 
-
             if(
-
-                y === rows - 1
-
-                &&
-
+                y === rows - 1 &&
                 cell.walls.bottom
-
             ) {
 
                 walls.push({
 
-                    x: px,
+                    x:
+                        px,
 
                     y:
                         py + cellH,
@@ -2147,81 +1575,60 @@ function generateMaze(levelNumber) {
     }
 
 
-
-    /* =================================================
-       DÉPART
-    ================================================= */
+    /*
+       Position du joueur.
+    */
 
     player.x =
         cellW * 0.25;
-
 
     player.y =
         cellH * 0.25;
 
 
-
-    /* =================================================
-       SORTIE
-    ================================================= */
+    /*
+       Sortie.
+    */
 
     exit.x =
-        (cols - 1) *
-        cellW +
+        (cols - 1) * cellW +
         cellW * 0.35;
 
-
     exit.y =
-        (rows - 1) *
-        cellH +
+        (rows - 1) * cellH +
         cellH * 0.35;
-
 
     exit.size =
         Math.max(
-
             12,
-
             Math.min(
                 cellW,
                 cellH
-            ) * 0.30
-
+            ) * .30
         );
-
-
-
-    /* =================================================
-       ROBOTS
-    ================================================= */
-
-    robots = [];
 
 
     /*
-       Très peu de robots au début.
+       ROBOTS
 
-       Ils deviennent progressivement
-       plus nombreux.
+       Aucun robot au tout début.
+       Ils arrivent progressivement.
     */
 
     const robotCount =
-        Math.min(
-
-            Math.floor(
-                (levelNumber - 1) / 3
-            ) + 1,
-
-            8
-
-        );
+        levelNumber < 4
+            ? 0
+            : Math.min(
+                Math.floor(
+                    (levelNumber - 2) / 2
+                ),
+                12
+            );
 
 
     const robotSpeed =
         0.65 +
-        levelNumber *
-        0.12;
-
+        levelNumber * 0.12;
 
 
     for(
@@ -2230,7 +1637,11 @@ function generateMaze(levelNumber) {
         i++
     ) {
 
-        let rx =
+        const horizontal =
+            random() > .5;
+
+
+        const rx =
             cellW *
             (
                 2 +
@@ -2244,7 +1655,7 @@ function generateMaze(levelNumber) {
             );
 
 
-        let ry =
+        const ry =
             cellH *
             (
                 1 +
@@ -2256,11 +1667,6 @@ function generateMaze(levelNumber) {
                     )
                 )
             );
-
-
-        const horizontal =
-            random() > 0.5;
-
 
 
         robots.push({
@@ -2275,16 +1681,16 @@ function generateMaze(levelNumber) {
                     Math.min(
                         cellW,
                         cellH
-                    ) * 0.32
+                    ) * .30
                 ),
 
             speed:
                 robotSpeed,
 
             direction:
-                random() > 0.5
-                ? 1
-                : -1,
+                random() > .5
+                    ? 1
+                    : -1,
 
             horizontal:
                 horizontal
@@ -2296,7 +1702,6 @@ function generateMaze(levelNumber) {
 }
 
 
-
 /* =====================================================
    COLLISION
 ===================================================== */
@@ -2305,85 +1710,139 @@ function isColliding(a, b) {
 
     return (
 
-        a.x <
-        b.x + b.w
+        a.x < b.x + b.w &&
 
-        &&
+        a.x + a.size > b.x &&
 
-        a.x + a.size >
-        b.x
+        a.y < b.y + b.h &&
 
-        &&
-
-        a.y <
-        b.y + b.h
-
-        &&
-
-        a.y + a.size >
-        b.y
+        a.y + a.size > b.y
 
     );
 
 }
 
 
+/* =====================================================
+   DEPLACEMENT
+===================================================== */
+
+function movePlayer() {
+
+    if(!gameRunning)
+        return;
+
+
+    let dx = 0;
+
+    let dy = 0;
+
+
+    if(
+        keys["arrowright"] ||
+        keys["d"]
+    ) {
+
+        dx += player.speed;
+
+    }
+
+
+    if(
+        keys["arrowleft"] ||
+        keys["q"] ||
+        keys["a"]
+    ) {
+
+        dx -= player.speed;
+
+    }
+
+
+    if(
+        keys["arrowdown"] ||
+        keys["s"]
+    ) {
+
+        dy += player.speed;
+
+    }
+
+
+    if(
+        keys["arrowup"] ||
+        keys["z"] ||
+        keys["w"]
+    ) {
+
+        dy -= player.speed;
+
+    }
+
+
+    if(dx === 0 && dy === 0)
+        return;
+
+
+    const oldX =
+        player.x;
+
+    const oldY =
+        player.y;
+
+
+    player.x += dx;
+
+    player.y += dy;
+
+
+    for(const wall of walls) {
+
+        if(
+            isColliding(
+                player,
+                wall
+            )
+        ) {
+
+            player.x = oldX;
+
+            player.y = oldY;
+
+            lose(
+                t("wall")
+            );
+
+            return;
+
+        }
+
+    }
+
+}
+
 
 /* =====================================================
-   CLAVIER PC
+   CLAVIER
 ===================================================== */
 
 document.addEventListener(
     "keydown",
     function(e) {
 
-        /*
-           IMPORTANT :
-
-           Si on est en train d'écrire
-           un pseudo, le clavier fonctionne
-           normalement.
-
-           Donc A, Q, W, Z, etc.
-           peuvent être écrits.
-        */
-
-        const tag =
-            document.activeElement
-            ?.tagName;
-
-
-        if(
-            tag === "INPUT"
-            ||
-            tag === "SELECT"
-        ) {
-
-            return;
-
-        }
-
-
         const key =
             e.key.toLowerCase();
 
-
-        keys[key] =
-            true;
-
+        keys[key] = true;
 
         if(
-
-            key === "arrowup"
-            ||
-            key === "arrowdown"
-            ||
-            key === "arrowleft"
-            ||
-            key === "arrowright"
-            ||
-            key === " "
-
+            [
+                "arrowup",
+                "arrowdown",
+                "arrowleft",
+                "arrowright",
+                " "
+            ].includes(key)
         ) {
 
             e.preventDefault();
@@ -2394,26 +1853,9 @@ document.addEventListener(
 );
 
 
-
 document.addEventListener(
     "keyup",
     function(e) {
-
-        const tag =
-            document.activeElement
-            ?.tagName;
-
-
-        if(
-            tag === "INPUT"
-            ||
-            tag === "SELECT"
-        ) {
-
-            return;
-
-        }
-
 
         keys[
             e.key.toLowerCase()
@@ -2423,239 +1865,73 @@ document.addEventListener(
 );
 
 
-
 /* =====================================================
    TOUCHES TELEPHONE
 ===================================================== */
 
-document
-    .querySelectorAll(".mobileButton")
-    .forEach(
-        function(button) {
+document.querySelectorAll(
+    ".mobileButton"
+).forEach(
+    button => {
 
-            const key =
-                button.dataset.key;
-
-
-
-            function press(e) {
-
-                e.preventDefault();
-
-                keys[key] =
-                    true;
-
-            }
+        const key =
+            button.dataset.key;
 
 
+        function press(e) {
 
-            function release(e) {
+            e.preventDefault();
 
-                e.preventDefault();
-
-                keys[key] =
-                    false;
-
-            }
-
-
-
-            button.addEventListener(
-                "touchstart",
-                press,
-                {
-                    passive: false
-                }
-            );
-
-
-            button.addEventListener(
-                "touchend",
-                release,
-                {
-                    passive: false
-                }
-            );
-
-
-            button.addEventListener(
-                "touchcancel",
-                release,
-                {
-                    passive: false
-                }
-            );
-
-
-            button.addEventListener(
-                "mousedown",
-                press
-            );
-
-
-            button.addEventListener(
-                "mouseup",
-                release
-            );
-
-
-            button.addEventListener(
-                "mouseleave",
-                release
-            );
+            keys[key] = true;
 
         }
-    );
 
 
+        function release(e) {
 
-/* =====================================================
-   DÉPLACEMENT
-===================================================== */
+            e.preventDefault();
 
-function movePlayer() {
-
-    if(!gameRunning) {
-
-        return;
-
-    }
-
-
-    let dx = 0;
-
-    let dy = 0;
-
-
-
-    if(
-
-        keys["arrowright"]
-        ||
-        keys["d"]
-
-    ) {
-
-        dx +=
-            player.speed;
-
-    }
-
-
-
-    if(
-
-        keys["arrowleft"]
-        ||
-        keys["q"]
-        ||
-        keys["a"]
-
-    ) {
-
-        dx -=
-            player.speed;
-
-    }
-
-
-
-    if(
-
-        keys["arrowdown"]
-        ||
-        keys["s"]
-
-    ) {
-
-        dy +=
-            player.speed;
-
-    }
-
-
-
-    if(
-
-        keys["arrowup"]
-        ||
-        keys["z"]
-        ||
-        keys["w"]
-
-    ) {
-
-        dy -=
-            player.speed;
-
-    }
-
-
-
-    /*
-       Évite que la diagonale
-       soit trop rapide.
-    */
-
-    if(
-        dx !== 0 &&
-        dy !== 0
-    ) {
-
-        dx *= 0.7071;
-
-        dy *= 0.7071;
-
-    }
-
-
-
-    const oldX =
-        player.x;
-
-
-    const oldY =
-        player.y;
-
-
-
-    player.x += dx;
-
-    player.y += dy;
-
-
-
-    for(
-        const wall of walls
-    ) {
-
-        if(
-            isColliding(
-                player,
-                wall
-            )
-        ) {
-
-            player.x =
-                oldX;
-
-            player.y =
-                oldY;
-
-
-            lose(
-                t("wall")
-            );
-
-
-            return;
+            keys[key] = false;
 
         }
 
+
+        button.addEventListener(
+            "touchstart",
+            press,
+            { passive: false }
+        );
+
+        button.addEventListener(
+            "touchend",
+            release,
+            { passive: false }
+        );
+
+        button.addEventListener(
+            "touchcancel",
+            release,
+            { passive: false }
+        );
+
+
+        button.addEventListener(
+            "mousedown",
+            press
+        );
+
+        button.addEventListener(
+            "mouseup",
+            release
+        );
+
+        button.addEventListener(
+            "mouseleave",
+            release
+        );
+
     }
-
-}
-
+);
 
 
 /* =====================================================
@@ -2664,20 +1940,13 @@ function movePlayer() {
 
 function updateRobots() {
 
-    if(!gameRunning) {
-
+    if(!gameRunning)
         return;
 
-    }
 
+    for(const robot of robots) {
 
-    for(
-        const robot of robots
-    ) {
-
-        if(
-            robot.horizontal
-        ) {
+        if(robot.horizontal) {
 
             robot.x +=
                 robot.direction *
@@ -2685,23 +1954,18 @@ function updateRobots() {
 
 
             if(
-
-                robot.x < 25
-
-                ||
-
+                robot.x < 20 ||
                 robot.x >
-                canvas.width - 30
-
+                canvas.width -
+                robot.size -
+                20
             ) {
 
-                robot.direction *=
-                    -1;
+                robot.direction *= -1;
 
             }
 
         }
-
 
         else {
 
@@ -2711,41 +1975,31 @@ function updateRobots() {
 
 
             if(
-
-                robot.y < 25
-
-                ||
-
+                robot.y < 20 ||
                 robot.y >
-                canvas.height - 30
-
+                canvas.height -
+                robot.size -
+                20
             ) {
 
-                robot.direction *=
-                    -1;
+                robot.direction *= -1;
 
             }
 
         }
 
 
-
         const r = {
 
-            x:
-                robot.x,
+            x: robot.x,
 
-            y:
-                robot.y,
+            y: robot.y,
 
-            w:
-                robot.size,
+            w: robot.size,
 
-            h:
-                robot.size
+            h: robot.size
 
         };
-
 
 
         if(
@@ -2756,9 +2010,8 @@ function updateRobots() {
         ) {
 
             lose(
-                t("robotHit")
+                t("robot")
             );
-
 
             return;
 
@@ -2769,33 +2022,25 @@ function updateRobots() {
 }
 
 
-
 /* =====================================================
    SORTIE
 ===================================================== */
 
 function checkExit() {
 
-    if(!gameRunning) {
-
+    if(!gameRunning)
         return;
-
-    }
 
 
     const e = {
 
-        x:
-            exit.x,
+        x: exit.x,
 
-        y:
-            exit.y,
+        y: exit.y,
 
-        w:
-            exit.size,
+        w: exit.size,
 
-        h:
-            exit.size
+        h: exit.size
 
     };
 
@@ -2814,16 +2059,14 @@ function checkExit() {
 }
 
 
-
 /* =====================================================
-   NIVEAU TERMINÉ
+   NIVEAU TERMINE
 ===================================================== */
 
 function levelComplete() {
 
     /*
-       Le joueur qui réussit
-       garde son tour.
+       Gain qui diminue avec les niveaux.
     */
 
     const gain =
@@ -2836,18 +2079,10 @@ function levelComplete() {
         );
 
 
-    scores[currentPlayer] +=
-        gain;
+    scores[currentPlayer] += gain;
 
 
-
-    /*
-       Niveau 23 terminé.
-    */
-
-    if(
-        level >= MAX_LEVEL
-    ) {
+    if(level >= MAX_LEVEL) {
 
         winGame();
 
@@ -2855,12 +2090,6 @@ function levelComplete() {
 
     }
 
-
-
-    /*
-       Le même joueur continue
-       au niveau suivant.
-    */
 
     level++;
 
@@ -2870,20 +2099,21 @@ function levelComplete() {
 }
 
 
-
 /* =====================================================
-   PERTE
+   DEFAITE
 ===================================================== */
 
 function lose(reason) {
 
-    if(!gameRunning) {
-
+    if(!gameRunning)
         return;
 
-    }
 
-
+    /*
+       -2 au début.
+       Puis la pénalité augmente
+       progressivement.
+    */
 
     const penalty =
         Math.min(
@@ -2895,110 +2125,34 @@ function lose(reason) {
         );
 
 
-    scores[currentPlayer] =
-        Math.max(
-            0,
-            scores[currentPlayer] -
-            penalty
-        );
+    /*
+       IMPORTANT :
+       PAS de Math.max(0,...)
+       Le score peut donc être négatif.
+    */
+
+    scores[currentPlayer] -=
+        penalty;
 
 
-    gameRunning =
-        false;
-
-
-
-    /* =================================================
-       SOLO
-    ================================================= */
-
-    if(
-        mode === "solo"
-    ) {
-
-        messageTitle.textContent =
-            t("lose");
-
-
-        messageText.textContent =
-            reason +
-            "\n-" +
-            penalty +
-            " points";
-
-
-        messageButton.textContent =
-            t("restart");
-
-
-        messageButton.onclick =
-            restartLevel;
-
-
-        message.style.display =
-            "flex";
-
-
-        updateInterface();
-
-
-        return;
-
-    }
-
-
-
-    /* =================================================
-       DUO
-
-       Le joueur change.
-
-       Le niveau ne change PAS.
-
-       Le deuxième joueur joue donc
-       le même niveau.
-    ================================================= */
-
-    const lostPlayer =
-        names[currentPlayer];
-
-
-    currentPlayer =
-        currentPlayer === 0
-        ? 1
-        : 0;
-
+    gameRunning = false;
 
 
     messageTitle.textContent =
-        "💥 " +
-        lostPlayer +
-        " a perdu !";
+        t("lose");
 
 
     messageText.textContent =
-
         reason +
-
-        "\n-" +
+        "\n" +
+        names[currentPlayer] +
+        " : -" +
         penalty +
-        " points" +
-
-        "\n\n" +
-
-        t("switchDuo")
-            .replace(
-                "%PLAYER%",
-                names[currentPlayer]
-            );
+        " points";
 
 
     messageButton.textContent =
         t("continue");
-
-
-    messageButton.onclick =
-        continueDuoTurn;
 
 
     message.style.display =
@@ -3010,52 +2164,47 @@ function lose(reason) {
 }
 
 
-
 /* =====================================================
-   TOUR SUIVANT EN DUO
+   BOUTON APRES DEFAITE
 ===================================================== */
 
-function continueDuoTurn() {
+messageButton.addEventListener(
+    "click",
+    function() {
 
-    message.style.display =
-        "none";
-
-
-    gameRunning =
-        true;
+        message.style.display =
+            "none";
 
 
-    /*
-       Le niveau reste le même.
+        /*
+           SOLO :
+           le même joueur recommence.
 
-       Le nouveau joueur commence
-       une nouvelle tentative.
-    */
+           DUO :
+           on passe au joueur suivant.
+        */
 
-    loadLevel();
+        if(mode === "duo") {
 
-}
+            currentPlayer =
+                currentPlayer === 0
+                    ? 1
+                    : 0;
 
-
-
-/* =====================================================
-   RECOMMENCER
-===================================================== */
-
-function restartLevel() {
-
-    message.style.display =
-        "none";
+        }
 
 
-    gameRunning =
-        true;
+        gameRunning = true;
 
 
-    loadLevel();
+        /*
+           Le niveau reste le même.
+        */
 
-}
+        loadLevel();
 
+    }
+);
 
 
 /* =====================================================
@@ -3064,59 +2213,36 @@ function restartLevel() {
 
 function winGame() {
 
-    gameRunning =
-        false;
+    gameRunning = false;
 
 
+    messageTitle.textContent =
+        t("win");
 
-    if(
-        mode === "duo"
-    ) {
 
-        messageTitle.textContent =
-            "🏆 VICTOIRE !";
-
+    if(mode === "duo") {
 
         messageText.textContent =
-
             names[currentPlayer] +
-            " a terminé les 23 niveaux !" +
-
-            "\n\nScore : " +
-
-            scores[currentPlayer];
+            " : " +
+            scores[currentPlayer] +
+            " points\n\n" +
+            t("winText");
 
     }
-
 
     else {
 
-        messageTitle.textContent =
-            t("win");
-
-
         messageText.textContent =
-
-            t("winText") +
-
-            "\n\nScore : " +
-
-            scores[0];
+            scores[0] +
+            " points\n\n" +
+            t("winText");
 
     }
 
 
-
     messageButton.textContent =
-        t("play");
-
-
-    messageButton.onclick =
-        function() {
-
-            location.reload();
-
-        };
+        t("continue");
 
 
     message.style.display =
@@ -3125,23 +2251,125 @@ function winGame() {
 }
 
 
-
 /* =====================================================
    INTERFACE
 ===================================================== */
 
 function updateInterface() {
 
-    levelText.textContent =
+    document.getElementById(
+        "level"
+    ).textContent =
         level;
 
 
-    scoreText.textContent =
-        scores[currentPlayer];
+    /*
+       SCORES
+       Ils peuvent être négatifs.
+    */
+
+    document.getElementById(
+        "score0"
+    ).textContent =
+        scores[0];
 
 
-    playerNameText.textContent =
-        names[currentPlayer] || "-";
+    document.getElementById(
+        "score1"
+    ).textContent =
+        scores[1];
+
+
+    document.getElementById(
+        "playerName0"
+    ).textContent =
+        names[0];
+
+
+    document.getElementById(
+        "playerName1"
+    ).textContent =
+        names[1];
+
+
+    const turn0 =
+        document.getElementById(
+            "playerTurn0"
+        );
+
+    const turn1 =
+        document.getElementById(
+            "playerTurn1"
+        );
+
+
+    turn0.textContent =
+        t("turn") +
+        " " +
+        names[0];
+
+
+    turn1.textContent =
+        t("turn") +
+        " " +
+        names[1];
+
+
+    turn0.classList.remove(
+        "active",
+        "inactive"
+    );
+
+    turn1.classList.remove(
+        "active",
+        "inactive"
+    );
+
+
+    /*
+       Le joueur actif = VERT.
+       L'autre = ROUGE.
+    */
+
+    if(mode === "duo") {
+
+        if(currentPlayer === 0) {
+
+            turn0.classList.add(
+                "active"
+            );
+
+            turn1.classList.add(
+                "inactive"
+            );
+
+        }
+
+        else {
+
+            turn0.classList.add(
+                "inactive"
+            );
+
+            turn1.classList.add(
+                "active"
+            );
+
+        }
+
+    }
+
+    else {
+
+        turn0.classList.add(
+            "active"
+        );
+
+        turn1.classList.add(
+            "inactive"
+        );
+
+    }
 
 
     playerSpeedText.textContent =
@@ -3149,37 +2377,12 @@ function updateInterface() {
 
 
     robotSpeedText.textContent =
-
         (
-            0.65 +
-            level *
-            0.12
+            .65 +
+            level * .12
         ).toFixed(1);
 
-
-
-    if(
-        mode === "duo"
-    ) {
-
-        turnInfo.textContent =
-
-            t("turn") +
-            " " +
-            names[currentPlayer];
-
-    }
-
-
-    else {
-
-        turnInfo.textContent =
-            "";
-
-    }
-
 }
-
 
 
 /* =====================================================
@@ -3196,85 +2399,70 @@ function draw() {
     );
 
 
-
-    /* FOND */
+    /*
+       Fond
+    */
 
     ctx.fillStyle =
         "#222";
 
-
     ctx.fillRect(
-
         0,
         0,
-
         canvas.width,
         canvas.height
-
     );
 
 
-
-    /* MURS */
+    /*
+       Murs
+    */
 
     ctx.fillStyle =
         "#eeeeee";
 
 
-    for(
-        const wall of walls
-    ) {
+    for(const wall of walls) {
 
         ctx.fillRect(
-
             wall.x,
             wall.y,
-
             wall.w,
             wall.h
-
         );
 
     }
 
 
-
-    /* SORTIE */
+    /*
+       Sortie
+    */
 
     ctx.fillStyle =
         "#00ff66";
 
-
     ctx.fillRect(
-
         exit.x,
         exit.y,
-
         exit.size,
         exit.size
-
     );
 
 
+    /*
+       Robots
+    */
 
-    /* ROBOTS */
-
-    for(
-        const robot of robots
-    ) {
+    for(const robot of robots) {
 
         ctx.fillStyle =
             "#ff3030";
 
-
         ctx.fillRect(
-
             robot.x,
             robot.y,
-
             robot.size,
             robot.size
-
         );
 
 
@@ -3286,71 +2474,71 @@ function draw() {
             "white";
 
 
-        const eyeSize =
+        const eye =
             Math.max(
                 2,
-                robot.size *
-                0.18
+                robot.size * .18
             );
 
 
         ctx.fillRect(
-
             robot.x +
-            robot.size *
-            0.20,
+            robot.size * .20,
 
             robot.y +
-            robot.size *
-            0.20,
+            robot.size * .20,
 
-            eyeSize,
-            eyeSize
-
+            eye,
+            eye
         );
 
 
         ctx.fillRect(
-
             robot.x +
-            robot.size *
-            0.62,
+            robot.size * .62,
 
             robot.y +
-            robot.size *
-            0.20,
+            robot.size * .20,
 
-            eyeSize,
-            eyeSize
-
+            eye,
+            eye
         );
 
     }
 
 
-
-    /* JOUEUR */
+    /*
+       Joueur bleu
+    */
 
     ctx.fillStyle =
         "#3498ff";
 
-
     ctx.fillRect(
-
         player.x,
         player.y,
-
         player.size,
         player.size
-
     );
 
 }
 
 
+/* =====================================================
+   CHARGER NIVEAU
+===================================================== */
+
+function loadLevel() {
+
+    generateMaze(level);
+
+    updateInterface();
+
+}
+
 
 /* =====================================================
-   BOUCLE DU JEU
+   BOUCLE
 ===================================================== */
 
 function gameLoop() {
@@ -3365,9 +2553,7 @@ function gameLoop() {
 
     }
 
-
     draw();
-
 
     requestAnimationFrame(
         gameLoop
@@ -3376,31 +2562,15 @@ function gameLoop() {
 }
 
 
-
 /* =====================================================
-   CHARGEMENT DU NIVEAU
+   DEMARRAGE
 ===================================================== */
 
-function loadLevel() {
-
-    generateMaze(level);
-
-    updateInterface();
-
-}
-
-
-
-/* =====================================================
-   DÉMARRAGE
-===================================================== */
-
-applyLanguage();
+updateLanguage();
 
 gameLoop();
 
 </script>
 
 </body>
-
 </html>
