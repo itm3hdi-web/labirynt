@@ -40,7 +40,6 @@ body {
     justify-content: center;
     align-items: center;
     padding: 20px;
-
     background:
         radial-gradient(circle at 20% 20%, #164b7a 0, transparent 30%),
         radial-gradient(circle at 80% 80%, #47156c 0, transparent 30%),
@@ -230,7 +229,7 @@ canvas {
 }
 
 /* =========================
-   TOUCHES TELEPHONE
+   TOUCHES
 ========================= */
 
 #controls {
@@ -372,19 +371,9 @@ canvas {
         <label>Langue</label>
 
         <select id="languageSelect">
-
-            <option value="fr">
-                Français
-            </option>
-
-            <option value="en">
-                English
-            </option>
-
-            <option value="ar">
-                العربية
-            </option>
-
+            <option value="fr">Français</option>
+            <option value="en">English</option>
+            <option value="ar">العربية</option>
         </select>
     </div>
 
@@ -461,8 +450,6 @@ canvas {
 
 <div id="top">
 
-    <!-- JOUEUR 1 -->
-
     <div
         id="card1"
         class="playerCard active"
@@ -489,8 +476,6 @@ canvas {
 
     </div>
 
-
-    <!-- JOUEUR 2 -->
 
     <div
         id="card2"
@@ -528,9 +513,7 @@ canvas {
 
         /
 
-        <span id="maxLevelText">
-            23
-        </span>
+        <span id="maxLevelText">23</span>
 
     </div>
 
@@ -575,9 +558,7 @@ canvas {
     <div class="stats">
 
         Vitesse robot :
-        <b id="robotSpeedText">
-            0
-        </b>
+        <b id="robotSpeedText">—</b>
 
     </div>
 
@@ -595,10 +576,6 @@ canvas {
 </div>
 
 
-<!-- =========================
-     TOUCHES TELEPHONE
-========================= -->
-
 <div id="controls">
 
     <button class="control empty"></button>
@@ -611,7 +588,6 @@ canvas {
     </button>
 
     <button class="control empty"></button>
-
 
     <button
         class="control"
@@ -758,9 +734,20 @@ let walls = [];
 
 let robots = [];
 
+let coins = [];
+
 let keys = {};
 
-let playerSpeed = 0.6;
+
+/*
+   IMPORTANT :
+   Ces valeurs sont maintenant des
+   multiplicateurs de vitesse.
+
+   0.6 = vitesse rapide d'origine.
+*/
+
+let playerSpeedMultiplier = 0.6;
 
 
 /* =====================================================
@@ -775,9 +762,24 @@ const player = {
 
     size: 12,
 
-    speed: 0.6
+    speed: 6
 
 };
+
+
+/*
+   Vitesse réelle de base.
+
+   Avant, 0.6 correspondait environ à 6 pixels.
+*/
+
+function updatePlayerSpeed() {
+
+    player.speed =
+        10 *
+        playerSpeedMultiplier;
+
+}
 
 
 /* =====================================================
@@ -793,6 +795,15 @@ const exit = {
     size: 16
 
 };
+
+
+/* =====================================================
+   PIECES
+===================================================== */
+
+const GOLD_VALUE = 2;
+
+const SILVER_VALUE = 0.5;
 
 
 /* =====================================================
@@ -871,19 +882,9 @@ function startGame() {
         getMaxLevel();
 
 
-    /*
-       Le premier joueur est toujours
-       le pseudo entré.
-    */
-
     player1Name.textContent =
         pseudo;
 
-
-    /*
-       SOLO :
-       il n'y a PAS de deuxième joueur.
-    */
 
     if(gameMode === "solo") {
 
@@ -894,12 +895,6 @@ function startGame() {
             "none";
 
     }
-
-
-    /*
-       DUO :
-       on demande le pseudo du deuxième joueur.
-    */
 
     else {
 
@@ -934,16 +929,17 @@ function startGame() {
 
 
     /*
-       IMPORTANT :
-       la vitesse commence à 0,6.
+       Vitesse de départ :
+       0.6 = rapide.
     */
 
-    playerSpeed = 0.6;
-
-    player.speed = 0.6;
+    playerSpeedMultiplier =
+        0.6;
 
     playerSpeedSelect.value =
         "0.6";
+
+    updatePlayerSpeed();
 
 
     home.style.display =
@@ -966,16 +962,11 @@ playerSpeedSelect.addEventListener(
     "change",
     function() {
 
-        /*
-           On récupère la vitesse choisie.
-        */
-
-        playerSpeed =
+        playerSpeedMultiplier =
             parseFloat(this.value);
 
 
-        player.speed =
-            playerSpeed;
+        updatePlayerSpeed();
 
     }
 );
@@ -1010,12 +1001,9 @@ function generateMaze(levelNumber) {
 
     walls = [];
 
-    /*
-       SOLO :
-       aucun robot.
-    */
-
     robots = [];
+
+    coins = [];
 
 
     let cols;
@@ -1024,7 +1012,8 @@ function generateMaze(levelNumber) {
 
 
     /*
-       Les premiers niveaux sont faciles.
+       Les premiers niveaux sont beaucoup
+       plus faciles.
     */
 
     if(levelNumber <= 3) {
@@ -1116,10 +1105,6 @@ function generateMaze(levelNumber) {
 
     }
 
-
-    /*
-       Génération DFS.
-    */
 
     const stack = [
 
@@ -1286,7 +1271,7 @@ function generateMaze(levelNumber) {
 
         }
 
-        else if(next.direction === "left") {
+        else {
 
             cell.walls.left =
                 false;
@@ -1311,10 +1296,6 @@ function generateMaze(levelNumber) {
 
     }
 
-
-    /*
-       Épaisseur des murs.
-    */
 
     const wallThickness =
         Math.max(
@@ -1433,7 +1414,7 @@ function generateMaze(levelNumber) {
 
 
     /*
-       Position du joueur.
+       Départ.
     */
 
     player.x =
@@ -1468,10 +1449,25 @@ function generateMaze(levelNumber) {
 
 
     /*
-       ROBOTS :
-       ils sont désactivés en SOLO.
+       Création des pièces.
        
-       En DUO, ils sont présents.
+       Elles sont placées dans des cellules
+       différentes du départ et de la sortie.
+    */
+
+    createCoins(
+        cells,
+        cols,
+        rows,
+        cellW,
+        cellH,
+        random,
+        levelNumber
+    );
+
+
+    /*
+       ROBOTS UNIQUEMENT EN DUO.
     */
 
     if(gameMode === "solo") {
@@ -1482,10 +1478,6 @@ function generateMaze(levelNumber) {
 
     }
 
-
-    /*
-       Nombre de robots en DUO.
-    */
 
     let robotCount;
 
@@ -1577,6 +1569,162 @@ function generateMaze(levelNumber) {
 
             horizontal:
                 random() > 0.5
+
+        });
+
+    }
+
+}
+
+
+/* =====================================================
+   CRÉATION DES PIÈCES
+===================================================== */
+
+function createCoins(
+    cells,
+    cols,
+    rows,
+    cellW,
+    cellH,
+    random,
+    levelNumber
+) {
+
+    /*
+       Plus le niveau avance,
+       plus il y a de pièces.
+    */
+
+    const coinCount =
+        Math.min(
+            4 +
+            Math.floor(
+                levelNumber / 2
+            ),
+            15
+        );
+
+
+    /*
+       On garde une liste des cellules
+       déjà utilisées.
+    */
+
+    const used = new Set();
+
+
+    /*
+       On évite le départ.
+    */
+
+    used.add("0,0");
+
+
+    /*
+       On évite la sortie.
+    */
+
+    used.add(
+        (cols - 1) +
+        "," +
+        (rows - 1)
+    );
+
+
+    for(
+        let i = 0;
+        i < coinCount;
+        i++
+    ) {
+
+        let x;
+
+        let y;
+
+        let key;
+
+
+        let tries = 0;
+
+
+        do {
+
+            x =
+                1 +
+                Math.floor(
+                    random() *
+                    Math.max(
+                        1,
+                        cols - 2
+                    )
+                );
+
+
+            y =
+                1 +
+                Math.floor(
+                    random() *
+                    Math.max(
+                        1,
+                        rows - 2
+                    )
+                );
+
+
+            key =
+                x + "," + y;
+
+
+            tries++;
+
+
+        } while(
+            used.has(key) &&
+            tries < 100
+        );
+
+
+        if(used.has(key))
+            continue;
+
+
+        used.add(key);
+
+
+        /*
+           Environ 60% des pièces sont en or.
+        */
+
+        const isGold =
+            random() < 0.60;
+
+
+        coins.push({
+
+            x:
+                x * cellW +
+                cellW * 0.35,
+
+            y:
+                y * cellH +
+                cellH * 0.35,
+
+            size:
+                Math.min(
+                    cellW,
+                    cellH
+                ) * 0.28,
+
+            value:
+                isGold
+                    ? GOLD_VALUE
+                    : SILVER_VALUE,
+
+            type:
+                isGold
+                    ? "gold"
+                    : "silver"
 
         });
 
@@ -1714,6 +1862,83 @@ function movePlayer() {
 
     }
 
+
+    /*
+       Vérification des pièces.
+    */
+
+    collectCoins();
+
+}
+
+
+/* =====================================================
+   RAMASSER LES PIÈCES
+===================================================== */
+
+function collectCoins() {
+
+    for(
+        let i = coins.length - 1;
+        i >= 0;
+        i--
+    ) {
+
+        const coin =
+            coins[i];
+
+
+        const coinBox = {
+
+            x: coin.x,
+
+            y: coin.y,
+
+            w: coin.size,
+
+            h: coin.size
+
+        };
+
+
+        if(
+            isColliding(
+                player,
+                coinBox
+            )
+        ) {
+
+            /*
+               La pièce disparaît.
+            */
+
+            if(currentPlayer === 1) {
+
+                score1 +=
+                    coin.value;
+
+            }
+
+            else {
+
+                score2 +=
+                    coin.value;
+
+            }
+
+
+            coins.splice(
+                i,
+                1
+            );
+
+
+            updateInterface();
+
+        }
+
+    }
+
 }
 
 
@@ -1722,10 +1947,6 @@ function movePlayer() {
 ===================================================== */
 
 function updateRobots() {
-
-    /*
-       Aucun robot en SOLO.
-    */
 
     if(
         !gameRunning ||
@@ -1860,6 +2081,10 @@ function levelComplete() {
     gameRunning = false;
 
 
+    /*
+       Bonus de fin de niveau.
+    */
+
     const gain =
         Math.max(
             1,
@@ -1927,11 +2152,6 @@ function continueAfterMessage() {
         "none";
 
 
-    /*
-       En DUO seulement :
-       le tour change.
-    */
-
     if(gameMode === "duo") {
 
         currentPlayer =
@@ -1940,13 +2160,6 @@ function continueAfterMessage() {
                 : 1;
 
     }
-
-
-    /*
-       En SOLO :
-       le joueur reste toujours
-       le joueur 1.
-    */
 
     else {
 
@@ -1994,9 +2207,8 @@ function lose(reason) {
 
     /*
        IMPORTANT :
-       le score peut être négatif.
+       le score reste négatif si nécessaire.
     */
-
 
     messageTitle.textContent =
         "💀 GAME OVER";
@@ -2009,11 +2221,6 @@ function lose(reason) {
         " points";
 
 
-    /*
-       En SOLO :
-       pas de changement de tour.
-    */
-
     if(gameMode === "solo") {
 
         document
@@ -2024,12 +2231,6 @@ function lose(reason) {
     }
 
     else {
-
-        /*
-           En DUO :
-           le bouton permet de passer
-           au joueur suivant.
-        */
 
         document
             .getElementById("nextButton")
@@ -2095,6 +2296,30 @@ function finalVictory() {
 
     else {
 
+        let winner;
+
+        if(score1 > score2) {
+
+            winner =
+                player1Name.textContent;
+
+        }
+
+        else if(score2 > score1) {
+
+            winner =
+                player2Name.textContent;
+
+        }
+
+        else {
+
+            winner =
+                "Égalité";
+
+        }
+
+
         messageText.textContent =
             "Fin de la partie ! " +
             player1Name.textContent +
@@ -2104,7 +2329,9 @@ function finalVictory() {
             player2Name.textContent +
             " : " +
             score2 +
-            " points";
+            " points. " +
+            "🏆 " +
+            winner;
 
     }
 
@@ -2135,14 +2362,11 @@ function goHome() {
 
     gameRunning = false;
 
-
     message.style.display =
         "none";
 
-
     gameScreen.style.display =
         "none";
-
 
     home.style.display =
         "flex";
@@ -2164,52 +2388,37 @@ function updateInterface() {
         maxLevel;
 
 
+    /*
+       Affichage avec les décimales.
+    */
+
     score1Text.textContent =
-        score1;
+        Number(score1).toFixed(
+            score1 % 1 === 0
+                ? 0
+                : 1
+        );
 
 
     score2Text.textContent =
-        score2;
+        Number(score2).toFixed(
+            score2 % 1 === 0
+                ? 0
+                : 1
+        );
 
-
-    /*
-       Affichage de la vitesse.
-    */
 
     playerSpeedSelect.value =
-        String(player.speed);
+        String(
+            playerSpeedMultiplier
+        );
 
-
-    /*
-       Vitesse des robots.
-    */
 
     if(gameMode === "solo") {
 
         robotSpeedText.textContent =
             "—";
 
-    }
-
-    else {
-
-        const robotSpeed =
-            0.7 +
-            level * 0.13;
-
-
-        robotSpeedText.textContent =
-            robotSpeed.toFixed(1);
-
-    }
-
-
-    /*
-       SOLO :
-       une seule carte.
-    */
-
-    if(gameMode === "solo") {
 
         card1.classList.add(
             "active"
@@ -2231,10 +2440,14 @@ function updateInterface() {
     }
 
 
-    /*
-       DUO :
-       affichage des tours.
-    */
+    const robotSpeed =
+        0.7 +
+        level * 0.13;
+
+
+    robotSpeedText.textContent =
+        robotSpeed.toFixed(1);
+
 
     card1.classList.remove(
         "active",
@@ -2314,10 +2527,6 @@ function draw() {
     );
 
 
-    /*
-       Fond.
-    */
-
     ctx.fillStyle =
         "#222";
 
@@ -2345,6 +2554,137 @@ function draw() {
             wall.w,
             wall.h
         );
+
+    }
+
+
+    /*
+       Pièces.
+    */
+
+    for(const coin of coins) {
+
+        const centerX =
+            coin.x +
+            coin.size / 2;
+
+        const centerY =
+            coin.y +
+            coin.size / 2;
+
+        const radius =
+            coin.size / 2;
+
+
+        /*
+           OR.
+        */
+
+        if(coin.type === "gold") {
+
+            ctx.beginPath();
+
+            ctx.arc(
+                centerX,
+                centerY,
+                radius,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fillStyle =
+                "#FFD700";
+
+            ctx.fill();
+
+            ctx.lineWidth = 2;
+
+            ctx.strokeStyle =
+                "#fff0a0";
+
+            ctx.stroke();
+
+
+            /*
+               Petit symbole +.
+            */
+
+            ctx.fillStyle =
+                "#8a6500";
+
+            ctx.font =
+                Math.max(
+                    8,
+                    radius
+                ) +
+                "px Arial";
+
+            ctx.textAlign =
+                "center";
+
+            ctx.textBaseline =
+                "middle";
+
+            ctx.fillText(
+                "2",
+                centerX,
+                centerY
+            );
+
+        }
+
+        /*
+           ARGENT.
+        */
+
+        else {
+
+            ctx.beginPath();
+
+            ctx.arc(
+                centerX,
+                centerY,
+                radius,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fillStyle =
+                "#D9DDE2";
+
+            ctx.fill();
+
+            ctx.lineWidth = 2;
+
+            ctx.strokeStyle =
+                "#ffffff";
+
+            ctx.stroke();
+
+
+            ctx.fillStyle =
+                "#68717c";
+
+            ctx.font =
+                Math.max(
+                    8,
+                    radius
+                ) +
+                "px Arial";
+
+            ctx.textAlign =
+                "center";
+
+            ctx.textBaseline =
+                "middle";
+
+            ctx.fillText(
+                "0.5",
+                centerX,
+                centerY
+            );
+
+        }
 
     }
 
@@ -2482,7 +2822,7 @@ document.addEventListener(
 
 
 /* =====================================================
-   BOUTONS TELEPHONE
+   TOUCHES TELEPHONE
 ===================================================== */
 
 function setupTouchButton(
@@ -2539,10 +2879,6 @@ function setupTouchButton(
     );
 
 
-    /*
-       Souris sur PC.
-    */
-
     button.addEventListener(
         "mousedown",
         function() {
@@ -2580,18 +2916,15 @@ setupTouchButton(
     "arrowup"
 );
 
-
 setupTouchButton(
     "downButton",
     "arrowdown"
 );
 
-
 setupTouchButton(
     "leftButton",
     "arrowleft"
 );
-
 
 setupTouchButton(
     "rightButton",
@@ -2600,10 +2933,12 @@ setupTouchButton(
 
 
 /* =====================================================
-   CHARGEMENT NIVEAU
+   CHARGEMENT
 ===================================================== */
 
 function loadLevel() {
+
+    updatePlayerSpeed();
 
     generateMaze(level);
 
@@ -2613,7 +2948,7 @@ function loadLevel() {
 
 
 /* =====================================================
-   BOUCLE DU JEU
+   BOUCLE PRINCIPALE
 ===================================================== */
 
 function gameLoop() {
