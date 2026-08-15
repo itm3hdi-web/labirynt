@@ -3,9 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Blue Escape</title>
+
+<title>Pac-Man 2.0</title>
 
 <style>
+
 * {
     box-sizing: border-box;
 }
@@ -19,88 +21,72 @@ body {
 }
 
 /* =========================
-   ATELIER
+   LANCEUR
 ========================= */
 
-#atelier {
+#launcher {
     position: fixed;
     inset: 0;
     background: #050505;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 10;
+    z-index: 20;
 }
 
-.panel {
-    width: 420px;
-    max-width: 90%;
+.launcherBox {
+    width: 430px;
     padding: 35px;
     background: #111;
     border: 3px solid #174bff;
-    border-radius: 15px;
-    box-shadow: 0 0 30px rgba(23, 75, 255, 0.4);
-}
-
-h1 {
+    border-radius: 16px;
+    box-shadow: 0 0 35px rgba(23,75,255,.45);
     text-align: center;
+}
+
+.gameTitle {
+    font-size: 42px;
+    font-weight: bold;
     color: #00aaff;
-    margin-top: 0;
-    margin-bottom: 30px;
+    margin-bottom: 8px;
 }
 
-label {
-    display: block;
-    margin-top: 18px;
-    margin-bottom: 7px;
+.slogan {
+    font-size: 16px;
     color: #aaa;
+    margin-bottom: 28px;
+    font-style: italic;
 }
 
-input,
-select {
+.inputTitle {
+    text-align: left;
+    color: #aaa;
+    margin-top: 15px;
+    margin-bottom: 6px;
+}
+
+input {
     width: 100%;
     padding: 13px;
     background: #222;
+    color: white;
     border: 2px solid #333;
     border-radius: 8px;
-    color: white;
     font-size: 16px;
     outline: none;
 }
 
-input:focus,
-select:focus {
+input:focus {
     border-color: #174bff;
-}
-
-.mode {
-    display: flex;
-    gap: 10px;
-}
-
-.mode button {
-    flex: 1;
-    padding: 13px;
-    border: 2px solid #333;
-    background: #222;
-    color: white;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.mode button.active {
-    background: #174bff;
-    border-color: #4f70ff;
 }
 
 #startButton {
     width: 100%;
-    margin-top: 30px;
-    padding: 15px;
+    margin-top: 25px;
+    padding: 14px;
+    background: #008cff;
     border: none;
     border-radius: 8px;
-    background: #008cff;
     color: white;
     font-size: 18px;
     font-weight: bold;
@@ -118,146 +104,203 @@ select:focus {
 
 #game {
     display: none;
+    width: 100vw;
+    height: 100vh;
 }
 
-#top {
-    height: 60px;
+#titleArea {
+    height: 82px;
+    text-align: center;
+    padding-top: 8px;
+}
+
+#titleArea h1 {
+    margin: 0;
+    font-size: 32px;
+    color: #00aaff;
+}
+
+#titleArea p {
+    margin: 4px 0 0;
+    color: #777;
+    font-style: italic;
+}
+
+
+/* =========================
+   ZONE PRINCIPALE
+========================= */
+
+#mainArea {
+    height: calc(100vh - 82px);
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 60px;
+    gap: 15px;
+}
+
+
+/* =========================
+   RECTANGLES COTES
+========================= */
+
+.sidePanel {
+    width: 180px;
+    height: 430px;
     background: #111;
+    border: 2px solid #174bff;
+    border-radius: 12px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.sideTitle {
+    color: #00aaff;
     font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.infoBox {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 12px;
+}
+
+.infoLabel {
+    color: #777;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.infoValue {
+    font-size: 17px;
     font-weight: bold;
 }
 
-#gameContainer {
-    height: calc(100vh - 60px);
+
+/* =========================
+   CENTRE
+========================= */
+
+#centerArea {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
 }
 
-canvas {
-    max-width: 96vw;
-    max-height: 88vh;
-    background: black;
+#topBar {
+    width: 672px;
+    max-width: 70vw;
+    height: 55px;
+    margin-bottom: 10px;
+    background: #111;
+    border: 2px solid #174bff;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
 }
+
+#canvasContainer {
+    background: #000;
+    border: 3px solid #174bff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+canvas {
+    display: block;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1000px) {
+
+    .sidePanel {
+        width: 140px;
+    }
+
+    #topBar {
+        width: 560px;
+    }
+
+}
+
+@media (max-width: 800px) {
+
+    .sidePanel {
+        display: none;
+    }
+
+    #topBar {
+        max-width: 95vw;
+        width: 672px;
+    }
+
+}
+
 </style>
 </head>
 
 <body>
 
 
-<!-- =========================
-     ATELIER
-========================= -->
+<!-- ==================================================
+     LANCEUR
+================================================== -->
 
-<div id="atelier">
+<div id="launcher">
 
-    <div class="panel">
+    <div class="launcherBox">
 
-        <h1>BLUE ESCAPE</h1>
+        <div class="gameTitle">
+            Pac-Man 2.0
+        </div>
 
-        <label for="pseudo">
-            Pseudo
-        </label>
+        <div class="slogan">
+            « Cours. Survis. Ne te fais jamais attraper. »
+        </div>
+
+
+        <div class="inputTitle">
+            Nom du joueur 1
+        </div>
 
         <input
-            id="pseudo"
+            id="player1Name"
             type="text"
-            placeholder="Ton pseudo"
+            placeholder="Pseudo joueur 1"
             maxlength="15"
         >
 
 
-        <label for="language">
-            Langue
-        </label>
-
-        <select id="language">
-
-            <option value="fr">
-                Français
-            </option>
-
-            <option value="en">
-                English
-            </option>
-
-            <option value="es">
-                Español
-            </option>
-
-            <option value="ar">
-                العربية
-            </option>
-
-        </select>
-
-
-        <label for="region">
-            Région
-        </label>
-
-        <select id="region">
-
-            <option>
-                Maroc
-            </option>
-
-            <option>
-                France
-            </option>
-
-            <option>
-                Espagne
-            </option>
-
-            <option>
-                États-Unis
-            </option>
-
-            <option>
-                Royaume-Uni
-            </option>
-
-            <option>
-                Autre
-            </option>
-
-        </select>
-
-
-        <label>
-            Mode
-        </label>
-
-        <div class="mode">
-
-            <button
-                id="soloButton"
-                class="active"
-                onclick="selectMode('solo')"
-            >
-                👤 Solo
-            </button>
-
-            <button
-                id="duoButton"
-                onclick="selectMode('duo')"
-            >
-                👥 Duo
-            </button>
-
+        <div class="inputTitle">
+            Nom du joueur 2
         </div>
+
+        <input
+            id="player2Name"
+            type="text"
+            placeholder="Pseudo joueur 2"
+            maxlength="15"
+        >
 
 
         <button
             id="startButton"
             onclick="startGame()"
         >
-            JOUER
+            JOUER À 2
         </button>
 
     </div>
@@ -265,32 +308,216 @@ canvas {
 </div>
 
 
-<!-- =========================
+<!-- ==================================================
      JEU
-========================= -->
+================================================== -->
 
 <div id="game">
 
-    <div id="top">
 
-        <div>
-            ⏱️ <span id="timer">00:00</span>
-        </div>
+    <div id="titleArea">
 
-        <div>
-            👹 <span id="enemyCount">1</span>
-        </div>
+        <h1>
+            Pac-Man 2.0
+        </h1>
 
-        <div id="playerName">
-            Joueur
-        </div>
+        <p>
+            « Cours. Survis. Ne te fais jamais attraper. »
+        </p>
 
     </div>
 
 
-    <div id="gameContainer">
+    <div id="mainArea">
 
-        <canvas id="canvas"></canvas>
+
+        <!-- =========================
+             JOUEUR 1
+        ========================= -->
+
+        <div class="sidePanel">
+
+            <div>
+
+                <div class="sideTitle">
+                    JOUEUR 1
+                </div>
+
+                <div class="infoBox">
+
+                    <div class="infoLabel">
+                        NOM
+                    </div>
+
+                    <div
+                        class="infoValue"
+                        id="sidePlayer1"
+                    >
+                        Joueur 1
+                    </div>
+
+                </div>
+
+
+                <div class="infoBox">
+
+                    <div class="infoLabel">
+                        PERSONNAGE
+                    </div>
+
+                    <div class="infoValue">
+                        🔵 Bleu
+                    </div>
+
+                </div>
+
+
+                <div class="infoBox">
+
+                    <div class="infoLabel">
+                        OBJECTIF
+                    </div>
+
+                    <div class="infoValue">
+                        Fuir les têtes
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="infoBox">
+
+                <div class="infoLabel">
+                    SCORE
+                </div>
+
+                <div
+                    class="infoValue"
+                    id="score1"
+                >
+                    0
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             CENTRE
+        ========================= -->
+
+        <div id="centerArea">
+
+            <div id="topBar">
+
+                <div>
+                    ⏱️
+                    <span id="timer">
+                        00:00
+                    </span>
+                </div>
+
+                <div>
+                    👹
+                    <span id="enemyCount">
+                        1
+                    </span>
+                </div>
+
+                <div>
+                    🏆
+                    <span id="mainScore">
+                        0
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div id="canvasContainer">
+
+                <canvas id="canvas"></canvas>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             JOUEUR 2
+        ========================= -->
+
+        <div class="sidePanel">
+
+            <div>
+
+                <div class="sideTitle">
+                    JOUEUR 2
+                </div>
+
+                <div class="infoBox">
+
+                    <div class="infoLabel">
+                        NOM
+                    </div>
+
+                    <div
+                        class="infoValue"
+                        id="sidePlayer2"
+                    >
+                        Joueur 2
+                    </div>
+
+                </div>
+
+
+                <div class="infoBox">
+
+                    <div class="infoLabel">
+                        PERSONNAGE
+                    </div>
+
+                    <div class="infoValue">
+                        🔵 Bleu
+                    </div>
+
+                </div>
+
+
+                <div class="infoBox">
+
+                    <div class="infoLabel">
+                        OBJECTIF
+                    </div>
+
+                    <div class="infoValue">
+                        Fuir les têtes
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="infoBox">
+
+                <div class="infoLabel">
+                    SCORE
+                </div>
+
+                <div
+                    class="infoValue"
+                    id="score2"
+                >
+                    0
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
 
@@ -300,84 +527,54 @@ canvas {
 <script>
 
 /* ==================================================
-   CONFIGURATION ATELIER
+   LANCEUR
 ================================================== */
 
-let selectedMode = "solo";
-
-let pseudo = "";
-let language = "fr";
-let region = "";
-
-
-function selectMode(mode) {
-
-    selectedMode = mode;
-
-    document
-        .getElementById("soloButton")
-        .classList.remove("active");
-
-    document
-        .getElementById("duoButton")
-        .classList.remove("active");
-
-
-    if (mode === "solo") {
-
-        document
-            .getElementById("soloButton")
-            .classList.add("active");
-
-    } else {
-
-        document
-            .getElementById("duoButton")
-            .classList.add("active");
-
-    }
-}
-
+let player1Name = "";
+let player2Name = "";
 
 function startGame() {
 
-    pseudo =
+    player1Name =
         document
-            .getElementById("pseudo")
-            .value
-            .trim();
+        .getElementById("player1Name")
+        .value
+        .trim();
+
+    player2Name =
+        document
+        .getElementById("player2Name")
+        .value
+        .trim();
 
 
-    if (pseudo === "") {
-        pseudo = "Joueur";
+    if (player1Name === "") {
+        player1Name = "Joueur 1";
+    }
+
+    if (player2Name === "") {
+        player2Name = "Joueur 2";
     }
 
 
-    language =
-        document
-            .getElementById("language")
-            .value;
+    document.getElementById(
+        "sidePlayer1"
+    ).textContent = player1Name;
 
 
-    region =
-        document
-            .getElementById("region")
-            .value;
+    document.getElementById(
+        "sidePlayer2"
+    ).textContent = player2Name;
 
 
-    document
-        .getElementById("playerName")
-        .textContent = pseudo;
+    document.getElementById(
+        "launcher"
+    ).style.display = "none";
 
 
-    document
-        .getElementById("atelier")
-        .style.display = "none";
-
-
-    document
-        .getElementById("game")
-        .style.display = "block";
+    document.getElementById(
+        "game"
+    ).style.display = "block";
 
 
     initGame();
@@ -385,7 +582,7 @@ function startGame() {
 
 
 /* ==================================================
-   JEU
+   CANVAS
 ================================================== */
 
 const canvas =
@@ -399,7 +596,7 @@ const tile = 32;
 
 
 /* ==================================================
-   MAP
+   MAP PAC-MAN
 ================================================== */
 
 const map = [
@@ -452,6 +649,8 @@ let startTime;
 
 let lastEnemyCount = 1;
 
+let score = 0;
+
 
 /* ==================================================
    TOUCHES
@@ -463,16 +662,21 @@ document.addEventListener(
     "keydown",
     e => {
 
-        keys[e.key.toLowerCase()] = true;
+        keys[
+            e.key.toLowerCase()
+        ] = true;
 
     }
 );
+
 
 document.addEventListener(
     "keyup",
     e => {
 
-        keys[e.key.toLowerCase()] = false;
+        keys[
+            e.key.toLowerCase()
+        ] = false;
 
     }
 );
@@ -497,6 +701,8 @@ function initGame() {
 
 
     enemies = [];
+
+    score = 0;
 
     lastEnemyCount = 1;
 
@@ -536,7 +742,6 @@ function initGame() {
 
     createEnemy();
 
-
     gameLoop();
 }
 
@@ -573,7 +778,6 @@ function isWall(x, y) {
 function canMove(x, y) {
 
     const size = 9;
-
 
     return (
 
@@ -623,9 +827,7 @@ function movePlayer() {
         keys["z"] ||
         keys["w"]
     ) {
-
         dy = -player.speed;
-
     }
 
 
@@ -633,9 +835,7 @@ function movePlayer() {
         keys["arrowdown"] ||
         keys["s"]
     ) {
-
         dy = player.speed;
-
     }
 
 
@@ -644,9 +844,7 @@ function movePlayer() {
         keys["q"] ||
         keys["a"]
     ) {
-
         dx = -player.speed;
-
     }
 
 
@@ -654,9 +852,7 @@ function movePlayer() {
         keys["arrowright"] ||
         keys["d"]
     ) {
-
         dx = player.speed;
-
     }
 
 
@@ -666,6 +862,8 @@ function movePlayer() {
     ) {
 
         player.walk += 0.35;
+
+        score += 0.01;
 
     }
 
@@ -750,20 +948,17 @@ function createEnemy() {
 
 
 /* ==================================================
-   DIRECTION DE LA TÊTE
+   DIRECTION
 ================================================== */
 
 function getPossibleDirections(enemy) {
 
     const directions = [
 
-        { x: 1, y: 0 },
-
-        { x: -1, y: 0 },
-
-        { x: 0, y: 1 },
-
-        { x: 0, y: -1 }
+        {x: 1, y: 0},
+        {x: -1, y: 0},
+        {x: 0, y: 1},
+        {x: 0, y: -1}
 
     ];
 
@@ -788,7 +983,7 @@ function getPossibleDirections(enemy) {
 
 
 /* ==================================================
-   LA TÊTE POURSUIT LE JOUEUR
+   POURSUITE
 ================================================== */
 
 function chooseBestDirection(enemy) {
@@ -800,24 +995,20 @@ function chooseBestDirection(enemy) {
     if (
         possible.length === 0
     ) {
-
         return;
-
     }
 
 
-    let best = possible[0];
+    let best =
+        possible[0];
 
-    let bestDistance = Infinity;
+    let bestDistance =
+        Infinity;
 
 
     for (
         const dir of possible
     ) {
-
-        /*
-           Position future
-        */
 
         const futureX =
             enemy.x +
@@ -827,12 +1018,6 @@ function chooseBestDirection(enemy) {
             enemy.y +
             dir.y * tile;
 
-
-        /*
-           Distance entre la future
-           position de la tête et
-           le joueur.
-        */
 
         const dx =
             player.x -
@@ -856,14 +1041,16 @@ function chooseBestDirection(enemy) {
             bestDistance =
                 distance;
 
-            best = dir;
+            best =
+                dir;
 
         }
 
     }
 
 
-    enemy.direction = best;
+    enemy.direction =
+        best;
 
 }
 
@@ -874,32 +1061,13 @@ function chooseBestDirection(enemy) {
 
 function moveEnemy(enemy) {
 
-    /*
-       Si elle n'a pas de direction,
-       elle cherche le joueur.
-    */
-
-    if (!enemy.direction) {
-
-        chooseBestDirection(enemy);
-
-    }
-
-
-    /*
-       Vérifie régulièrement
-       la meilleure direction.
-    */
-
-    const possible =
-        getPossibleDirections(enemy);
-
-
     if (
-        possible.length > 2
+        !enemy.direction
     ) {
 
-        chooseBestDirection(enemy);
+        chooseBestDirection(
+            enemy
+        );
 
     }
 
@@ -907,7 +1075,6 @@ function moveEnemy(enemy) {
     const dx =
         enemy.direction.x *
         enemy.speed;
-
 
     const dy =
         enemy.direction.y *
@@ -925,7 +1092,9 @@ function moveEnemy(enemy) {
 
     } else {
 
-        chooseBestDirection(enemy);
+        chooseBestDirection(
+            enemy
+        );
 
     }
 
@@ -941,15 +1110,12 @@ function moveEnemy(enemy) {
 
     } else {
 
-        chooseBestDirection(enemy);
+        chooseBestDirection(
+            enemy
+        );
 
     }
 
-
-    /*
-       Nouvelle décision aux
-       intersections.
-    */
 
     const centerX =
         Math.floor(
@@ -968,23 +1134,26 @@ function moveEnemy(enemy) {
     if (
 
         Math.abs(
-            enemy.x -
-            centerX
+            enemy.x - centerX
         ) < 2
 
         &&
 
         Math.abs(
-            enemy.y -
-            centerY
+            enemy.y - centerY
         ) < 2
 
     ) {
 
-        enemy.x = centerX;
-        enemy.y = centerY;
+        enemy.x =
+            centerX;
 
-        chooseBestDirection(enemy);
+        enemy.y =
+            centerY;
+
+        chooseBestDirection(
+            enemy
+        );
 
     }
 
@@ -992,7 +1161,7 @@ function moveEnemy(enemy) {
 
 
 /* ==================================================
-   DESSIN MAP
+   MAP
 ================================================== */
 
 function drawMap() {
@@ -1020,11 +1189,8 @@ function drawMap() {
                 ctx.fillRect(
 
                     x * tile,
-
                     y * tile,
-
                     tile,
-
                     tile
 
                 );
@@ -1037,11 +1203,8 @@ function drawMap() {
                 ctx.strokeRect(
 
                     x * tile + 1,
-
                     y * tile + 1,
-
                     tile - 2,
-
                     tile - 2
 
                 );
@@ -1055,11 +1218,8 @@ function drawMap() {
                 ctx.fillRect(
 
                     x * tile,
-
                     y * tile,
-
                     tile,
-
                     tile
 
                 );
@@ -1092,10 +1252,6 @@ function drawPlayer() {
         "#00aaff";
 
 
-    /*
-       Tête
-    */
-
     ctx.beginPath();
 
     ctx.arc(
@@ -1109,10 +1265,6 @@ function drawPlayer() {
     ctx.fill();
 
 
-    /*
-       Corps
-    */
-
     ctx.fillRect(
         -9,
         2,
@@ -1120,10 +1272,6 @@ function drawPlayer() {
         15
     );
 
-
-    /*
-       Bras
-    */
 
     ctx.strokeStyle =
         "#00aaff";
@@ -1142,10 +1290,7 @@ function drawPlayer() {
 
     ctx.beginPath();
 
-    ctx.moveTo(
-        -7,
-        5
-    );
+    ctx.moveTo(-7, 5);
 
     ctx.lineTo(
         -12,
@@ -1157,10 +1302,7 @@ function drawPlayer() {
 
     ctx.beginPath();
 
-    ctx.moveTo(
-        7,
-        5
-    );
+    ctx.moveTo(7, 5);
 
     ctx.lineTo(
         12,
@@ -1170,10 +1312,6 @@ function drawPlayer() {
     ctx.stroke();
 
 
-    /*
-       Jambes
-    */
-
     const leg =
         Math.sin(
             player.walk
@@ -1182,10 +1320,7 @@ function drawPlayer() {
 
     ctx.beginPath();
 
-    ctx.moveTo(
-        -4,
-        16
-    );
+    ctx.moveTo(-4, 16);
 
     ctx.lineTo(
         -7,
@@ -1197,10 +1332,7 @@ function drawPlayer() {
 
     ctx.beginPath();
 
-    ctx.moveTo(
-        4,
-        16
-    );
+    ctx.moveTo(4, 16);
 
     ctx.lineTo(
         7,
@@ -1216,7 +1348,7 @@ function drawPlayer() {
 
 
 /* ==================================================
-   TÊTE MÉCHANTE
+   TÊTE
 ================================================== */
 
 function drawEnemy(enemy) {
@@ -1246,10 +1378,6 @@ function drawEnemy(enemy) {
 
     ctx.fill();
 
-
-    /*
-       Yeux
-    */
 
     ctx.fillStyle =
         "white";
@@ -1281,10 +1409,6 @@ function drawEnemy(enemy) {
     ctx.fill();
 
 
-    /*
-       Pupilles
-    */
-
     ctx.fillStyle =
         "black";
 
@@ -1315,10 +1439,6 @@ function drawEnemy(enemy) {
     ctx.fill();
 
 
-    /*
-       Sourcils
-    */
-
     ctx.strokeStyle =
         "black";
 
@@ -1327,44 +1447,25 @@ function drawEnemy(enemy) {
 
     ctx.beginPath();
 
-    ctx.moveTo(
-        -11,
-        -9
-    );
+    ctx.moveTo(-11, -9);
 
-    ctx.lineTo(
-        -3,
-        -6
-    );
+    ctx.lineTo(-3, -6);
 
     ctx.stroke();
 
 
     ctx.beginPath();
 
-    ctx.moveTo(
-        11,
-        -9
-    );
+    ctx.moveTo(11, -9);
 
-    ctx.lineTo(
-        3,
-        -6
-    );
+    ctx.lineTo(3, -6);
 
     ctx.stroke();
 
 
-    /*
-       Bouche mécontente
-    */
-
     ctx.beginPath();
 
-    ctx.moveTo(
-        -7,
-        8
-    );
+    ctx.moveTo(-7, 8);
 
     ctx.quadraticCurveTo(
         0,
@@ -1395,7 +1496,6 @@ function checkCollision() {
             player.x -
             enemy.x;
 
-
         const dy =
             player.y -
             enemy.y;
@@ -1413,10 +1513,9 @@ function checkCollision() {
         ) {
 
             alert(
-                pseudo +
+                player1Name +
                 " a été attrapé !"
             );
-
 
             location.reload();
 
@@ -1428,7 +1527,7 @@ function checkCollision() {
 
 
 /* ==================================================
-   TIMER
+   TIMER + TÊTES
 ================================================== */
 
 function updateTimer() {
@@ -1455,18 +1554,13 @@ function updateTimer() {
     ).textContent =
 
         String(minutes)
-            .padStart(2, "0")
+        .padStart(2, "0")
 
         + ":" +
 
         String(seconds)
-            .padStart(2, "0");
+        .padStart(2, "0");
 
-
-    /*
-       +1 tête toutes les
-       30 secondes.
-    */
 
     const wanted =
         Math.floor(
@@ -1499,6 +1593,22 @@ function updateTimer() {
             enemies.length;
 
     }
+
+
+    const currentScore =
+        Math.floor(score);
+
+
+    document.getElementById(
+        "mainScore"
+    ).textContent =
+        currentScore;
+
+
+    document.getElementById(
+        "score1"
+    ).textContent =
+        currentScore;
 
 }
 
