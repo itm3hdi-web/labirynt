@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -7,6 +6,7 @@
 <title>Pac-Man 2.0</title>
 
 <style>
+
 * {
     box-sizing: border-box;
 }
@@ -53,6 +53,7 @@ body {
     color: #888;
     font-style: italic;
     margin: 8px 0 25px;
+    min-height: 20px;
 }
 
 label {
@@ -145,7 +146,10 @@ select:focus {
     margin: 4px;
     color: #777;
     font-style: italic;
+    transition: .3s;
 }
+
+/* ================= ZONE PRINCIPALE ================= */
 
 #mainArea {
     height: calc(100vh - 82px);
@@ -339,7 +343,7 @@ canvas {
     box-shadow: 0 0 15px rgba(23,75,255,.7);
 }
 
-/* ================= FIN ================= */
+/* ================= GAME OVER ================= */
 
 #gameOver {
     display: none;
@@ -396,12 +400,15 @@ canvas {
         transform-origin: bottom left;
     }
 }
+
 </style>
 </head>
 
 <body>
 
-<!-- ================= ATELIER ================= -->
+<!-- =====================================================
+     ATELIER
+===================================================== -->
 
 <div id="launcher">
 
@@ -411,11 +418,16 @@ canvas {
             Pac-Man 2.0
         </div>
 
-        <div class="slogan">
+        <div
+            id="launcherSlogan"
+            class="slogan"
+        >
             « Cours. Survis. Ne te fais jamais attraper. »
         </div>
 
-        <label>Pseudo</label>
+        <label>
+            Pseudo
+        </label>
 
         <input
             id="player1Name"
@@ -424,27 +436,65 @@ canvas {
             placeholder="Ton pseudo"
         >
 
-        <label>Langue</label>
+        <label>
+            Langue
+        </label>
 
         <select id="language">
-            <option>Français</option>
-            <option>English</option>
-            <option>Español</option>
-            <option>العربية</option>
+
+            <option>
+                Français
+            </option>
+
+            <option>
+                English
+            </option>
+
+            <option>
+                Español
+            </option>
+
+            <option>
+                العربية
+            </option>
+
         </select>
 
-        <label>Région</label>
+        <label>
+            Région
+        </label>
 
         <select id="region">
-            <option>Maroc</option>
-            <option>France</option>
-            <option>Espagne</option>
-            <option>États-Unis</option>
-            <option>Royaume-Uni</option>
-            <option>Autre</option>
+
+            <option>
+                Maroc
+            </option>
+
+            <option>
+                France
+            </option>
+
+            <option>
+                Espagne
+            </option>
+
+            <option>
+                États-Unis
+            </option>
+
+            <option>
+                Royaume-Uni
+            </option>
+
+            <option>
+                Autre
+            </option>
+
         </select>
 
-        <label>Mode de jeu</label>
+        <label>
+            Mode de jeu
+        </label>
 
         <div class="mode">
 
@@ -467,7 +517,9 @@ canvas {
 
         <div id="player2Box">
 
-            <label>Pseudo du joueur 2</label>
+            <label>
+                Pseudo du joueur 2
+            </label>
 
             <input
                 id="player2Name"
@@ -489,25 +541,35 @@ canvas {
 
 </div>
 
-<!-- ================= JEU ================= -->
+
+<!-- =====================================================
+     JEU
+===================================================== -->
 
 <div id="game">
 
     <div id="titleArea">
 
-        <h1>Pac-Man 2.0</h1>
+        <h1>
+            Pac-Man 2.0
+        </h1>
 
-        <p>
+        <p id="gameSlogan">
             « Cours. Survis. Ne te fais jamais attraper. »
         </p>
 
     </div>
 
+
     <div id="mainArea">
+
 
         <!-- JOUEUR 1 -->
 
-        <div id="panel1" class="sidePanel active">
+        <div
+            id="panel1"
+            class="sidePanel active"
+        >
 
             <div>
 
@@ -576,6 +638,7 @@ canvas {
 
         </div>
 
+
         <!-- CENTRE -->
 
         <div id="centerArea">
@@ -584,22 +647,30 @@ canvas {
 
                 <div>
                     ⏱️
-                    <span id="timer">00:00</span>
+                    <span id="timer">
+                        00:00
+                    </span>
                 </div>
 
                 <div>
                     🏆
-                    <span id="mainScore">0</span>
+                    <span id="mainScore">
+                        0
+                    </span>
                 </div>
 
                 <div>
                     👹
-                    <span id="enemyCount">1</span>
+                    <span id="enemyCount">
+                        1
+                    </span>
                 </div>
 
                 <div>
                     STAGE
-                    <span id="stage">1</span>
+                    <span id="stage">
+                        1
+                    </span>
                 </div>
 
             </div>
@@ -612,9 +683,13 @@ canvas {
 
         </div>
 
+
         <!-- JOUEUR 2 -->
 
-        <div id="panel2" class="sidePanel inactive">
+        <div
+            id="panel2"
+            class="sidePanel inactive"
+        >
 
             <div>
 
@@ -685,29 +760,45 @@ canvas {
 
     </div>
 
-    <!-- ================= CONTROLES ================= -->
+
+    <!-- =================================================
+         CONTROLES
+    ================================================= -->
 
     <div id="controls">
 
         <div id="arrowControls">
 
-            <div class="arrow up" data-direction="up">
+            <div
+                class="arrow up"
+                data-direction="up"
+            >
                 ▲
             </div>
 
-            <div class="arrow down" data-direction="down">
+            <div
+                class="arrow down"
+                data-direction="down"
+            >
                 ▼
             </div>
 
-            <div class="arrow left" data-direction="left">
+            <div
+                class="arrow left"
+                data-direction="left"
+            >
                 ◀
             </div>
 
-            <div class="arrow right" data-direction="right">
+            <div
+                class="arrow right"
+                data-direction="right"
+            >
                 ▶
             </div>
 
         </div>
+
 
         <div id="joystick">
 
@@ -719,7 +810,10 @@ canvas {
 
 </div>
 
-<!-- ================= GAME OVER ================= -->
+
+<!-- =====================================================
+     GAME OVER
+===================================================== -->
 
 <div id="gameOver">
 
@@ -740,6 +834,7 @@ canvas {
     </div>
 
 </div>
+
 
 <script>
 
@@ -766,14 +861,36 @@ let lastEnemyHit = 0;
 
 
 /* =====================================================
+   5 SLOGANS
+   Ils changent à chaque stage
+===================================================== */
+
+const slogans = [
+
+    "« Cours. Survis. Ne te fais jamais attraper. »",
+
+    "« Plus vite que la peur. Plus fort que la chasse. »",
+
+    "« Le labyrinthe est à toi. La sortie est à toi. »",
+
+    "« Une erreur et la chasse recommence. »",
+
+    "« Ils te poursuivent. Toi, tu ne t'arrêtes jamais. »"
+
+];
+
+
+/* =====================================================
    CONTROLES
 ===================================================== */
 
 const controlKeys = {
+
     up: false,
     down: false,
     left: false,
     right: false
+
 };
 
 
@@ -793,6 +910,7 @@ function selectMode(mode) {
         .getElementById("duoButton")
         .classList.remove("active");
 
+
     if (mode === "solo") {
 
         document
@@ -803,7 +921,9 @@ function selectMode(mode) {
             .getElementById("player2Box")
             .style.display = "none";
 
-    } else {
+    }
+
+    else {
 
         document
             .getElementById("duoButton")
@@ -812,7 +932,9 @@ function selectMode(mode) {
         document
             .getElementById("player2Box")
             .style.display = "block";
+
     }
+
 }
 
 
@@ -824,26 +946,36 @@ function startGame() {
             .value
             .trim();
 
+
     player2Name =
         document
             .getElementById("player2Name")
             .value
             .trim();
 
+
     if (player1Name === "") {
+
         player1Name = "Joueur 1";
+
     }
+
 
     if (
         selectedMode === "duo" &&
         player2Name === ""
     ) {
+
         player2Name = "Joueur 2";
+
     }
+
 
     document
         .getElementById("sidePlayer1")
-        .textContent = player1Name;
+        .textContent =
+        player1Name;
+
 
     document
         .getElementById("sidePlayer2")
@@ -852,15 +984,19 @@ function startGame() {
             ? player2Name
             : "Mode Solo";
 
+
     document
         .getElementById("launcher")
         .style.display = "none";
+
 
     document
         .getElementById("game")
         .style.display = "block";
 
+
     initGame();
+
 }
 
 
@@ -870,18 +1006,25 @@ function startGame() {
 
 const keys = {};
 
-document.addEventListener("keydown", function(e) {
 
-    keys[e.key.toLowerCase()] = true;
+document.addEventListener(
+    "keydown",
+    function(e) {
 
-});
+        keys[e.key.toLowerCase()] = true;
+
+    }
+);
 
 
-document.addEventListener("keyup", function(e) {
+document.addEventListener(
+    "keyup",
+    function(e) {
 
-    keys[e.key.toLowerCase()] = false;
+        keys[e.key.toLowerCase()] = false;
 
-});
+    }
+);
 
 
 /* =====================================================
@@ -893,6 +1036,7 @@ const canvas =
 
 const ctx =
     canvas.getContext("2d");
+
 
 const tile = 32;
 
@@ -927,11 +1071,17 @@ const map = [
 
 ];
 
+
 const rows = map.length;
+
 const cols = map[0].length;
 
-canvas.width = cols * tile;
-canvas.height = rows * tile;
+
+canvas.width =
+    cols * tile;
+
+canvas.height =
+    rows * tile;
 
 
 /* =====================================================
@@ -939,10 +1089,15 @@ canvas.height = rows * tile;
 ===================================================== */
 
 let player = {
+
     x: 0,
+
     y: 0,
+
     speed: 5,
+
     walk: 0
+
 };
 
 
@@ -952,15 +1107,25 @@ let player = {
 
 let enemies = [];
 
+
 const enemyStarts = [
+
     [10, 9],
+
     [9, 5],
+
     [11, 15],
+
     [5, 19],
+
     [15, 19],
+
     [19, 9],
+
     [3, 13],
+
     [17, 13]
+
 ];
 
 
@@ -984,20 +1149,25 @@ function initGame() {
 
     startTime = Date.now();
 
+
     resetPlayerPosition();
 
     createEnemy();
 
     updatePanels();
 
+    updateSlogan();
+
     resetControls();
 
+
     requestAnimationFrame(gameLoop);
+
 }
 
 
 /* =====================================================
-   RESET POSITION
+   POSITION DU JOUEUR
 ===================================================== */
 
 function resetPlayerPosition() {
@@ -1020,14 +1190,56 @@ function resetPlayerPosition() {
                     x * tile +
                     tile / 2;
 
+
                 player.y =
                     y * tile +
                     tile / 2;
 
+
                 return;
+
             }
+
         }
+
     }
+
+}
+
+
+/* =====================================================
+   POSITION DE DÉPART DES MÉCHANTS
+===================================================== */
+
+function resetEnemies() {
+
+    enemies.forEach(
+        (enemy, index) => {
+
+            const pos =
+                enemyStarts[
+                    index %
+                    enemyStarts.length
+                ];
+
+
+            enemy.x =
+                pos[0] * tile +
+                tile / 2;
+
+
+            enemy.y =
+                pos[1] * tile +
+                tile / 2;
+
+
+            enemy.speed =
+                2.8 +
+                stage * 0.15;
+
+        }
+    );
+
 }
 
 
@@ -1055,6 +1267,7 @@ function updatePanels() {
         "inactive"
     );
 
+
     panel2.classList.remove(
         "active",
         "inactive"
@@ -1064,31 +1277,68 @@ function updatePanels() {
     if (selectedMode === "solo") {
 
         panel1.classList.add("active");
+
         panel2.classList.add("inactive");
 
-        state1.textContent = "EN JEU";
-        state2.textContent = "MODE SOLO";
+        state1.textContent =
+            "EN JEU";
+
+        state2.textContent =
+            "MODE SOLO";
 
         return;
+
     }
 
 
     if (activePlayer === 1) {
 
         panel1.classList.add("active");
+
         panel2.classList.add("inactive");
 
-        state1.textContent = "EN JEU";
-        state2.textContent = "EN ATTENTE";
+        state1.textContent =
+            "EN JEU";
 
-    } else {
+        state2.textContent =
+            "EN ATTENTE";
+
+    }
+
+    else {
 
         panel1.classList.add("inactive");
+
         panel2.classList.add("active");
 
-        state1.textContent = "EN ATTENTE";
-        state2.textContent = "EN JEU";
+        state1.textContent =
+            "EN ATTENTE";
+
+        state2.textContent =
+            "EN JEU";
+
     }
+
+}
+
+
+/* =====================================================
+   SLOGAN
+===================================================== */
+
+function updateSlogan() {
+
+    const slogan =
+        slogans[
+            (stage - 1) %
+            slogans.length
+        ];
+
+
+    document
+        .getElementById("gameSlogan")
+        .textContent = slogan;
+
 }
 
 
@@ -1101,8 +1351,10 @@ function isWall(x, y) {
     const col =
         Math.floor(x / tile);
 
+
     const row =
         Math.floor(y / tile);
+
 
     if (
         row < 0 ||
@@ -1110,10 +1362,14 @@ function isWall(x, y) {
         col < 0 ||
         col >= cols
     ) {
+
         return true;
+
     }
 
+
     return map[row][col] === "#";
+
 }
 
 
@@ -1121,12 +1377,31 @@ function canMove(x, y) {
 
     const size = 8;
 
+
     return (
-        !isWall(x - size, y - size) &&
-        !isWall(x + size, y - size) &&
-        !isWall(x - size, y + size) &&
-        !isWall(x + size, y + size)
+
+        !isWall(
+            x - size,
+            y - size
+        ) &&
+
+        !isWall(
+            x + size,
+            y - size
+        ) &&
+
+        !isWall(
+            x - size,
+            y + size
+        ) &&
+
+        !isWall(
+            x + size,
+            y + size
+        )
+
     );
+
 }
 
 
@@ -1140,29 +1415,43 @@ const joystick =
 const joystickKnob =
     document.getElementById("joystickKnob");
 
+
 let joystickX = 0;
+
 let joystickY = 0;
+
 let joystickActive = false;
 
 
-function moveJoystick(clientX, clientY) {
+function moveJoystick(
+    clientX,
+    clientY
+) {
 
     const rect =
         joystick.getBoundingClientRect();
 
+
     const centerX =
-        rect.left + rect.width / 2;
+        rect.left +
+        rect.width / 2;
+
 
     const centerY =
-        rect.top + rect.height / 2;
+        rect.top +
+        rect.height / 2;
+
 
     let dx =
         clientX - centerX;
 
+
     let dy =
         clientY - centerY;
 
+
     const maxDistance = 38;
+
 
     const distance =
         Math.sqrt(
@@ -1170,16 +1459,22 @@ function moveJoystick(clientX, clientY) {
             dy * dy
         );
 
-    if (distance > maxDistance) {
+
+    if (
+        distance > maxDistance
+    ) {
 
         dx =
             dx / distance *
             maxDistance;
 
+
         dy =
             dy / distance *
             maxDistance;
+
     }
+
 
     joystickKnob.style.left =
         (
@@ -1188,6 +1483,7 @@ function moveJoystick(clientX, clientY) {
             dx
         ) + "px";
 
+
     joystickKnob.style.top =
         (
             rect.height / 2 -
@@ -1195,11 +1491,14 @@ function moveJoystick(clientX, clientY) {
             dy
         ) + "px";
 
+
     joystickX =
         dx / maxDistance;
 
+
     joystickY =
         dy / maxDistance;
+
 }
 
 
@@ -1208,10 +1507,17 @@ function resetJoystick() {
     joystickActive = false;
 
     joystickX = 0;
+
     joystickY = 0;
 
-    joystickKnob.style.left = "38px";
-    joystickKnob.style.top = "38px";
+
+    joystickKnob.style.left =
+        "38px";
+
+
+    joystickKnob.style.top =
+        "38px";
+
 }
 
 
@@ -1227,6 +1533,7 @@ joystick.addEventListener(
             e.clientX,
             e.clientY
         );
+
     }
 );
 
@@ -1241,6 +1548,7 @@ document.addEventListener(
             e.clientX,
             e.clientY
         );
+
     }
 );
 
@@ -1250,8 +1558,11 @@ document.addEventListener(
     function() {
 
         if (joystickActive) {
+
             resetJoystick();
+
         }
+
     }
 );
 
@@ -1269,13 +1580,16 @@ joystick.addEventListener(
         const touch =
             e.touches[0];
 
+
         moveJoystick(
             touch.clientX,
             touch.clientY
         );
 
     },
-    { passive: false }
+    {
+        passive: false
+    }
 );
 
 
@@ -1290,13 +1604,16 @@ joystick.addEventListener(
         const touch =
             e.touches[0];
 
+
         moveJoystick(
             touch.clientX,
             touch.clientY
         );
 
     },
-    { passive: false }
+    {
+        passive: false
+    }
 );
 
 
@@ -1309,7 +1626,9 @@ joystick.addEventListener(
         resetJoystick();
 
     },
-    { passive: false }
+    {
+        passive: false
+    }
 );
 
 
@@ -1326,12 +1645,18 @@ document
 
 
         function start() {
-            controlKeys[direction] = true;
+
+            controlKeys[direction] =
+                true;
+
         }
 
 
         function stop() {
-            controlKeys[direction] = false;
+
+            controlKeys[direction] =
+                false;
+
         }
 
 
@@ -1340,10 +1665,12 @@ document
             start
         );
 
+
         button.addEventListener(
             "mouseup",
             stop
         );
+
 
         button.addEventListener(
             "mouseleave",
@@ -1360,7 +1687,9 @@ document
                 start();
 
             },
-            { passive: false }
+            {
+                passive: false
+            }
         );
 
 
@@ -1373,7 +1702,9 @@ document
                 stop();
 
             },
-            { passive: false }
+            {
+                passive: false
+            }
         );
 
     });
@@ -1386,11 +1717,15 @@ document
 function resetControls() {
 
     controlKeys.up = false;
+
     controlKeys.down = false;
+
     controlKeys.left = false;
+
     controlKeys.right = false;
 
     resetJoystick();
+
 }
 
 
@@ -1401,6 +1736,7 @@ function resetControls() {
 function movePlayer() {
 
     let dx = 0;
+
     let dy = 0;
 
 
@@ -1411,43 +1747,65 @@ function movePlayer() {
         keys["z"] ||
         keys["w"]
     ) {
+
         dy -= 1;
+
     }
+
 
     if (
         keys["arrowdown"] ||
         keys["s"]
     ) {
+
         dy += 1;
+
     }
+
 
     if (
         keys["arrowleft"] ||
         keys["q"] ||
         keys["a"]
     ) {
+
         dx -= 1;
+
     }
+
 
     if (
         keys["arrowright"] ||
         keys["d"]
     ) {
+
         dx += 1;
+
     }
 
 
     /* FLÈCHES */
 
-    if (controlKeys.up) dy -= 1;
-    if (controlKeys.down) dy += 1;
-    if (controlKeys.left) dx -= 1;
-    if (controlKeys.right) dx += 1;
+    if (controlKeys.up)
+        dy -= 1;
+
+
+    if (controlKeys.down)
+        dy += 1;
+
+
+    if (controlKeys.left)
+        dx -= 1;
+
+
+    if (controlKeys.right)
+        dx += 1;
 
 
     /* JOYSTICK */
 
     dx += joystickX;
+
     dy += joystickY;
 
 
@@ -1461,14 +1819,20 @@ function movePlayer() {
     if (length > 0) {
 
         dx /= length;
+
         dy /= length;
 
+
         dx *= player.speed;
+
         dy *= player.speed;
+
 
         player.walk += 0.4;
 
+
         score += 0.03;
+
     }
 
 
@@ -1480,6 +1844,7 @@ function movePlayer() {
     ) {
 
         player.x += dx;
+
     }
 
 
@@ -1491,18 +1856,21 @@ function movePlayer() {
     ) {
 
         player.y += dy;
+
     }
+
 }
 
 
 /* =====================================================
-   CRÉER TÊTE
+   CRÉATION MÉCHANT
 ===================================================== */
 
 function createEnemy() {
 
     const index =
         enemies.length;
+
 
     const pos =
         enemyStarts[
@@ -1524,7 +1892,9 @@ function createEnemy() {
         speed:
             2.8 +
             stage * 0.15
+
     });
+
 }
 
 
@@ -1535,35 +1905,52 @@ function createEnemy() {
 function findPath(enemy) {
 
     const startX =
-        Math.floor(enemy.x / tile);
+        Math.floor(
+            enemy.x / tile
+        );
+
 
     const startY =
-        Math.floor(enemy.y / tile);
+        Math.floor(
+            enemy.y / tile
+        );
+
 
     const targetX =
-        Math.floor(player.x / tile);
+        Math.floor(
+            player.x / tile
+        );
+
 
     const targetY =
-        Math.floor(player.y / tile);
+        Math.floor(
+            player.y / tile
+        );
 
 
     if (
         startX === targetX &&
         startY === targetY
     ) {
+
         return null;
+
     }
 
 
     const queue = [];
 
-    const visited = new Set();
+    const visited =
+        new Set();
 
-    const parent = new Map();
+    const parent =
+        new Map();
 
 
     const startKey =
-        startX + "," + startY;
+        startX +
+        "," +
+        startY;
 
 
     queue.push([
@@ -1571,27 +1958,40 @@ function findPath(enemy) {
         startY
     ]);
 
+
     visited.add(startKey);
 
 
     const directions = [
+
         [1, 0],
+
         [-1, 0],
+
         [0, 1],
+
         [0, -1]
+
     ];
 
 
     let found = false;
 
 
-    while (queue.length > 0) {
+    while (
+        queue.length > 0
+    ) {
 
         const current =
             queue.shift();
 
-        const cx = current[0];
-        const cy = current[1];
+
+        const cx =
+            current[0];
+
+
+        const cy =
+            current[1];
 
 
         if (
@@ -1600,7 +2000,9 @@ function findPath(enemy) {
         ) {
 
             found = true;
+
             break;
+
         }
 
 
@@ -1610,6 +2012,7 @@ function findPath(enemy) {
 
             const nx =
                 cx + dir[0];
+
 
             const ny =
                 cy + dir[1];
@@ -1621,48 +2024,69 @@ function findPath(enemy) {
                 nx >= cols ||
                 ny >= rows
             ) {
+
                 continue;
+
             }
 
 
             if (
                 map[ny][nx] === "#"
             ) {
+
                 continue;
+
             }
 
 
             const key =
-                nx + "," + ny;
+                nx +
+                "," +
+                ny;
 
 
-            if (visited.has(key)) {
+            if (
+                visited.has(key)
+            ) {
+
                 continue;
+
             }
 
 
             visited.add(key);
 
+
             parent.set(
                 key,
-                cx + "," + cy
+                cx +
+                "," +
+                cy
             );
+
 
             queue.push([
                 nx,
                 ny
             ]);
+
         }
+
     }
 
 
     if (!found) {
+
         return null;
+
     }
 
 
     let current =
-        targetX + "," + targetY;
+        targetX +
+        "," +
+        targetY;
+
 
     const path = [];
 
@@ -1673,17 +2097,26 @@ function findPath(enemy) {
 
         path.unshift(current);
 
+
         current =
             parent.get(current);
 
+
         if (!current) {
+
             return null;
+
         }
+
     }
 
 
-    if (path.length === 0) {
+    if (
+        path.length === 0
+    ) {
+
         return null;
+
     }
 
 
@@ -1692,14 +2125,18 @@ function findPath(enemy) {
 
 
     return {
+
         x: Number(next[0]),
+
         y: Number(next[1])
+
     };
+
 }
 
 
 /* =====================================================
-   MOUVEMENT TÊTES
+   MOUVEMENT MÉCHANT
 ===================================================== */
 
 function moveEnemy(enemy) {
@@ -1709,13 +2146,16 @@ function moveEnemy(enemy) {
 
 
     if (!next) {
+
         return;
+
     }
 
 
     const targetX =
         next.x * tile +
         tile / 2;
+
 
     const targetY =
         next.y * tile +
@@ -1724,6 +2164,7 @@ function moveEnemy(enemy) {
 
     const dx =
         targetX - enemy.x;
+
 
     const dy =
         targetY - enemy.y;
@@ -1736,7 +2177,9 @@ function moveEnemy(enemy) {
         );
 
 
-    if (distance > 1) {
+    if (
+        distance > 1
+    ) {
 
         const move =
             Math.min(
@@ -1746,11 +2189,18 @@ function moveEnemy(enemy) {
 
 
         enemy.x +=
-            dx / distance * move;
+            dx /
+            distance *
+            move;
+
 
         enemy.y +=
-            dy / distance * move;
+            dy /
+            distance *
+            move;
+
     }
+
 }
 
 
@@ -1772,49 +2222,80 @@ function drawMap() {
             x++
         ) {
 
-            if (map[y][x] === "#") {
+            if (
+                map[y][x] === "#"
+            ) {
 
-                ctx.fillStyle = "#123bff";
+                ctx.fillStyle =
+                    "#123bff";
+
 
                 ctx.fillRect(
+
                     x * tile,
+
                     y * tile,
+
                     tile,
+
                     tile
+
                 );
 
-                ctx.strokeStyle = "#3155ff";
+
+                ctx.strokeStyle =
+                    "#3155ff";
+
 
                 ctx.strokeRect(
+
                     x * tile + 1,
+
                     y * tile + 1,
+
                     tile - 2,
+
                     tile - 2
+
                 );
 
-            } else {
+            }
 
-                ctx.fillStyle = "#050505";
+            else {
+
+                ctx.fillStyle =
+                    "#050505";
+
 
                 ctx.fillRect(
+
                     x * tile,
+
                     y * tile,
+
                     tile,
+
                     tile
+
                 );
+
             }
+
         }
+
     }
+
 }
 
 
 /* =====================================================
-   PERSONNAGE
+   DESSIN PERSONNAGE
 ===================================================== */
 
 function drawPlayer() {
 
     ctx.save();
+
 
     ctx.translate(
         player.x,
@@ -1822,110 +2303,171 @@ function drawPlayer() {
     );
 
 
-    ctx.fillStyle = "#00aaff";
+    ctx.fillStyle =
+        "#00aaff";
 
 
-    /* tête */
+    /* TÊTE */
 
     ctx.beginPath();
 
+
     ctx.arc(
+
         0,
+
         -7,
+
         9,
+
         0,
+
         Math.PI * 2
+
     );
+
 
     ctx.fill();
 
 
-    /* corps */
+    /* CORPS */
 
     ctx.fillRect(
+
         -9,
+
         2,
+
         18,
+
         15
+
     );
 
 
-    /* bras */
+    /* BRAS */
 
-    ctx.strokeStyle = "#00aaff";
+    ctx.strokeStyle =
+        "#00aaff";
+
+
     ctx.lineWidth = 5;
-    ctx.lineCap = "round";
+
+    ctx.lineCap =
+        "round";
 
 
     const arm =
-        Math.sin(player.walk) * 5;
+        Math.sin(
+            player.walk
+        ) * 5;
 
 
     ctx.beginPath();
 
-    ctx.moveTo(-7, 5);
+
+    ctx.moveTo(
+        -7,
+        5
+    );
+
 
     ctx.lineTo(
+
         -12,
+
         12 + arm
+
     );
+
 
     ctx.stroke();
 
 
     ctx.beginPath();
 
-    ctx.moveTo(7, 5);
+
+    ctx.moveTo(
+        7,
+        5
+    );
+
 
     ctx.lineTo(
+
         12,
+
         12 - arm
+
     );
+
 
     ctx.stroke();
 
 
-    /* jambes */
+    /* JAMBES */
 
     const leg =
-        Math.sin(player.walk) * 7;
+        Math.sin(
+            player.walk
+        ) * 7;
 
 
     ctx.beginPath();
 
-    ctx.moveTo(-4, 16);
+
+    ctx.moveTo(
+        -4,
+        16
+    );
+
 
     ctx.lineTo(
+
         -7,
+
         27 + leg
+
     );
+
 
     ctx.stroke();
 
 
     ctx.beginPath();
 
-    ctx.moveTo(4, 16);
+
+    ctx.moveTo(
+        4,
+        16
+    );
+
 
     ctx.lineTo(
+
         7,
+
         27 - leg
+
     );
+
 
     ctx.stroke();
 
 
     ctx.restore();
+
 }
 
 
 /* =====================================================
-   TÊTE
+   DESSIN MÉCHANT
 ===================================================== */
 
 function drawEnemy(enemy) {
 
     ctx.save();
+
 
     ctx.translate(
         enemy.x,
@@ -1933,171 +2475,246 @@ function drawEnemy(enemy) {
     );
 
 
-    ctx.fillStyle = "#e32626";
+    ctx.fillStyle =
+        "#e32626";
 
 
     ctx.beginPath();
 
+
     ctx.arc(
+
         0,
+
         0,
+
         15,
+
         0,
+
         Math.PI * 2
+
     );
+
 
     ctx.fill();
 
 
-    /* yeux */
+    /* YEUX */
 
-    ctx.fillStyle = "white";
+    ctx.fillStyle =
+        "white";
 
 
     ctx.beginPath();
 
+
     ctx.arc(
+
         -6,
+
         -4,
+
         4,
+
         0,
+
         Math.PI * 2
+
     );
+
 
     ctx.fill();
 
 
     ctx.beginPath();
 
+
     ctx.arc(
+
         6,
+
         -4,
+
         4,
+
         0,
+
         Math.PI * 2
+
     );
+
 
     ctx.fill();
 
 
-    /* pupilles */
+    /* PUPILLES */
 
-    ctx.fillStyle = "black";
+    ctx.fillStyle =
+        "black";
 
 
     ctx.beginPath();
 
+
     ctx.arc(
+
         -6,
+
         -3,
+
         2,
+
         0,
+
         Math.PI * 2
+
     );
+
 
     ctx.fill();
 
 
     ctx.beginPath();
 
+
     ctx.arc(
+
         6,
+
         -3,
+
         2,
+
         0,
+
         Math.PI * 2
+
     );
+
 
     ctx.fill();
 
 
-    /* sourcils */
+    /* SOURCILS */
 
-    ctx.strokeStyle = "black";
+    ctx.strokeStyle =
+        "black";
+
+
     ctx.lineWidth = 3;
 
 
     ctx.beginPath();
 
-    ctx.moveTo(-11, -9);
 
-    ctx.lineTo(-3, -6);
+    ctx.moveTo(
+        -11,
+        -9
+    );
+
+
+    ctx.lineTo(
+        -3,
+        -6
+    );
+
 
     ctx.stroke();
 
 
     ctx.beginPath();
 
-    ctx.moveTo(11, -9);
 
-    ctx.lineTo(3, -6);
+    ctx.moveTo(
+        11,
+        -9
+    );
+
+
+    ctx.lineTo(
+        3,
+        -6
+    );
+
 
     ctx.stroke();
 
 
-    /* bouche */
+    /* BOUCHE */
 
     ctx.beginPath();
 
-    ctx.moveTo(-7, 8);
 
-    ctx.quadraticCurveTo(
-        0,
-        2,
-        7,
+    ctx.moveTo(
+        -7,
         8
     );
+
+
+    ctx.quadraticCurveTo(
+
+        0,
+
+        2,
+
+        7,
+
+        8
+
+    );
+
 
     ctx.stroke();
 
 
     ctx.restore();
+
 }
 
 
 /* =====================================================
-   QUAND LE JOUEUR EST ATTRAPÉ
+   JOUEUR ATTRAPÉ
 ===================================================== */
 
 function playerCaught() {
 
-    /*
-       Évite que plusieurs collisions
-       arrivent pendant la même frame.
-    */
+    const now =
+        Date.now();
 
-    const now = Date.now();
 
     if (
         now - lastEnemyHit < 800
     ) {
+
         return;
+
     }
 
-    lastEnemyHit = now;
+
+    lastEnemyHit =
+        now;
 
 
-    /*
-       SOLO
-    */
+    /* SOLO */
 
     if (
         selectedMode === "solo"
     ) {
 
         loseGame(
+
             player1Name +
             " a été attrapé !"
+
         );
 
         return;
+
     }
 
 
-    /*
-       DUO :
-       joueur 1 -> joueur 2
-    */
+    /* DUO */
 
     if (
         activePlayer === 1
@@ -2107,11 +2724,6 @@ function playerCaught() {
 
     }
 
-    /*
-       DUO :
-       joueur 2 -> joueur 1
-    */
-
     else {
 
         activePlayer = 1;
@@ -2119,22 +2731,25 @@ function playerCaught() {
     }
 
 
-    /*
-       On remet le personnage
-       au départ.
-    */
+    /* LE JOUEUR REVIENT */
 
     resetPlayerPosition();
 
 
-    /*
-       Les têtes restent dans
-       la partie.
-    */
+    /* LES MÉCHANTS REVIENNENT */
+
+    resetEnemies();
+
+
+    /* CONTRÔLES */
 
     resetControls();
 
+
+    /* PANNEAUX */
+
     updatePanels();
+
 }
 
 
@@ -2149,10 +2764,13 @@ function checkCollision() {
     ) {
 
         const dx =
-            player.x - enemy.x;
+            player.x -
+            enemy.x;
+
 
         const dy =
-            player.y - enemy.y;
+            player.y -
+            enemy.y;
 
 
         const distance =
@@ -2169,8 +2787,11 @@ function checkCollision() {
             playerCaught();
 
             return;
+
         }
+
     }
+
 }
 
 
@@ -2182,7 +2803,12 @@ function updateStage() {
 
     const elapsed =
         Math.floor(
-            (Date.now() - startTime) / 1000
+
+            (
+                Date.now() -
+                startTime
+            ) / 1000
+
         );
 
 
@@ -2196,12 +2822,13 @@ function updateStage() {
         newStage !== stage
     ) {
 
-        stage = newStage;
+        stage =
+            newStage;
 
 
         /*
-           Une tête supplémentaire
-           toutes les 30 secondes.
+           UNE TÊTE DE PLUS
+           À CHAQUE STAGE
         */
 
         createEnemy();
@@ -2214,19 +2841,30 @@ function updateStage() {
             enemy.speed =
                 2.8 +
                 stage * 0.15;
+
         }
+
+
+        /*
+           NOUVEAU SLOGAN
+        */
+
+        updateSlogan();
+
     }
 
 
-    document.getElementById(
-        "stage"
-    ).textContent = stage;
+    document
+        .getElementById("stage")
+        .textContent =
+        stage;
 
 
-    document.getElementById(
-        "enemyCount"
-    ).textContent =
+    document
+        .getElementById("enemyCount")
+        .textContent =
         enemies.length;
+
 }
 
 
@@ -2238,13 +2876,16 @@ function updateTimer() {
 
     const elapsed =
         Math.floor(
-            (Date.now() - startTime) / 1000
+
+            (
+                Date.now() -
+                startTime
+            ) / 1000
+
         );
 
 
-    /*
-       FIN À 30 MINUTES
-    */
+    /* 30 MINUTES */
 
     if (
         elapsed >= 1800
@@ -2253,47 +2894,90 @@ function updateTimer() {
         endGame();
 
         return;
+
     }
 
 
     const minutes =
-        Math.floor(elapsed / 60);
+        Math.floor(
+            elapsed / 60
+        );
+
 
     const seconds =
         elapsed % 60;
 
 
-    document.getElementById(
-        "timer"
-    ).textContent =
+    document
+        .getElementById("timer")
+        .textContent =
 
-        String(minutes).padStart(2, "0")
+        String(minutes)
+            .padStart(2, "0")
+
         +
+
         ":"
+
         +
-        String(seconds).padStart(2, "0");
+
+        String(seconds)
+            .padStart(2, "0");
 
 
     const currentScore =
         Math.floor(score);
 
 
-    document.getElementById(
-        "mainScore"
-    ).textContent =
+    document
+        .getElementById("mainScore")
+        .textContent =
         currentScore;
 
 
-    document.getElementById(
-        "score1"
-    ).textContent =
+    document
+        .getElementById("score1")
+        .textContent =
         currentScore;
 
 
-    document.getElementById(
-        "score2"
-    ).textContent =
+    document
+        .getElementById("score2")
+        .textContent =
         currentScore;
+
+}
+
+
+/* =====================================================
+   PERDU
+===================================================== */
+
+function loseGame(message) {
+
+    gameRunning = false;
+
+
+    resetControls();
+
+
+    document
+        .getElementById("gameOverTitle")
+        .textContent =
+        "GAME OVER";
+
+
+    document
+        .getElementById("loserText")
+        .textContent =
+        message;
+
+
+    document
+        .getElementById("gameOver")
+        .style.display =
+        "flex";
+
 }
 
 
@@ -2305,36 +2989,40 @@ function endGame() {
 
     gameRunning = false;
 
+
     resetControls();
 
 
-    document.getElementById(
-        "gameOverTitle"
-    ).textContent =
+    document
+        .getElementById("gameOverTitle")
+        .textContent =
         "🏆 FIN DE LA PARTIE";
 
 
-    document.getElementById(
-        "loserText"
-    ).textContent =
+    document
+        .getElementById("loserText")
+        .textContent =
         "Vous avez survécu pendant 30 minutes !";
 
 
-    document.getElementById(
-        "gameOver"
-    ).style.display =
+    document
+        .getElementById("gameOver")
+        .style.display =
         "flex";
+
 }
 
 
 /* =====================================================
-   BOUCLE
+   BOUCLE PRINCIPALE
 ===================================================== */
 
 function gameLoop() {
 
     if (!gameRunning) {
+
         return;
+
     }
 
 
@@ -2346,10 +3034,12 @@ function gameLoop() {
     ) {
 
         moveEnemy(enemy);
+
     }
 
 
     drawMap();
+
 
     drawPlayer();
 
@@ -2359,12 +3049,15 @@ function gameLoop() {
     ) {
 
         drawEnemy(enemy);
+
     }
 
 
     checkCollision();
 
+
     updateTimer();
+
 
     updateStage();
 
@@ -2374,7 +3067,9 @@ function gameLoop() {
         requestAnimationFrame(
             gameLoop
         );
+
     }
+
 }
 
 </script>
