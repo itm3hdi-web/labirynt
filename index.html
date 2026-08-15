@@ -3,88 +3,166 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Labyrinthe</title>
+<title>Blue Escape</title>
 
 <style>
-    * {
-        box-sizing: border-box;
-    }
+* {
+    box-sizing: border-box;
+}
 
-    body {
-        margin: 0;
-        background: #111;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        overflow: hidden;
-    }
+body {
+    margin: 0;
+    background: #050505;
+    color: white;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
 
-    canvas {
-        background: #222;
-        border: 3px solid white;
-    }
+#top {
+    height: 60px;
+    background: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+#gameContainer {
+    width: 100vw;
+    height: calc(100vh - 60px);
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+canvas {
+    background: #151515;
+}
 </style>
 </head>
 
 <body>
 
-<canvas id="game"></canvas>
+<div id="top">
+    <div>⏱️ <span id="timer">00:00</span></div>
+    <div>👹 Têtes : <span id="enemyCount">1</span></div>
+</div>
+
+<div id="gameContainer">
+    <canvas id="game"></canvas>
+</div>
 
 <script>
+
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 
-const tile = 40;
+const tile = 45;
+
+/*
+    # = mur
+    . = chemin
+    P = joueur
+*/
 
 const maze = [
-    "####################",
-    "#P       #         #",
-    "# ###### # ####### #",
-    "#      # #       # #",
-    "###### # ####### # #",
-    "#      #       #   #",
-    "# ########### #####",
-    "#           #     #",
-    "# ######### # ### #",
-    "#       #   # #   #",
-    "# ##### # ### # ###",
-    "#     # #     #   #",
-    "##### # ####### # #",
-    "#     #         # #",
-    "# ############### #",
-    "#                 #",
-    "####################"
+"############################################################",
+"#P................................#.........................#",
+"#.###############################.#.#######################.#",
+"#.#.............................#.#.#.....................#.#",
+"#.#.###########################.#.#.#.###################.#.#",
+"#.#.#.........................#.#.#.#.#.................#.#.#",
+"#.#.#.#######################.#.#.#.#.#.###############.#.#.#",
+"#.#.#.#.....................#.#.#.#.#.#.#.............#.#.#.#",
+"#.#.#.#.###################.#.#.#.#.#.#.#.###########.#.#.#.#",
+"#.#.#.#.#.................#.#.#.#.#.#.#.#.#.........#.#.#.#.#",
+"#.#.#.#.#.###############.#.#.#.#.#.#.#.#.#.#######.#.#.#.#.#",
+"#.#.#.#.#.#.............#.#.#.#.#.#.#.#.#.#.#.....#.#.#.#.#.#",
+"#.#.#.#.#.#.###########.#.#.#.#.#.#.#.#.#.#.#.###.#.#.#.#.#.#",
+"#.#.#.#.#.#.#.........#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#",
+"#.#.#.#.#.#.#.#######.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#",
+"#.#.#.#.#.#.#.#.....#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#",
+"#.#.#.#.#.#.#.#.###.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#",
+"#.#.#.#.#.#.#.#.#...#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#",
+"#.#.#.#.#.#.#.#.#.###.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#",
+"#.#.#.#.#.#.#.#.#.....#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#",
+"#.#.#.#.#.#.#.#######.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#",
+"#.#.#.#.#.#.#.........#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#",
+"#.#.#.#.#.#############.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#",
+"#.#.#.#................#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#",
+"#.#.#.#################.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#",
+"#.#.#...................#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#",
+"#.#.#####################.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#",
+"#.#.......................#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#",
+"#.#########################.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#",
+"#...........................#.#.#.#.#.#.#.#.#.#.#.#.#.#.#",
+"#############################.#.#.#.#.#.#.#.#.#.#.#.#.#.#",
+"#.............................#.#.#.#.#.#.#.#.#.#.#.#.#.#",
+"#.#############################.#.#.#.#.#.#.#.#.#.#.#.#",
+"#.#...........................#.#.#.#.#.#.#.#.#.#.#.#",
+"#.#.#########################.#.#.#.#.#.#.#.#.#.#.#",
+"#.#.#.......................#.#.#.#.#.#.#.#.#.#.#.#",
+"#.#.#.#####################.#.#.#.#.#.#.#.#.#.#.#",
+"#.#.#.#...................#.#.#.#.#.#.#.#.#.#.#",
+"#.#.#.#.#################.#.#.#.#.#.#.#.#.#.#",
+"#.#.#.#.#...............#.#.#.#.#.#.#.#.#.#.#",
+"#.#.#.#.#.#############.#.#.#.#.#.#.#.#.#.#",
+"#.#.#.#.#.#...........#.#.#.#.#.#.#.#.#.#.#",
+"#.#.#.#.#.#.#########.#.#.#.#.#.#.#.#.#.#",
+"#.#.#.#.#.#.#.......#.#.#.#.#.#.#.#.#.#.#",
+"#.#.#.#.#.#.#.#####.#.#.#.#.#.#.#.#.#.#",
+"#.#.#.#.#.#.#.#...#.#.#.#.#.#.#.#.#.#.#",
+"#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#",
+"#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#",
+"#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#",
+"#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#",
+"#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#",
+"#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#",
+"#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#",
+"#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#",
+"#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#",
+"#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#",
+"#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#",
+"#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#",
+"#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#",
+"#...........................................................#",
+"############################################################"
 ];
 
 canvas.width = maze[0].length * tile;
 canvas.height = maze.length * tile;
 
+
+/* =========================
+   JOUEUR
+========================= */
+
 let player = {
     x: 0,
     y: 0,
-    speed: 3
-};
-
-let enemy = {
-    x: 0,
-    y: 0,
-    speed: 1.4
+    speed: 4,
+    walk: 0
 };
 
 for (let y = 0; y < maze.length; y++) {
     for (let x = 0; x < maze[y].length; x++) {
 
         if (maze[y][x] === "P") {
+
             player.x = x * tile + tile / 2;
             player.y = y * tile + tile / 2;
+
         }
     }
 }
 
-// Position de départ de la tête
-enemy.x = 18 * tile + tile / 2;
-enemy.y = 15 * tile + tile / 2;
+
+/* =========================
+   TOUCHES
+========================= */
 
 const keys = {};
 
@@ -95,6 +173,11 @@ document.addEventListener("keydown", e => {
 document.addEventListener("keyup", e => {
     keys[e.key.toLowerCase()] = false;
 });
+
+
+/* =========================
+   COLLISION MURS
+========================= */
 
 function isWall(x, y) {
 
@@ -113,9 +196,10 @@ function isWall(x, y) {
     return maze[row][col] === "#";
 }
 
+
 function canMove(x, y) {
 
-    const size = 12;
+    const size = 13;
 
     return (
         !isWall(x - size, y - size) &&
@@ -125,15 +209,39 @@ function canMove(x, y) {
     );
 }
 
+
+/* =========================
+   DEPLACEMENT JOUEUR
+========================= */
+
 function movePlayer() {
 
     let dx = 0;
     let dy = 0;
 
-    if (keys["arrowup"] || keys["z"] || keys["w"]) dy -= player.speed;
-    if (keys["arrowdown"] || keys["s"]) dy += player.speed;
-    if (keys["arrowleft"] || keys["q"] || keys["a"]) dx -= player.speed;
-    if (keys["arrowright"] || keys["d"]) dx += player.speed;
+    if (keys["arrowup"] || keys["z"] || keys["w"]) {
+        dy -= player.speed;
+    }
+
+    if (keys["arrowdown"] || keys["s"]) {
+        dy += player.speed;
+    }
+
+    if (keys["arrowleft"] || keys["q"] || keys["a"]) {
+        dx -= player.speed;
+    }
+
+    if (keys["arrowright"] || keys["d"]) {
+        dx += player.speed;
+    }
+
+
+    if (dx !== 0 || dy !== 0) {
+
+        player.walk += 0.25;
+
+    }
+
 
     if (canMove(player.x + dx, player.y)) {
         player.x += dx;
@@ -144,20 +252,64 @@ function movePlayer() {
     }
 }
 
-function moveEnemy() {
+
+/* =========================
+   ENNEMIS
+========================= */
+
+let enemies = [];
+
+function createEnemy() {
+
+    const positions = [
+        [58, 1],
+        [56, 60],
+        [3, 60],
+        [50, 30],
+        [30, 50],
+        [40, 10],
+        [20, 30],
+        [55, 45]
+    ];
+
+    const index = enemies.length % positions.length;
+
+    enemies.push({
+
+        x: positions[index][0] * tile + tile / 2,
+        y: positions[index][1] * tile + tile / 2,
+
+        speed: 1.4 + enemies.length * 0.05
+
+    });
+}
+
+
+createEnemy();
+
+
+/* =========================
+   DEPLACEMENT DES TETES
+========================= */
+
+function moveEnemy(enemy) {
 
     let dx = player.x - enemy.x;
     let dy = player.y - enemy.y;
 
     const distance = Math.sqrt(dx * dx + dy * dy);
 
-    if (distance > 1) {
+    if (distance > 0) {
+
         dx /= distance;
         dy /= distance;
+
     }
 
-    let nextX = enemy.x + dx * enemy.speed;
-    let nextY = enemy.y + dy * enemy.speed;
+
+    const nextX = enemy.x + dx * enemy.speed;
+    const nextY = enemy.y + dy * enemy.speed;
+
 
     if (canMove(nextX, enemy.y)) {
         enemy.x = nextX;
@@ -168,6 +320,11 @@ function moveEnemy() {
     }
 }
 
+
+/* =========================
+   DESSIN DU LABYRINTHE
+========================= */
+
 function drawMaze() {
 
     for (let y = 0; y < maze.length; y++) {
@@ -176,7 +333,8 @@ function drawMaze() {
 
             if (maze[y][x] === "#") {
 
-                ctx.fillStyle = "#555";
+                ctx.fillStyle = "#174b72";
+
                 ctx.fillRect(
                     x * tile,
                     y * tile,
@@ -186,17 +344,24 @@ function drawMaze() {
 
             } else {
 
-                ctx.fillStyle = "#222";
+                ctx.fillStyle = "#080808";
+
                 ctx.fillRect(
                     x * tile,
                     y * tile,
                     tile,
                     tile
                 );
+
             }
         }
     }
 }
+
+
+/* =========================
+   PERSONNAGE BLEU
+========================= */
 
 function drawPlayer() {
 
@@ -204,111 +369,302 @@ function drawPlayer() {
 
     ctx.translate(player.x, player.y);
 
-    // Corps
-    ctx.fillStyle = "#3498db";
+    /*
+       Corps bleu
+    */
+
+    ctx.fillStyle = "#008cff";
+
     ctx.beginPath();
-    ctx.arc(0, 8, 9, 0, Math.PI * 2);
+
+    ctx.arc(
+        0,
+        -7,
+        9,
+        0,
+        Math.PI * 2
+    );
+
     ctx.fill();
 
-    // Tête
-    ctx.fillStyle = "#f1c27d";
-    ctx.beginPath();
-    ctx.arc(0, -7, 8, 0, Math.PI * 2);
-    ctx.fill();
 
-    // Jambes
-    ctx.strokeStyle = "#3498db";
-    ctx.lineWidth = 4;
+    /*
+       Corps
+    */
+
+    ctx.fillRect(
+        -8,
+        2,
+        16,
+        15
+    );
+
+
+    /*
+       Bras
+    */
+
+    ctx.strokeStyle = "#008cff";
+    ctx.lineWidth = 5;
+    ctx.lineCap = "round";
+
+    const arm = Math.sin(player.walk) * 5;
 
     ctx.beginPath();
-    ctx.moveTo(-4, 15);
-    ctx.lineTo(-8, 23);
+    ctx.moveTo(-7, 5);
+    ctx.lineTo(-12, 12 + arm);
     ctx.stroke();
 
     ctx.beginPath();
-    ctx.moveTo(4, 15);
-    ctx.lineTo(8, 23);
+    ctx.moveTo(7, 5);
+    ctx.lineTo(12, 12 - arm);
     ctx.stroke();
+
+
+    /*
+       Jambes qui marchent
+    */
+
+    const leg = Math.sin(player.walk) * 7;
+
+    ctx.beginPath();
+
+    ctx.moveTo(-4, 16);
+    ctx.lineTo(-7, 27 + leg);
+
+    ctx.stroke();
+
+
+    ctx.beginPath();
+
+    ctx.moveTo(4, 16);
+    ctx.lineTo(7, 27 - leg);
+
+    ctx.stroke();
+
 
     ctx.restore();
 }
 
-function drawEnemy() {
+
+/* =========================
+   TETE MECONTENTE
+========================= */
+
+function drawEnemy(enemy) {
 
     ctx.save();
 
     ctx.translate(enemy.x, enemy.y);
 
-    // Tête
-    ctx.fillStyle = "#e74c3c";
+
+    /*
+       Tête
+    */
+
+    ctx.fillStyle = "#d92828";
 
     ctx.beginPath();
-    ctx.arc(0, 0, 15, 0, Math.PI * 2);
+
+    ctx.arc(
+        0,
+        0,
+        18,
+        0,
+        Math.PI * 2
+    );
+
     ctx.fill();
 
-    // Yeux
+
+    /*
+       Yeux
+    */
+
     ctx.fillStyle = "white";
 
     ctx.beginPath();
-    ctx.arc(-6, -4, 4, 0, Math.PI * 2);
+    ctx.arc(-7, -4, 5, 0, Math.PI * 2);
     ctx.fill();
 
     ctx.beginPath();
-    ctx.arc(6, -4, 4, 0, Math.PI * 2);
+    ctx.arc(7, -4, 5, 0, Math.PI * 2);
     ctx.fill();
 
-    // Pupilles
+
+    /*
+       Pupilles
+    */
+
     ctx.fillStyle = "black";
 
     ctx.beginPath();
-    ctx.arc(-6, -4, 2, 0, Math.PI * 2);
+    ctx.arc(-7, -3, 2.5, 0, Math.PI * 2);
     ctx.fill();
 
     ctx.beginPath();
-    ctx.arc(6, -4, 2, 0, Math.PI * 2);
+    ctx.arc(7, -3, 2.5, 0, Math.PI * 2);
     ctx.fill();
 
-    // Bouche
+
+    /*
+       Sourcils méchants
+    */
+
     ctx.strokeStyle = "black";
     ctx.lineWidth = 3;
 
     ctx.beginPath();
-    ctx.arc(0, 3, 7, 0, Math.PI);
+    ctx.moveTo(-13, -11);
+    ctx.lineTo(-3, -7);
     ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(13, -11);
+    ctx.lineTo(3, -7);
+    ctx.stroke();
+
+
+    /*
+       Bouche
+    */
+
+    ctx.beginPath();
+
+    ctx.moveTo(-8, 8);
+    ctx.quadraticCurveTo(
+        0,
+        1,
+        8,
+        8
+    );
+
+    ctx.stroke();
+
 
     ctx.restore();
 }
 
+
+/* =========================
+   COLLISION TETES / JOUEUR
+========================= */
+
 function checkCollision() {
 
-    const dx = player.x - enemy.x;
-    const dy = player.y - enemy.y;
+    for (const enemy of enemies) {
 
-    const distance = Math.sqrt(dx * dx + dy * dy);
+        const dx = player.x - enemy.x;
+        const dy = player.y - enemy.y;
 
-    if (distance < 25) {
-        alert("La tête t'a attrapé !");
-        location.reload();
+        const distance = Math.sqrt(
+            dx * dx + dy * dy
+        );
+
+        if (distance < 28) {
+
+            alert("TU AS ÉTÉ ATTRAPÉ !");
+
+            location.reload();
+
+        }
     }
 }
 
+
+/* =========================
+   MINUTEUR
+========================= */
+
+const startTime = Date.now();
+
+let lastEnemyNumber = 1;
+
+
+function updateTimer() {
+
+    const elapsed = Math.floor(
+        (Date.now() - startTime) / 1000
+    );
+
+
+    const minutes = Math.floor(
+        elapsed / 60
+    );
+
+    const seconds = elapsed % 60;
+
+
+    document.getElementById("timer").textContent =
+        String(minutes).padStart(2, "0") +
+        ":" +
+        String(seconds).padStart(2, "0");
+
+
+    /*
+       Toutes les 30 secondes :
+       +1 tête
+    */
+
+    const wantedEnemies =
+        Math.floor(elapsed / 30) + 1;
+
+
+    if (wantedEnemies > lastEnemyNumber) {
+
+        while (enemies.length < wantedEnemies) {
+
+            createEnemy();
+
+        }
+
+        lastEnemyNumber = wantedEnemies;
+
+        document.getElementById("enemyCount").textContent =
+            enemies.length;
+    }
+}
+
+
+/* =========================
+   BOUCLE DU JEU
+========================= */
+
 function gameLoop() {
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
     movePlayer();
-    moveEnemy();
+
+
+    for (const enemy of enemies) {
+
+        moveEnemy(enemy);
+
+    }
+
 
     drawMaze();
+
     drawPlayer();
-    drawEnemy();
+
+
+    for (const enemy of enemies) {
+
+        drawEnemy(enemy);
+
+    }
+
 
     checkCollision();
+
+    updateTimer();
+
 
     requestAnimationFrame(gameLoop);
 }
 
+
 gameLoop();
+
 </script>
 
 </body>
