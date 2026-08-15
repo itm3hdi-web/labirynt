@@ -2,2357 +2,313 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>Labyrinthe Hardcore</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Labyrinthe</title>
 
 <style>
-*{box-sizing:border-box}
-
-body{
-    margin:0;
-    font-family:Arial,sans-serif;
-    color:white;
-    background:#080808;
-    text-align:center;
-    overflow-x:hidden;
-    touch-action:manipulation;
-}
-
-/* ================= ACCUEIL ================= */
-
-#home{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:20px;
-    background:
-        radial-gradient(circle at 20% 20%,#243b55 0,transparent 35%),
-        radial-gradient(circle at 80% 80%,#41295a 0,transparent 35%),
-        linear-gradient(135deg,#050505,#151515,#080808);
-}
-
-.homeBox{
-    width:min(500px,95vw);
-    padding:35px 25px;
-    border:2px solid #444;
-    border-radius:25px;
-    background:rgba(20,20,20,.92);
-    box-shadow:0 0 40px rgba(0,0,0,.8);
-}
-
-.homeBox h1{
-    font-size:42px;
-    margin:0 0 8px;
-}
-
-.homeBox p{
-    color:#bbb;
-    margin-bottom:25px;
-}
-
-input,select{
-    width:100%;
-    padding:14px;
-    margin:8px 0;
-    border:0;
-    border-radius:10px;
-    font-size:18px;
-    text-align:center;
-}
-
-.optionTitle{
-    margin-top:18px;
-    margin-bottom:5px;
-    font-weight:bold;
-}
-
-.options{
-    display:flex;
-    gap:8px;
-    justify-content:center;
-}
-
-.option{
-    flex:1;
-    padding:13px 5px;
-    background:#292929;
-    border:2px solid #444;
-    border-radius:10px;
-    cursor:pointer;
-}
-
-.option.active{
-    border-color:#00ff88;
-    background:#123d2a;
-}
-
-#startButton{
-    width:100%;
-    margin-top:25px;
-    padding:16px;
-    border:0;
-    border-radius:12px;
-    background:#00c853;
-    color:white;
-    font-size:22px;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-/* ================= JEU ================= */
-
-#gameScreen{
-    display:none;
-    min-height:100vh;
-    background:#111;
-}
-
-#top{
-    min-height:70px;
-    background:#181818;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:20px;
-    flex-wrap:wrap;
-    padding:10px;
-}
-
-.infoBox{
-    min-width:130px;
-    padding:8px 12px;
-    background:#242424;
-    border-radius:10px;
-}
-
-#game{
-    display:block;
-    margin:10px auto;
-    border:4px solid white;
-    background:#222;
-    max-width:96vw;
-    height:auto;
-}
-
-#mobileControls{
-    display:none;
-    width:220px;
-    margin:10px auto 25px;
-    touch-action:none;
-}
-
-.mobileRow{
-    display:flex;
-    justify-content:center;
-    gap:8px;
-}
-
-.mobileButton{
-    width:65px;
-    height:65px;
-    margin:3px;
-    border:2px solid white;
-    border-radius:12px;
-    background:#333;
-    color:white;
-    font-size:28px;
-    touch-action:none;
-    user-select:none;
-}
-
-.mobileButton:active{
-    background:#666;
-    transform:scale(.95);
-}
-
-#message{
-    position:fixed;
-    inset:0;
-    display:none;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    background:rgba(0,0,0,.93);
-    z-index:20;
-}
-
-#message h1{
-    font-size:55px;
-}
-
-#message p{
-    font-size:22px;
-    padding:0 20px;
-}
-
-.gameButton{
-    padding:14px 28px;
-    font-size:19px;
-    border:0;
-    border-radius:10px;
-    cursor:pointer;
-}
-
-#speedBox{
-    display:flex;
-    align-items:center;
-    gap:5px;
-}
-
-#speedSelect{
-    width:auto;
-    margin:0;
-    padding:7px;
-    font-size:15px;
-}
-
-#coins{
-    color:#ffd700;
-}
-
-/* ================= MOBILE ================= */
-
-@media(max-width:700px){
-
-    .homeBox h1{
-        font-size:32px;
+    * {
+        box-sizing: border-box;
     }
 
-    #top{
-        font-size:13px;
-        gap:6px;
+    body {
+        margin: 0;
+        background: #111;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden;
     }
 
-    .infoBox{
-        min-width:auto;
-        padding:6px 8px;
+    canvas {
+        background: #222;
+        border: 3px solid white;
     }
-
-    #mobileControls{
-        display:block;
-    }
-
-    #game{
-        width:96vw;
-        border-width:3px;
-    }
-
-    .options{
-        flex-direction:column;
-    }
-
-    .option{
-        padding:11px;
-    }
-}
 </style>
 </head>
 
 <body>
 
-<!-- =====================================================
-     ACCUEIL
-===================================================== -->
-
-<section id="home">
-
-<div class="homeBox">
-
-    <h1>🧩 Labyrinthe Hardcore</h1>
-
-    <p id="welcome">
-        Bienvenue dans le jeu !
-    </p>
-
-    <input
-        id="pseudo"
-        type="text"
-        maxlength="20"
-        autocomplete="off"
-        placeholder="Ton pseudo">
-
-    <div class="optionTitle">🌍 Langue</div>
-
-    <div class="options">
-
-        <div class="option active" data-lang="fr">
-            🇫🇷 Français
-        </div>
-
-        <div class="option" data-lang="en">
-            🇬🇧 English
-        </div>
-
-        <div class="option" data-lang="ar">
-            🇸🇦 العربية
-        </div>
-
-    </div>
-
-    <div class="optionTitle">🎮 Mode</div>
-
-    <div class="options">
-
-        <div class="option active" data-mode="solo">
-            Solo
-        </div>
-
-        <div class="option" data-mode="duo">
-            Duo
-        </div>
-
-    </div>
-
-    <div class="optionTitle">🔥 Difficulté</div>
-
-    <div class="options">
-
-        <div class="option active" data-difficulty="easy">
-            🟢 Facile<br>
-            <small>10 niveaux</small>
-        </div>
-
-        <div class="option" data-difficulty="medium">
-            🟡 Moyen<br>
-            <small>15 niveaux</small>
-        </div>
-
-        <div class="option" data-difficulty="hard">
-            🔴 Difficile<br>
-            <small>23 niveaux</small>
-        </div>
-
-    </div>
-
-    <button id="startButton">
-        Jouer
-    </button>
-
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     JEU
-===================================================== -->
-
-<section id="gameScreen">
-
-<div id="top">
-
-    <div class="infoBox">
-        Niveau :
-        <b><span id="level">1</span>/<span id="maxLevel">23</span></b>
-    </div>
-
-    <div class="infoBox">
-        Score :
-        <b><span id="score">0</span></b>
-    </div>
-
-    <div class="infoBox">
-        👤 <span id="playerName">Joueur</span>
-    </div>
-
-    <div class="infoBox">
-        🪙 <span id="coins">0</span>
-    </div>
-
-    <div class="infoBox" id="speedBox">
-        ⚡
-        <select id="speedSelect">
-            <option value="0.1">0.1</option>
-            <option value="0.3">0.3</option>
-            <option value="0.6" selected>0.6</option>
-            <option value="0.9">0.9</option>
-            <option value="1.2">1.2</option>
-        </select>
-    </div>
-
-    <div class="infoBox">
-        🤖 <span id="robotSpeed">0</span>
-    </div>
-
-</div>
-
-<canvas id="game" width="900" height="600"></canvas>
-
-
-<!-- COMMANDES TELEPHONE -->
-
-<div id="mobileControls">
-
-    <div class="mobileRow">
-
-        <button class="mobileButton" data-key="arrowup">
-            ⬆️
-        </button>
-
-    </div>
-
-    <div class="mobileRow">
-
-        <button class="mobileButton" data-key="arrowleft">
-            ⬅️
-        </button>
-
-        <button class="mobileButton" data-key="arrowdown">
-            ⬇️
-        </button>
-
-        <button class="mobileButton" data-key="arrowright">
-            ➡️
-        </button>
-
-    </div>
-
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     MESSAGE
-===================================================== -->
-
-<div id="message">
-
-    <h1 id="messageTitle"></h1>
-
-    <p id="messageText"></p>
-
-    <button
-        id="continueButton"
-        class="gameButton"
-        onclick="continueGame()">
-        Continuer
-    </button>
-
-</div>
-
+<canvas id="game"></canvas>
 
 <script>
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
 
-/* =====================================================
-   CONFIGURATION
-===================================================== */
+const tile = 40;
 
-const canvas =
-    document.getElementById("game");
-
-const ctx =
-    canvas.getContext("2d");
-
-const home =
-    document.getElementById("home");
-
-const gameScreen =
-    document.getElementById("gameScreen");
-
-const message =
-    document.getElementById("message");
-
-const messageTitle =
-    document.getElementById("messageTitle");
-
-const messageText =
-    document.getElementById("messageText");
-
-const continueButton =
-    document.getElementById("continueButton");
-
-const levelText =
-    document.getElementById("level");
-
-const maxLevelText =
-    document.getElementById("maxLevel");
-
-const scoreText =
-    document.getElementById("score");
-
-const coinsText =
-    document.getElementById("coins");
-
-const playerNameText =
-    document.getElementById("playerName");
-
-const robotSpeedText =
-    document.getElementById("robotSpeed");
-
-const speedSelect =
-    document.getElementById("speedSelect");
-
-
-/* =====================================================
-   VARIABLES
-===================================================== */
-
-let level = 1;
-
-let maxLevel = 23;
-
-let score = 0;
-
-let coins = 0;
-
-let gameRunning = false;
-
-let difficulty = "hard";
-
-let mode = "solo";
-
-let language = "fr";
-
-let pseudo = "Joueur";
-
-let walls = [];
-
-let robots = [];
-
-let goldCoins = [];
-
-let silverCoins = [];
-
-let keys = {};
-
-let turn = 1;
-
-
-/* =====================================================
-   VITESSES
-===================================================== */
-
-const speedValues = [
-    0.1,
-    0.3,
-    0.6,
-    0.9,
-    1.2
+const maze = [
+    "####################",
+    "#P       #         #",
+    "# ###### # ####### #",
+    "#      # #       # #",
+    "###### # ####### # #",
+    "#      #       #   #",
+    "# ########### #####",
+    "#           #     #",
+    "# ######### # ### #",
+    "#       #   # #   #",
+    "# ##### # ### # ###",
+    "#     # #     #   #",
+    "##### # ####### # #",
+    "#     #         # #",
+    "# ############### #",
+    "#                 #",
+    "####################"
 ];
 
+canvas.width = maze[0].length * tile;
+canvas.height = maze.length * tile;
 
-/*
-   0.6 correspond à la vitesse normale de départ.
-*/
-
-const player = {
-
-    x:0,
-
-    y:0,
-
-    size:12,
-
-    speed:6
-
+let player = {
+    x: 0,
+    y: 0,
+    speed: 3
 };
 
-
-const exit = {
-
-    x:0,
-
-    y:0,
-
-    size:18
-
+let enemy = {
+    x: 0,
+    y: 0,
+    speed: 1.4
 };
 
+for (let y = 0; y < maze.length; y++) {
+    for (let x = 0; x < maze[y].length; x++) {
 
-/* =====================================================
-   TEXTES
-===================================================== */
-
-const texts = {
-
-    fr:{
-        welcome:"Bienvenue dans le jeu !",
-        placeholder:"Ton pseudo",
-        play:"Jouer",
-        next:"Continuer",
-        win:"🏆 VICTOIRE !",
-        lose:"💥 PERDU !",
-        level:"Niveau",
-        score:"Score"
-    },
-
-    en:{
-        welcome:"Welcome to the game!",
-        placeholder:"Your nickname",
-        play:"Play",
-        next:"Continue",
-        win:"🏆 VICTORY!",
-        lose:"💥 YOU LOST!",
-        level:"Level",
-        score:"Score"
-    },
-
-    ar:{
-        welcome:"أهلاً بك في اللعبة!",
-        placeholder:"اسمك المستعار",
-        play:"لعب",
-        next:"متابعة",
-        win:"🏆 فوز!",
-        lose:"💥 خسرت!",
-        level:"المستوى",
-        score:"النقاط"
+        if (maze[y][x] === "P") {
+            player.x = x * tile + tile / 2;
+            player.y = y * tile + tile / 2;
+        }
     }
+}
 
-};
+// Position de départ de la tête
+enemy.x = 18 * tile + tile / 2;
+enemy.y = 15 * tile + tile / 2;
 
+const keys = {};
 
-/* =====================================================
-   LANGUE
-===================================================== */
-
-document
-.querySelectorAll("[data-lang]")
-.forEach(button => {
-
-    button.addEventListener("click",()=>{
-
-        document
-        .querySelectorAll("[data-lang]")
-        .forEach(b=>b.classList.remove("active"));
-
-        button.classList.add("active");
-
-        language =
-            button.dataset.lang;
-
-        updateLanguage();
-
-    });
-
+document.addEventListener("keydown", e => {
+    keys[e.key.toLowerCase()] = true;
 });
 
-
-function updateLanguage(){
-
-    const t =
-        texts[language];
-
-    document
-    .getElementById("welcome")
-    .textContent =
-        t.welcome;
-
-    document
-    .getElementById("pseudo")
-    .placeholder =
-        t.placeholder;
-
-    document
-    .getElementById("startButton")
-    .textContent =
-        t.play;
-
-    document.documentElement.lang =
-        language;
-
-}
-
-
-/* =====================================================
-   MODE
-===================================================== */
-
-document
-.querySelectorAll("[data-mode]")
-.forEach(button => {
-
-    button.addEventListener("click",()=>{
-
-        document
-        .querySelectorAll("[data-mode]")
-        .forEach(b=>b.classList.remove("active"));
-
-        button.classList.add("active");
-
-        mode =
-            button.dataset.mode;
-
-    });
-
+document.addEventListener("keyup", e => {
+    keys[e.key.toLowerCase()] = false;
 });
 
+function isWall(x, y) {
 
-/* =====================================================
-   DIFFICULTÉ
-===================================================== */
+    const col = Math.floor(x / tile);
+    const row = Math.floor(y / tile);
 
-document
-.querySelectorAll("[data-difficulty]")
-.forEach(button => {
-
-    button.addEventListener("click",()=>{
-
-        document
-        .querySelectorAll("[data-difficulty]")
-        .forEach(b=>b.classList.remove("active"));
-
-        button.classList.add("active");
-
-        difficulty =
-            button.dataset.difficulty;
-
-    });
-
-});
-
-
-/* =====================================================
-   LANCER LE JEU
-===================================================== */
-
-document
-.getElementById("startButton")
-.addEventListener("click",startGame);
-
-
-function startGame(){
-
-    pseudo =
-        document
-        .getElementById("pseudo")
-        .value
-        .trim();
-
-    if(!pseudo){
-
-        pseudo = "Joueur";
-
+    if (
+        row < 0 ||
+        row >= maze.length ||
+        col < 0 ||
+        col >= maze[row].length
+    ) {
+        return true;
     }
 
-
-    if(difficulty === "easy"){
-
-        maxLevel = 10;
-
-    }
-
-    else if(difficulty === "medium"){
-
-        maxLevel = 15;
-
-    }
-
-    else{
-
-        maxLevel = 23;
-
-    }
-
-
-    level = 1;
-
-    score = 0;
-
-    coins = 0;
-
-    turn = 1;
-
-    gameRunning = true;
-
-
-    home.style.display =
-        "none";
-
-    gameScreen.style.display =
-        "block";
-
-
-    playerNameText.textContent =
-        pseudo;
-
-    maxLevelText.textContent =
-        maxLevel;
-
-
-    loadLevel();
-
+    return maze[row][col] === "#";
 }
 
+function canMove(x, y) {
 
-/* =====================================================
-   GÉNÉRATEUR
-===================================================== */
+    const size = 12;
 
-function randomGenerator(seed){
-
-    let value = seed;
-
-    return function(){
-
-        value =
-            (value * 9301 + 49297)
-            % 233280;
-
-        return value / 233280;
-
-    };
-
+    return (
+        !isWall(x - size, y - size) &&
+        !isWall(x + size, y - size) &&
+        !isWall(x - size, y + size) &&
+        !isWall(x + size, y + size)
+    );
 }
 
+function movePlayer() {
 
-/* =====================================================
-   CRÉER LE LABYRINTHE
-===================================================== */
+    let dx = 0;
+    let dy = 0;
 
-function generateMaze(levelNumber){
+    if (keys["arrowup"] || keys["z"] || keys["w"]) dy -= player.speed;
+    if (keys["arrowdown"] || keys["s"]) dy += player.speed;
+    if (keys["arrowleft"] || keys["q"] || keys["a"]) dx -= player.speed;
+    if (keys["arrowright"] || keys["d"]) dx += player.speed;
 
-    walls = [];
-
-    robots = [];
-
-    goldCoins = [];
-
-    silverCoins = [];
-
-
-    /*
-       Les labyrinthes deviennent progressivement
-       plus complexes.
-
-       Facile :
-       10 niveaux.
-
-       Moyen :
-       15 niveaux.
-
-       Difficile :
-       23 niveaux.
-    */
-
-    let cols;
-    let rows;
-
-
-    if(difficulty === "easy"){
-
-        cols =
-            12 +
-            Math.floor(levelNumber * 0.5);
-
-        rows =
-            8 +
-            Math.floor(levelNumber * 0.3);
-
+    if (canMove(player.x + dx, player.y)) {
+        player.x += dx;
     }
 
-    else if(difficulty === "medium"){
+    if (canMove(player.x, player.y + dy)) {
+        player.y += dy;
+    }
+}
 
-        cols =
-            15 +
-            Math.floor(levelNumber * 0.7);
+function moveEnemy() {
 
-        rows =
-            9 +
-            Math.floor(levelNumber * 0.45);
+    let dx = player.x - enemy.x;
+    let dy = player.y - enemy.y;
 
+    const distance = Math.sqrt(dx * dx + dy * dy);
+
+    if (distance > 1) {
+        dx /= distance;
+        dy /= distance;
     }
 
-    else{
+    let nextX = enemy.x + dx * enemy.speed;
+    let nextY = enemy.y + dy * enemy.speed;
 
-        cols =
-            16 +
-            Math.floor(levelNumber * 0.55);
-
-        rows =
-            10 +
-            Math.floor(levelNumber * 0.35);
-
+    if (canMove(nextX, enemy.y)) {
+        enemy.x = nextX;
     }
 
-
-    cols =
-        Math.min(cols,28);
-
-    rows =
-        Math.min(rows,20);
-
-
-    const cellW =
-        canvas.width / cols;
-
-    const cellH =
-        canvas.height / rows;
-
-
-    const random =
-        randomGenerator(
-            levelNumber *
-            98431 +
-            difficulty.length * 777
-        );
-
-
-    let cells = [];
-
-
-    for(let y=0;y<rows;y++){
-
-        cells[y]=[];
-
-        for(let x=0;x<cols;x++){
-
-            cells[y][x]={
-
-                visited:false,
-
-                walls:{
-                    top:true,
-                    right:true,
-                    bottom:true,
-                    left:true
-                }
-
-            };
-
-        }
-
+    if (canMove(enemy.x, nextY)) {
+        enemy.y = nextY;
     }
+}
 
+function drawMaze() {
 
-    /*
-       DFS :
-       génération d'un vrai labyrinthe.
-    */
+    for (let y = 0; y < maze.length; y++) {
 
-    let stack = [];
+        for (let x = 0; x < maze[y].length; x++) {
 
-    cells[0][0].visited = true;
+            if (maze[y][x] === "#") {
 
-    stack.push({
-        x:0,
-        y:0
-    });
+                ctx.fillStyle = "#555";
+                ctx.fillRect(
+                    x * tile,
+                    y * tile,
+                    tile,
+                    tile
+                );
 
+            } else {
 
-    while(stack.length){
-
-        const current =
-            stack[stack.length-1];
-
-        let neighbours=[];
-
-
-        if(
-            current.y > 0 &&
-            !cells[
-                current.y-1
-            ][
-                current.x
-            ].visited
-        ){
-
-            neighbours.push({
-                x:current.x,
-                y:current.y-1,
-                direction:"top"
-            });
-
-        }
-
-
-        if(
-            current.x < cols-1 &&
-            !cells[
-                current.y
-            ][
-                current.x+1
-            ].visited
-        ){
-
-            neighbours.push({
-                x:current.x+1,
-                y:current.y,
-                direction:"right"
-            });
-
-        }
-
-
-        if(
-            current.y < rows-1 &&
-            !cells[
-                current.y+1
-            ][
-                current.x
-            ].visited
-        ){
-
-            neighbours.push({
-                x:current.x,
-                y:current.y+1,
-                direction:"bottom"
-            });
-
-        }
-
-
-        if(
-            current.x > 0 &&
-            !cells[
-                current.y
-            ][
-                current.x-1
-            ].visited
-        ){
-
-            neighbours.push({
-                x:current.x-1,
-                y:current.y,
-                direction:"left"
-            });
-
-        }
-
-
-        if(neighbours.length){
-
-            const next =
-                neighbours[
-                    Math.floor(
-                        random() *
-                        neighbours.length
-                    )
-                ];
-
-
-            const currentCell =
-                cells[
-                    current.y
-                ][
-                    current.x
-                ];
-
-            const nextCell =
-                cells[
-                    next.y
-                ][
-                    next.x
-                ];
-
-
-            if(next.direction==="top"){
-
-                currentCell.walls.top=false;
-                nextCell.walls.bottom=false;
-
+                ctx.fillStyle = "#222";
+                ctx.fillRect(
+                    x * tile,
+                    y * tile,
+                    tile,
+                    tile
+                );
             }
-
-            if(next.direction==="right"){
-
-                currentCell.walls.right=false;
-                nextCell.walls.left=false;
-
-            }
-
-            if(next.direction==="bottom"){
-
-                currentCell.walls.bottom=false;
-                nextCell.walls.top=false;
-
-            }
-
-            if(next.direction==="left"){
-
-                currentCell.walls.left=false;
-                nextCell.walls.right=false;
-
-            }
-
-
-            nextCell.visited=true;
-
-            stack.push({
-                x:next.x,
-                y:next.y
-            });
-
         }
-
-        else{
-
-            stack.pop();
-
-        }
-
     }
-
-
-    /*
-       Murs.
-    */
-
-    const thickness =
-        Math.max(
-            3,
-            7 - levelNumber*0.08
-        );
-
-
-    for(let y=0;y<rows;y++){
-
-        for(let x=0;x<cols;x++){
-
-            const cell =
-                cells[y][x];
-
-            const px =
-                x*cellW;
-
-            const py =
-                y*cellH;
-
-
-            if(cell.walls.top){
-
-                walls.push({
-                    x:px,
-                    y:py,
-                    w:cellW+thickness,
-                    h:thickness
-                });
-
-            }
-
-
-            if(cell.walls.left){
-
-                walls.push({
-                    x:px,
-                    y:py,
-                    w:thickness,
-                    h:cellH+thickness
-                });
-
-            }
-
-
-            if(
-                x===cols-1 &&
-                cell.walls.right
-            ){
-
-                walls.push({
-                    x:px+cellW,
-                    y:py,
-                    w:thickness,
-                    h:cellH
-                });
-
-            }
-
-
-            if(
-                y===rows-1 &&
-                cell.walls.bottom
-            ){
-
-                walls.push({
-                    x:px,
-                    y:py+cellH,
-                    w:cellW,
-                    h:thickness
-                });
-
-            }
-
-        }
-
-    }
-
-
-    /*
-       Départ.
-    */
-
-    player.x =
-        cellW*0.25;
-
-    player.y =
-        cellH*0.25;
-
-
-    /*
-       Sortie.
-    */
-
-    exit.x =
-        (cols-1)*cellW +
-        cellW*0.35;
-
-    exit.y =
-        (rows-1)*cellH +
-        cellH*0.35;
-
-    exit.size =
-        Math.max(
-            12,
-            Math.min(cellW,cellH)*0.35
-        );
-
-
-    /* =================================================
-       ROBOTS
-    ================================================= */
-
-    /*
-       IMPORTANT :
-       SOLO = aucun robot.
-    */
-
-    if(mode === "solo"){
-
-        robots = [];
-
-    }
-
-    else{
-
-        const robotCount =
-            Math.min(
-                Math.floor(
-                    levelNumber/2
-                ),
-                10
-            );
-
-
-        const robotSpeed =
-            0.6 +
-            levelNumber*0.10;
-
-
-        for(
-            let i=0;
-            i<robotCount;
-            i++
-        ){
-
-            robots.push({
-
-                x:
-                    cellW *
-                    (
-                        2 +
-                        Math.floor(
-                            random() *
-                            Math.max(
-                                1,
-                                cols-4
-                            )
-                        )
-                    ),
-
-                y:
-                    cellH *
-                    (
-                        1 +
-                        Math.floor(
-                            random() *
-                            Math.max(
-                                1,
-                                rows-3
-                            )
-                        )
-                    ),
-
-                size:
-                    Math.max(
-                        10,
-                        Math.min(
-                            cellW,
-                            cellH
-                        )*.30
-                    ),
-
-                speed:robotSpeed,
-
-                direction:
-                    random()>.5
-                    ?1
-                    :-1,
-
-                horizontal:
-                    random()>.5
-
-            });
-
-        }
-
-    }
-
-
-    /*
-       Pièces.
-    */
-
-    const coinCount =
-        Math.min(
-            2 +
-            Math.floor(levelNumber/2),
-            8
-        );
-
-
-    for(let i=0;i<coinCount;i++){
-
-        let cx =
-            cellW *
-            (
-                1 +
-                Math.floor(
-                    random() *
-                    Math.max(
-                        1,
-                        cols-2
-                    )
-                )
-            );
-
-        let cy =
-            cellH *
-            (
-                1 +
-                Math.floor(
-                    random() *
-                    Math.max(
-                        1,
-                        rows-2
-                    )
-                )
-            );
-
-
-        /*
-           Une partie or,
-           une partie argent.
-        */
-
-        if(random()>.45){
-
-            goldCoins.push({
-                x:cx,
-                y:cy,
-                size:9,
-                value:2,
-                collected:false
-            });
-
-        }
-
-        else{
-
-            silverCoins.push({
-                x:cx,
-                y:cy,
-                size:8,
-                value:.5,
-                collected:false
-            });
-
-        }
-
-    }
-
 }
 
+function drawPlayer() {
 
-/* =====================================================
-   COLLISION
-===================================================== */
+    ctx.save();
 
-function collides(a,b){
+    ctx.translate(player.x, player.y);
 
-    return(
-        a.x < b.x+b.w &&
-        a.x+a.size > b.x &&
-        a.y < b.y+b.h &&
-        a.y+a.size > b.y
-    );
+    // Corps
+    ctx.fillStyle = "#3498db";
+    ctx.beginPath();
+    ctx.arc(0, 8, 9, 0, Math.PI * 2);
+    ctx.fill();
 
+    // Tête
+    ctx.fillStyle = "#f1c27d";
+    ctx.beginPath();
+    ctx.arc(0, -7, 8, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Jambes
+    ctx.strokeStyle = "#3498db";
+    ctx.lineWidth = 4;
+
+    ctx.beginPath();
+    ctx.moveTo(-4, 15);
+    ctx.lineTo(-8, 23);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(4, 15);
+    ctx.lineTo(8, 23);
+    ctx.stroke();
+
+    ctx.restore();
 }
 
+function drawEnemy() {
 
-/* =====================================================
-   DÉPLACEMENT
-===================================================== */
+    ctx.save();
 
-function movePlayer(){
+    ctx.translate(enemy.x, enemy.y);
 
-    if(!gameRunning)
-        return;
+    // Tête
+    ctx.fillStyle = "#e74c3c";
 
+    ctx.beginPath();
+    ctx.arc(0, 0, 15, 0, Math.PI * 2);
+    ctx.fill();
 
-    let dx=0;
-    let dy=0;
+    // Yeux
+    ctx.fillStyle = "white";
 
+    ctx.beginPath();
+    ctx.arc(-6, -4, 4, 0, Math.PI * 2);
+    ctx.fill();
 
-    if(
-        keys.arrowright ||
-        keys.d
-    ){
+    ctx.beginPath();
+    ctx.arc(6, -4, 4, 0, Math.PI * 2);
+    ctx.fill();
 
-        dx += player.speed;
+    // Pupilles
+    ctx.fillStyle = "black";
 
-    }
+    ctx.beginPath();
+    ctx.arc(-6, -4, 2, 0, Math.PI * 2);
+    ctx.fill();
 
+    ctx.beginPath();
+    ctx.arc(6, -4, 2, 0, Math.PI * 2);
+    ctx.fill();
 
-    if(
-        keys.arrowleft ||
-        keys.q ||
-        keys.a
-    ){
+    // Bouche
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = 3;
 
-        dx -= player.speed;
+    ctx.beginPath();
+    ctx.arc(0, 3, 7, 0, Math.PI);
+    ctx.stroke();
 
-    }
-
-
-    if(
-        keys.arrowdown ||
-        keys.s
-    ){
-
-        dy += player.speed;
-
-    }
-
-
-    if(
-        keys.arrowup ||
-        keys.z ||
-        keys.w
-    ){
-
-        dy -= player.speed;
-
-    }
-
-
-    /*
-       La vitesse sélectionnée modifie
-       directement la vitesse du joueur.
-    */
-
-    const multiplier =
-        Number(
-            speedSelect.value
-        );
-
-
-    dx *= multiplier;
-
-    dy *= multiplier;
-
-
-    /*
-       Déplacement horizontal.
-       Cela évite qu'un mur fasse perdre
-       tout le mouvement.
-    */
-
-    const oldX =
-        player.x;
-
-    player.x += dx;
-
-
-    for(const wall of walls){
-
-        if(
-            collides(
-                player,
-                wall
-            )
-        ){
-
-            player.x =
-                oldX;
-
-            lose(
-                "💥 TU AS TOUCHÉ UN MUR !"
-            );
-
-            return;
-
-        }
-
-    }
-
-
-    /*
-       Déplacement vertical.
-    */
-
-    const oldY =
-        player.y;
-
-    player.y += dy;
-
-
-    for(const wall of walls){
-
-        if(
-            collides(
-                player,
-                wall
-            )
-        ){
-
-            player.y =
-                oldY;
-
-            lose(
-                "💥 TU AS TOUCHÉ UN MUR !"
-            );
-
-            return;
-
-        }
-
-    }
-
+    ctx.restore();
 }
 
+function checkCollision() {
 
-/* =====================================================
-   PIÈCES
-===================================================== */
+    const dx = player.x - enemy.x;
+    const dy = player.y - enemy.y;
 
-function updateCoins(){
+    const distance = Math.sqrt(dx * dx + dy * dy);
 
-    const playerBox={
-        x:player.x,
-        y:player.y,
-        size:player.size
-    };
-
-
-    for(const coin of goldCoins){
-
-        if(coin.collected)
-            continue;
-
-
-        const box={
-            x:coin.x,
-            y:coin.y,
-            w:coin.size,
-            h:coin.size
-        };
-
-
-        if(collides(playerBox,box)){
-
-            coin.collected=true;
-
-            coins += 2;
-
-            score += 2;
-
-        }
-
+    if (distance < 25) {
+        alert("La tête t'a attrapé !");
+        location.reload();
     }
-
-
-    for(const coin of silverCoins){
-
-        if(coin.collected)
-            continue;
-
-
-        const box={
-            x:coin.x,
-            y:coin.y,
-            w:coin.size,
-            h:coin.size
-        };
-
-
-        if(collides(playerBox,box)){
-
-            coin.collected=true;
-
-            coins += .5;
-
-            score += .5;
-
-        }
-
-    }
-
 }
 
+function gameLoop() {
 
-/* =====================================================
-   ROBOTS
-===================================================== */
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-function updateRobots(){
+    movePlayer();
+    moveEnemy();
 
-    if(mode==="solo")
-        return;
+    drawMaze();
+    drawPlayer();
+    drawEnemy();
 
+    checkCollision();
 
-    for(const robot of robots){
-
-        if(robot.horizontal){
-
-            robot.x +=
-                robot.direction *
-                robot.speed;
-
-            if(
-                robot.x<20 ||
-                robot.x>
-                canvas.width-35
-            ){
-
-                robot.direction *= -1;
-
-            }
-
-        }
-
-        else{
-
-            robot.y +=
-                robot.direction *
-                robot.speed;
-
-            if(
-                robot.y<20 ||
-                robot.y>
-                canvas.height-35
-            ){
-
-                robot.direction *= -1;
-
-            }
-
-        }
-
-
-        const r={
-            x:robot.x,
-            y:robot.y,
-            w:robot.size,
-            h:robot.size
-        };
-
-
-        if(
-            collides(
-                player,
-                r
-            )
-        ){
-
-            lose(
-                "🤖 UN ROBOT T'A TOUCHÉ !"
-            );
-
-            return;
-
-        }
-
-    }
-
+    requestAnimationFrame(gameLoop);
 }
-
-
-/* =====================================================
-   SORTIE
-===================================================== */
-
-function checkExit(){
-
-    const e={
-        x:exit.x,
-        y:exit.y,
-        w:exit.size,
-        h:exit.size
-    };
-
-
-    if(
-        collides(
-            player,
-            e
-        )
-    ){
-
-        levelComplete();
-
-    }
-
-}
-
-
-/* =====================================================
-   FIN DU NIVEAU
-===================================================== */
-
-function levelComplete(){
-
-    if(!gameRunning)
-        return;
-
-
-    gameRunning=false;
-
-
-    /*
-       Bonus de niveau.
-    */
-
-    score +=
-        Math.max(
-            1,
-            5 -
-            Math.floor(
-                (level-1)/5
-            )
-        );
-
-
-    if(level >= maxLevel){
-
-        winGame();
-
-        return;
-
-    }
-
-
-    /*
-       On affiche le message.
-       Le niveau n'est PAS augmenté ici.
-       Cela évite le bug du niveau 2.
-    */
-
-    messageTitle.textContent =
-        "🎉 Niveau terminé !";
-
-    messageText.textContent =
-        "Score : " +
-        score;
-
-    continueButton.textContent =
-        texts[language].next;
-
-    message.style.display =
-        "flex";
-
-
-    updateInterface();
-
-}
-
-
-/* =====================================================
-   CONTINUER
-===================================================== */
-
-function continueGame(){
-
-    message.style.display =
-        "none";
-
-
-    /*
-       C'est ici que le niveau augmente.
-    */
-
-    if(level < maxLevel){
-
-        level++;
-
-        gameRunning=true;
-
-        loadLevel();
-
-    }
-
-    else{
-
-        winGame();
-
-    }
-
-}
-
-
-/* =====================================================
-   PERDU
-===================================================== */
-
-function lose(reason){
-
-    if(!gameRunning)
-        return;
-
-
-    gameRunning=false;
-
-
-    const penalty =
-        Math.min(
-            6,
-            2 +
-            Math.floor(level/5)
-        );
-
-
-    score -= penalty;
-
-
-    if(score<0)
-        score=0;
-
-
-    messageTitle.textContent =
-        texts[language].lose;
-
-
-    messageText.textContent =
-        reason +
-        "  -" +
-        penalty +
-        " points";
-
-
-    continueButton.textContent =
-        "Recommencer";
-
-
-    message.style.display =
-        "flex";
-
-
-    continueButton.onclick =
-        restartLevel;
-
-
-    updateInterface();
-
-}
-
-
-/* =====================================================
-   RECOMMENCER
-===================================================== */
-
-function restartLevel(){
-
-    message.style.display =
-        "none";
-
-
-    continueButton.onclick =
-        continueGame;
-
-
-    gameRunning=true;
-
-
-    loadLevel();
-
-}
-
-
-/* =====================================================
-   VICTOIRE
-===================================================== */
-
-function winGame(){
-
-    gameRunning=false;
-
-
-    messageTitle.textContent =
-        texts[language].win;
-
-
-    messageText.textContent =
-        "Bravo " +
-        pseudo +
-        " ! Score : " +
-        score;
-
-
-    continueButton.textContent =
-        "Retour à l'accueil";
-
-
-    continueButton.onclick =
-        backHome;
-
-
-    message.style.display =
-        "flex";
-
-}
-
-
-/* =====================================================
-   RETOUR ACCUEIL
-===================================================== */
-
-function backHome(){
-
-    message.style.display =
-        "none";
-
-    gameScreen.style.display =
-        "none";
-
-    home.style.display =
-        "flex";
-
-
-    continueButton.onclick =
-        continueGame;
-
-}
-
-
-/* =====================================================
-   INTERFACE
-===================================================== */
-
-function updateInterface(){
-
-    levelText.textContent =
-        level;
-
-    maxLevelText.textContent =
-        maxLevel;
-
-    scoreText.textContent =
-        score;
-
-    coinsText.textContent =
-        coins;
-
-    playerNameText.textContent =
-        pseudo;
-
-
-    if(mode==="solo"){
-
-        robotSpeedText.textContent =
-            "—";
-
-    }
-
-    else{
-
-        robotSpeedText.textContent =
-            (
-                .6 +
-                level*.1
-            ).toFixed(1);
-
-    }
-
-}
-
-
-/* =====================================================
-   DESSIN
-===================================================== */
-
-function draw(){
-
-    ctx.clearRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
-
-
-    /*
-       Fond.
-    */
-
-    ctx.fillStyle =
-        "#222";
-
-    ctx.fillRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
-
-
-    /*
-       Murs.
-    */
-
-    ctx.fillStyle =
-        "#eee";
-
-
-    for(const wall of walls){
-
-        ctx.fillRect(
-            wall.x,
-            wall.y,
-            wall.w,
-            wall.h
-        );
-
-    }
-
-
-    /*
-       Sortie.
-    */
-
-    ctx.fillStyle =
-        "#00ff66";
-
-    ctx.fillRect(
-        exit.x,
-        exit.y,
-        exit.size,
-        exit.size
-    );
-
-
-    /*
-       Pièces or.
-    */
-
-    for(const coin of goldCoins){
-
-        if(coin.collected)
-            continue;
-
-
-        ctx.beginPath();
-
-        ctx.arc(
-            coin.x + coin.size/2,
-            coin.y + coin.size/2,
-            coin.size/2,
-            0,
-            Math.PI*2
-        );
-
-        ctx.fillStyle =
-            "#ffd700";
-
-        ctx.fill();
-
-    }
-
-
-    /*
-       Pièces argent.
-    */
-
-    for(const coin of silverCoins){
-
-        if(coin.collected)
-            continue;
-
-
-        ctx.beginPath();
-
-        ctx.arc(
-            coin.x + coin.size/2,
-            coin.y + coin.size/2,
-            coin.size/2,
-            0,
-            Math.PI*2
-        );
-
-        ctx.fillStyle =
-            "#c0c0c0";
-
-        ctx.fill();
-
-    }
-
-
-    /*
-       Robots.
-    */
-
-    for(const robot of robots){
-
-        ctx.fillStyle =
-            "#ff3030";
-
-        ctx.fillRect(
-            robot.x,
-            robot.y,
-            robot.size,
-            robot.size
-        );
-
-
-        ctx.fillStyle =
-            "white";
-
-
-        const eye =
-            Math.max(
-                2,
-                robot.size*.18
-            );
-
-
-        ctx.fillRect(
-            robot.x+
-            robot.size*.2,
-            robot.y+
-            robot.size*.2,
-            eye,
-            eye
-        );
-
-
-        ctx.fillRect(
-            robot.x+
-            robot.size*.62,
-            robot.y+
-            robot.size*.2,
-            eye,
-            eye
-        );
-
-    }
-
-
-    /*
-       Joueur.
-    */
-
-    ctx.fillStyle =
-        "#3498ff";
-
-    ctx.fillRect(
-        player.x,
-        player.y,
-        player.size,
-        player.size
-    );
-
-}
-
-
-/* =====================================================
-   CLAVIER
-===================================================== */
-
-document.addEventListener(
-    "keydown",
-    e=>{
-
-        const key =
-            e.key.toLowerCase();
-
-        keys[key]=true;
-
-
-        if(
-            [
-                "arrowup",
-                "arrowdown",
-                "arrowleft",
-                "arrowright",
-                " "
-            ].includes(key)
-        ){
-
-            e.preventDefault();
-
-        }
-
-    }
-);
-
-
-document.addEventListener(
-    "keyup",
-    e=>{
-
-        keys[
-            e.key.toLowerCase()
-        ]=false;
-
-    }
-);
-
-
-/* =====================================================
-   BOUTONS TÉLÉPHONE
-===================================================== */
-
-document
-.querySelectorAll(".mobileButton")
-.forEach(button=>{
-
-    const key =
-        button.dataset.key;
-
-
-    button.addEventListener(
-        "touchstart",
-        e=>{
-
-            e.preventDefault();
-
-            keys[key]=true;
-
-        },
-        {passive:false}
-    );
-
-
-    button.addEventListener(
-        "touchend",
-        e=>{
-
-            e.preventDefault();
-
-            keys[key]=false;
-
-        },
-        {passive:false}
-    );
-
-
-    button.addEventListener(
-        "touchcancel",
-        e=>{
-
-            e.preventDefault();
-
-            keys[key]=false;
-
-        },
-        {passive:false}
-    );
-
-
-    /*
-       Également compatible avec
-       certains navigateurs qui utilisent
-       pointer events.
-    */
-
-    button.addEventListener(
-        "pointerdown",
-        e=>{
-
-            e.preventDefault();
-
-            keys[key]=true;
-
-        }
-    );
-
-
-    button.addEventListener(
-        "pointerup",
-        e=>{
-
-            e.preventDefault();
-
-            keys[key]=false;
-
-        }
-    );
-
-
-    button.addEventListener(
-        "pointercancel",
-        e=>{
-
-            keys[key]=false;
-
-        }
-    );
-
-});
-
-
-/* =====================================================
-   VITESSE
-===================================================== */
-
-speedSelect.addEventListener(
-    "change",
-    ()=>{
-
-        updateInterface();
-
-    }
-);
-
-
-/* =====================================================
-   CHARGER UN NIVEAU
-===================================================== */
-
-function loadLevel(){
-
-    generateMaze(level);
-
-    updateInterface();
-
-}
-
-
-/* =====================================================
-   BOUCLE
-===================================================== */
-
-function gameLoop(){
-
-    if(gameRunning){
-
-        movePlayer();
-
-        updateRobots();
-
-        updateCoins();
-
-        checkExit();
-
-    }
-
-
-    draw();
-
-
-    requestAnimationFrame(
-        gameLoop
-    );
-
-}
-
-
-/* =====================================================
-   INITIALISATION
-===================================================== */
-
-updateLanguage();
 
 gameLoop();
-
 </script>
 
 </body>
