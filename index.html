@@ -20,202 +20,108 @@ body {
     overflow: hidden;
 }
 
-
 /* =====================================================
    ATELIER
 ===================================================== */
 
 #launcher {
-
     position: fixed;
-
     inset: 0;
-
     background: #050505;
-
     display: flex;
-
     justify-content: center;
-
     align-items: center;
-
     z-index: 100;
-
 }
-
 
 .launcherBox {
-
     width: 430px;
-
     max-width: 90%;
-
     padding: 32px;
-
     background: #111;
-
     border: 3px solid #174bff;
-
     border-radius: 16px;
-
-    box-shadow:
-        0 0 35px rgba(23,75,255,.45);
-
+    box-shadow: 0 0 35px rgba(23,75,255,.45);
 }
-
 
 .gameTitle {
-
     text-align: center;
-
     font-size: 42px;
-
     font-weight: bold;
-
     color: #00aaff;
-
 }
-
 
 .slogan {
-
     text-align: center;
-
     color: #888;
-
     font-style: italic;
-
-    margin-top: 8px;
-
-    margin-bottom: 25px;
-
+    margin: 8px 0 25px;
 }
-
 
 label {
-
     display: block;
-
     color: #aaa;
-
     margin-top: 15px;
-
     margin-bottom: 6px;
-
 }
-
 
 input,
 select {
-
     width: 100%;
-
     padding: 12px;
-
     background: #222;
-
     color: white;
-
     border: 2px solid #333;
-
     border-radius: 8px;
-
     font-size: 16px;
-
     outline: none;
-
 }
-
 
 input:focus,
 select:focus {
-
     border-color: #174bff;
-
 }
-
-
-/* MODE */
 
 .mode {
-
     display: flex;
-
     gap: 10px;
-
 }
-
 
 .mode button {
-
     flex: 1;
-
     padding: 12px;
-
     background: #222;
-
     color: white;
-
     border: 2px solid #333;
-
     border-radius: 8px;
-
     cursor: pointer;
-
     font-size: 16px;
-
 }
-
 
 .mode button.active {
-
     background: #174bff;
-
     border-color: #4f70ff;
-
 }
-
-
-/* DEUXIEME JOUEUR */
 
 #player2Box {
-
     display: none;
-
 }
-
-
-/* BOUTON */
 
 #startButton {
-
     width: 100%;
-
     margin-top: 25px;
-
     padding: 14px;
-
     border: none;
-
     border-radius: 8px;
-
     background: #008cff;
-
     color: white;
-
     font-size: 18px;
-
     font-weight: bold;
-
     cursor: pointer;
-
 }
 
-
 #startButton:hover {
-
     background: #00aaff;
-
 }
 
 
@@ -224,69 +130,35 @@ select:focus {
 ===================================================== */
 
 #game {
-
     display: none;
-
     width: 100vw;
-
     height: 100vh;
-
 }
-
-
-/* =====================================================
-   TITRE
-===================================================== */
 
 #titleArea {
-
     height: 82px;
-
     text-align: center;
-
     padding-top: 7px;
-
 }
-
 
 #titleArea h1 {
-
     margin: 0;
-
     color: #00aaff;
-
     font-size: 32px;
-
 }
-
 
 #titleArea p {
-
     margin: 4px;
-
     color: #777;
-
     font-style: italic;
-
 }
 
-
-/* =====================================================
-   ZONE PRINCIPALE
-===================================================== */
-
 #mainArea {
-
     height: calc(100vh - 82px);
-
     display: flex;
-
     justify-content: center;
-
     align-items: center;
-
     gap: 15px;
-
 }
 
 
@@ -295,73 +167,51 @@ select:focus {
 ===================================================== */
 
 .sidePanel {
-
     width: 180px;
-
     height: 430px;
-
     background: #111;
-
-    border: 2px solid #174bff;
-
+    border: 3px solid #e32626;
     border-radius: 12px;
-
     padding: 17px;
-
     display: flex;
-
     flex-direction: column;
-
     justify-content: space-between;
-
+    transition: .25s;
 }
 
+.sidePanel.active {
+    border-color: #19e65c;
+    box-shadow: 0 0 22px rgba(25,230,92,.35);
+}
+
+.sidePanel.inactive {
+    border-color: #e32626;
+}
 
 .sideTitle {
-
     color: #00aaff;
-
     font-size: 19px;
-
     font-weight: bold;
-
     margin-bottom: 15px;
-
 }
-
 
 .infoBox {
-
     background: #1a1a1a;
-
     border: 1px solid #333;
-
     border-radius: 8px;
-
     padding: 10px;
-
     margin-bottom: 10px;
-
 }
-
 
 .infoLabel {
-
     color: #777;
-
     font-size: 11px;
-
 }
 
-
 .infoValue {
-
     font-size: 16px;
-
     font-weight: bold;
-
     margin-top: 4px;
-
 }
 
 
@@ -370,59 +220,224 @@ select:focus {
 ===================================================== */
 
 #centerArea {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#topBar {
+    width: 672px;
+    max-width: 70vw;
+    height: 55px;
+    margin-bottom: 10px;
+    background: #111;
+    border: 2px solid #174bff;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-weight: bold;
+}
+
+#canvasContainer {
+    border: 3px solid #174bff;
+    background: black;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+canvas {
+    display: block;
+}
+
+
+/* =====================================================
+   CONTROLES À L'ÉCRAN
+===================================================== */
+
+#controls {
+
+    position: fixed;
+
+    left: 20px;
+
+    bottom: 20px;
+
+    width: 270px;
+
+    height: 150px;
 
     display: flex;
 
-    flex-direction: column;
-
     align-items: center;
+
+    justify-content: space-between;
+
+    z-index: 20;
+
+    user-select: none;
 
 }
 
 
-#topBar {
+/* =====================================================
+   FLÈCHES
+===================================================== */
 
-    width: 672px;
+#arrowControls {
 
-    max-width: 70vw;
+    position: relative;
 
-    height: 55px;
+    width: 135px;
 
-    margin-bottom: 10px;
+    height: 135px;
 
-    background: #111;
+}
 
-    border: 2px solid #174bff;
+
+.arrow {
+
+    position: absolute;
+
+    width: 43px;
+
+    height: 43px;
 
     border-radius: 10px;
 
+    border: 2px solid #ffffff;
+
+    background: rgba(20,20,20,.85);
+
+    color: white;
+
+    font-size: 24px;
+
     display: flex;
 
-    justify-content: space-around;
+    justify-content: center;
 
     align-items: center;
 
-    font-weight: bold;
+    cursor: pointer;
+
+    transition: .08s;
 
 }
 
 
-#canvasContainer {
+.arrow:active {
+
+    background: #174bff;
+
+    transform: scale(.92);
+
+}
+
+
+.arrow.up {
+
+    top: 0;
+
+    left: 46px;
+
+}
+
+
+.arrow.down {
+
+    bottom: 0;
+
+    left: 46px;
+
+}
+
+
+.arrow.left {
+
+    top: 46px;
+
+    left: 0;
+
+}
+
+
+.arrow.right {
+
+    top: 46px;
+
+    right: 0;
+
+}
+
+
+/* =====================================================
+   JOYSTICK
+===================================================== */
+
+#joystick {
+
+    width: 125px;
+
+    height: 125px;
+
+    border-radius: 50%;
 
     border: 3px solid #174bff;
 
-    background: black;
+    background: rgba(20,20,20,.75);
 
-    border-radius: 8px;
+    position: relative;
 
-    overflow: hidden;
+    touch-action: none;
+
+    cursor: pointer;
 
 }
 
 
-canvas {
+#joystick::before {
 
-    display: block;
+    content: "";
+
+    position: absolute;
+
+    width: 75px;
+
+    height: 75px;
+
+    border-radius: 50%;
+
+    border: 1px dashed #555;
+
+    left: 22px;
+
+    top: 22px;
+
+}
+
+
+#joystickKnob {
+
+    position: absolute;
+
+    width: 43px;
+
+    height: 43px;
+
+    border-radius: 50%;
+
+    background: #174bff;
+
+    border: 3px solid #74a0ff;
+
+    left: 38px;
+
+    top: 38px;
+
+    cursor: grab;
+
+    box-shadow: 0 0 15px rgba(23,75,255,.7);
 
 }
 
@@ -441,14 +456,13 @@ canvas {
 
     background: rgba(0,0,0,.88);
 
-    z-index: 50;
+    z-index: 200;
 
     justify-content: center;
 
     align-items: center;
 
 }
-
 
 .gameOverBox {
 
@@ -464,7 +478,6 @@ canvas {
 
 }
 
-
 .gameOverBox h2 {
 
     color: #e32626;
@@ -474,7 +487,6 @@ canvas {
     margin: 0 0 10px;
 
 }
-
 
 .gameOverBox button {
 
@@ -497,12 +509,14 @@ canvas {
 }
 
 
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
 @media(max-width:900px) {
 
     .sidePanel {
-
         display: none;
-
     }
 
     #topBar {
@@ -510,6 +524,18 @@ canvas {
         width: 90vw;
 
         max-width: none;
+
+    }
+
+    #controls {
+
+        left: 10px;
+
+        bottom: 10px;
+
+        transform: scale(.85);
+
+        transform-origin: bottom left;
 
     }
 
@@ -539,11 +565,7 @@ canvas {
         </div>
 
 
-        <!-- PSEUDO -->
-
-        <label for="player1Name">
-            Pseudo
-        </label>
+        <label>Pseudo</label>
 
         <input
             id="player1Name"
@@ -553,73 +575,33 @@ canvas {
         >
 
 
-        <!-- LANGUE -->
-
-        <label for="language">
-            Langue
-        </label>
+        <label>Langue</label>
 
         <select id="language">
 
-            <option value="fr">
-                Français
-            </option>
-
-            <option value="en">
-                English
-            </option>
-
-            <option value="es">
-                Español
-            </option>
-
-            <option value="ar">
-                العربية
-            </option>
+            <option>Français</option>
+            <option>English</option>
+            <option>Español</option>
+            <option>العربية</option>
 
         </select>
 
 
-        <!-- REGION -->
-
-        <label for="region">
-            Région
-        </label>
+        <label>Région</label>
 
         <select id="region">
 
-            <option>
-                Maroc
-            </option>
-
-            <option>
-                France
-            </option>
-
-            <option>
-                Espagne
-            </option>
-
-            <option>
-                États-Unis
-            </option>
-
-            <option>
-                Royaume-Uni
-            </option>
-
-            <option>
-                Autre
-            </option>
+            <option>Maroc</option>
+            <option>France</option>
+            <option>Espagne</option>
+            <option>États-Unis</option>
+            <option>Royaume-Uni</option>
+            <option>Autre</option>
 
         </select>
 
 
-        <!-- MODE -->
-
-        <label>
-            Mode de jeu
-        </label>
+        <label>Mode de jeu</label>
 
         <div class="mode">
 
@@ -641,13 +623,9 @@ canvas {
         </div>
 
 
-        <!-- PSEUDO 2 -->
-
         <div id="player2Box">
 
-            <label for="player2Name">
-                Pseudo du joueur 2
-            </label>
+            <label>Pseudo du joueur 2</label>
 
             <input
                 id="player2Name"
@@ -677,6 +655,7 @@ canvas {
 
 <div id="game">
 
+
     <div id="titleArea">
 
         <h1>
@@ -695,14 +674,16 @@ canvas {
 
         <!-- JOUEUR 1 -->
 
-        <div class="sidePanel">
+        <div
+            id="panel1"
+            class="sidePanel active"
+        >
 
             <div>
 
                 <div class="sideTitle">
                     JOUEUR 1
                 </div>
-
 
                 <div class="infoBox">
 
@@ -719,7 +700,6 @@ canvas {
 
                 </div>
 
-
                 <div class="infoBox">
 
                     <div class="infoLabel">
@@ -732,15 +712,17 @@ canvas {
 
                 </div>
 
-
                 <div class="infoBox">
 
                     <div class="infoLabel">
-                        OBJECTIF
+                        ÉTAT
                     </div>
 
-                    <div class="infoValue">
-                        Fuir les têtes
+                    <div
+                        id="state1"
+                        class="infoValue"
+                    >
+                        EN JEU
                     </div>
 
                 </div>
@@ -814,14 +796,16 @@ canvas {
 
         <!-- JOUEUR 2 -->
 
-        <div class="sidePanel">
+        <div
+            id="panel2"
+            class="sidePanel inactive"
+        >
 
             <div>
 
                 <div class="sideTitle">
                     JOUEUR 2
                 </div>
-
 
                 <div class="infoBox">
 
@@ -838,7 +822,6 @@ canvas {
 
                 </div>
 
-
                 <div class="infoBox">
 
                     <div class="infoLabel">
@@ -851,15 +834,17 @@ canvas {
 
                 </div>
 
-
                 <div class="infoBox">
 
                     <div class="infoLabel">
-                        OBJECTIF
+                        ÉTAT
                     </div>
 
-                    <div class="infoValue">
-                        Fuir les têtes
+                    <div
+                        id="state2"
+                        class="infoValue"
+                    >
+                        EN ATTENTE
                     </div>
 
                 </div>
@@ -883,6 +868,60 @@ canvas {
             </div>
 
         </div>
+
+    </div>
+
+
+    <!-- =================================================
+         CONTROLES
+    ================================================= -->
+
+    <div id="controls">
+
+
+        <!-- FLÈCHES -->
+
+        <div id="arrowControls">
+
+            <div
+                class="arrow up"
+                data-direction="up"
+            >
+                ▲
+            </div>
+
+            <div
+                class="arrow down"
+                data-direction="down"
+            >
+                ▼
+            </div>
+
+            <div
+                class="arrow left"
+                data-direction="left"
+            >
+                ◀
+            </div>
+
+            <div
+                class="arrow right"
+                data-direction="right"
+            >
+                ▶
+            </div>
+
+        </div>
+
+
+        <!-- JOYSTICK -->
+
+        <div id="joystick">
+
+            <div id="joystickKnob"></div>
+
+        </div>
+
 
     </div>
 
@@ -918,7 +957,7 @@ canvas {
 
 
 /* =====================================================
-   ATELIER
+   CONFIGURATION
 ===================================================== */
 
 let selectedMode = "solo";
@@ -927,10 +966,33 @@ let player1Name = "";
 
 let player2Name = "";
 
-let language = "fr";
+let activePlayer = 1;
 
-let region = "";
+let player1Alive = true;
 
+let player2Alive = true;
+
+
+/* =====================================================
+   CONTROLES
+===================================================== */
+
+const controlKeys = {
+
+    up: false,
+
+    down: false,
+
+    left: false,
+
+    right: false
+
+};
+
+
+/* =====================================================
+   ATELIER
+===================================================== */
 
 function selectMode(mode) {
 
@@ -960,8 +1022,7 @@ function selectMode(mode) {
 
     }
 
-
-    if (mode === "duo") {
+    else {
 
         document
             .getElementById("duoButton")
@@ -993,22 +1054,9 @@ function startGame() {
         .trim();
 
 
-    language =
-        document
-        .getElementById("language")
-        .value;
-
-
-    region =
-        document
-        .getElementById("region")
-        .value;
-
-
     if (player1Name === "") {
 
-        player1Name =
-            "Joueur 1";
+        player1Name = "Joueur 1";
 
     }
 
@@ -1018,8 +1066,7 @@ function startGame() {
         player2Name === ""
     ) {
 
-        player2Name =
-            "Joueur 2";
+        player2Name = "Joueur 2";
 
     }
 
@@ -1037,7 +1084,9 @@ function startGame() {
             .textContent =
             player2Name;
 
-    } else {
+    }
+
+    else {
 
         document
             .getElementById("sidePlayer2")
@@ -1065,6 +1114,37 @@ function startGame() {
 
 
 /* =====================================================
+   TOUCHES CLAVIER
+===================================================== */
+
+const keys = {};
+
+
+document.addEventListener(
+    "keydown",
+    function(e) {
+
+        keys[
+            e.key.toLowerCase()
+        ] = true;
+
+    }
+);
+
+
+document.addEventListener(
+    "keyup",
+    function(e) {
+
+        keys[
+            e.key.toLowerCase()
+        ] = false;
+
+    }
+);
+
+
+/* =====================================================
    CANVAS
 ===================================================== */
 
@@ -1073,7 +1153,6 @@ const canvas =
 
 const ctx =
     canvas.getContext("2d");
-
 
 const tile = 32;
 
@@ -1139,41 +1218,18 @@ let gameRunning = false;
 
 
 /* =====================================================
-   TOUCHES
-===================================================== */
-
-const keys = {};
-
-
-document.addEventListener(
-    "keydown",
-    function(e) {
-
-        keys[
-            e.key.toLowerCase()
-        ] = true;
-
-    }
-);
-
-
-document.addEventListener(
-    "keyup",
-    function(e) {
-
-        keys[
-            e.key.toLowerCase()
-        ] = false;
-
-    }
-);
-
-
-/* =====================================================
    INITIALISATION
 ===================================================== */
 
 function initGame() {
+
+    activePlayer = 1;
+
+    player1Alive = true;
+
+    player2Alive =
+        selectedMode === "duo";
+
 
     player = {
 
@@ -1233,10 +1289,94 @@ function initGame() {
 
     createEnemy();
 
+    updatePanels();
 
     requestAnimationFrame(
         gameLoop
     );
+
+}
+
+
+/* =====================================================
+   PANNEAUX VERT / ROUGE
+===================================================== */
+
+function updatePanels() {
+
+    const panel1 =
+        document.getElementById(
+            "panel1"
+        );
+
+
+    const panel2 =
+        document.getElementById(
+            "panel2"
+        );
+
+
+    panel1.classList.remove(
+        "active",
+        "inactive"
+    );
+
+
+    panel2.classList.remove(
+        "active",
+        "inactive"
+    );
+
+
+    if (activePlayer === 1) {
+
+        panel1.classList.add(
+            "active"
+        );
+
+        panel2.classList.add(
+            "inactive"
+        );
+
+
+        document.getElementById(
+            "state1"
+        ).textContent =
+            "EN JEU";
+
+
+        document.getElementById(
+            "state2"
+        ).textContent =
+            selectedMode === "duo"
+                ? "EN ATTENTE"
+                : "MODE SOLO";
+
+    }
+
+    else {
+
+        panel1.classList.add(
+            "inactive"
+        );
+
+        panel2.classList.add(
+            "active"
+        );
+
+
+        document.getElementById(
+            "state1"
+        ).textContent =
+            "ÉLIMINÉ";
+
+
+        document.getElementById(
+            "state2"
+        ).textContent =
+            "EN JEU";
+
+    }
 
 }
 
@@ -1315,7 +1455,7 @@ function canMove(x, y) {
 
 
 /* =====================================================
-   JOUEUR
+   MOUVEMENT
 ===================================================== */
 
 function movePlayer() {
@@ -1325,14 +1465,15 @@ function movePlayer() {
     let dy = 0;
 
 
+    /* CLAVIER */
+
     if (
         keys["arrowup"] ||
         keys["z"] ||
         keys["w"]
     ) {
 
-        dy =
-            -player.speed;
+        dy -= 1;
 
     }
 
@@ -1342,8 +1483,7 @@ function movePlayer() {
         keys["s"]
     ) {
 
-        dy =
-            player.speed;
+        dy += 1;
 
     }
 
@@ -1354,8 +1494,7 @@ function movePlayer() {
         keys["a"]
     ) {
 
-        dx =
-            -player.speed;
+        dx -= 1;
 
     }
 
@@ -1365,16 +1504,62 @@ function movePlayer() {
         keys["d"]
     ) {
 
-        dx =
-            player.speed;
+        dx += 1;
 
     }
 
 
-    if (
-        dx !== 0 ||
-        dy !== 0
-    ) {
+    /* FLÈCHES À L'ÉCRAN */
+
+    if (controlKeys.up) {
+        dy -= 1;
+    }
+
+    if (controlKeys.down) {
+        dy += 1;
+    }
+
+    if (controlKeys.left) {
+        dx -= 1;
+    }
+
+    if (controlKeys.right) {
+        dx += 1;
+    }
+
+
+    /*
+       JOYSTICK
+    */
+
+    dx += joystickX;
+
+    dy += joystickY;
+
+
+    /*
+       Normalisation pour éviter
+       d'aller plus vite en diagonale.
+    */
+
+    const length =
+        Math.sqrt(
+            dx * dx +
+            dy * dy
+        );
+
+
+    if (length > 0) {
+
+        dx /= length;
+
+        dy /= length;
+
+
+        dx *= player.speed;
+
+        dy *= player.speed;
+
 
         player.walk += 0.4;
 
@@ -1410,25 +1595,335 @@ function movePlayer() {
 
 
 /* =====================================================
-   CREATION TÊTES
+   FLÈCHES
+===================================================== */
+
+document
+    .querySelectorAll(".arrow")
+    .forEach(
+        button => {
+
+            const direction =
+                button.dataset.direction;
+
+
+            function start() {
+
+                controlKeys[
+                    direction
+                ] = true;
+
+            }
+
+
+            function stop() {
+
+                controlKeys[
+                    direction
+                ] = false;
+
+            }
+
+
+            button.addEventListener(
+                "mousedown",
+                start
+            );
+
+
+            button.addEventListener(
+                "mouseup",
+                stop
+            );
+
+
+            button.addEventListener(
+                "mouseleave",
+                stop
+            );
+
+
+            button.addEventListener(
+                "touchstart",
+                function(e) {
+
+                    e.preventDefault();
+
+                    start();
+
+                },
+                {
+                    passive: false
+                }
+            );
+
+
+            button.addEventListener(
+                "touchend",
+                function(e) {
+
+                    e.preventDefault();
+
+                    stop();
+
+                },
+                {
+                    passive: false
+                }
+            );
+
+        }
+    );
+
+
+/* =====================================================
+   JOYSTICK
+===================================================== */
+
+const joystick =
+    document.getElementById(
+        "joystick"
+    );
+
+
+const joystickKnob =
+    document.getElementById(
+        "joystickKnob"
+    );
+
+
+let joystickX = 0;
+
+let joystickY = 0;
+
+let joystickActive = false;
+
+
+function moveJoystick(clientX, clientY) {
+
+    const rect =
+        joystick.getBoundingClientRect();
+
+
+    const centerX =
+        rect.left +
+        rect.width / 2;
+
+
+    const centerY =
+        rect.top +
+        rect.height / 2;
+
+
+    let dx =
+        clientX - centerX;
+
+
+    let dy =
+        clientY - centerY;
+
+
+    const maxDistance = 38;
+
+
+    const distance =
+        Math.sqrt(
+            dx * dx +
+            dy * dy
+        );
+
+
+    if (
+        distance > maxDistance
+    ) {
+
+        dx =
+            dx / distance *
+            maxDistance;
+
+
+        dy =
+            dy / distance *
+            maxDistance;
+
+    }
+
+
+    joystickKnob.style.left =
+        (
+            rect.width / 2 -
+            21 +
+            dx
+        ) + "px";
+
+
+    joystickKnob.style.top =
+        (
+            rect.height / 2 -
+            21 +
+            dy
+        ) + "px";
+
+
+    joystickX =
+        dx / maxDistance;
+
+
+    joystickY =
+        dy / maxDistance;
+
+}
+
+
+function resetJoystick() {
+
+    joystickActive = false;
+
+    joystickX = 0;
+
+    joystickY = 0;
+
+
+    joystickKnob.style.left =
+        "38px";
+
+
+    joystickKnob.style.top =
+        "38px";
+
+}
+
+
+/* SOURIS */
+
+joystick.addEventListener(
+    "mousedown",
+    function(e) {
+
+        joystickActive = true;
+
+        moveJoystick(
+            e.clientX,
+            e.clientY
+        );
+
+    }
+);
+
+
+document.addEventListener(
+    "mousemove",
+    function(e) {
+
+        if (!joystickActive) {
+            return;
+        }
+
+
+        moveJoystick(
+            e.clientX,
+            e.clientY
+        );
+
+    }
+);
+
+
+document.addEventListener(
+    "mouseup",
+    function() {
+
+        if (joystickActive) {
+            resetJoystick();
+        }
+
+    }
+);
+
+
+/* TACTILE */
+
+joystick.addEventListener(
+    "touchstart",
+    function(e) {
+
+        e.preventDefault();
+
+        joystickActive = true;
+
+
+        const touch =
+            e.touches[0];
+
+
+        moveJoystick(
+            touch.clientX,
+            touch.clientY
+        );
+
+    },
+    {
+        passive: false
+    }
+);
+
+
+joystick.addEventListener(
+    "touchmove",
+    function(e) {
+
+        e.preventDefault();
+
+
+        if (!joystickActive) {
+            return;
+        }
+
+
+        const touch =
+            e.touches[0];
+
+
+        moveJoystick(
+            touch.clientX,
+            touch.clientY
+        );
+
+    },
+    {
+        passive: false
+    }
+);
+
+
+joystick.addEventListener(
+    "touchend",
+    function(e) {
+
+        e.preventDefault();
+
+        resetJoystick();
+
+    },
+    {
+        passive: false
+    }
+);
+
+
+/* =====================================================
+   CRÉATION DES TÊTES
 ===================================================== */
 
 const enemyStarts = [
 
     [10, 9],
-
     [9, 5],
-
     [11, 15],
-
     [5, 19],
-
     [15, 19],
-
     [19, 9],
-
     [3, 13],
-
     [17, 13]
 
 ];
@@ -1459,10 +1954,7 @@ function createEnemy() {
 
         speed:
             2.8 +
-            stage * 0.15,
-
-        direction:
-            null
+            stage * 0.15
 
     });
 
@@ -1470,8 +1962,7 @@ function createEnemy() {
 
 
 /* =====================================================
-   NOUVEAU PATHFINDING
-   LA TÊTE CHERCHE VRAIMENT LE JOUEUR
+   PATHFINDING
 ===================================================== */
 
 function findPath(enemy) {
@@ -1515,7 +2006,6 @@ function findPath(enemy) {
     const visited =
         new Set();
 
-
     const parent =
         new Map();
 
@@ -1530,7 +2020,9 @@ function findPath(enemy) {
     ]);
 
 
-    visited.add(startKey);
+    visited.add(
+        startKey
+    );
 
 
     const directions = [
@@ -1658,10 +2150,16 @@ function findPath(enemy) {
         current !== startKey
     ) {
 
-        path.unshift(current);
+        path.unshift(
+            current
+        );
+
 
         current =
-            parent.get(current);
+            parent.get(
+                current
+            );
+
 
         if (!current) {
 
@@ -1699,71 +2197,66 @@ function findPath(enemy) {
 
 
 /* =====================================================
-   MOUVEMENT DE LA TÊTE
+   MOUVEMENT DES TÊTES
 ===================================================== */
 
 function moveEnemy(enemy) {
-
-    /*
-       La tête recalcule son chemin
-       vers le joueur très souvent.
-    */
 
     const next =
         findPath(enemy);
 
 
-    if (next) {
-
-        const targetX =
-            next.x * tile +
-            tile / 2;
+    if (!next) {
+        return;
+    }
 
 
-        const targetY =
-            next.y * tile +
-            tile / 2;
+    const targetX =
+        next.x * tile +
+        tile / 2;
 
 
-        const dx =
-            targetX - enemy.x;
+    const targetY =
+        next.y * tile +
+        tile / 2;
 
 
-        const dy =
-            targetY - enemy.y;
+    const dx =
+        targetX -
+        enemy.x;
 
 
-        const distance =
-            Math.sqrt(
-                dx * dx +
-                dy * dy
+    const dy =
+        targetY -
+        enemy.y;
+
+
+    const distance =
+        Math.sqrt(
+            dx * dx +
+            dy * dy
+        );
+
+
+    if (
+        distance > 1
+    ) {
+
+        const move =
+            Math.min(
+                enemy.speed,
+                distance
             );
 
 
-        if (
-            distance > 1
-        ) {
-
-            const move =
-                enemy.speed;
+        enemy.x +=
+            (dx / distance) *
+            move;
 
 
-            enemy.x +=
-                (dx / distance) *
-                Math.min(
-                    move,
-                    distance
-                );
-
-
-            enemy.y +=
-                (dy / distance) *
-                Math.min(
-                    move,
-                    distance
-                );
-
-        }
+        enemy.y +=
+            (dy / distance) *
+            move;
 
     }
 
@@ -1825,7 +2318,9 @@ function drawMap() {
 
                 );
 
-            } else {
+            }
+
+            else {
 
                 ctx.fillStyle =
                     "#050505";
@@ -1987,7 +2482,7 @@ function drawPlayer() {
 
 
 /* =====================================================
-   TÊTE
+   TÊTE ENNEMIE
 ===================================================== */
 
 function drawEnemy(enemy) {
@@ -2145,7 +2640,135 @@ function drawEnemy(enemy) {
 
 
 /* =====================================================
-   COLLISION = PERDU
+   PERSONNAGE ATTRAPÉ
+===================================================== */
+
+function playerCaught() {
+
+    if (
+        activePlayer === 1
+    ) {
+
+        player1Alive = false;
+
+
+        document.getElementById(
+            "state1"
+        ).textContent =
+            "ÉLIMINÉ";
+
+
+        if (
+            selectedMode === "duo" &&
+            player2Alive
+        ) {
+
+            activePlayer = 2;
+
+
+            resetPlayerPosition();
+
+
+            updatePanels();
+
+
+            /*
+               Petite remise à zéro
+               des contrôles.
+            */
+
+            controlKeys.up = false;
+            controlKeys.down = false;
+            controlKeys.left = false;
+            controlKeys.right = false;
+
+            resetJoystick();
+
+
+            return;
+
+        }
+
+
+        loseGame(
+            player1Name +
+            " a été attrapé !"
+        );
+
+
+        return;
+
+    }
+
+
+    if (
+        activePlayer === 2
+    ) {
+
+        player2Alive = false;
+
+
+        document.getElementById(
+            "state2"
+        ).textContent =
+            "ÉLIMINÉ";
+
+
+        loseGame(
+            player2Name +
+            " a été attrapé !"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   RESET POSITION
+===================================================== */
+
+function resetPlayerPosition() {
+
+    for (
+        let y = 0;
+        y < rows;
+        y++
+    ) {
+
+        for (
+            let x = 0;
+            x < cols;
+            x++
+        ) {
+
+            if (
+                map[y][x] === "P"
+            ) {
+
+                player.x =
+                    x * tile +
+                    tile / 2;
+
+
+                player.y =
+                    y * tile +
+                    tile / 2;
+
+
+                return;
+
+            }
+
+        }
+
+    }
+
+}
+
+
+/* =====================================================
+   COLLISION
 ===================================================== */
 
 function checkCollision() {
@@ -2175,25 +2798,7 @@ function checkCollision() {
             distance < 23
         ) {
 
-            gameRunning = false;
-
-
-            document
-                .getElementById(
-                    "loserText"
-                )
-                .textContent =
-                player1Name +
-                " a été attrapé !";
-
-
-            document
-                .getElementById(
-                    "gameOver"
-                )
-                .style.display =
-                "flex";
-
+            playerCaught();
 
             return;
 
@@ -2231,17 +2836,8 @@ function updateStage() {
             newStage;
 
 
-        /*
-           +1 tête à chaque stage
-        */
-
         createEnemy();
 
-
-        /*
-           Les têtes deviennent
-           légèrement plus rapides.
-        */
 
         for (
             const enemy of enemies
@@ -2256,19 +2852,15 @@ function updateStage() {
     }
 
 
-    document
-        .getElementById(
-            "stage"
-        )
-        .textContent =
+    document.getElementById(
+        "stage"
+    ).textContent =
         stage;
 
 
-    document
-        .getElementById(
-            "enemyCount"
-        )
-        .textContent =
+    document.getElementById(
+        "enemyCount"
+    ).textContent =
         enemies.length;
 
 }
@@ -2297,11 +2889,9 @@ function updateTimer() {
         elapsed % 60;
 
 
-    document
-        .getElementById(
-            "timer"
-        )
-        .textContent =
+    document.getElementById(
+        "timer"
+    ).textContent =
 
         String(minutes)
         .padStart(2, "0")
@@ -2316,20 +2906,48 @@ function updateTimer() {
         Math.floor(score);
 
 
-    document
-        .getElementById(
-            "mainScore"
-        )
-        .textContent =
+    document.getElementById(
+        "mainScore"
+    ).textContent =
         currentScore;
 
 
-    document
-        .getElementById(
-            "score1"
-        )
-        .textContent =
+    document.getElementById(
+        "score1"
+    ).textContent =
         currentScore;
+
+
+    document.getElementById(
+        "score2"
+    ).textContent =
+        currentScore;
+
+}
+
+
+/* =====================================================
+   PERDU
+===================================================== */
+
+function loseGame(message) {
+
+    gameRunning = false;
+
+
+    resetJoystick();
+
+
+    document.getElementById(
+        "loserText"
+    ).textContent =
+        message;
+
+
+    document.getElementById(
+        "gameOver"
+    ).style.display =
+        "flex";
 
 }
 
@@ -2341,9 +2959,7 @@ function updateTimer() {
 function gameLoop() {
 
     if (!gameRunning) {
-
         return;
-
     }
 
 
