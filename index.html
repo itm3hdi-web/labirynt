@@ -10,21 +10,23 @@
     box-sizing:border-box;
 }
 
-body{
+html,body{
     margin:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
     background:#050505;
     color:white;
     font-family:Arial,sans-serif;
-    overflow:hidden;
 }
 
-button,
-input,
-select{
+button,input,select{
     font-family:Arial,sans-serif;
 }
 
-/* ================= ATELIER ================= */
+/* =========================
+   ATELIER
+========================= */
 
 #launcher{
     position:fixed;
@@ -38,14 +40,14 @@ select{
 
 .launcherBox{
     width:440px;
-    max-width:92%;
-    max-height:95vh;
+    max-width:94vw;
+    max-height:94vh;
     overflow:auto;
     padding:28px;
     background:#111;
     border:2px solid #174bff;
     border-radius:16px;
-    box-shadow:0 0 25px rgba(23,75,255,.3);
+    box-shadow:0 0 25px rgba(23,75,255,.25);
 }
 
 .gameTitle{
@@ -77,6 +79,12 @@ select{
     border:1px solid #444;
     border-radius:7px;
     font-size:15px;
+    outline:none;
+}
+
+input:focus,
+select:focus{
+    border-color:#174bff;
 }
 
 .mode{
@@ -126,7 +134,9 @@ select{
     background:#333;
 }
 
-/* ================= PARAMETRES ================= */
+/* =========================
+   PARAMETRES
+========================= */
 
 #settings{
     display:none;
@@ -136,6 +146,13 @@ select{
     color:#00aaff;
     text-align:center;
     margin:0 0 15px;
+}
+
+.settingsInfo{
+    color:#777;
+    font-size:12px;
+    text-align:center;
+    line-height:1.5;
 }
 
 .keyGrid{
@@ -154,9 +171,17 @@ select{
     text-align:left;
 }
 
+.keyButton:hover{
+    border-color:#174bff;
+}
+
 .keyButton.waiting{
     background:#174bff;
-    border-color:#5d7cff;
+    border-color:#8aa0ff;
+}
+
+.keyButton b{
+    color:#00aaff;
 }
 
 .settingsButtons{
@@ -183,7 +208,9 @@ select{
     background:#333;
 }
 
-/* ================= JEU ================= */
+/* =========================
+   JEU
+========================= */
 
 #game{
     display:none;
@@ -295,7 +322,9 @@ canvas{
     display:block;
 }
 
-/* ================= BOUTONS DU JEU ================= */
+/* =========================
+   PAUSE / FPS
+========================= */
 
 #pauseButton{
     position:fixed;
@@ -329,7 +358,9 @@ canvas{
     font-weight:bold;
 }
 
-/* ================= CONTROLES ================= */
+/* =========================
+   CONTROLES
+========================= */
 
 #controls{
     position:fixed;
@@ -410,49 +441,55 @@ canvas{
     top:34px;
 }
 
-/* ================= PAUSE ================= */
+/* =========================
+   OVERLAYS
+========================= */
 
-#pauseOverlay{
+#pauseOverlay,
+#levelMessage,
+#gameOver{
     position:fixed;
     inset:0;
     display:none;
     justify-content:center;
     align-items:center;
+}
+
+#pauseOverlay{
     background:rgba(0,0,0,.68);
     z-index:140;
 }
 
-.pauseBox{
-    text-align:center;
-    background:#111;
-    border:2px solid #174bff;
-    border-radius:12px;
-    padding:30px 50px;
-}
-
-.pauseBox h2{
-    color:#00aaff;
-    margin:0 0 10px;
-}
-
-/* ================= NIVEAU ================= */
-
 #levelMessage{
-    position:fixed;
-    inset:0;
-    display:none;
-    justify-content:center;
-    align-items:center;
     background:rgba(0,0,0,.78);
     z-index:150;
 }
 
-#levelMessageBox{
+#gameOver{
+    background:rgba(0,0,0,.9);
+    z-index:200;
+}
+
+.pauseBox,
+#levelMessageBox,
+.gameOverBox{
     text-align:center;
-    padding:30px 50px;
     background:#111;
-    border:2px solid #00aaff;
     border-radius:12px;
+    padding:30px 50px;
+}
+
+.pauseBox,
+#levelMessageBox{
+    border:2px solid #174bff;
+}
+
+.gameOverBox{
+    border:3px solid #e32626;
+}
+
+.pauseBox h2{
+    color:#00aaff;
 }
 
 #levelMessageText{
@@ -461,40 +498,19 @@ canvas{
     font-size:32px;
 }
 
-/* ================= GAME OVER ================= */
-
-#gameOver{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.9);
-    z-index:200;
-    justify-content:center;
-    align-items:center;
-}
-
-.gameOverBox{
-    background:#111;
-    border:3px solid #e32626;
-    border-radius:12px;
-    padding:30px;
-    text-align:center;
-}
-
 .gameOverBox h2{
     color:#e32626;
     font-size:38px;
     margin:0 0 12px;
 }
 
-.gameOverBox button{
+.overlayButton{
     margin-top:18px;
-    padding:11px 28px;
+    padding:11px 25px;
     border:0;
     border-radius:7px;
     background:#174bff;
     color:white;
-    font-size:16px;
     cursor:pointer;
 }
 
@@ -520,7 +536,7 @@ canvas{
 <body>
 
 <!-- =====================================================
-ATELIER
+     ATELIER
 ===================================================== -->
 
 <div id="launcher">
@@ -614,62 +630,133 @@ ATELIER
     </div>
 
 
-    <!-- ================= PARAMETRES ================= -->
+    <!-- =================================================
+         PARAMETRES
+    ================================================= -->
 
     <div class="launcherBox" id="settings">
 
         <h2 class="settingsTitle">
-            ⚙️ PARAMÈTRES DES TOUCHES
+            ⚙️ PARAMÈTRES
         </h2>
 
-        <p style="color:#888;font-size:13px;text-align:center">
-            Clique sur une touche puis appuie sur la touche
-            de ton choix.
+        <label>Limite FPS</label>
+
+        <select id="fpsLimit">
+            <option value="30">30 FPS</option>
+            <option value="60">60 FPS</option>
+            <option value="90">90 FPS</option>
+            <option value="120">120 FPS</option>
+            <option value="180">180 FPS</option>
+            <option value="240">240 FPS</option>
+            <option value="360">360 FPS</option>
+            <option value="0">Illimité</option>
+        </select>
+
+        <p class="settingsInfo">
+            Choisis la limite d'images par seconde.
+            <br>
+            Illimité laisse le navigateur tourner au maximum.
         </p>
 
-        <h3>Joueur 1</h3>
+        <h3>🎮 Joueur 1</h3>
 
         <div class="keyGrid">
 
-            <button class="keyButton" data-player="1" data-action="up">
-                Avancer : <b id="p1up">Z</b>
+            <button
+                class="keyButton"
+                data-player="1"
+                data-action="up">
+
+                Avancer :
+                <b id="p1up">Z</b>
+
             </button>
 
-            <button class="keyButton" data-player="1" data-action="down">
-                Reculer : <b id="p1down">S</b>
+            <button
+                class="keyButton"
+                data-player="1"
+                data-action="down">
+
+                Reculer :
+                <b id="p1down">S</b>
+
             </button>
 
-            <button class="keyButton" data-player="1" data-action="left">
-                Gauche : <b id="p1left">Q</b>
+            <button
+                class="keyButton"
+                data-player="1"
+                data-action="left">
+
+                Gauche :
+                <b id="p1left">Q</b>
+
             </button>
 
-            <button class="keyButton" data-player="1" data-action="right">
-                Droite : <b id="p1right">D</b>
+            <button
+                class="keyButton"
+                data-player="1"
+                data-action="right">
+
+                Droite :
+                <b id="p1right">D</b>
+
             </button>
 
         </div>
 
-        <h3>Joueur 2</h3>
+        <h3>🎮 Joueur 2</h3>
 
         <div class="keyGrid">
 
-            <button class="keyButton" data-player="2" data-action="up">
-                Avancer : <b id="p2up">↑</b>
+            <button
+                class="keyButton"
+                data-player="2"
+                data-action="up">
+
+                Avancer :
+                <b id="p2up">↑</b>
+
             </button>
 
-            <button class="keyButton" data-player="2" data-action="down">
-                Reculer : <b id="p2down">↓</b>
+            <button
+                class="keyButton"
+                data-player="2"
+                data-action="down">
+
+                Reculer :
+                <b id="p2down">↓</b>
+
             </button>
 
-            <button class="keyButton" data-player="2" data-action="left">
-                Gauche : <b id="p2left">←</b>
+            <button
+                class="keyButton"
+                data-player="2"
+                data-action="left">
+
+                Gauche :
+                <b id="p2left">←</b>
+
             </button>
 
-            <button class="keyButton" data-player="2" data-action="right">
-                Droite : <b id="p2right">→</b>
+            <button
+                class="keyButton"
+                data-player="2"
+                data-action="right">
+
+                Droite :
+                <b id="p2right">→</b>
+
             </button>
 
         </div>
+
+        <p class="settingsInfo">
+            Clique sur une touche puis appuie directement
+            sur la nouvelle touche de ton clavier.
+            <br>
+            Exemple : clique sur Z → appuie sur F8 → F8 est utilisé.
+        </p>
 
         <div class="settingsButtons">
 
@@ -693,7 +780,7 @@ ATELIER
 
 
 <!-- =====================================================
-JEU
+     JEU
 ===================================================== -->
 
 <div id="game">
@@ -718,12 +805,13 @@ JEU
 
     </div>
 
-
     <div id="mainArea">
 
         <!-- JOUEUR 1 -->
 
-        <div id="panel1" class="sidePanel active">
+        <div
+            id="panel1"
+            class="sidePanel active">
 
             <div>
 
@@ -845,7 +933,9 @@ JEU
 
         <!-- JOUEUR 2 -->
 
-        <div id="panel2" class="sidePanel inactive">
+        <div
+            id="panel2"
+            class="sidePanel inactive">
 
             <div>
 
@@ -936,10 +1026,29 @@ JEU
 
         <div id="arrowControls">
 
-            <div class="arrow up" data-direction="up">▲</div>
-            <div class="arrow down" data-direction="down">▼</div>
-            <div class="arrow left" data-direction="left">◀</div>
-            <div class="arrow right" data-direction="right">▶</div>
+            <div
+                class="arrow up"
+                data-direction="up">
+                ▲
+            </div>
+
+            <div
+                class="arrow down"
+                data-direction="down">
+                ▼
+            </div>
+
+            <div
+                class="arrow left"
+                data-direction="left">
+                ◀
+            </div>
+
+            <div
+                class="arrow right"
+                data-direction="right">
+                ▶
+            </div>
 
         </div>
 
@@ -955,7 +1064,7 @@ JEU
 
 
 <!-- =====================================================
-PAUSE
+     PAUSE
 ===================================================== -->
 
 <div id="pauseOverlay">
@@ -965,19 +1074,15 @@ PAUSE
         <h2>⏸ JEU EN PAUSE</h2>
 
         <p>
-            Appuie sur ESPACE ou clique sur le bouton
-            pour continuer.
+            Le jeu est arrêté.
         </p>
 
         <button
-            onclick="togglePause()"
-            style="padding:10px 25px;
-                   border:0;
-                   border-radius:7px;
-                   background:#174bff;
-                   color:white;
-                   cursor:pointer">
+            class="overlayButton"
+            onclick="togglePause()">
+
             ▶ CONTINUER
+
         </button>
 
     </div>
@@ -986,7 +1091,7 @@ PAUSE
 
 
 <!-- =====================================================
-NIVEAU
+     NIVEAU
 ===================================================== -->
 
 <div id="levelMessage">
@@ -1003,7 +1108,7 @@ NIVEAU
 
 
 <!-- =====================================================
-GAME OVER
+     GAME OVER
 ===================================================== -->
 
 <div id="gameOver">
@@ -1018,8 +1123,12 @@ GAME OVER
             Partie terminée.
         </div>
 
-        <button onclick="location.reload()">
+        <button
+            class="overlayButton"
+            onclick="location.reload()">
+
             REJOUER
+
         </button>
 
     </div>
@@ -1030,7 +1139,47 @@ GAME OVER
 <script>
 
 /* =====================================================
-CONFIGURATION DES TOUCHES
+   VARIABLES GENERALES
+===================================================== */
+
+let selectedMode = "solo";
+
+let selectedLanguage = "fr";
+
+let player1Name = "";
+
+let player2Name = "";
+
+let activePlayer = 1;
+
+let gameRunning = false;
+
+let manualPaused = false;
+
+let levelPaused = false;
+
+
+/* =====================================================
+   FPS
+===================================================== */
+
+/*
+   0 = illimité
+*/
+
+let fpsLimit = 0;
+
+let lastFrameTime = 0;
+
+let fpsFrames = 0;
+
+let fpsLastTime = performance.now();
+
+let currentFPS = 0;
+
+
+/* =====================================================
+   TOUCHES
 ===================================================== */
 
 let controls = {
@@ -1052,267 +1201,14 @@ let controls = {
 };
 
 
-/* =====================================================
-PARAMETRES
-===================================================== */
-
 let waitingForKey = null;
 
 
-function openSettings(){
-
-    document
-        .getElementById("mainLauncher")
-        .style.display="none";
-
-    document
-        .getElementById("settings")
-        .style.display="block";
-
-}
-
-
-function closeSettings(){
-
-    waitingForKey=null;
-
-    document
-        .getElementById("settings")
-        .style.display="none";
-
-    document
-        .getElementById("mainLauncher")
-        .style.display="block";
-
-}
-
-
-function saveSettings(){
-
-    localStorage.setItem(
-        "pacmanControls",
-        JSON.stringify(controls)
-    );
-
-    updateKeyDisplay();
-
-    closeSettings();
-
-}
-
-
-function loadSettings(){
-
-    const saved =
-        localStorage.getItem(
-            "pacmanControls"
-        );
-
-    if(saved){
-
-        try{
-
-            controls =
-                JSON.parse(saved);
-
-        }
-        catch(e){
-
-            console.log(
-                "Configuration invalide"
-            );
-
-        }
-
-    }
-
-}
-
-
-function prettyKey(key){
-
-    const names={
-
-        "arrowup":"↑",
-        "arrowdown":"↓",
-        "arrowleft":"←",
-        "arrowright":"→",
-        " ":"ESPACE",
-        "escape":"ÉCHAP",
-        "enter":"ENTRÉE",
-        "control":"CTRL",
-        "shift":"SHIFT",
-        "alt":"ALT",
-        "tab":"TAB",
-        "backspace":"RETOUR"
-
-    };
-
-    return names[key] ||
-           key.toUpperCase();
-
-}
-
-
-function updateKeyDisplay(){
-
-    for(const player of [1,2]){
-
-        for(
-            const action
-            of ["up","down","left","right"]
-        ){
-
-            const element =
-                document.getElementById(
-                    `p${player}${action}`
-                );
-
-            if(element){
-
-                element.textContent =
-                    prettyKey(
-                        controls[player][action]
-                    );
-
-            }
-
-        }
-
-    }
-
-}
-
-
-document
-    .querySelectorAll(".keyButton")
-    .forEach(button=>{
-
-        button.addEventListener(
-            "click",
-            ()=>{
-
-                document
-                    .querySelectorAll(".keyButton")
-                    .forEach(b=>
-                        b.classList.remove(
-                            "waiting"
-                        )
-                    );
-
-                button.classList.add(
-                    "waiting"
-                );
-
-                waitingForKey = {
-
-                    player:
-                        Number(
-                            button.dataset.player
-                        ),
-
-                    action:
-                        button.dataset.action,
-
-                    button
-
-                };
-
-                button.innerHTML =
-                    "Appuie sur une touche...";
-
-            }
-        );
-
-    });
-
-
-/*
-   Capture de la touche choisie.
-
-   Cela permet aussi F8, F9, F10, etc.
-*/
-
-document.addEventListener(
-    "keydown",
-    e=>{
-
-        if(!waitingForKey)
-            return;
-
-
-        e.preventDefault();
-        e.stopPropagation();
-
-
-        const key =
-            e.key.toLowerCase();
-
-
-        controls[
-            waitingForKey.player
-        ][
-            waitingForKey.action
-        ] = key;
-
-
-        waitingForKey =
-            null;
-
-
-        document
-            .querySelectorAll(".keyButton")
-            .forEach(b=>
-                b.classList.remove(
-                    "waiting"
-                )
-            );
-
-
-        updateKeyDisplay();
-
-    },
-    true
-);
-
-
-loadSettings();
-
-updateKeyDisplay();
-
-
 /* =====================================================
-MODE
+   JOUEURS
 ===================================================== */
 
-let selectedMode="solo";
-
-let player1Name="";
-let player2Name="";
-
-let selectedLanguage="fr";
-
-let activePlayer=1;
-
-const MAX_TIME=1800;
-
-
-/* =====================================================
-ETAT DU JEU
-===================================================== */
-
-let gameRunning=false;
-
-let levelPaused=false;
-
-let manualPaused=false;
-
-
-/* =====================================================
-JOUEURS
-===================================================== */
-
-let players={
+let players = {
 
     1:{
         time:0,
@@ -1334,10 +1230,10 @@ let players={
 
 
 /* =====================================================
-SLOGANS
+   SLOGANS
 ===================================================== */
 
-const slogans=[
+const slogans = [
 
     "« Cours. Survis. Ne te fais jamais attraper. »",
 
@@ -1363,118 +1259,10 @@ const slogans=[
 
 
 /* =====================================================
-MODE SOLO / DUO
+   MAP
 ===================================================== */
 
-function selectMode(mode){
-
-    selectedMode=mode;
-
-    document
-        .getElementById("soloButton")
-        .classList.remove("active");
-
-    document
-        .getElementById("duoButton")
-        .classList.remove("active");
-
-
-    if(mode==="solo"){
-
-        document
-            .getElementById("soloButton")
-            .classList.add("active");
-
-        document
-            .getElementById("player2Box")
-            .style.display="none";
-
-    }
-    else{
-
-        document
-            .getElementById("duoButton")
-            .classList.add("active");
-
-        document
-            .getElementById("player2Box")
-            .style.display="block";
-
-    }
-
-}
-
-
-/* =====================================================
-START
-===================================================== */
-
-function startGame(){
-
-    player1Name=
-        document
-        .getElementById("player1Name")
-        .value.trim() ||
-        "Joueur 1";
-
-
-    player2Name=
-        document
-        .getElementById("player2Name")
-        .value.trim() ||
-        "Joueur 2";
-
-
-    selectedLanguage=
-        document
-        .getElementById("language")
-        .value;
-
-
-    document
-        .getElementById("sidePlayer1")
-        .textContent=player1Name;
-
-
-    document
-        .getElementById("sidePlayer2")
-        .textContent=
-        selectedMode==="duo"
-        ?player2Name
-        :"-";
-
-
-    document
-        .getElementById("launcher")
-        .style.display="none";
-
-
-    document
-        .getElementById("game")
-        .style.display="block";
-
-
-    initGame();
-
-}
-
-
-/* =====================================================
-MAP
-===================================================== */
-
-const canvas=
-    document.getElementById("canvas");
-
-const ctx=
-    canvas.getContext("2d",{
-        alpha:false
-    });
-
-const tile=32;
-
-
-const map=[
+const map = [
 
     "#####################",
     "#P....#.......#....#",
@@ -1500,35 +1288,57 @@ const map=[
 
 ];
 
+const tile = 32;
 
-const rows=map.length;
+const rows = map.length;
 
-const cols=map[0].length;
-
-canvas.width=cols*tile;
-
-canvas.height=rows*tile;
+const cols = map[0].length;
 
 
 /* =====================================================
-JOUEUR
+   CANVAS
 ===================================================== */
 
-let player={
+const canvas =
+    document.getElementById("canvas");
+
+const ctx =
+    canvas.getContext(
+        "2d",
+        {
+            alpha:false
+        }
+    );
+
+canvas.width =
+    cols * tile;
+
+canvas.height =
+    rows * tile;
+
+
+/* =====================================================
+   JOUEUR
+===================================================== */
+
+let player = {
 
     x:0,
+
     y:0,
+
     speed:5,
+
     walk:0
 
 };
 
 
 /* =====================================================
-ENNEMIS
+   ENNEMIS
 ===================================================== */
 
-const enemyStarts=[
+const enemyStarts = [
 
     [3,19],
     [10,19],
@@ -1542,41 +1352,633 @@ const enemyStarts=[
 
 ];
 
+let enemies = [];
 
-let enemies=[];
-
-
-/*
-   On ne calcule pas le chemin
-   60 fois par seconde.
-
-   Cela économise énormément
-   de CPU.
-*/
-
-let pathTimer=0;
-
-const PATH_INTERVAL=100;
+const PATH_INTERVAL = 100;
 
 
 /* =====================================================
-FPS
+   TOUCHES ENFONCEES
 ===================================================== */
 
-let fpsFrames=0;
-
-let fpsLast=performance.now();
-
-let currentFPS=0;
+const keys = {};
 
 
 /* =====================================================
-INIT
+   CONTROLES TACTILES
+===================================================== */
+
+const controlKeys = {
+
+    up:false,
+    down:false,
+    left:false,
+    right:false
+
+};
+
+
+/* =====================================================
+   JOYSTICK
+===================================================== */
+
+const joystick =
+    document.getElementById("joystick");
+
+const joystickKnob =
+    document.getElementById(
+        "joystickKnob"
+    );
+
+let joystickActive = false;
+
+let joystickX = 0;
+
+let joystickY = 0;
+
+
+/* =====================================================
+   FORMAT TOUCHE
+===================================================== */
+
+function prettyKey(key){
+
+    const names = {
+
+        "arrowup":"↑",
+
+        "arrowdown":"↓",
+
+        "arrowleft":"←",
+
+        "arrowright":"→",
+
+        " ":"ESPACE",
+
+        "escape":"ÉCHAP",
+
+        "enter":"ENTRÉE",
+
+        "control":"CTRL",
+
+        "shift":"SHIFT",
+
+        "alt":"ALT",
+
+        "tab":"TAB",
+
+        "backspace":"RETOUR",
+
+        "capslock":"VERR. MAJ",
+
+        "delete":"SUPPR",
+
+        "insert":"INSER",
+
+        "home":"HOME",
+
+        "end":"END",
+
+        "pageup":"PAGE ↑",
+
+        "pagedown":"PAGE ↓"
+
+    };
+
+    return names[key] ||
+           key.toUpperCase();
+
+}
+
+
+/* =====================================================
+   AFFICHAGE TOUCHES
+===================================================== */
+
+function updateKeyDisplay(){
+
+    for(
+        const p of [1,2]
+    ){
+
+        for(
+            const action of
+            ["up","down","left","right"]
+        ){
+
+            const element =
+                document.getElementById(
+                    `p${p}${action}`
+                );
+
+            if(element){
+
+                element.textContent =
+                    prettyKey(
+                        controls[p][action]
+                    );
+
+            }
+
+        }
+
+    }
+
+}
+
+
+/* =====================================================
+   CHARGER PARAMETRES
+===================================================== */
+
+function loadSettings(){
+
+    const savedKeys =
+        localStorage.getItem(
+            "pacmanControls"
+        );
+
+    if(savedKeys){
+
+        try{
+
+            const data =
+                JSON.parse(savedKeys);
+
+            if(data[1]){
+
+                controls[1] = {
+                    ...controls[1],
+                    ...data[1]
+                };
+
+            }
+
+            if(data[2]){
+
+                controls[2] = {
+                    ...controls[2],
+                    ...data[2]
+                };
+
+            }
+
+        }
+        catch(e){
+
+            console.log(
+                "Erreur touches"
+            );
+
+        }
+
+    }
+
+
+    const savedFPS =
+        localStorage.getItem(
+            "pacmanFPS"
+        );
+
+    if(savedFPS !== null){
+
+        fpsLimit =
+            Number(savedFPS);
+
+    }
+
+
+    const fpsSelect =
+        document.getElementById(
+            "fpsLimit"
+        );
+
+    if(fpsSelect){
+
+        fpsSelect.value =
+            String(fpsLimit);
+
+    }
+
+
+    updateKeyDisplay();
+
+}
+
+
+/* =====================================================
+   SAUVEGARDER PARAMETRES
+===================================================== */
+
+function saveSettings(){
+
+    const fpsSelect =
+        document.getElementById(
+            "fpsLimit"
+        );
+
+    fpsLimit =
+        Number(
+            fpsSelect.value
+        );
+
+
+    localStorage.setItem(
+        "pacmanFPS",
+        String(fpsLimit)
+    );
+
+
+    localStorage.setItem(
+        "pacmanControls",
+        JSON.stringify(controls)
+    );
+
+
+    updateKeyDisplay();
+
+    closeSettings();
+
+}
+
+
+/* =====================================================
+   PARAMETRES
+===================================================== */
+
+function openSettings(){
+
+    document
+        .getElementById("mainLauncher")
+        .style.display="none";
+
+    document
+        .getElementById("settings")
+        .style.display="block";
+
+}
+
+
+function closeSettings(){
+
+    waitingForKey = null;
+
+    document
+        .querySelectorAll(".keyButton")
+        .forEach(button=>{
+
+            button.classList.remove(
+                "waiting"
+            );
+
+        });
+
+
+    updateKeyDisplay();
+
+
+    document
+        .getElementById("settings")
+        .style.display="none";
+
+    document
+        .getElementById("mainLauncher")
+        .style.display="block";
+
+}
+
+
+/* =====================================================
+   CHANGER UNE TOUCHE
+===================================================== */
+
+document
+    .querySelectorAll(".keyButton")
+    .forEach(button=>{
+
+        button.addEventListener(
+            "click",
+            ()=>{
+
+                document
+                    .querySelectorAll(".keyButton")
+                    .forEach(b=>{
+
+                        b.classList.remove(
+                            "waiting"
+                        );
+
+                    });
+
+
+                button.classList.add(
+                    "waiting"
+                );
+
+
+                waitingForKey = {
+
+                    player:
+                        Number(
+                            button.dataset.player
+                        ),
+
+                    action:
+                        button.dataset.action
+
+                };
+
+
+                button.innerHTML =
+                    "⌨️ APPUIE SUR LA TOUCHE";
+
+            }
+        );
+
+    });
+
+
+/* =====================================================
+   RECUPERER NOUVELLE TOUCHE
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(e){
+
+        /*
+           Si on est en train de
+           choisir une touche.
+        */
+
+        if(waitingForKey){
+
+            e.preventDefault();
+
+            e.stopPropagation();
+
+
+            const newKey =
+                e.key.toLowerCase();
+
+
+            const p =
+                waitingForKey.player;
+
+            const action =
+                waitingForKey.action;
+
+
+            /*
+               Si la touche est déjà utilisée
+               par une autre direction du même
+               joueur, on échange les touches.
+            */
+
+            let oldAction = null;
+
+
+            for(
+                const a of
+                ["up","down","left","right"]
+            ){
+
+                if(
+                    a !== action &&
+                    controls[p][a] === newKey
+                ){
+
+                    oldAction = a;
+
+                    break;
+
+                }
+
+            }
+
+
+            if(oldAction){
+
+                const oldKey =
+                    controls[p][action];
+
+
+                controls[p][action] =
+                    newKey;
+
+
+                controls[p][oldAction] =
+                    oldKey;
+
+            }
+            else{
+
+                controls[p][action] =
+                    newKey;
+
+            }
+
+
+            waitingForKey = null;
+
+
+            document
+                .querySelectorAll(".keyButton")
+                .forEach(b=>{
+
+                    b.classList.remove(
+                        "waiting"
+                    );
+
+                });
+
+
+            updateKeyDisplay();
+
+
+            /*
+               Sauvegarde immédiate.
+            */
+
+            localStorage.setItem(
+                "pacmanControls",
+                JSON.stringify(controls)
+            );
+
+
+            return;
+
+        }
+
+
+        /*
+           ESPACE = pause
+        */
+
+        if(
+            e.key === " " &&
+            gameRunning
+        ){
+
+            e.preventDefault();
+
+            togglePause();
+
+            return;
+
+        }
+
+
+        /*
+           ESC = pause
+        */
+
+        if(
+            e.key === "Escape" &&
+            gameRunning
+        ){
+
+            e.preventDefault();
+
+            togglePause();
+
+            return;
+
+        }
+
+
+        keys[
+            e.key.toLowerCase()
+        ] = true;
+
+    },
+    true
+);
+
+
+document.addEventListener(
+    "keyup",
+    function(e){
+
+        keys[
+            e.key.toLowerCase()
+        ] = false;
+
+    }
+);
+
+
+/* =====================================================
+   MODE
+===================================================== */
+
+function selectMode(mode){
+
+    selectedMode = mode;
+
+
+    document
+        .getElementById("soloButton")
+        .classList.remove("active");
+
+
+    document
+        .getElementById("duoButton")
+        .classList.remove("active");
+
+
+    if(mode === "solo"){
+
+        document
+            .getElementById("soloButton")
+            .classList.add("active");
+
+
+        document
+            .getElementById("player2Box")
+            .style.display="none";
+
+    }
+    else{
+
+        document
+            .getElementById("duoButton")
+            .classList.add("active");
+
+
+        document
+            .getElementById("player2Box")
+            .style.display="block";
+
+    }
+
+}
+
+
+/* =====================================================
+   DEMARRER
+===================================================== */
+
+function startGame(){
+
+    player1Name =
+        document
+        .getElementById("player1Name")
+        .value
+        .trim() ||
+        "Joueur 1";
+
+
+    player2Name =
+        document
+        .getElementById("player2Name")
+        .value
+        .trim() ||
+        "Joueur 2";
+
+
+    selectedLanguage =
+        document
+        .getElementById("language")
+        .value;
+
+
+    document
+        .getElementById("sidePlayer1")
+        .textContent =
+        player1Name;
+
+
+    document
+        .getElementById("sidePlayer2")
+        .textContent =
+        selectedMode === "duo"
+        ? player2Name
+        : "-";
+
+
+    document
+        .getElementById("launcher")
+        .style.display="none";
+
+
+    document
+        .getElementById("game")
+        .style.display="block";
+
+
+    initGame();
+
+}
+
+
+/* =====================================================
+   INITIALISATION
 ===================================================== */
 
 function initGame(){
 
-    players={
+    players = {
 
         1:{
             time:0,
@@ -1597,17 +1999,15 @@ function initGame(){
     };
 
 
-    activePlayer=1;
+    activePlayer = 1;
 
-    gameRunning=true;
+    gameRunning = true;
 
-    levelPaused=false;
+    manualPaused = false;
 
-    manualPaused=false;
+    levelPaused = false;
 
-    enemies=[];
-
-    pathTimer=0;
+    enemies = [];
 
     resetPlayerPosition();
 
@@ -1619,30 +2019,51 @@ function initGame(){
 
     updateSlogan();
 
-    requestAnimationFrame(gameLoop);
+
+    lastFrameTime =
+        performance.now();
+
+
+    fpsFrames = 0;
+
+    fpsLastTime =
+        performance.now();
+
+
+    requestAnimationFrame(
+        gameLoop
+    );
 
 }
 
 
 /* =====================================================
-POSITION JOUEUR
+   POSITION JOUEUR
 ===================================================== */
 
 function resetPlayerPosition(){
 
-    for(let y=0;y<rows;y++){
+    for(
+        let y=0;
+        y<rows;
+        y++
+    ){
 
-        for(let x=0;x<cols;x++){
+        for(
+            let x=0;
+            x<cols;
+            x++
+        ){
 
-            if(map[y][x]==="P"){
+            if(map[y][x] === "P"){
 
-                player.x=
-                    x*tile+
-                    tile/2;
+                player.x =
+                    x * tile +
+                    tile / 2;
 
-                player.y=
-                    y*tile+
-                    tile/2;
+                player.y =
+                    y * tile +
+                    tile / 2;
 
                 return;
 
@@ -1656,38 +2077,44 @@ function resetPlayerPosition(){
 
 
 /* =====================================================
-CREER ENNEMI
+   CREER ENNEMI
 ===================================================== */
 
 function createEnemy(){
 
-    const index=enemies.length;
+    const index =
+        enemies.length;
 
-    const pos=
+
+    const pos =
         enemyStarts[
-            index%enemyStarts.length
+            index %
+            enemyStarts.length
         ];
 
 
     enemies.push({
 
         x:
-            pos[0]*tile+
-            tile/2,
+            pos[0] * tile +
+            tile / 2,
 
         y:
-            pos[1]*tile+
-            tile/2,
+            pos[1] * tile +
+            tile / 2,
 
         speed:
-            2.8+
-            players[activePlayer].stage*.15,
+            2.8 +
+            players[activePlayer].stage *
+            .15,
 
         targetX:
             player.x,
 
         targetY:
-            player.y
+            player.y,
+
+        nextPathTime:0
 
     });
 
@@ -1695,7 +2122,7 @@ function createEnemy(){
 
 
 /* =====================================================
-RESET ENNEMIS
+   RESET ENNEMIS
 ===================================================== */
 
 function resetEnemies(){
@@ -1706,28 +2133,32 @@ function resetEnemies(){
         i++
     ){
 
-        const pos=
+        const pos =
             enemyStarts[
-                i%enemyStarts.length
+                i %
+                enemyStarts.length
             ];
 
 
-        enemies[i].x=
-            pos[0]*tile+
-            tile/2;
+        enemies[i].x =
+            pos[0] * tile +
+            tile / 2;
 
 
-        enemies[i].y=
-            pos[1]*tile+
-            tile/2;
+        enemies[i].y =
+            pos[1] * tile +
+            tile / 2;
 
 
-        enemies[i].targetX=
+        enemies[i].targetX =
             player.x;
 
 
-        enemies[i].targetY=
+        enemies[i].targetY =
             player.y;
+
+
+        enemies[i].nextPathTime=0;
 
     }
 
@@ -1735,39 +2166,53 @@ function resetEnemies(){
 
 
 /* =====================================================
-TEMPS
+   TEMPS JOUEUR
 ===================================================== */
 
 function getPlayerTime(id){
 
-    const p=players[id];
+    const p = players[id];
+
 
     if(p.running){
 
-        return p.time+
+        return p.time +
             Math.floor(
-                (Date.now()-p.lastStart)/1000
+                (Date.now() -
+                 p.lastStart) /
+                1000
             );
 
     }
+
 
     return p.time;
 
 }
 
 
+/* =====================================================
+   SAUVER PROGRESSION
+===================================================== */
+
 function saveActivePlayer(){
 
-    const p=players[activePlayer];
+    const p =
+        players[activePlayer];
+
 
     if(p.running){
 
-        p.time+=
+        p.time +=
             Math.floor(
-                (Date.now()-p.lastStart)/1000
+                (Date.now() -
+                 p.lastStart) /
+                1000
             );
 
-        p.lastStart=Date.now();
+
+        p.lastStart =
+            Date.now();
 
     }
 
@@ -1775,24 +2220,29 @@ function saveActivePlayer(){
 
 
 /* =====================================================
-CHANGEMENT JOUEUR
+   CHANGER JOUEUR
 ===================================================== */
 
 function switchPlayer(){
 
     saveActivePlayer();
 
-    players[activePlayer].running=false;
 
-    activePlayer=
-        activePlayer===1
-        ?2
-        :1;
+    players[activePlayer].running =
+        false;
 
 
-    players[activePlayer].running=true;
+    activePlayer =
+        activePlayer === 1
+        ? 2
+        : 1;
 
-    players[activePlayer].lastStart=
+
+    players[activePlayer].running =
+        true;
+
+
+    players[activePlayer].lastStart =
         Date.now();
 
 
@@ -1810,95 +2260,120 @@ function switchPlayer(){
 
 
 /* =====================================================
-NIVEAU
+   NIVEAU
 ===================================================== */
 
 function showLevelMessage(level){
 
-    levelPaused=true;
+    levelPaused = true;
 
 
     let text;
 
 
-    if(selectedLanguage==="fr"){
+    if(selectedLanguage === "fr"){
 
-        text=
-            "PASSAGE AU NIVEAU "+
+        text =
+            "PASSAGE AU NIVEAU " +
             level;
 
     }
-    else if(selectedLanguage==="ar"){
+    else if(selectedLanguage === "ar"){
 
-        text=
-            "الانتقال إلى المستوى "+
+        text =
+            "الانتقال إلى المستوى " +
             level;
 
     }
     else{
 
-        text=
-            "LEVEL "+
+        text =
+            "LEVEL " +
             level;
 
     }
 
 
     document
-        .getElementById("levelMessageText")
-        .textContent=text;
+        .getElementById(
+            "levelMessageText"
+        )
+        .textContent = text;
 
 
     document
-        .getElementById("levelMessage")
-        .style.display="flex";
+        .getElementById(
+            "levelMessage"
+        )
+        .style.display = "flex";
 
 
-    setTimeout(()=>{
+    /*
+       Le jeu reste réellement en pause
+       pendant le message.
+    */
 
-        document
-            .getElementById("levelMessage")
-            .style.display="none";
+    setTimeout(
+        function(){
+
+            document
+                .getElementById(
+                    "levelMessage"
+                )
+                .style.display = "none";
 
 
-        resetEnemies();
+            resetEnemies();
 
 
-        levelPaused=false;
+            levelPaused = false;
 
 
-        requestAnimationFrame(gameLoop);
+            lastFrameTime =
+                performance.now();
 
-    },1800);
+
+            requestAnimationFrame(
+                gameLoop
+            );
+
+        },
+        1800
+    );
 
 }
 
 
 /* =====================================================
-UPDATE NIVEAU
+   UPDATE NIVEAU
 ===================================================== */
 
 function updatePlayerStage(){
 
-    const p=
+    const p =
         players[activePlayer];
 
 
-    const time=
-        getPlayerTime(activePlayer);
+    const time =
+        getPlayerTime(
+            activePlayer
+        );
 
 
-    const newStage=
-        Math.floor(time/30)+1;
+    const newStage =
+        Math.floor(
+            time / 30
+        ) + 1;
 
 
-    if(newStage!==p.stage){
+    if(newStage !== p.stage){
 
-        p.stage=newStage;
+        p.stage =
+            newStage;
 
 
         while(
-            enemies.length<
+            enemies.length <
             p.stage
         ){
 
@@ -1911,14 +2386,18 @@ function updatePlayerStage(){
             const enemy of enemies
         ){
 
-            enemy.speed=
-                2.8+
-                p.stage*.15;
+            enemy.speed =
+                2.8 +
+                p.stage *
+                .15;
 
         }
 
 
-        showLevelMessage(newStage);
+        showLevelMessage(
+            newStage
+        );
+
 
         updateSlogan();
 
@@ -1926,7 +2405,7 @@ function updatePlayerStage(){
 
 
     while(
-        enemies.length<
+        enemies.length <
         p.stage
     ){
 
@@ -1938,16 +2417,20 @@ function updatePlayerStage(){
 
 
 /* =====================================================
-PANNEAUX
+   PANNEAUX
 ===================================================== */
 
 function updatePanels(){
 
-    const panel1=
-        document.getElementById("panel1");
+    const panel1 =
+        document.getElementById(
+            "panel1"
+        );
 
-    const panel2=
-        document.getElementById("panel2");
+    const panel2 =
+        document.getElementById(
+            "panel2"
+        );
 
 
     panel1.classList.remove(
@@ -1955,59 +2438,85 @@ function updatePanels(){
         "inactive"
     );
 
+
     panel2.classList.remove(
         "active",
         "inactive"
     );
 
 
-    if(selectedMode==="solo"){
+    if(selectedMode === "solo"){
 
-        panel1.classList.add("active");
+        panel1.classList.add(
+            "active"
+        );
 
-        panel2.classList.add("inactive");
+        panel2.classList.add(
+            "inactive"
+        );
+
 
         document
             .getElementById("state1")
-            .textContent="EN JEU";
+            .textContent =
+            "EN JEU";
+
 
         document
             .getElementById("state2")
-            .textContent="MODE SOLO";
+            .textContent =
+            "MODE SOLO";
+
 
         return;
 
     }
 
 
-    if(activePlayer===1){
+    if(activePlayer === 1){
 
-        panel1.classList.add("active");
+        panel1.classList.add(
+            "active"
+        );
 
-        panel2.classList.add("inactive");
+        panel2.classList.add(
+            "inactive"
+        );
+
 
         document
             .getElementById("state1")
-            .textContent="EN JEU";
+            .textContent =
+            "EN JEU";
+
 
         document
             .getElementById("state2")
-            .textContent="EN ATTENTE";
+            .textContent =
+            "EN ATTENTE";
 
     }
     else{
 
-        panel1.classList.add("inactive");
+        panel1.classList.add(
+            "inactive"
+        );
 
-        panel2.classList.add("active");
+        panel2.classList.add(
+            "active"
+        );
+
 
         document
             .getElementById("state1")
-            .textContent="EN ATTENTE";
+            .textContent =
+            "EN ATTENTE";
+
 
         document
             .getElementById("state2")
-            .textContent="EN JEU";
+            .textContent =
+            "EN JEU";
 
     }
 
@@ -2015,49 +2524,61 @@ function updatePanels(){
 
 
 /* =====================================================
-TEMPS FORMAT
+   FORMAT TEMPS
 ===================================================== */
 
 function formatTime(seconds){
 
-    seconds=Math.floor(seconds);
+    seconds =
+        Math.floor(seconds);
 
-    const min=
-        Math.floor(seconds/60);
 
-    const sec=
-        seconds%60;
+    const minutes =
+        Math.floor(
+            seconds / 60
+        );
+
+
+    const secs =
+        seconds % 60;
+
 
     return(
-        String(min).padStart(2,"0")+
-        ":"+
-        String(sec).padStart(2,"0")
+        String(minutes)
+        .padStart(2,"0") +
+        ":" +
+        String(secs)
+        .padStart(2,"0")
     );
 
 }
 
 
 /* =====================================================
-AFFICHAGE
+   AFFICHAGE
 ===================================================== */
 
 function updateAllDisplays(){
 
     document
         .getElementById("score1")
-        .textContent=
-        Math.floor(players[1].score);
+        .textContent =
+        Math.floor(
+            players[1].score
+        );
 
 
     document
         .getElementById("score2")
-        .textContent=
-        Math.floor(players[2].score);
+        .textContent =
+        Math.floor(
+            players[2].score
+        );
 
 
     document
         .getElementById("time1Side")
-        .textContent=
+        .textContent =
         formatTime(
             getPlayerTime(1)
         );
@@ -2065,7 +2586,7 @@ function updateAllDisplays(){
 
     document
         .getElementById("time2Side")
-        .textContent=
+        .textContent =
         formatTime(
             getPlayerTime(2)
         );
@@ -2073,63 +2594,69 @@ function updateAllDisplays(){
 
     document
         .getElementById("stage1Side")
-        .textContent=
+        .textContent =
         players[1].stage;
 
 
     document
         .getElementById("stage2Side")
-        .textContent=
+        .textContent =
         players[2].stage;
 
 
-    const current=
+    const current =
         players[activePlayer];
 
 
     document
         .getElementById("timer")
-        .textContent=
+        .textContent =
         formatTime(
-            getPlayerTime(activePlayer)
+            getPlayerTime(
+                activePlayer
+            )
         );
 
 
     document
         .getElementById("mainScore")
-        .textContent=
-        Math.floor(current.score);
+        .textContent =
+        Math.floor(
+            current.score
+        );
 
 
     document
         .getElementById("stage")
-        .textContent=
+        .textContent =
         current.stage;
 
 
     document
         .getElementById("enemyCount")
-        .textContent=
+        .textContent =
         enemies.length;
 
 }
 
 
 /* =====================================================
-SLOGAN
+   SLOGAN
 ===================================================== */
 
 function updateSlogan(){
 
-    const p=
-        players[activePlayer];
+    const stage =
+        players[activePlayer].stage;
 
 
     document
-        .getElementById("gameSlogan")
-        .textContent=
+        .getElementById(
+            "gameSlogan"
+        )
+        .textContent =
         slogans[
-            (p.stage-1)%
+            (stage - 1) %
             slogans.length
         ];
 
@@ -2137,23 +2664,28 @@ function updateSlogan(){
 
 
 /* =====================================================
-MURS
+   MURS
 ===================================================== */
 
 function isWall(x,y){
 
-    const col=
-        Math.floor(x/tile);
+    const col =
+        Math.floor(
+            x / tile
+        );
 
-    const row=
-        Math.floor(y/tile);
+
+    const row =
+        Math.floor(
+            y / tile
+        );
 
 
     if(
-        row<0||
-        row>=rows||
-        col<0||
-        col>=cols
+        row < 0 ||
+        row >= rows ||
+        col < 0 ||
+        col >= cols
     ){
 
         return true;
@@ -2161,21 +2693,37 @@ function isWall(x,y){
     }
 
 
-    return map[row][col]==="#";
+    return map[row][col] === "#";
 
 }
 
 
 function canMove(x,y){
 
-    const size=8;
+    const size = 8;
+
 
     return(
 
-        !isWall(x-size,y-size)&&
-        !isWall(x+size,y-size)&&
-        !isWall(x-size,y+size)&&
-        !isWall(x+size,y+size)
+        !isWall(
+            x-size,
+            y-size
+        ) &&
+
+        !isWall(
+            x+size,
+            y-size
+        ) &&
+
+        !isWall(
+            x-size,
+            y+size
+        ) &&
+
+        !isWall(
+            x+size,
+            y+size
+        )
 
     );
 
@@ -2183,272 +2731,185 @@ function canMove(x,y){
 
 
 /* =====================================================
-CLAVIER
+   CONTROLES TACTILES
 ===================================================== */
 
-const keys={};
+function setupTouchButtons(){
+
+    document
+        .querySelectorAll(".arrow")
+        .forEach(button=>{
+
+            const direction =
+                button.dataset.direction;
 
 
-document.addEventListener(
-    "keydown",
-    e=>{
+            const start = function(e){
 
-        const key=
-            e.key.toLowerCase();
+                if(e)
+                    e.preventDefault();
 
+                controlKeys[direction] =
+                    true;
 
-        /*
-           Espace = pause.
-        */
-
-        if(key===" "){
-
-            if(
-                gameRunning &&
-                !levelPaused
-            ){
-
-                e.preventDefault();
-
-                togglePause();
-
-            }
-
-            return;
-
-        }
+            };
 
 
-        /*
-           Échap = pause.
-        */
+            const stop = function(e){
 
-        if(key==="escape"){
+                if(e)
+                    e.preventDefault();
 
-            if(gameRunning){
+                controlKeys[direction] =
+                    false;
 
-                e.preventDefault();
-
-                togglePause();
-
-            }
-
-            return;
-
-        }
+            };
 
 
-        keys[key]=true;
-
-    }
-);
-
-
-document.addEventListener(
-    "keyup",
-    e=>{
-
-        keys[
-            e.key.toLowerCase()
-        ]=false;
-
-    }
-);
+            button.addEventListener(
+                "mousedown",
+                start
+            );
 
 
-/* =====================================================
-CONTROLES ACTIFS
-===================================================== */
-
-function keyPressed(action){
-
-    const set=
-        controls[activePlayer];
+            button.addEventListener(
+                "mouseup",
+                stop
+            );
 
 
-    return(
-        keys[set[action]]===true
-    );
+            button.addEventListener(
+                "mouseleave",
+                stop
+            );
+
+
+            button.addEventListener(
+                "touchstart",
+                start,
+                {passive:false}
+            );
+
+
+            button.addEventListener(
+                "touchend",
+                stop,
+                {passive:false}
+            );
+
+        });
 
 }
 
 
-/* =====================================================
-BOUTONS
-===================================================== */
-
-const controlKeys={
-
-    up:false,
-    down:false,
-    left:false,
-    right:false
-
-};
-
-
-document
-    .querySelectorAll(".arrow")
-    .forEach(button=>{
-
-        const direction=
-            button.dataset.direction;
-
-
-        const start=()=>{
-
-            controlKeys[direction]=true;
-
-        };
-
-
-        const stop=()=>{
-
-            controlKeys[direction]=false;
-
-        };
-
-
-        button.addEventListener(
-            "mousedown",
-            start
-        );
-
-
-        button.addEventListener(
-            "mouseup",
-            stop
-        );
-
-
-        button.addEventListener(
-            "mouseleave",
-            stop
-        );
-
-
-        button.addEventListener(
-            "touchstart",
-            e=>{
-
-                e.preventDefault();
-
-                start();
-
-            },
-            {passive:false}
-        );
-
-
-        button.addEventListener(
-            "touchend",
-            e=>{
-
-                e.preventDefault();
-
-                stop();
-
-            },
-            {passive:false}
-        );
-
-    });
+setupTouchButtons();
 
 
 /* =====================================================
-JOYSTICK
+   JOYSTICK
 ===================================================== */
 
-const joystick=
-    document.getElementById("joystick");
+function moveJoystick(
+    clientX,
+    clientY
+){
 
-const joystickKnob=
-    document.getElementById("joystickKnob");
-
-
-let joystickActive=false;
-
-let joystickX=0;
-
-let joystickY=0;
-
-
-function moveJoystick(clientX,clientY){
-
-    const rect=
+    const rect =
         joystick.getBoundingClientRect();
 
 
-    const cx=
-        rect.left+
-        rect.width/2;
+    const centerX =
+        rect.left +
+        rect.width / 2;
 
 
-    const cy=
-        rect.top+
-        rect.height/2;
+    const centerY =
+        rect.top +
+        rect.height / 2;
 
 
-    let dx=clientX-cx;
-
-    let dy=clientY-cy;
-
-
-    const max=35;
+    let dx =
+        clientX - centerX;
 
 
-    const distance=
-        Math.sqrt(dx*dx+dy*dy);
+    let dy =
+        clientY - centerY;
 
 
-    if(distance>max){
+    const max = 35;
 
-        dx=
-            dx/distance*
+
+    const distance =
+        Math.sqrt(
+            dx*dx +
+            dy*dy
+        );
+
+
+    if(distance > max){
+
+        dx =
+            dx / distance *
             max;
 
-        dy=
-            dy/distance*
+
+        dy =
+            dy / distance *
             max;
 
     }
 
 
-    joystickKnob.style.left=
-        (rect.width/2-21+dx)+"px";
+    joystickKnob.style.left =
+        (
+            rect.width / 2 -
+            21 +
+            dx
+        ) + "px";
 
 
-    joystickKnob.style.top=
-        (rect.height/2-21+dy)+"px";
+    joystickKnob.style.top =
+        (
+            rect.height / 2 -
+            21 +
+            dy
+        ) + "px";
 
 
-    joystickX=dx/max;
+    joystickX =
+        dx / max;
 
-    joystickY=dy/max;
+
+    joystickY =
+        dy / max;
 
 }
 
 
 function resetJoystick(){
 
-    joystickActive=false;
+    joystickActive = false;
 
-    joystickX=0;
+    joystickX = 0;
 
-    joystickY=0;
+    joystickY = 0;
 
-    joystickKnob.style.left="34px";
 
-    joystickKnob.style.top="34px";
+    joystickKnob.style.left =
+        "34px";
+
+
+    joystickKnob.style.top =
+        "34px";
 
 }
 
 
 joystick.addEventListener(
     "mousedown",
-    e=>{
+    function(e){
 
-        joystickActive=true;
+        joystickActive = true;
 
         moveJoystick(
             e.clientX,
@@ -2461,7 +2922,7 @@ joystick.addEventListener(
 
 document.addEventListener(
     "mousemove",
-    e=>{
+    function(e){
 
         if(joystickActive){
 
@@ -2484,17 +2945,20 @@ document.addEventListener(
 
 joystick.addEventListener(
     "touchstart",
-    e=>{
+    function(e){
 
         e.preventDefault();
 
-        joystickActive=true;
+        joystickActive = true;
 
-        const t=e.touches[0];
+
+        const touch =
+            e.touches[0];
+
 
         moveJoystick(
-            t.clientX,
-            t.clientY
+            touch.clientX,
+            touch.clientY
         );
 
     },
@@ -2504,18 +2968,22 @@ joystick.addEventListener(
 
 joystick.addEventListener(
     "touchmove",
-    e=>{
+    function(e){
 
         e.preventDefault();
+
 
         if(!joystickActive)
             return;
 
-        const t=e.touches[0];
+
+        const touch =
+            e.touches[0];
+
 
         moveJoystick(
-            t.clientX,
-            t.clientY
+            touch.clientX,
+            touch.clientY
         );
 
     },
@@ -2525,7 +2993,7 @@ joystick.addEventListener(
 
 joystick.addEventListener(
     "touchend",
-    e=>{
+    function(e){
 
         e.preventDefault();
 
@@ -2537,18 +3005,18 @@ joystick.addEventListener(
 
 
 /* =====================================================
-RESET CONTROLES
+   RESET CONTROLES
 ===================================================== */
 
 function resetControls(){
 
-    controlKeys.up=false;
+    controlKeys.up = false;
 
-    controlKeys.down=false;
+    controlKeys.down = false;
 
-    controlKeys.left=false;
+    controlKeys.left = false;
 
-    controlKeys.right=false;
+    controlKeys.right = false;
 
     resetJoystick();
 
@@ -2556,110 +3024,121 @@ function resetControls(){
 
 
 /* =====================================================
-MOUVEMENT
+   TOUCHE DIRECTION
+===================================================== */
+
+function keyPressed(action){
+
+    const key =
+        controls[
+            activePlayer
+        ][action];
+
+
+    return keys[key] === true;
+
+}
+
+
+/* =====================================================
+   MOUVEMENT JOUEUR
 ===================================================== */
 
 function movePlayer(){
 
-    let dx=0;
+    let dx = 0;
 
-    let dy=0;
+    let dy = 0;
 
-
-    /*
-       Touches personnalisées.
-    */
 
     if(
-        keyPressed("up")||
+        keyPressed("up") ||
         controlKeys.up
     ){
 
-        dy-=1;
+        dy--;
 
     }
 
 
     if(
-        keyPressed("down")||
+        keyPressed("down") ||
         controlKeys.down
     ){
 
-        dy+=1;
+        dy++;
 
     }
 
 
     if(
-        keyPressed("left")||
+        keyPressed("left") ||
         controlKeys.left
     ){
 
-        dx-=1;
+        dx--;
 
     }
 
 
     if(
-        keyPressed("right")||
+        keyPressed("right") ||
         controlKeys.right
     ){
 
-        dx+=1;
+        dx++;
 
     }
 
 
-    /*
-       Joystick.
-    */
+    dx += joystickX;
 
-    dx+=joystickX;
-
-    dy+=joystickY;
+    dy += joystickY;
 
 
-    const length=
+    const length =
         Math.sqrt(
-            dx*dx+
+            dx*dx +
             dy*dy
         );
 
 
-    if(length>0){
+    if(length > 0){
 
-        dx/=length;
+        dx /= length;
 
-        dy/=length;
-
-
-        dx*=player.speed;
-
-        dy*=player.speed;
+        dy /= length;
 
 
-        player.walk+=.35;
+        dx *= player.speed;
+
+        dy *= player.speed;
 
 
-        players[activePlayer].score+=.03;
+        player.walk += .35;
+
+
+        players[
+            activePlayer
+        ].score += .03;
 
     }
 
 
     /*
-       Collision séparée X/Y.
-       Cela permet de glisser contre les murs
-       au lieu de rester complètement coincé.
+       Collision X puis Y.
+       Le joueur peut glisser contre
+       les murs.
     */
 
     if(
         canMove(
-            player.x+dx,
+            player.x + dx,
             player.y
         )
     ){
 
-        player.x+=dx;
+        player.x += dx;
 
     }
 
@@ -2667,11 +3146,11 @@ function movePlayer(){
     if(
         canMove(
             player.x,
-            player.y+dy
+            player.y + dy
         )
     ){
 
-        player.y+=dy;
+        player.y += dy;
 
     }
 
@@ -2679,38 +3158,38 @@ function movePlayer(){
 
 
 /* =====================================================
-CHEMIN ENNEMI
+   PATHFINDING
 ===================================================== */
 
 function findPath(enemy){
 
-    const sx=
+    const sx =
         Math.floor(
-            enemy.x/tile
+            enemy.x / tile
         );
 
 
-    const sy=
+    const sy =
         Math.floor(
-            enemy.y/tile
+            enemy.y / tile
         );
 
 
-    const tx=
+    const tx =
         Math.floor(
-            player.x/tile
+            player.x / tile
         );
 
 
-    const ty=
+    const ty =
         Math.floor(
-            player.y/tile
+            player.y / tile
         );
 
 
     if(
-        sx===tx&&
-        sy===ty
+        sx === tx &&
+        sy === ty
     ){
 
         return null;
@@ -2718,27 +3197,29 @@ function findPath(enemy){
     }
 
 
-    const queue=[
+    const queue = [
         [sx,sy]
     ];
 
 
-    const visited=
+    const visited =
         new Set();
 
 
-    const parent=
+    const parent =
         new Map();
 
 
-    const startKey=
-        sx+","+sy;
+    const startKey =
+        sx + "," + sy;
 
 
-    visited.add(startKey);
+    visited.add(
+        startKey
+    );
 
 
-    const dirs=[
+    const dirs = [
 
         [1,0],
         [-1,0],
@@ -2748,26 +3229,29 @@ function findPath(enemy){
     ];
 
 
-    let found=false;
+    let found = false;
 
 
     while(queue.length){
 
-        const current=
+        const current =
             queue.shift();
 
 
-        const x=current[0];
+        const x =
+            current[0];
 
-        const y=current[1];
+
+        const y =
+            current[1];
 
 
         if(
-            x===tx&&
-            y===ty
+            x === tx &&
+            y === ty
         ){
 
-            found=true;
+            found = true;
 
             break;
 
@@ -2778,16 +3262,19 @@ function findPath(enemy){
             const d of dirs
         ){
 
-            const nx=x+d[0];
+            const nx =
+                x + d[0];
 
-            const ny=y+d[1];
+
+            const ny =
+                y + d[1];
 
 
             if(
-                nx<0||
-                ny<0||
-                nx>=cols||
-                ny>=rows
+                nx < 0 ||
+                ny < 0 ||
+                nx >= cols ||
+                ny >= rows
             ){
 
                 continue;
@@ -2796,7 +3283,7 @@ function findPath(enemy){
 
 
             if(
-                map[ny][nx]==="#"
+                map[ny][nx] === "#"
             ){
 
                 continue;
@@ -2804,8 +3291,8 @@ function findPath(enemy){
             }
 
 
-            const key=
-                nx+","+ny;
+            const key =
+                nx + "," + ny;
 
 
             if(
@@ -2822,7 +3309,7 @@ function findPath(enemy){
 
             parent.set(
                 key,
-                x+","+y
+                x + "," + y
             );
 
 
@@ -2840,23 +3327,27 @@ function findPath(enemy){
         return null;
 
 
-    let current=
-        tx+","+ty;
+    let current =
+        tx + "," + ty;
 
 
-    const path=[];
+    const path = [];
 
 
     while(
-        current!==
+        current !==
         startKey
     ){
 
-        path.unshift(current);
+        path.unshift(
+            current
+        );
 
 
-        current=
-            parent.get(current);
+        current =
+            parent.get(
+                current
+            );
 
 
         if(!current)
@@ -2869,11 +3360,11 @@ function findPath(enemy){
         return null;
 
 
-    const next=
+    const next =
         path[0].split(",");
 
 
-    return{
+    return {
 
         x:Number(next[0]),
 
@@ -2885,92 +3376,89 @@ function findPath(enemy){
 
 
 /* =====================================================
-MOUVEMENT ENNEMI
+   MOUVEMENT ENNEMI
 ===================================================== */
 
 function moveEnemy(enemy){
 
-    /*
-       Le chemin n'est recalculé que
-       toutes les 100 ms.
+    const now =
+        performance.now();
 
-       Ça économise énormément de CPU.
+
+    /*
+       Pas de pathfinding à chaque frame.
+       Cela réduit énormément le CPU.
     */
 
     if(
-        performance.now()>=
+        now >=
         enemy.nextPathTime
     ){
 
-        const next=
+        const next =
             findPath(enemy);
 
 
         if(next){
 
-            enemy.targetX=
-                next.x*tile+
-                tile/2;
+            enemy.targetX =
+                next.x * tile +
+                tile / 2;
 
 
-            enemy.targetY=
-                next.y*tile+
-                tile/2;
+            enemy.targetY =
+                next.y * tile +
+                tile / 2;
 
         }
 
 
-        enemy.nextPathTime=
-            performance.now()+
+        enemy.nextPathTime =
+            now +
             PATH_INTERVAL;
 
     }
 
 
-    const dx=
-        enemy.targetX-
+    const dx =
+        enemy.targetX -
         enemy.x;
 
 
-    const dy=
-        enemy.targetY-
+    const dy =
+        enemy.targetY -
         enemy.y;
 
 
-    const distance=
+    const distance =
         Math.sqrt(
-            dx*dx+
+            dx*dx +
             dy*dy
         );
 
 
-    if(distance>.5){
+    if(distance > .5){
 
-        const move=
+        const movement =
             Math.min(
                 enemy.speed,
                 distance
             );
 
 
-        enemy.x+=
-            dx/distance*
-            move;
+        enemy.x +=
+            dx / distance *
+            movement;
 
 
-        enemy.y+=
-            dy/distance*
-            move;
+        enemy.y +=
+            dy / distance *
+            movement;
 
     }
     else{
 
-        /*
-           Si la cible est atteinte,
-           on force une nouvelle recherche.
-        */
-
-        enemy.nextPathTime=0;
+        enemy.nextPathTime = 0;
 
     }
 
@@ -2978,7 +3466,7 @@ function moveEnemy(enemy){
 
 
 /* =====================================================
-COLLISION
+   COLLISION
 ===================================================== */
 
 function checkCollision(){
@@ -2987,24 +3475,24 @@ function checkCollision(){
         const enemy of enemies
     ){
 
-        const dx=
-            player.x-
+        const dx =
+            player.x -
             enemy.x;
 
 
-        const dy=
-            player.y-
+        const dy =
+            player.y -
             enemy.y;
 
 
-        const distance=
+        const distance =
             Math.sqrt(
-                dx*dx+
+                dx*dx +
                 dy*dy
             );
 
 
-        if(distance<23){
+        if(distance < 23){
 
             playerCaught();
 
@@ -3018,24 +3506,33 @@ function checkCollision(){
 
 
 /* =====================================================
-JOUEUR ATTRAPE
+   JOUEUR ATTRAPE
 ===================================================== */
 
 function playerCaught(){
 
-    if(selectedMode==="solo"){
+    if(selectedMode === "solo"){
 
         saveActivePlayer();
 
+
         loseGame(
-            player1Name+
+            player1Name +
             " a été attrapé !"
         );
+
 
         return;
 
     }
 
+
+    /*
+       En duo :
+       le joueur touché perd son tour,
+       puis l'autre commence avec SA
+       propre progression.
+    */
 
     switchPlayer();
 
@@ -3043,7 +3540,7 @@ function playerCaught(){
 
 
 /* =====================================================
-PAUSE
+   PAUSE
 ===================================================== */
 
 function togglePause(){
@@ -3056,17 +3553,17 @@ function togglePause(){
         return;
 
 
-    manualPaused=
+    manualPaused =
         !manualPaused;
 
 
-    const overlay=
+    const overlay =
         document.getElementById(
             "pauseOverlay"
         );
 
 
-    const button=
+    const button =
         document.getElementById(
             "pauseButton"
         );
@@ -3074,24 +3571,50 @@ function togglePause(){
 
     if(manualPaused){
 
-        overlay.style.display="flex";
-
-        button.textContent="▶ REPRENDRE";
+        /*
+           On sauvegarde la progression
+           avant de mettre en pause.
+        */
 
         saveActivePlayer();
 
+
         resetControls();
+
+
+        overlay.style.display =
+            "flex";
+
+
+        button.textContent =
+            "▶ REPRENDRE";
+
 
     }
     else{
 
-        players[activePlayer].lastStart=
+        /*
+           On recommence le compteur
+           à partir de la progression
+           sauvegardée.
+        */
+
+        players[
+            activePlayer
+        ].lastStart =
             Date.now();
 
 
-        overlay.style.display="none";
+        overlay.style.display =
+            "none";
 
-        button.textContent="⏸ PAUSE";
+
+        button.textContent =
+            "⏸ PAUSE";
+
+
+        lastFrameTime =
+            performance.now();
 
 
         requestAnimationFrame(
@@ -3104,16 +3627,14 @@ function togglePause(){
 
 
 /* =====================================================
-DESSIN MAP
+   DESSIN MAP
 ===================================================== */
 
 function drawMap(){
 
-    /*
-       Fond.
-    */
+    ctx.fillStyle =
+        "#050505";
 
-    ctx.fillStyle="#050505";
 
     ctx.fillRect(
         0,
@@ -3123,13 +3644,30 @@ function drawMap(){
     );
 
 
-    for(let y=0;y<rows;y++){
+    /*
+       Murs simples.
+       Aucun effet lourd.
+    */
 
-        for(let x=0;x<cols;x++){
+    ctx.fillStyle =
+        "#123bff";
 
-            if(map[y][x]==="#"){
 
-                ctx.fillStyle="#123bff";
+    for(
+        let y=0;
+        y<rows;
+        y++
+    ){
+
+        for(
+            let x=0;
+            x<cols;
+            x++
+        ){
+
+            if(
+                map[y][x] === "#"
+            ){
 
                 ctx.fillRect(
                     x*tile,
@@ -3148,7 +3686,7 @@ function drawMap(){
 
 
 /* =====================================================
-DESSIN JOUEUR
+   DESSIN JOUEUR
 ===================================================== */
 
 function drawPlayer(){
@@ -3162,8 +3700,13 @@ function drawPlayer(){
     );
 
 
-    ctx.fillStyle="#00aaff";
+    ctx.fillStyle =
+        "#00aaff";
 
+
+    /*
+       Tête
+    */
 
     ctx.beginPath();
 
@@ -3178,6 +3721,10 @@ function drawPlayer(){
     ctx.fill();
 
 
+    /*
+       Corps
+    */
+
     ctx.fillRect(
         -9,
         2,
@@ -3186,17 +3733,19 @@ function drawPlayer(){
     );
 
 
-    ctx.strokeStyle="#00aaff";
-
-    ctx.lineWidth=5;
-
-    ctx.lineCap="round";
+    ctx.strokeStyle =
+        "#00aaff";
 
 
-    const arm=
+    ctx.lineWidth = 5;
+
+    ctx.lineCap = "round";
+
+
+    const arm =
         Math.sin(
             player.walk
-        )*5;
+        ) * 5;
 
 
     ctx.beginPath();
@@ -3205,7 +3754,7 @@ function drawPlayer(){
 
     ctx.lineTo(
         -12,
-        12+arm
+        12 + arm
     );
 
     ctx.stroke();
@@ -3217,16 +3766,16 @@ function drawPlayer(){
 
     ctx.lineTo(
         12,
-        12-arm
+        12 - arm
     );
 
     ctx.stroke();
 
 
-    const leg=
+    const leg =
         Math.sin(
             player.walk
-        )*7;
+        ) * 7;
 
 
     ctx.beginPath();
@@ -3235,7 +3784,7 @@ function drawPlayer(){
 
     ctx.lineTo(
         -7,
-        27+leg
+        27 + leg
     );
 
     ctx.stroke();
@@ -3247,7 +3796,7 @@ function drawPlayer(){
 
     ctx.lineTo(
         7,
-        27-leg
+        27 - leg
     );
 
     ctx.stroke();
@@ -3259,7 +3808,7 @@ function drawPlayer(){
 
 
 /* =====================================================
-DESSIN ENNEMI
+   DESSIN ENNEMI
 ===================================================== */
 
 function drawEnemy(enemy){
@@ -3273,7 +3822,12 @@ function drawEnemy(enemy){
     );
 
 
-    ctx.fillStyle="#e32626";
+    /*
+       Tête rouge.
+    */
+
+    ctx.fillStyle =
+        "#e32626";
 
 
     ctx.beginPath();
@@ -3289,7 +3843,12 @@ function drawEnemy(enemy){
     ctx.fill();
 
 
-    ctx.fillStyle="white";
+    /*
+       Yeux
+    */
+
+    ctx.fillStyle =
+        "white";
 
 
     ctx.beginPath();
@@ -3318,7 +3877,8 @@ function drawEnemy(enemy){
     ctx.fill();
 
 
-    ctx.fillStyle="black";
+    ctx.fillStyle =
+        "black";
 
 
     ctx.beginPath();
@@ -3347,9 +3907,15 @@ function drawEnemy(enemy){
     ctx.fill();
 
 
-    ctx.strokeStyle="black";
+    /*
+       Sourcils méchants.
+    */
 
-    ctx.lineWidth=3;
+    ctx.strokeStyle =
+        "black";
+
+
+    ctx.lineWidth = 3;
 
 
     ctx.beginPath();
@@ -3369,6 +3935,10 @@ function drawEnemy(enemy){
 
     ctx.stroke();
 
+
+    /*
+       Bouche.
+    */
 
     ctx.beginPath();
 
@@ -3390,16 +3960,16 @@ function drawEnemy(enemy){
 
 
 /* =====================================================
-GAME OVER
+   GAME OVER
 ===================================================== */
 
 function loseGame(message){
 
-    gameRunning=false;
+    gameRunning = false;
 
-    manualPaused=false;
+    manualPaused = false;
 
-    levelPaused=false;
+    levelPaused = false;
 
     resetControls();
 
@@ -3407,55 +3977,72 @@ function loseGame(message){
 
 
     document
-        .getElementById("gameOverTitle")
-        .textContent="GAME OVER";
+        .getElementById(
+            "gameOverTitle"
+        )
+        .textContent =
+        "GAME OVER";
 
 
     document
-        .getElementById("loserText")
-        .textContent=message;
+        .getElementById(
+            "loserText"
+        )
+        .textContent =
+        message;
 
 
     document
-        .getElementById("gameOver")
-        .style.display="flex";
+        .getElementById(
+            "gameOver"
+        )
+        .style.display =
+        "flex";
 
 }
 
 
 /* =====================================================
-30 MINUTES
+   30 MINUTES
 ===================================================== */
 
 function check30Minutes(){
 
     if(
-        getPlayerTime(activePlayer)>=
-        MAX_TIME
+        getPlayerTime(
+            activePlayer
+        ) >= 1800
     ){
 
         saveActivePlayer();
 
-        gameRunning=false;
+        gameRunning = false;
 
         resetControls();
 
 
         document
-            .getElementById("gameOverTitle")
-            .textContent=
+            .getElementById(
+                "gameOverTitle"
+            )
+            .textContent =
             "🏆 FIN DE LA PARTIE";
 
 
         document
-            .getElementById("loserText")
-            .textContent=
+            .getElementById(
+                "loserText"
+            )
+            .textContent =
             "30 minutes atteintes !";
 
 
         document
-            .getElementById("gameOver")
-            .style.display="flex";
+            .getElementById(
+                "gameOver"
+            )
+            .style.display =
+            "flex";
 
     }
 
@@ -3463,7 +4050,7 @@ function check30Minutes(){
 
 
 /* =====================================================
-FPS
+   FPS COMPTEUR
 ===================================================== */
 
 function updateFPS(){
@@ -3471,36 +4058,37 @@ function updateFPS(){
     fpsFrames++;
 
 
-    const now=
+    const now =
         performance.now();
 
 
     if(
-        now-fpsLast>=500
+        now - fpsLastTime >=
+        500
     ){
 
-        currentFPS=
+        currentFPS =
             Math.round(
-                fpsFrames/
-                ((now-fpsLast)/1000)
+                fpsFrames /
+                (
+                    (now -
+                     fpsLastTime)
+                    / 1000
+                )
             );
 
 
-        /*
-           On limite l'affichage
-           pour éviter de modifier
-           le DOM à chaque frame.
-        */
-
         document
-            .getElementById("fps")
-            .textContent=
+            .getElementById(
+                "fps"
+            )
+            .textContent =
             currentFPS;
 
 
-        fpsFrames=0;
+        fpsFrames = 0;
 
-        fpsLast=now;
+        fpsLastTime = now;
 
     }
 
@@ -3508,27 +4096,20 @@ function updateFPS(){
 
 
 /* =====================================================
-BOUCLE PRINCIPALE ULTRA LÉGÈRE
+   UNE IMAGE DU JEU
 ===================================================== */
 
-function gameLoop(){
+function runGameFrame(){
 
-    if(!gameRunning)
-        return;
-
-
-    updateFPS();
-
-
-    /*
-       Pause manuelle.
-    */
-
-    if(manualPaused){
+    if(
+        manualPaused ||
+        levelPaused
+    ){
 
         drawMap();
 
         drawPlayer();
+
 
         for(
             const enemy of enemies
@@ -3538,28 +4119,6 @@ function gameLoop(){
 
         }
 
-        return;
-
-    }
-
-
-    /*
-       Pause passage de niveau.
-    */
-
-    if(levelPaused){
-
-        drawMap();
-
-        drawPlayer();
-
-        for(
-            const enemy of enemies
-        ){
-
-            drawEnemy(enemy);
-
-        }
 
         return;
 
@@ -3567,14 +4126,14 @@ function gameLoop(){
 
 
     /*
-       Joueur.
+       Joueur
     */
 
     movePlayer();
 
 
     /*
-       Ennemis.
+       Ennemis
     */
 
     for(
@@ -3587,28 +4146,28 @@ function gameLoop(){
 
 
     /*
-       Collision.
+       Collision
     */
 
     checkCollision();
 
 
     /*
-       Niveau.
+       Niveau
     */
 
     updatePlayerStage();
 
 
     /*
-       Affichage.
+       Interface
     */
 
     updateAllDisplays();
 
 
     /*
-       Dessin.
+       Dessin
     */
 
     drawMap();
@@ -3626,17 +4185,113 @@ function gameLoop(){
 
 
     /*
-       Fin.
+       Fin de partie
     */
 
     check30Minutes();
 
 
+    /*
+       FPS
+    */
+
+    updateFPS();
+
+}
+
+
+/* =====================================================
+   BOUCLE PRINCIPALE AVEC LIMITE FPS
+===================================================== */
+
+function gameLoop(timestamp){
+
+    if(!gameRunning)
+        return;
+
+
+    /*
+       PAUSE :
+       on ne fait pas avancer le jeu.
+    */
+
+    if(manualPaused){
+
+        runGameFrame();
+
+        return;
+
+    }
+
+
+    if(levelPaused){
+
+        runGameFrame();
+
+        return;
+
+    }
+
+
+    /*
+       ILLIMITE
+    */
+
+    if(fpsLimit === 0){
+
+        runGameFrame();
+
+        requestAnimationFrame(
+            gameLoop
+        );
+
+        return;
+
+    }
+
+
+    /*
+       Temps entre deux images.
+
+       30  FPS = 33.33 ms
+       60  FPS = 16.67 ms
+       120 FPS = 8.33 ms
+       240 FPS = 4.17 ms
+       360 FPS = 2.78 ms
+    */
+
+    const frameDuration =
+        1000 / fpsLimit;
+
+
+    /*
+       Pas encore assez de temps
+       depuis la dernière image.
+    */
+
     if(
-        gameRunning &&
-        !manualPaused &&
-        !levelPaused
+        timestamp -
+        lastFrameTime <
+        frameDuration
     ){
+
+        requestAnimationFrame(
+            gameLoop
+        );
+
+        return;
+
+    }
+
+
+    lastFrameTime =
+        timestamp;
+
+
+    runGameFrame();
+
+
+    if(gameRunning){
 
         requestAnimationFrame(
             gameLoop
@@ -3645,6 +4300,13 @@ function gameLoop(){
     }
 
 }
+
+
+/* =====================================================
+   CHARGEMENT FINAL
+===================================================== */
+
+loadSettings();
 
 </script>
 
