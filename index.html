@@ -18,6 +18,8 @@ body{
 
 button,input,select{font:inherit}
 
+/* ================= LANCEUR ================= */
+
 #launcher{
     position:fixed;
     inset:0;
@@ -87,7 +89,9 @@ input,select{
     background:#174bff;
 }
 
-#player2Box{display:none}
+#player2Box{
+    display:none;
+}
 
 .actions{
     display:flex;
@@ -105,10 +109,19 @@ input,select{
     cursor:pointer;
 }
 
-#playBtn{background:#008cff}
-#settingsBtn{background:#333}
+#playBtn{
+    background:#008cff;
+}
 
-#settings{display:none}
+#settingsBtn{
+    background:#333;
+}
+
+/* ================= PARAMETRES ================= */
+
+#settings{
+    display:none;
+}
 
 .settingsTitle{
     text-align:center;
@@ -137,7 +150,7 @@ input,select{
 
 .keyButton.waiting{
     background:#174bff;
-    border-color:#fff;
+    border-color:white;
 }
 
 .keyButton b{
@@ -175,7 +188,7 @@ input,select{
     background:#333;
 }
 
-/* ================= GAME ================= */
+/* ================= JEU ================= */
 
 #game{
     display:none;
@@ -302,7 +315,7 @@ canvas{
     font-weight:bold;
 }
 
-/* CONTROLES */
+/* ================= CONTROLES ================= */
 
 #controls{
     position:fixed;
@@ -340,10 +353,25 @@ canvas{
     background:#174bff;
 }
 
-.up{top:0;left:41px}
-.down{bottom:0;left:41px}
-.left{top:41px;left:0}
-.right{top:41px;right:0}
+.up{
+    top:0;
+    left:41px;
+}
+
+.down{
+    bottom:0;
+    left:41px;
+}
+
+.left{
+    top:41px;
+    left:0;
+}
+
+.right{
+    top:41px;
+    right:0;
+}
 
 #joystick{
     width:110px;
@@ -366,7 +394,7 @@ canvas{
     top:32px;
 }
 
-/* OVERLAYS */
+/* ================= OVERLAYS ================= */
 
 .overlay{
     position:fixed;
@@ -406,525 +434,862 @@ canvas{
 #gameOverBox h2{
     color:#e32626;
 }
+
+
+/* =====================================================
+   📱 VERSION TELEPHONE UNIQUEMENT
+   ===================================================== */
+
+@media (max-width:600px){
+
+    #titleArea{
+        height:55px;
+    }
+
+    #titleArea h1{
+        font-size:22px;
+        margin:3px 0;
+    }
+
+    #gameSlogan{
+        font-size:11px;
+    }
+
+    #mainArea{
+        height:calc(100vh - 55px);
+        gap:0;
+        align-items:center;
+        justify-content:center;
+    }
+
+    /*
+       Le labyrinthe est réduit uniquement
+       sur téléphone.
+    */
+
+    #center{
+        transform:scale(.70);
+        transform-origin:center center;
+    }
+
+    #topBar{
+        width:672px;
+        max-width:none;
+    }
+
+    .side{
+        display:none;
+    }
+
+    #controls{
+        width:235px;
+        height:108px;
+        bottom:8px;
+        left:8px;
+        transform:scale(.80);
+        transform-origin:bottom left;
+    }
+
+    #pauseButton{
+        top:7px;
+        right:7px;
+        padding:6px 9px;
+        font-size:11px;
+    }
+
+    #fpsBox{
+        top:43px;
+        right:7px;
+        padding:5px 7px;
+        font-size:10px;
+    }
+
+    #canvasContainer{
+        border-width:2px;
+    }
+}
+
+
+/* Téléphones très petits */
+
+@media (max-width:380px){
+
+    #center{
+        transform:scale(.60);
+    }
+
+    #controls{
+        transform:scale(.70);
+    }
+
+    #fpsBox{
+        font-size:9px;
+    }
+
+}
+
+
+/* Téléphone en paysage */
+
+@media (max-width:900px) and (orientation:landscape){
+
+    #titleArea{
+        height:42px;
+    }
+
+    #titleArea h1{
+        font-size:19px;
+    }
+
+    #gameSlogan{
+        display:none;
+    }
+
+    #mainArea{
+        height:calc(100vh - 42px);
+    }
+
+    #center{
+        transform:scale(.62);
+    }
+
+    #controls{
+        transform:scale(.65);
+        bottom:3px;
+        left:3px;
+    }
+
+    .side{
+        display:none;
+    }
+
+}
 </style>
 </head>
 
 <body>
 
-<!-- ================= ATELIER ================= -->
+<!-- =====================================================
+     LANCEUR
+===================================================== -->
 
 <div id="launcher">
 
-    <div class="box" id="home">
+<div class="box" id="home">
 
-        <div class="title">Pac-Man 2.0</div>
+<div class="title">
+Pac-Man 2.0
+</div>
 
-        <div class="slogan">
-            « Cours. Survis. Ne te fais jamais attraper. »
-        </div>
+<div class="slogan">
+« Cours. Survis. Ne te fais jamais attraper. »
+</div>
 
-        <label>Pseudo joueur 1</label>
-        <input id="name1" placeholder="Ton pseudo">
+<label>Pseudo joueur 1</label>
 
-        <label>Langue</label>
-        <select id="language">
-            <option value="fr">Français</option>
-            <option value="ar">العربية</option>
-            <option value="es">Español</option>
-        </select>
-
-        <label>Région</label>
-        <select id="region">
-            <option>Maroc</option>
-            <option>France</option>
-            <option>Espagne</option>
-            <option>États-Unis</option>
-            <option>Autre</option>
-        </select>
-
-        <label>Mode</label>
-
-        <div class="mode">
-            <button id="solo" class="active" onclick="setMode('solo')">
-                👤 Solo
-            </button>
-
-            <button id="duo" onclick="setMode('duo')">
-                👥 Duo
-            </button>
-        </div>
-
-        <div id="player2Box">
-
-            <label>Pseudo joueur 2</label>
-
-            <input id="name2" placeholder="Pseudo joueur 2">
-
-        </div>
-
-        <div class="actions">
-
-            <button id="settingsBtn" onclick="openSettings()">
-                ⚙️ PARAMÈTRES
-            </button>
-
-            <button id="playBtn" onclick="startGame()">
-                JOUER
-            </button>
-
-        </div>
-
-    </div>
+<input id="name1" placeholder="Ton pseudo">
 
 
-    <!-- ================= PARAMETRES ================= -->
+<label>Langue</label>
 
-    <div class="box" id="settings">
+<select id="language">
 
-        <h2 class="settingsTitle">
-            ⚙️ PARAMÈTRES
-        </h2>
+<option value="fr">Français</option>
+<option value="ar">العربية</option>
+<option value="es">Español</option>
 
-        <label>Limite FPS</label>
-
-        <select id="fpsSelect">
-            <option value="30">30 FPS</option>
-            <option value="60">60 FPS</option>
-            <option value="90">90 FPS</option>
-            <option value="120">120 FPS</option>
-            <option value="180">180 FPS</option>
-            <option value="240">240 FPS</option>
-            <option value="360">360 FPS</option>
-            <option value="0">Illimité</option>
-        </select>
-
-        <p class="help">
-            Le compteur FPS du jeu indique maintenant
-            la fréquence sélectionnée pour les modes limités.
-            En mode illimité, il indique les FPS réellement obtenus.
-        </p>
-
-        <h3>🎮 Joueur 1</h3>
-
-        <div class="keyGrid">
-
-            <button class="keyButton"
-                    data-player="1"
-                    data-action="up">
-
-                Avancer :
-                <b id="p1up">Z</b>
-
-            </button>
-
-            <button class="keyButton"
-                    data-player="1"
-                    data-action="down">
-
-                Reculer :
-                <b id="p1down">S</b>
-
-            </button>
-
-            <button class="keyButton"
-                    data-player="1"
-                    data-action="left">
-
-                Gauche :
-                <b id="p1left">Q</b>
-
-            </button>
-
-            <button class="keyButton"
-                    data-player="1"
-                    data-action="right">
-
-                Droite :
-                <b id="p1right">D</b>
-
-            </button>
-
-        </div>
+</select>
 
 
-        <h3>🎮 Joueur 2</h3>
+<label>Région</label>
 
-        <div class="keyGrid">
+<select id="region">
 
-            <button class="keyButton"
-                    data-player="2"
-                    data-action="up">
+<option>Maroc</option>
+<option>France</option>
+<option>Espagne</option>
+<option>États-Unis</option>
+<option>Autre</option>
 
-                Avancer :
-                <b id="p2up">↑</b>
+</select>
 
-            </button>
 
-            <button class="keyButton"
-                    data-player="2"
-                    data-action="down">
+<label>Mode</label>
 
-                Reculer :
-                <b id="p2down">↓</b>
+<div class="mode">
 
-            </button>
+<button
+id="solo"
+class="active"
+onclick="setMode('solo')">
+👤 Solo
+</button>
 
-            <button class="keyButton"
-                    data-player="2"
-                    data-action="left">
-
-                Gauche :
-                <b id="p2left">←</b>
-
-            </button>
-
-            <button class="keyButton"
-                    data-player="2"
-                    data-action="right">
-
-                Droite :
-                <b id="p2right">→</b>
-
-            </button>
-
-        </div>
-
-        <p class="help">
-            🖱️ Clique directement sur la touche affichée,
-            puis appuie sur la nouvelle touche de ton clavier.
-            <br><br>
-            Exemple : <b>Z</b> → clic sur Z → appuie sur <b>A</b>
-            → la touche devient immédiatement <b>A</b>.
-        </p>
-
-        <div class="settingsActions">
-
-            <button id="saveSettings" onclick="saveSettings()">
-                ✓ ENREGISTRER
-            </button>
-
-            <button id="backSettings" onclick="closeSettings()">
-                RETOUR
-            </button>
-
-        </div>
-
-    </div>
+<button
+id="duo"
+onclick="setMode('duo')">
+👥 Duo
+</button>
 
 </div>
 
 
-<!-- ================= JEU ================= -->
+<div id="player2Box">
+
+<label>Pseudo joueur 2</label>
+
+<input
+id="name2"
+placeholder="Pseudo joueur 2">
+
+</div>
+
+
+<div class="actions">
+
+<button
+id="settingsBtn"
+onclick="openSettings()">
+⚙️ PARAMÈTRES
+</button>
+
+<button
+id="playBtn"
+onclick="startGame()">
+JOUER
+</button>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     PARAMETRES
+===================================================== -->
+
+<div class="box" id="settings">
+
+<h2 class="settingsTitle">
+⚙️ PARAMÈTRES
+</h2>
+
+
+<label>Limite FPS</label>
+
+<select id="fpsSelect">
+
+<option value="30">30 FPS</option>
+<option value="60">60 FPS</option>
+<option value="90">90 FPS</option>
+<option value="120">120 FPS</option>
+<option value="180">180 FPS</option>
+<option value="240">240 FPS</option>
+<option value="360">360 FPS</option>
+<option value="0">Illimité</option>
+
+</select>
+
+
+<p class="help">
+Choisis la limite FPS du jeu.
+</p>
+
+
+<h3>🎮 Joueur 1</h3>
+
+<div class="keyGrid">
+
+<button
+class="keyButton"
+data-player="1"
+data-action="up">
+
+Avancer :
+<b id="p1up">Z</b>
+
+</button>
+
+
+<button
+class="keyButton"
+data-player="1"
+data-action="down">
+
+Reculer :
+<b id="p1down">S</b>
+
+</button>
+
+
+<button
+class="keyButton"
+data-player="1"
+data-action="left">
+
+Gauche :
+<b id="p1left">Q</b>
+
+</button>
+
+
+<button
+class="keyButton"
+data-player="1"
+data-action="right">
+
+Droite :
+<b id="p1right">D</b>
+
+</button>
+
+</div>
+
+
+<h3>🎮 Joueur 2</h3>
+
+<div class="keyGrid">
+
+<button
+class="keyButton"
+data-player="2"
+data-action="up">
+
+Avancer :
+<b id="p2up">↑</b>
+
+</button>
+
+
+<button
+class="keyButton"
+data-player="2"
+data-action="down">
+
+Reculer :
+<b id="p2down">↓</b>
+
+</button>
+
+
+<button
+class="keyButton"
+data-player="2"
+data-action="left">
+
+Gauche :
+<b id="p2left">←</b>
+
+</button>
+
+
+<button
+class="keyButton"
+data-player="2"
+data-action="right">
+
+Droite :
+<b id="p2right">→</b>
+
+</button>
+
+</div>
+
+
+<p class="help">
+
+Clique sur la touche que tu veux modifier,
+puis appuie directement sur la nouvelle touche
+de ton clavier.
+
+<br><br>
+
+Exemple :
+<b>Z</b> → clic sur Z → appuie sur <b>A</b>
+→ <b>A</b> est enregistré directement.
+
+</p>
+
+
+<div class="settingsActions">
+
+<button
+id="saveSettings"
+onclick="saveSettings()">
+✓ ENREGISTRER
+</button>
+
+<button
+id="backSettings"
+onclick="closeSettings()">
+RETOUR
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     JEU
+===================================================== -->
 
 <div id="game">
 
-    <button id="pauseButton" onclick="togglePause()">
-        ⏸ PAUSE
-    </button>
-
-    <div id="fpsBox">
-        FPS: <span id="fps">0</span>
-    </div>
-
-    <div id="titleArea">
-
-        <h1>Pac-Man 2.0</h1>
-
-        <p id="gameSlogan">
-            « Cours. Survis. Ne te fais jamais attraper. »
-        </p>
-
-    </div>
+<button
+id="pauseButton"
+onclick="togglePause()">
+⏸ PAUSE
+</button>
 
 
-    <div id="mainArea">
-
-        <div class="side" id="panel1">
-
-            <div>
-
-                <div class="sideTitle">JOUEUR 1</div>
-
-                <div class="info">
-                    <div class="small">PSEUDO</div>
-                    <div class="value" id="sideName1">
-                        Joueur 1
-                    </div>
-                </div>
-
-                <div class="info">
-                    <div class="small">PROGRESSION</div>
-                    <div class="value" id="sideTime1">
-                        00:00
-                    </div>
-                </div>
-
-                <div class="info">
-                    <div class="small">NIVEAU</div>
-                    <div class="value" id="sideStage1">
-                        1
-                    </div>
-                </div>
-
-                <div class="info">
-                    <div class="small">ÉTAT</div>
-                    <div class="value" id="state1">
-                        EN JEU
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="info">
-                <div class="small">SCORE</div>
-                <div class="value" id="score1">0</div>
-            </div>
-
-        </div>
+<div id="fpsBox">
+FPS: <span id="fps">0</span>
+</div>
 
 
-        <div id="center">
+<div id="titleArea">
 
-            <div id="topBar">
+<h1>Pac-Man 2.0</h1>
 
-                <span>⏱️ <span id="timer">00:00</span></span>
+<p id="gameSlogan">
+« Cours. Survis. Ne te fais jamais attraper. »
+</p>
 
-                <span>🏆 <span id="score">0</span></span>
-
-                <span>👹 <span id="enemyCount">1</span></span>
-
-                <span>NIVEAU <span id="stage">1</span></span>
-
-            </div>
-
-            <div id="canvasContainer">
-                <canvas id="canvas"></canvas>
-            </div>
-
-        </div>
+</div>
 
 
-        <div class="side" id="panel2">
-
-            <div>
-
-                <div class="sideTitle">JOUEUR 2</div>
-
-                <div class="info">
-                    <div class="small">PSEUDO</div>
-                    <div class="value" id="sideName2">-</div>
-                </div>
-
-                <div class="info">
-                    <div class="small">PROGRESSION</div>
-                    <div class="value" id="sideTime2">
-                        00:00
-                    </div>
-                </div>
-
-                <div class="info">
-                    <div class="small">NIVEAU</div>
-                    <div class="value" id="sideStage2">
-                        1
-                    </div>
-                </div>
-
-                <div class="info">
-                    <div class="small">ÉTAT</div>
-                    <div class="value" id="state2">
-                        EN ATTENTE
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="info">
-                <div class="small">SCORE</div>
-                <div class="value" id="score2">0</div>
-            </div>
-
-        </div>
-
-    </div>
+<div id="mainArea">
 
 
-    <!-- CONTROLES -->
+<div class="side" id="panel1">
 
-    <div id="controls">
+<div>
 
-        <div id="arrows">
+<div class="sideTitle">
+JOUEUR 1
+</div>
 
-            <div class="arrow up" data-dir="up">▲</div>
-            <div class="arrow down" data-dir="down">▼</div>
-            <div class="arrow left" data-dir="left">◀</div>
-            <div class="arrow right" data-dir="right">▶</div>
+<div class="info">
 
-        </div>
+<div class="small">
+PSEUDO
+</div>
 
-        <div id="joystick">
-            <div id="knob"></div>
-        </div>
+<div
+class="value"
+id="sideName1">
+Joueur 1
+</div>
 
-    </div>
+</div>
+
+
+<div class="info">
+
+<div class="small">
+PROGRESSION
+</div>
+
+<div
+class="value"
+id="sideTime1">
+00:00
+</div>
+
+</div>
+
+
+<div class="info">
+
+<div class="small">
+NIVEAU
+</div>
+
+<div
+class="value"
+id="sideStage1">
+1
+</div>
+
+</div>
+
+
+<div class="info">
+
+<div class="small">
+ÉTAT
+</div>
+
+<div
+class="value"
+id="state1">
+EN JEU
+</div>
+
+</div>
+
+</div>
+
+
+<div class="info">
+
+<div class="small">
+SCORE
+</div>
+
+<div
+class="value"
+id="score1">
+0
+</div>
+
+</div>
+
+</div>
+
+
+<div id="center">
+
+<div id="topBar">
+
+<span>
+⏱️
+<span id="timer">00:00</span>
+</span>
+
+<span>
+🏆
+<span id="score">0</span>
+</span>
+
+<span>
+👹
+<span id="enemyCount">1</span>
+</span>
+
+<span>
+NIVEAU
+<span id="stage">1</span>
+</span>
+
+</div>
+
+
+<div id="canvasContainer">
+
+<canvas id="canvas"></canvas>
+
+</div>
+
+</div>
+
+
+<div class="side" id="panel2">
+
+<div>
+
+<div class="sideTitle">
+JOUEUR 2
+</div>
+
+<div class="info">
+
+<div class="small">
+PSEUDO
+</div>
+
+<div
+class="value"
+id="sideName2">
+-
+</div>
+
+</div>
+
+
+<div class="info">
+
+<div class="small">
+PROGRESSION
+</div>
+
+<div
+class="value"
+id="sideTime2">
+00:00
+</div>
+
+</div>
+
+
+<div class="info">
+
+<div class="small">
+NIVEAU
+</div>
+
+<div
+class="value"
+id="sideStage2">
+1
+</div>
+
+</div>
+
+
+<div class="info">
+
+<div class="small">
+ÉTAT
+</div>
+
+<div
+class="value"
+id="state2">
+EN ATTENTE
+</div>
+
+</div>
+
+</div>
+
+
+<div class="info">
+
+<div class="small">
+SCORE
+</div>
+
+<div
+class="value"
+id="score2">
+0
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- CONTROLES -->
+
+<div id="controls">
+
+<div id="arrows">
+
+<div
+class="arrow up"
+data-dir="up">
+▲
+</div>
+
+<div
+class="arrow down"
+data-dir="down">
+▼
+</div>
+
+<div
+class="arrow left"
+data-dir="left">
+◀
+</div>
+
+<div
+class="arrow right"
+data-dir="right">
+▶
+</div>
+
+</div>
+
+
+<div id="joystick">
+
+<div id="knob"></div>
+
+</div>
+
+</div>
 
 </div>
 
 
 <!-- PAUSE -->
 
-<div class="overlay" id="pauseOverlay">
+<div
+class="overlay"
+id="pauseOverlay">
 
-    <div class="overlayBox">
+<div class="overlayBox">
 
-        <h2>⏸ JEU EN PAUSE</h2>
+<h2>
+⏸ JEU EN PAUSE
+</h2>
 
-        <button onclick="togglePause()">
-            ▶ CONTINUER
-        </button>
+<button onclick="togglePause()">
+▶ CONTINUER
+</button>
 
-    </div>
+</div>
 
 </div>
 
 
 <!-- NIVEAU -->
 
-<div class="overlay" id="levelOverlay">
+<div
+class="overlay"
+id="levelOverlay">
 
-    <div class="overlayBox">
+<div class="overlayBox">
 
-        <h2 id="levelText">
-            PASSAGE AU NIVEAU 2
-        </h2>
+<h2 id="levelText">
+PASSAGE AU NIVEAU 2
+</h2>
 
-    </div>
+</div>
 
 </div>
 
 
 <!-- GAME OVER -->
 
-<div class="overlay" id="gameOver">
+<div
+class="overlay"
+id="gameOver">
 
-    <div class="overlayBox" id="gameOverBox">
+<div
+class="overlayBox"
+id="gameOverBox">
 
-        <h2>GAME OVER</h2>
+<h2>
+GAME OVER
+</h2>
 
-        <p id="gameOverText"></p>
+<p id="gameOverText"></p>
 
-        <button onclick="location.reload()">
-            REJOUER
-        </button>
+<button onclick="location.reload()">
+REJOUER
+</button>
 
-    </div>
+</div>
 
 </div>
 
 
 <script>
 
-/* =========================================================
-   CONFIGURATION
-========================================================= */
+/* =====================================================
+   VARIABLES
+===================================================== */
 
-let mode = "solo";
+let mode="solo";
 
-let language = "fr";
+let language="fr";
 
-let name1 = "Joueur 1";
+let name1="Joueur 1";
 
-let name2 = "Joueur 2";
+let name2="Joueur 2";
 
-let activePlayer = 1;
+let activePlayer=1;
 
-let running = false;
+let running=false;
 
-let paused = false;
+let paused=false;
 
-let levelPause = false;
+let levelPause=false;
 
-let fpsLimit = 60;
+let fpsLimit=60;
 
 
-/* =========================================================
+/* =====================================================
    TOUCHES
-========================================================= */
+===================================================== */
 
-let keys = {
+let keys={
 
-    1:{
-        up:"z",
-        down:"s",
-        left:"q",
-        right:"d"
-    },
+1:{
+up:"z",
+down:"s",
+left:"q",
+right:"d"
+},
 
-    2:{
-        up:"arrowup",
-        down:"arrowdown",
-        left:"arrowleft",
-        right:"arrowright"
-    }
+2:{
+up:"arrowup",
+down:"arrowdown",
+left:"arrowleft",
+right:"arrowright"
+}
+
+};
+
+let changingKey=null;
+
+
+/* =====================================================
+   JOUEURS
+===================================================== */
+
+let players={
+
+1:{
+time:0,
+startTime:0,
+score:0,
+stage:1,
+playing:false
+},
+
+2:{
+time:0,
+startTime:0,
+score:0,
+stage:1,
+playing:false
+}
 
 };
 
 
-/*
-   Cette variable contient EXACTEMENT
-   la touche que l'utilisateur est en
-   train de modifier.
-*/
-
-let changingKey = null;
-
-
-/* =========================================================
-   ETAT JOUEURS
-========================================================= */
-
-let players = {
-
-    1:{
-        time:0,
-        startTime:0,
-        score:0,
-        stage:1,
-        playing:false
-    },
-
-    2:{
-        time:0,
-        startTime:0,
-        score:0,
-        stage:1,
-        playing:false
-    }
-
-};
-
-
-/* =========================================================
+/* =====================================================
    SLOGANS
-========================================================= */
+===================================================== */
 
-const slogans = [
-    "« Cours. Survis. Ne te fais jamais attraper. »",
-    "« Chaque seconde compte. »",
-    "« Ils arrivent. COURS ! »",
-    "« Ne regarde pas derrière toi. »",
-    "« Le prochain niveau sera pire. »",
-    "« Le labyrinthe n'a aucune pitié. »",
-    "« Tu peux fuir... mais pas éternellement. »",
-    "« Une erreur et la chasse recommence. »",
-    "« Montre-leur qui est le plus rapide. »"
+const slogans=[
+
+"« Cours. Survis. Ne te fais jamais attraper. »",
+
+"« Chaque seconde compte. »",
+
+"« Ils arrivent. COURS ! »",
+
+"« Ne regarde pas derrière toi. »",
+
+"« Le prochain niveau sera pire. »",
+
+"« Le labyrinthe n'a aucune pitié. »",
+
+"« Tu peux fuir... mais pas éternellement. »",
+
+"« Une erreur et la chasse recommence. »",
+
+"« Montre-leur qui est le plus rapide. »"
+
 ];
 
 
-/* =========================================================
+/* =====================================================
    MAP
-========================================================= */
+===================================================== */
 
-const map = [
+const map=[
 
 "#####################",
 "#P....#.......#....#",
@@ -950,2210 +1315,1990 @@ const map = [
 
 ];
 
-const tile = 32;
+const tile=32;
 
-const rows = map.length;
+const rows=map.length;
 
-const cols = map[0].length;
+const cols=map[0].length;
 
 
-/* =========================================================
+/* =====================================================
    CANVAS
-========================================================= */
+===================================================== */
 
-const canvas =
-    document.getElementById("canvas");
+const canvas=document.getElementById("canvas");
 
-const ctx =
-    canvas.getContext("2d", {
-        alpha:false
-    });
+const ctx=canvas.getContext(
+"2d",
+{alpha:false}
+);
 
-canvas.width = cols * tile;
-canvas.height = rows * tile;
+canvas.width=cols*tile;
+
+canvas.height=rows*tile;
 
 
-/* =========================================================
-   PERSONNAGE
-========================================================= */
+/* =====================================================
+   JOUEUR
+===================================================== */
 
-let player = {
-    x:0,
-    y:0,
-    speed:5,
-    walk:0
+let player={
+x:0,
+y:0,
+speed:5,
+walk:0
 };
 
 
-/* =========================================================
+/* =====================================================
    ENNEMIS
-========================================================= */
+===================================================== */
 
-const enemyPositions = [
-    [3,19],
-    [10,19],
-    [17,19],
-    [1,19],
-    [5,19],
-    [8,19],
-    [12,19],
-    [15,19],
-    [19,19]
+const enemyPositions=[
+
+[3,19],
+[10,19],
+[17,19],
+[1,19],
+[5,19],
+[8,19],
+[12,19],
+[15,19],
+[19,19]
+
 ];
 
-let enemies = [];
+let enemies=[];
 
 
-/* =========================================================
-   TOUCHES ENFONCEES
-========================================================= */
+/* =====================================================
+   CLAVIER
+===================================================== */
 
-const pressed = {};
+const pressed={};
 
 
-/* =========================================================
-   CONTROLES ECRAN
-========================================================= */
+/* =====================================================
+   CONTROLES
+===================================================== */
 
-const touchDirection = {
-    up:false,
-    down:false,
-    left:false,
-    right:false
+const touchDirection={
+
+up:false,
+down:false,
+left:false,
+right:false
+
 };
 
 
-/* =========================================================
+/* =====================================================
    JOYSTICK
-========================================================= */
+===================================================== */
 
-let joyX = 0;
-let joyY = 0;
-let joyActive = false;
+let joyX=0;
 
-const joystick =
-    document.getElementById("joystick");
+let joyY=0;
 
-const knob =
-    document.getElementById("knob");
+let joyActive=false;
+
+const joystick=
+document.getElementById("joystick");
+
+const knob=
+document.getElementById("knob");
 
 
-/* =========================================================
-   AFFICHAGE NOM TOUCHE
-========================================================= */
+/* =====================================================
+   NOM TOUCHE
+===================================================== */
 
 function displayKey(key){
 
-    const names = {
+const names={
 
-        arrowup:"↑",
-        arrowdown:"↓",
-        arrowleft:"←",
-        arrowright:"→",
+arrowup:"↑",
+arrowdown:"↓",
+arrowleft:"←",
+arrowright:"→",
 
-        " ":"ESPACE",
+" ":"ESPACE",
 
-        escape:"ÉCHAP",
+escape:"ÉCHAP",
+enter:"ENTRÉE",
+shift:"SHIFT",
+control:"CTRL",
+alt:"ALT",
+tab:"TAB",
+backspace:"RETOUR",
+delete:"SUPPR",
+insert:"INSER",
+home:"HOME",
+end:"END",
+pageup:"PAGE ↑",
+pagedown:"PAGE ↓"
 
-        enter:"ENTRÉE",
+};
 
-        shift:"SHIFT",
-
-        control:"CTRL",
-
-        alt:"ALT",
-
-        tab:"TAB",
-
-        backspace:"RETOUR",
-
-        delete:"SUPPR",
-
-        insert:"INSER",
-
-        home:"HOME",
-
-        end:"END",
-
-        pageup:"PAGE ↑",
-
-        pagedown:"PAGE ↓"
-
-    };
-
-    return names[key] ||
-           key.toUpperCase();
+return names[key]||key.toUpperCase();
 
 }
 
 
-/* =========================================================
-   AFFICHER LES TOUCHES
-========================================================= */
+/* =====================================================
+   AFFICHER TOUCHES
+===================================================== */
 
 function refreshKeys(){
 
-    for(let p=1;p<=2;p++){
+for(let p=1;p<=2;p++){
 
-        for(
-            const action of
-            ["up","down","left","right"]
-        ){
+for(
+const action of
+["up","down","left","right"]
+){
 
-            document.getElementById(
-                `p${p}${action}`
-            ).textContent =
-                displayKey(
-                    keys[p][action]
-                );
+document.getElementById(
+`p${p}${action}`
+).textContent=
+displayKey(
+keys[p][action]
+);
 
-        }
+}
 
-    }
+}
 
 }
 
 
-/* =========================================================
-   SAUVEGARDE
-========================================================= */
+/* =====================================================
+   CHARGER PARAMETRES
+===================================================== */
 
 function loadSettings(){
 
-    const savedKeys =
-        localStorage.getItem(
-            "pacmanKeys"
-        );
+const savedKeys=
+localStorage.getItem(
+"pacmanKeys"
+);
 
-    if(savedKeys){
+if(savedKeys){
 
-        try{
+try{
 
-            const data =
-                JSON.parse(savedKeys);
+const data=
+JSON.parse(savedKeys);
 
-            if(data[1])
-                keys[1] = {
-                    ...keys[1],
-                    ...data[1]
-                };
+if(data[1])
+keys[1]={
+...keys[1],
+...data[1]
+};
 
-            if(data[2])
-                keys[2] = {
-                    ...keys[2],
-                    ...data[2]
-                };
+if(data[2])
+keys[2]={
+...keys[2],
+...data[2]
+};
 
-        }catch(e){}
-
-    }
-
-
-    const savedFPS =
-        localStorage.getItem(
-            "pacmanFPSLimit"
-        );
-
-    if(savedFPS !== null)
-        fpsLimit =
-            Number(savedFPS);
-
-
-    document.getElementById(
-        "fpsSelect"
-    ).value =
-        String(fpsLimit);
-
-
-    refreshKeys();
+}catch(e){}
 
 }
 
 
-/* =========================================================
-   FPS
-========================================================= */
+const savedFPS=
+localStorage.getItem(
+"pacmanFPSLimit"
+);
+
+if(savedFPS!==null)
+fpsLimit=Number(savedFPS);
+
+
+document.getElementById(
+"fpsSelect"
+).value=
+String(fpsLimit);
+
+refreshKeys();
+
+}
+
+
+/* =====================================================
+   SAUVER PARAMETRES
+===================================================== */
 
 function saveSettings(){
 
-    fpsLimit =
-        Number(
-            document.getElementById(
-                "fpsSelect"
-            ).value
-        );
+fpsLimit=
+Number(
+document.getElementById(
+"fpsSelect"
+).value
+);
 
+localStorage.setItem(
+"pacmanFPSLimit",
+fpsLimit
+);
 
-    localStorage.setItem(
-        "pacmanFPSLimit",
-        fpsLimit
-    );
+localStorage.setItem(
+"pacmanKeys",
+JSON.stringify(keys)
+);
 
+refreshKeys();
 
-    localStorage.setItem(
-        "pacmanKeys",
-        JSON.stringify(keys)
-    );
-
-
-    refreshKeys();
-
-    closeSettings();
+closeSettings();
 
 }
 
 
-/* =========================================================
+/* =====================================================
    OUVRIR PARAMETRES
-========================================================= */
+===================================================== */
 
 function openSettings(){
 
-    document.getElementById(
-        "home"
-    ).style.display = "none";
+document.getElementById(
+"home"
+).style.display="none";
 
-    document.getElementById(
-        "settings"
-    ).style.display = "block";
+document.getElementById(
+"settings"
+).style.display="block";
 
 }
 
 
-/* =========================================================
+/* =====================================================
    FERMER PARAMETRES
-========================================================= */
+===================================================== */
 
 function closeSettings(){
 
-    changingKey = null;
+changingKey=null;
 
-    document.querySelectorAll(
-        ".keyButton"
-    ).forEach(button=>{
-        button.classList.remove(
-            "waiting"
-        );
-    });
+document.querySelectorAll(
+".keyButton"
+).forEach(button=>{
+button.classList.remove(
+"waiting"
+);
+});
 
-    refreshKeys();
+refreshKeys();
 
-    document.getElementById(
-        "settings"
-    ).style.display = "none";
+document.getElementById(
+"settings"
+).style.display="none";
 
-    document.getElementById(
-        "home"
-    ).style.display = "block";
+document.getElementById(
+"home"
+).style.display="block";
 
 }
 
 
-/* =========================================================
-   CHANGEMENT DE TOUCHE
-========================================================= */
-
-/*
-   IMPORTANT :
-
-   1. Tu cliques avec la souris sur Z.
-   2. Le bouton Z est sélectionné.
-   3. Tu appuies sur A.
-   4. A devient immédiatement la nouvelle touche.
-
-   Il n'y a aucun bouton F8 ou autre à choisir.
-*/
+/* =====================================================
+   CLIQUER SUR UNE TOUCHE
+===================================================== */
 
 document.querySelectorAll(
-    ".keyButton"
+".keyButton"
 ).forEach(button=>{
 
-    button.addEventListener(
-        "click",
-        function(){
+button.addEventListener(
+"click",
+function(){
 
-            document.querySelectorAll(
-                ".keyButton"
-            ).forEach(b=>{
-                b.classList.remove(
-                    "waiting"
-                );
-            });
+document.querySelectorAll(
+".keyButton"
+).forEach(b=>{
+b.classList.remove(
+"waiting"
+);
+});
 
+this.classList.add(
+"waiting"
+);
 
-            this.classList.add(
-                "waiting"
-            );
+changingKey={
 
+player:Number(
+this.dataset.player
+),
 
-            changingKey = {
+action:this.dataset.action
 
-                player:
-                    Number(
-                        this.dataset.player
-                    ),
+};
 
-                action:
-                    this.dataset.action
-
-            };
-
-        }
-    );
+}
+);
 
 });
 
 
-/* =========================================================
-   NOUVELLE TOUCHE
-========================================================= */
+/* =====================================================
+   APPUYER SUR NOUVELLE TOUCHE
+===================================================== */
 
 document.addEventListener(
-    "keydown",
-    function(e){
+"keydown",
+function(e){
 
-        /*
-           Si on modifie une touche :
-           on prend DIRECTEMENT la touche
-           que l'utilisateur vient d'appuyer.
-        */
+if(changingKey){
 
-        if(changingKey){
+e.preventDefault();
 
-            e.preventDefault();
-            e.stopPropagation();
+e.stopPropagation();
 
+const newKey=
+e.key.toLowerCase();
 
-            const newKey =
-                e.key.toLowerCase();
+const p=
+changingKey.player;
 
+const action=
+changingKey.action;
 
-            const p =
-                changingKey.player;
+keys[p][action]=newKey;
 
-            const action =
-                changingKey.action;
+localStorage.setItem(
+"pacmanKeys",
+JSON.stringify(keys)
+);
 
+changingKey=null;
 
-            /*
-               On change directement.
-            */
+document.querySelectorAll(
+".keyButton"
+).forEach(b=>{
+b.classList.remove(
+"waiting"
+);
+});
 
-            keys[p][action] =
-                newKey;
+refreshKeys();
 
+return;
 
-            /*
-               Sauvegarde immédiate.
-            */
-
-            localStorage.setItem(
-                "pacmanKeys",
-                JSON.stringify(keys)
-            );
+}
 
 
-            /*
-               On quitte le mode
-               changement.
-            */
+if(
+running &&
+(
+e.code==="Space"||
+e.key==="Escape"
+)
+){
 
-            changingKey = null;
+e.preventDefault();
 
+togglePause();
 
-            document.querySelectorAll(
-                ".keyButton"
-            ).forEach(b=>{
-                b.classList.remove(
-                    "waiting"
-                );
-            });
+return;
 
-
-            refreshKeys();
-
-            return;
-
-        }
+}
 
 
-        /*
-           Espace ou Échap = pause
-        */
+pressed[
+e.key.toLowerCase()
+]=true;
 
-        if(
-            running &&
-            (
-                e.code === "Space" ||
-                e.key === "Escape"
-            )
-        ){
-
-            e.preventDefault();
-
-            togglePause();
-
-            return;
-
-        }
-
-
-        pressed[
-            e.key.toLowerCase()
-        ] = true;
-
-    },
-    true
+},
+true
 );
 
 
 document.addEventListener(
-    "keyup",
-    function(e){
+"keyup",
+function(e){
 
-        pressed[
-            e.key.toLowerCase()
-        ] = false;
+pressed[
+e.key.toLowerCase()
+]=false;
 
-    }
+}
 );
 
 
-/* =========================================================
+/* =====================================================
    MODE
-========================================================= */
+===================================================== */
 
 function setMode(newMode){
 
-    mode = newMode;
+mode=newMode;
+
+document.getElementById(
+"solo"
+).classList.remove("active");
+
+document.getElementById(
+"duo"
+).classList.remove("active");
 
 
-    document.getElementById(
-        "solo"
-    ).classList.remove("active");
+if(mode==="solo"){
 
-    document.getElementById(
-        "duo"
-    ).classList.remove("active");
+document.getElementById(
+"solo"
+).classList.add("active");
 
+document.getElementById(
+"player2Box"
+).style.display="none";
 
-    if(mode === "solo"){
+}else{
 
-        document.getElementById(
-            "solo"
-        ).classList.add("active");
+document.getElementById(
+"duo"
+).classList.add("active");
 
+document.getElementById(
+"player2Box"
+).style.display="block";
 
-        document.getElementById(
-            "player2Box"
-        ).style.display = "none";
-
-    }
-    else{
-
-        document.getElementById(
-            "duo"
-        ).classList.add("active");
-
-
-        document.getElementById(
-            "player2Box"
-        ).style.display = "block";
-
-    }
+}
 
 }
 
 
-/* =========================================================
-   START GAME
-========================================================= */
+/* =====================================================
+   DEMARRER
+===================================================== */
 
 function startGame(){
 
-    name1 =
-        document.getElementById(
-            "name1"
-        ).value.trim() ||
-        "Joueur 1";
+name1=
+document.getElementById(
+"name1"
+).value.trim()||
+"Joueur 1";
+
+name2=
+document.getElementById(
+"name2"
+).value.trim()||
+"Joueur 2";
+
+language=
+document.getElementById(
+"language"
+).value;
 
 
-    name2 =
-        document.getElementById(
-            "name2"
-        ).value.trim() ||
-        "Joueur 2";
+document.getElementById(
+"sideName1"
+).textContent=name1;
+
+document.getElementById(
+"sideName2"
+).textContent=
+mode==="duo"?name2:"-";
 
 
-    language =
-        document.getElementById(
-            "language"
-        ).value;
+document.getElementById(
+"launcher"
+).style.display="none";
 
+document.getElementById(
+"game"
+).style.display="block";
 
-    document.getElementById(
-        "sideName1"
-    ).textContent = name1;
-
-
-    document.getElementById(
-        "sideName2"
-    ).textContent =
-        mode === "duo"
-        ? name2
-        : "-";
-
-
-    document.getElementById(
-        "launcher"
-    ).style.display = "none";
-
-
-    document.getElementById(
-        "game"
-    ).style.display = "block";
-
-
-    initGame();
+initGame();
 
 }
 
 
-/* =========================================================
-   INIT GAME
-========================================================= */
+/* =====================================================
+   INIT
+===================================================== */
 
 function initGame(){
 
-    players = {
+players={
 
-        1:{
-            time:0,
-            startTime:performance.now(),
-            score:0,
-            stage:1,
-            playing:true
-        },
+1:{
+time:0,
+startTime:performance.now(),
+score:0,
+stage:1,
+playing:true
+},
 
-        2:{
-            time:0,
-            startTime:0,
-            score:0,
-            stage:1,
-            playing:false
-        }
+2:{
+time:0,
+startTime:0,
+score:0,
+stage:1,
+playing:false
+}
 
-    };
+};
 
+activePlayer=1;
 
-    activePlayer = 1;
+running=true;
 
-    running = true;
+paused=false;
 
-    paused = false;
+levelPause=false;
 
-    levelPause = false;
+findPlayerStart();
 
+enemies=[];
 
-    findPlayerStart();
+createEnemiesForStage();
 
-    enemies = [];
+updatePanels();
 
-    createEnemiesForStage();
+updateDisplay();
 
-    updatePanels();
+changeSlogan();
 
-    updateDisplay();
+lastFrameTime=
+performance.now();
 
-    changeSlogan();
+fpsCounterStart=
+performance.now();
 
+fpsFrames=0;
 
-    lastLogicTime =
-        performance.now();
-
-
-    lastFrameTime =
-        performance.now();
-
-
-    fpsCounterStart =
-        performance.now();
-
-    fpsFrames = 0;
-
-
-    requestAnimationFrame(
-        loop
-    );
+requestAnimationFrame(loop);
 
 }
 
 
-/* =========================================================
-   POSITION DE DEPART
-========================================================= */
+/* =====================================================
+   DEPART JOUEUR
+===================================================== */
 
 function findPlayerStart(){
 
-    for(let y=0;y<rows;y++){
+for(let y=0;y<rows;y++){
 
-        for(let x=0;x<cols;x++){
+for(let x=0;x<cols;x++){
 
-            if(map[y][x] === "P"){
+if(map[y][x]==="P"){
 
-                player.x =
-                    x * tile +
-                    tile / 2;
+player.x=
+x*tile+tile/2;
 
-                player.y =
-                    y * tile +
-                    tile / 2;
+player.y=
+y*tile+tile/2;
 
-                return;
+return;
 
-            }
+}
 
-        }
+}
 
-    }
+}
 
 }
 
 
-/* =========================================================
-   ENNEMIS
-========================================================= */
+/* =====================================================
+   CREER ENNEMIS
+===================================================== */
 
 function createEnemiesForStage(){
 
-    enemies = [];
+enemies=[];
 
+const count=
+Math.min(
+players[activePlayer].stage,
+enemyPositions.length
+);
 
-    const count =
-        Math.min(
-            players[activePlayer].stage,
-            enemyPositions.length
-        );
+for(let i=0;i<count;i++){
 
+const pos=
+enemyPositions[i];
 
-    for(let i=0;i<count;i++){
+enemies.push({
 
-        const pos =
-            enemyPositions[i];
+x:
+pos[0]*tile+tile/2,
 
+y:
+pos[1]*tile+tile/2,
 
-        enemies.push({
+targetX:player.x,
 
-            x:
-                pos[0] * tile +
-                tile / 2,
+targetY:player.y,
 
-            y:
-                pos[1] * tile +
-                tile / 2,
+speed:
+2.7+
+players[activePlayer].stage*.12,
 
-            targetX:player.x,
+nextPath:0
 
-            targetY:player.y,
+});
 
-            speed:
-                2.7 +
-                players[activePlayer].stage * .12,
-
-            nextPath:0
-
-        });
-
-    }
+}
 
 }
 
 
-/* =========================================================
+/* =====================================================
    TEMPS
-========================================================= */
+===================================================== */
 
 function getTime(id){
 
-    const p = players[id];
+const p=players[id];
 
+if(!p.playing)
+return p.time;
 
-    if(!p.playing)
-        return p.time;
-
-
-    return p.time +
-        Math.floor(
-            (
-                performance.now() -
-                p.startTime
-            ) / 1000
-        );
+return p.time+
+Math.floor(
+(
+performance.now()-
+p.startTime
+)/1000
+);
 
 }
 
 
-/* =========================================================
-   SAUVEGARDE TEMPS
-========================================================= */
+/* =====================================================
+   SAUVER TEMPS
+===================================================== */
 
 function saveCurrentTime(){
 
-    const p =
-        players[activePlayer];
+const p=
+players[activePlayer];
 
+if(p.playing){
 
-    if(p.playing){
+p.time=
+getTime(activePlayer);
 
-        p.time =
-            getTime(activePlayer);
+p.startTime=
+performance.now();
 
-
-        p.startTime =
-            performance.now();
-
-    }
+}
 
 }
 
 
-/* =========================================================
-   CHANGEMENT JOUEUR
-========================================================= */
+/* =====================================================
+   CHANGER JOUEUR
+===================================================== */
 
 function switchPlayer(){
 
-    saveCurrentTime();
+saveCurrentTime();
 
+players[activePlayer].playing=false;
 
-    players[activePlayer].playing =
-        false;
+activePlayer=
+activePlayer===1?2:1;
 
+players[activePlayer].playing=true;
 
-    activePlayer =
-        activePlayer === 1
-        ? 2
-        : 1;
+players[activePlayer].startTime=
+performance.now();
 
+findPlayerStart();
 
-    players[activePlayer].playing =
-        true;
+createEnemiesForStage();
 
+updatePanels();
 
-    players[activePlayer].startTime =
-        performance.now();
+updateDisplay();
 
-
-    findPlayerStart();
-
-    createEnemiesForStage();
-
-    updatePanels();
-
-    updateDisplay();
-
-    changeSlogan();
+changeSlogan();
 
 }
 
 
-/* =========================================================
+/* =====================================================
    NIVEAUX
-========================================================= */
+===================================================== */
 
 function updateStage(){
 
-    const currentTime =
-        getTime(activePlayer);
+const currentTime=
+getTime(activePlayer);
 
+const newStage=
+Math.floor(
+currentTime/30
+)+1;
 
-    const newStage =
-        Math.floor(
-            currentTime / 30
-        ) + 1;
+const p=
+players[activePlayer];
 
+if(newStage>p.stage){
 
-    const p =
-        players[activePlayer];
+p.stage=newStage;
 
+createEnemiesForStage();
 
-    if(newStage > p.stage){
+showLevel(newStage);
 
-        p.stage =
-            newStage;
+changeSlogan();
 
-
-        createEnemiesForStage();
-
-        showLevel(newStage);
-
-        changeSlogan();
-
-    }
+}
 
 }
 
 
-/* =========================================================
+/* =====================================================
    MESSAGE NIVEAU
-========================================================= */
+===================================================== */
 
 function showLevel(level){
 
-    levelPause = true;
+levelPause=true;
 
-    saveCurrentTime();
+saveCurrentTime();
 
-    const text =
-        language === "fr"
-        ? "PASSAGE AU NIVEAU " + level
-        : language === "ar"
-        ? "الانتقال إلى المستوى " + level
-        : "PASSAGE TO LEVEL " + level;
+let text;
 
+if(language==="fr"){
 
-    document.getElementById(
-        "levelText"
-    ).textContent = text;
+text=
+"PASSAGE AU NIVEAU "+level;
 
+}else if(language==="ar"){
 
-    document.getElementById(
-        "levelOverlay"
-    ).style.display = "flex";
+text=
+"الانتقال إلى المستوى "+level;
 
+}else{
 
-    setTimeout(
-        ()=>{
-
-            document.getElementById(
-                "levelOverlay"
-            ).style.display = "none";
-
-
-            /*
-               On reprend exactement
-               la progression sauvegardée.
-            */
-
-            players[
-                activePlayer
-            ].startTime =
-                performance.now();
-
-
-            levelPause = false;
-
-
-            lastFrameTime =
-                performance.now();
-
-
-            requestAnimationFrame(
-                loop
-            );
-
-        },
-        1600
-    );
+text=
+"PASSAGE TO LEVEL "+level;
 
 }
 
 
-/* =========================================================
+document.getElementById(
+"levelText"
+).textContent=text;
+
+document.getElementById(
+"levelOverlay"
+).style.display="flex";
+
+
+setTimeout(()=>{
+
+document.getElementById(
+"levelOverlay"
+).style.display="none";
+
+players[
+activePlayer
+].startTime=
+performance.now();
+
+levelPause=false;
+
+lastFrameTime=
+performance.now();
+
+requestAnimationFrame(loop);
+
+},1600);
+
+}
+
+
+/* =====================================================
    PANNEAUX
-========================================================= */
+===================================================== */
 
 function updatePanels(){
 
-    const p1 =
-        document.getElementById(
-            "panel1"
-        );
+const p1=
+document.getElementById(
+"panel1"
+);
 
-    const p2 =
-        document.getElementById(
-            "panel2"
-        );
+const p2=
+document.getElementById(
+"panel2"
+);
 
+p1.classList.remove("active");
 
-    p1.classList.remove("active");
-    p2.classList.remove("active");
-
-
-    if(activePlayer === 1){
-
-        p1.classList.add("active");
-
-        document.getElementById(
-            "state1"
-        ).textContent = "EN JEU";
+p2.classList.remove("active");
 
 
-        document.getElementById(
-            "state2"
-        ).textContent =
-            mode === "duo"
-            ? "EN ATTENTE"
-            : "MODE SOLO";
+if(activePlayer===1){
 
-    }
-    else{
+p1.classList.add("active");
 
-        p2.classList.add("active");
+document.getElementById(
+"state1"
+).textContent="EN JEU";
 
-        document.getElementById(
-            "state1"
-        ).textContent = "EN ATTENTE";
+document.getElementById(
+"state2"
+).textContent=
+mode==="duo"
+?"EN ATTENTE"
+:"MODE SOLO";
 
+}else{
 
-        document.getElementById(
-            "state2"
-        ).textContent = "EN JEU";
+p2.classList.add("active");
 
-    }
+document.getElementById(
+"state1"
+).textContent="EN ATTENTE";
+
+document.getElementById(
+"state2"
+).textContent="EN JEU";
+
+}
 
 }
 
 
-/* =========================================================
-   AFFICHAGE
-========================================================= */
+/* =====================================================
+   FORMAT TEMPS
+===================================================== */
 
 function formatTime(sec){
 
-    const min =
-        Math.floor(sec / 60);
+const min=
+Math.floor(sec/60);
 
-    const s =
-        sec % 60;
+const s=
+sec%60;
 
-
-    return String(min).padStart(2,"0")
-        + ":" +
-        String(s).padStart(2,"0");
+return String(min).padStart(2,"0")
++
+":"+
+String(s).padStart(2,"0");
 
 }
 
+
+/* =====================================================
+   AFFICHAGE
+===================================================== */
 
 function updateDisplay(){
 
-    document.getElementById(
-        "sideTime1"
-    ).textContent =
-        formatTime(
-            getTime(1)
-        );
+document.getElementById(
+"sideTime1"
+).textContent=
+formatTime(getTime(1));
 
+document.getElementById(
+"sideTime2"
+).textContent=
+formatTime(getTime(2));
 
-    document.getElementById(
-        "sideTime2"
-    ).textContent =
-        formatTime(
-            getTime(2)
-        );
+document.getElementById(
+"sideStage1"
+).textContent=
+players[1].stage;
 
+document.getElementById(
+"sideStage2"
+).textContent=
+players[2].stage;
 
-    document.getElementById(
-        "sideStage1"
-    ).textContent =
-        players[1].stage;
+document.getElementById(
+"score1"
+).textContent=
+Math.floor(players[1].score);
 
+document.getElementById(
+"score2"
+).textContent=
+Math.floor(players[2].score);
 
-    document.getElementById(
-        "sideStage2"
-    ).textContent =
-        players[2].stage;
+document.getElementById(
+"timer"
+).textContent=
+formatTime(getTime(activePlayer));
 
+document.getElementById(
+"score"
+).textContent=
+Math.floor(
+players[activePlayer].score
+);
 
-    document.getElementById(
-        "score1"
-    ).textContent =
-        Math.floor(
-            players[1].score
-        );
+document.getElementById(
+"stage"
+).textContent=
+players[activePlayer].stage;
 
-
-    document.getElementById(
-        "score2"
-    ).textContent =
-        Math.floor(
-            players[2].score
-        );
-
-
-    document.getElementById(
-        "timer"
-    ).textContent =
-        formatTime(
-            getTime(activePlayer)
-        );
-
-
-    document.getElementById(
-        "score"
-    ).textContent =
-        Math.floor(
-            players[activePlayer].score
-        );
-
-
-    document.getElementById(
-        "stage"
-    ).textContent =
-        players[activePlayer].stage;
-
-
-    document.getElementById(
-        "enemyCount"
-    ).textContent =
-        enemies.length;
+document.getElementById(
+"enemyCount"
+).textContent=
+enemies.length;
 
 }
 
 
-/* =========================================================
+/* =====================================================
    SLOGAN
-========================================================= */
+===================================================== */
 
 function changeSlogan(){
 
-    const index =
-        (
-            players[activePlayer].stage -
-            1
-        ) %
-        slogans.length;
+const index=
+(
+players[activePlayer].stage-1
+)%
+slogans.length;
 
-
-    document.getElementById(
-        "gameSlogan"
-    ).textContent =
-        slogans[index];
+document.getElementById(
+"gameSlogan"
+).textContent=
+slogans[index];
 
 }
 
 
-/* =========================================================
+/* =====================================================
    MURS
-========================================================= */
+===================================================== */
 
 function wall(x,y){
 
-    const c =
-        Math.floor(x/tile);
+const c=
+Math.floor(x/tile);
 
-    const r =
-        Math.floor(y/tile);
+const r=
+Math.floor(y/tile);
 
+if(
+r<0||
+r>=rows||
+c<0||
+c>=cols
+)
+return true;
 
-    if(
-        r < 0 ||
-        r >= rows ||
-        c < 0 ||
-        c >= cols
-    )
-        return true;
-
-
-    return map[r][c] === "#";
+return map[r][c]==="#";
 
 }
 
 
 function canMove(x,y){
 
-    const size = 8;
+const size=8;
 
-
-    return(
-        !wall(x-size,y-size) &&
-        !wall(x+size,y-size) &&
-        !wall(x-size,y+size) &&
-        !wall(x+size,y+size)
-    );
+return(
+!wall(x-size,y-size)&&
+!wall(x+size,y-size)&&
+!wall(x-size,y+size)&&
+!wall(x+size,y+size)
+);
 
 }
 
 
-/* =========================================================
-   CONTROLES
-========================================================= */
+/* =====================================================
+   DIRECTION
+===================================================== */
 
 function directionPressed(action){
 
-    const key =
-        keys[activePlayer][action];
+const key=
+keys[activePlayer][action];
 
-
-    return pressed[key] === true;
+return pressed[key]===true;
 
 }
 
+
+/* =====================================================
+   JOUEUR
+===================================================== */
 
 function movePlayer(){
 
-    let dx = 0;
-    let dy = 0;
+let dx=0;
+
+let dy=0;
 
 
-    if(
-        directionPressed("up") ||
-        touchDirection.up
-    )
-        dy--;
+if(
+directionPressed("up")||
+touchDirection.up
+)
+dy--;
+
+if(
+directionPressed("down")||
+touchDirection.down
+)
+dy++;
+
+if(
+directionPressed("left")||
+touchDirection.left
+)
+dx--;
+
+if(
+directionPressed("right")||
+touchDirection.right
+)
+dx++;
 
 
-    if(
-        directionPressed("down") ||
-        touchDirection.down
-    )
-        dy++;
+dx+=joyX;
+
+dy+=joyY;
 
 
-    if(
-        directionPressed("left") ||
-        touchDirection.left
-    )
-        dx--;
+const len=
+Math.sqrt(
+dx*dx+dy*dy
+);
 
 
-    if(
-        directionPressed("right") ||
-        touchDirection.right
-    )
-        dx++;
+if(len>0){
 
+dx/=len;
 
-    dx += joyX;
-    dy += joyY;
+dy/=len;
 
+dx*=player.speed;
 
-    const len =
-        Math.sqrt(
-            dx*dx + dy*dy
-        );
+dy*=player.speed;
 
+player.walk+=.35;
 
-    if(len > 0){
-
-        dx /= len;
-        dy /= len;
-
-
-        dx *= player.speed;
-        dy *= player.speed;
-
-
-        player.walk += .35;
-
-
-        players[
-            activePlayer
-        ].score += .03;
-
-    }
-
-
-    if(
-        canMove(
-            player.x + dx,
-            player.y
-        )
-    )
-        player.x += dx;
-
-
-    if(
-        canMove(
-            player.x,
-            player.y + dy
-        )
-    )
-        player.y += dy;
+players[
+activePlayer
+].score+=.03;
 
 }
 
 
-/* =========================================================
-   PATHFINDING ENNEMI
-========================================================= */
+if(
+canMove(
+player.x+dx,
+player.y
+)
+)
+player.x+=dx;
+
+
+if(
+canMove(
+player.x,
+player.y+dy
+)
+)
+player.y+=dy;
+
+}
+
+
+/* =====================================================
+   PATHFINDING
+===================================================== */
 
 function findPath(enemy){
 
-    const sx =
-        Math.floor(enemy.x/tile);
+const sx=
+Math.floor(enemy.x/tile);
 
-    const sy =
-        Math.floor(enemy.y/tile);
+const sy=
+Math.floor(enemy.y/tile);
 
-    const tx =
-        Math.floor(player.x/tile);
+const tx=
+Math.floor(player.x/tile);
 
-    const ty =
-        Math.floor(player.y/tile);
-
-
-    if(sx === tx && sy === ty)
-        return null;
+const ty=
+Math.floor(player.y/tile);
 
 
-    const queue = [[sx,sy]];
-
-    const visited = new Set();
-
-    const parent = new Map();
+if(sx===tx&&sy===ty)
+return null;
 
 
-    const start =
-        sx + "," + sy;
+const queue=[[sx,sy]];
+
+const visited=new Set();
+
+const parent=new Map();
+
+const start=
+sx+","+sy;
+
+visited.add(start);
 
 
-    visited.add(start);
+const dirs=[
+[1,0],
+[-1,0],
+[0,1],
+[0,-1]
+];
 
 
-    const dirs = [
-        [1,0],
-        [-1,0],
-        [0,1],
-        [0,-1]
-    ];
+while(queue.length){
+
+const [x,y]=
+queue.shift();
 
 
-    while(queue.length){
+for(const d of dirs){
 
-        const [x,y] =
-            queue.shift();
+const nx=x+d[0];
 
-
-        for(const d of dirs){
-
-            const nx =
-                x + d[0];
-
-            const ny =
-                y + d[1];
+const ny=y+d[1];
 
 
-            if(
-                nx < 0 ||
-                ny < 0 ||
-                nx >= cols ||
-                ny >= rows
-            )
-                continue;
+if(
+nx<0||
+ny<0||
+nx>=cols||
+ny>=rows
+)
+continue;
 
 
-            if(map[ny][nx] === "#")
-                continue;
+if(map[ny][nx]==="#")
+continue;
 
 
-            const key =
-                nx + "," + ny;
+const key=
+nx+","+ny;
 
 
-            if(visited.has(key))
-                continue;
+if(visited.has(key))
+continue;
 
 
-            visited.add(key);
+visited.add(key);
 
-            parent.set(
-                key,
-                x + "," + y
-            );
-
-
-            if(
-                nx === tx &&
-                ny === ty
-            ){
-
-                let cur = key;
-
-                const path = [];
+parent.set(
+key,
+x+","+y
+);
 
 
-                while(cur !== start){
+if(
+nx===tx&&
+ny===ty
+){
 
-                    path.unshift(cur);
+let cur=key;
 
-                    cur =
-                        parent.get(cur);
-
-                }
-
-
-                const next =
-                    path[0].split(",");
+const path=[];
 
 
-                return {
-                    x:Number(next[0]),
-                    y:Number(next[1])
-                };
+while(cur!==start){
 
-            }
+path.unshift(cur);
 
-
-            queue.push([nx,ny]);
-
-        }
-
-    }
-
-
-    return null;
+cur=
+parent.get(cur);
 
 }
 
 
-/* =========================================================
-   ENNEMIS
-========================================================= */
+const next=
+path[0].split(",");
+
+
+return{
+
+x:Number(next[0]),
+y:Number(next[1])
+
+};
+
+}
+
+
+queue.push([nx,ny]);
+
+}
+
+}
+
+
+return null;
+
+}
+
+
+/* =====================================================
+   ENNEMI
+===================================================== */
 
 function moveEnemy(enemy){
 
-    const now =
-        performance.now();
+const now=
+performance.now();
 
 
-    /*
-       Le calcul du chemin est fait
-       régulièrement, pas 360 fois par
-       seconde. Cela garde le jeu léger.
-    */
+if(now>=enemy.nextPath){
 
-    if(
-        now >= enemy.nextPath
-    ){
+const next=
+findPath(enemy);
 
-        const next =
-            findPath(enemy);
+if(next){
 
+enemy.targetX=
+next.x*tile+
+tile/2;
 
-        if(next){
+enemy.targetY=
+next.y*tile+
+tile/2;
 
-            enemy.targetX =
-                next.x*tile +
-                tile/2;
+}
 
-
-            enemy.targetY =
-                next.y*tile +
-                tile/2;
-
-        }
-
-
-        enemy.nextPath =
-            now + 80;
-
-    }
-
-
-    const dx =
-        enemy.targetX -
-        enemy.x;
-
-
-    const dy =
-        enemy.targetY -
-        enemy.y;
-
-
-    const dist =
-        Math.sqrt(
-            dx*dx +
-            dy*dy
-        );
-
-
-    if(dist > .5){
-
-        const move =
-            Math.min(
-                enemy.speed,
-                dist
-            );
-
-
-        enemy.x +=
-            dx/dist * move;
-
-
-        enemy.y +=
-            dy/dist * move;
-
-    }
+enemy.nextPath=
+now+80;
 
 }
 
 
-/* =========================================================
-   COLLISION ENNEMI
-========================================================= */
+const dx=
+enemy.targetX-enemy.x;
+
+const dy=
+enemy.targetY-enemy.y;
+
+const dist=
+Math.sqrt(dx*dx+dy*dy);
+
+
+if(dist>.5){
+
+const move=
+Math.min(
+enemy.speed,
+dist
+);
+
+enemy.x+=
+dx/dist*move;
+
+enemy.y+=
+dy/dist*move;
+
+}
+
+}
+
+
+/* =====================================================
+   COLLISION
+===================================================== */
 
 function checkEnemyCollision(){
 
-    for(const enemy of enemies){
+for(const enemy of enemies){
 
-        const dx =
-            player.x -
-            enemy.x;
+const dx=
+player.x-enemy.x;
 
-        const dy =
-            player.y -
-            enemy.y;
+const dy=
+player.y-enemy.y;
 
+if(
+Math.sqrt(dx*dx+dy*dy)<23
+){
 
-        if(
-            Math.sqrt(
-                dx*dx + dy*dy
-            ) < 23
-        ){
+caught();
 
-            caught();
+return;
 
-            return;
+}
 
-        }
-
-    }
+}
 
 }
 
 
-/* =========================================================
+/* =====================================================
    JOUEUR ATTRAPE
-========================================================= */
+===================================================== */
 
 function caught(){
 
-    if(mode === "solo"){
+if(mode==="solo"){
 
-        saveCurrentTime();
+saveCurrentTime();
 
-        endGame(
-            name1 +
-            " a été attrapé !"
-        );
+endGame(
+name1+
+" a été attrapé !"
+);
 
-    }
-    else{
+}else{
 
-        /*
-           Le joueur garde sa progression.
-           Le deuxième prend son propre temps.
-        */
+switchPlayer();
 
-        switchPlayer();
-
-    }
+}
 
 }
 
 
-/* =========================================================
+/* =====================================================
    30 MINUTES
-========================================================= */
+===================================================== */
 
 function check30Minutes(){
 
-    if(
-        getTime(activePlayer) >= 1800
-    ){
+if(
+getTime(activePlayer)>=1800
+){
 
-        saveCurrentTime();
+saveCurrentTime();
 
-        endGame(
-            "30 minutes atteintes !"
-        );
+endGame(
+"30 minutes atteintes !"
+);
 
-    }
+}
 
 }
 
 
-/* =========================================================
+/* =====================================================
    PAUSE
-========================================================= */
+===================================================== */
 
 function togglePause(){
 
-    if(!running || levelPause)
-        return;
+if(
+!running||
+levelPause
+)
+return;
 
 
-    paused = !paused;
+paused=!paused;
 
 
-    if(paused){
+if(paused){
 
-        saveCurrentTime();
+saveCurrentTime();
 
-        document.getElementById(
-            "pauseOverlay"
-        ).style.display = "flex";
+document.getElementById(
+"pauseOverlay"
+).style.display="flex";
 
+document.getElementById(
+"pauseButton"
+).textContent=
+"▶ REPRENDRE";
 
-        document.getElementById(
-            "pauseButton"
-        ).textContent =
-            "▶ REPRENDRE";
+}else{
 
-    }
-    else{
+players[
+activePlayer
+].startTime=
+performance.now();
 
-        players[
-            activePlayer
-        ].startTime =
-            performance.now();
+document.getElementById(
+"pauseOverlay"
+).style.display="none";
 
+document.getElementById(
+"pauseButton"
+).textContent=
+"⏸ PAUSE";
 
-        document.getElementById(
-            "pauseOverlay"
-        ).style.display = "none";
+lastFrameTime=
+performance.now();
 
+requestAnimationFrame(loop);
 
-        document.getElementById(
-            "pauseButton"
-        ).textContent =
-            "⏸ PAUSE";
-
-
-        lastFrameTime =
-            performance.now();
-
-
-        requestAnimationFrame(
-            loop
-        );
-
-    }
+}
 
 }
 
 
-/* =========================================================
+/* =====================================================
    DESSIN MAP
-========================================================= */
+===================================================== */
 
 function drawMap(){
 
-    ctx.fillStyle = "#050505";
+ctx.fillStyle="#050505";
 
-    ctx.fillRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
+ctx.fillRect(
+0,
+0,
+canvas.width,
+canvas.height
+);
+
+ctx.fillStyle="#123bff";
 
 
-    ctx.fillStyle = "#123bff";
+for(let y=0;y<rows;y++){
 
+for(let x=0;x<cols;x++){
 
-    for(let y=0;y<rows;y++){
+if(map[y][x]==="#"){
 
-        for(let x=0;x<cols;x++){
+ctx.fillRect(
+x*tile,
+y*tile,
+tile,
+tile
+);
 
-            if(map[y][x] === "#"){
+}
 
-                ctx.fillRect(
-                    x*tile,
-                    y*tile,
-                    tile,
-                    tile
-                );
+}
 
-            }
-
-        }
-
-    }
+}
 
 }
 
 
-/* =========================================================
+/* =====================================================
    DESSIN JOUEUR
-========================================================= */
+===================================================== */
 
 function drawPlayer(){
 
-    ctx.save();
+ctx.save();
 
-    ctx.translate(
-        player.x,
-        player.y
-    );
+ctx.translate(
+player.x,
+player.y
+);
 
-
-    ctx.fillStyle = "#00aaff";
-
-
-    ctx.beginPath();
-
-    ctx.arc(
-        0,
-        -7,
-        9,
-        0,
-        Math.PI*2
-    );
-
-    ctx.fill();
+ctx.fillStyle="#00aaff";
 
 
-    ctx.fillRect(
-        -9,
-        2,
-        18,
-        15
-    );
+ctx.beginPath();
+
+ctx.arc(
+0,
+-7,
+9,
+0,
+Math.PI*2
+);
+
+ctx.fill();
 
 
-    const movement =
-        Math.sin(
-            player.walk
-        ) * 7;
+ctx.fillRect(
+-9,
+2,
+18,
+15
+);
 
 
-    ctx.strokeStyle = "#00aaff";
-
-    ctx.lineWidth = 5;
-
-    ctx.lineCap = "round";
+const movement=
+Math.sin(player.walk)*7;
 
 
-    ctx.beginPath();
+ctx.strokeStyle="#00aaff";
 
-    ctx.moveTo(-4,16);
+ctx.lineWidth=5;
 
-    ctx.lineTo(
-        -7,
-        27 + movement
-    );
-
-    ctx.stroke();
+ctx.lineCap="round";
 
 
-    ctx.beginPath();
+ctx.beginPath();
 
-    ctx.moveTo(4,16);
+ctx.moveTo(-4,16);
 
-    ctx.lineTo(
-        7,
-        27 - movement
-    );
+ctx.lineTo(
+-7,
+27+movement
+);
 
-    ctx.stroke();
+ctx.stroke();
 
 
-    ctx.restore();
+ctx.beginPath();
+
+ctx.moveTo(4,16);
+
+ctx.lineTo(
+7,
+27-movement
+);
+
+ctx.stroke();
+
+
+ctx.restore();
 
 }
 
 
-/* =========================================================
-   DESSIN MECHANT
-========================================================= */
+/* =====================================================
+   DESSIN ENNEMI
+===================================================== */
 
 function drawEnemy(enemy){
 
-    ctx.save();
+ctx.save();
 
-    ctx.translate(
-        enemy.x,
-        enemy.y
-    );
+ctx.translate(
+enemy.x,
+enemy.y
+);
 
-
-    ctx.fillStyle = "#e32626";
-
-
-    ctx.beginPath();
-
-    ctx.arc(
-        0,
-        0,
-        15,
-        0,
-        Math.PI*2
-    );
-
-    ctx.fill();
+ctx.fillStyle="#e32626";
 
 
-    ctx.fillStyle = "white";
+ctx.beginPath();
+
+ctx.arc(
+0,
+0,
+15,
+0,
+Math.PI*2
+);
+
+ctx.fill();
 
 
-    ctx.beginPath();
-
-    ctx.arc(
-        -6,
-        -4,
-        4,
-        0,
-        Math.PI*2
-    );
-
-    ctx.fill();
+ctx.fillStyle="white";
 
 
-    ctx.beginPath();
+ctx.beginPath();
 
-    ctx.arc(
-        6,
-        -4,
-        4,
-        0,
-        Math.PI*2
-    );
+ctx.arc(
+-6,
+-4,
+4,
+0,
+Math.PI*2
+);
 
-    ctx.fill();
-
-
-    ctx.fillStyle = "black";
+ctx.fill();
 
 
-    ctx.beginPath();
+ctx.beginPath();
 
-    ctx.arc(
-        -6,
-        -3,
-        2,
-        0,
-        Math.PI*2
-    );
+ctx.arc(
+6,
+-4,
+4,
+0,
+Math.PI*2
+);
 
-    ctx.fill();
-
-
-    ctx.beginPath();
-
-    ctx.arc(
-        6,
-        -3,
-        2,
-        0,
-        Math.PI*2
-    );
-
-    ctx.fill();
+ctx.fill();
 
 
-    ctx.strokeStyle = "black";
-
-    ctx.lineWidth = 3;
+ctx.fillStyle="black";
 
 
-    ctx.beginPath();
+ctx.beginPath();
 
-    ctx.moveTo(-11,-9);
+ctx.arc(
+-6,
+-3,
+2,
+0,
+Math.PI*2
+);
 
-    ctx.lineTo(-3,-6);
-
-    ctx.stroke();
-
-
-    ctx.beginPath();
-
-    ctx.moveTo(11,-9);
-
-    ctx.lineTo(3,-6);
-
-    ctx.stroke();
+ctx.fill();
 
 
-    ctx.restore();
+ctx.beginPath();
+
+ctx.arc(
+6,
+-3,
+2,
+0,
+Math.PI*2
+);
+
+ctx.fill();
+
+
+ctx.strokeStyle="black";
+
+ctx.lineWidth=3;
+
+
+ctx.beginPath();
+
+ctx.moveTo(-11,-9);
+
+ctx.lineTo(-3,-6);
+
+ctx.stroke();
+
+
+ctx.beginPath();
+
+ctx.moveTo(11,-9);
+
+ctx.lineTo(3,-6);
+
+ctx.stroke();
+
+
+ctx.restore();
 
 }
 
 
-/* =========================================================
+/* =====================================================
    FPS
-========================================================= */
+===================================================== */
 
-let fpsFrames = 0;
+let fpsFrames=0;
 
-let fpsCounterStart = 0;
+let fpsCounterStart=0;
 
-
-/*
-   Pour les FPS limités :
-   on affiche exactement la limite choisie.
-
-   Exemple :
-   sélection 360 → FPS: 360
-
-   Pour illimité :
-   on affiche la mesure réelle.
-*/
 
 function updateFPSDisplay(){
 
-    if(fpsLimit !== 0){
+if(fpsLimit!==0){
 
-        document.getElementById(
-            "fps"
-        ).textContent =
-            fpsLimit;
+document.getElementById(
+"fps"
+).textContent=
+fpsLimit;
 
-        return;
-
-    }
-
-
-    fpsFrames++;
-
-
-    const now =
-        performance.now();
-
-
-    if(
-        now -
-        fpsCounterStart >=
-        500
-    ){
-
-        const elapsed =
-            now -
-            fpsCounterStart;
-
-
-        const realFPS =
-            Math.round(
-                fpsFrames /
-                (elapsed/1000)
-            );
-
-
-        document.getElementById(
-            "fps"
-        ).textContent =
-            realFPS;
-
-
-        fpsFrames = 0;
-
-        fpsCounterStart =
-            now;
-
-    }
+return;
 
 }
 
 
-/* =========================================================
+fpsFrames++;
+
+const now=
+performance.now();
+
+
+if(
+now-fpsCounterStart>=500
+){
+
+const elapsed=
+now-fpsCounterStart;
+
+const realFPS=
+Math.round(
+fpsFrames/
+(elapsed/1000)
+);
+
+document.getElementById(
+"fps"
+).textContent=
+realFPS;
+
+fpsFrames=0;
+
+fpsCounterStart=now;
+
+}
+
+}
+
+
+/* =====================================================
    FIN
-========================================================= */
+===================================================== */
 
 function endGame(message){
 
-    running = false;
+running=false;
 
-    paused = false;
+paused=false;
 
-    levelPause = false;
+levelPause=false;
 
+document.getElementById(
+"gameOverText"
+).textContent=
+message;
 
-    document.getElementById(
-        "gameOverText"
-    ).textContent =
-        message;
-
-
-    document.getElementById(
-        "gameOver"
-    ).style.display =
-        "flex";
+document.getElementById(
+"gameOver"
+).style.display=
+"flex";
 
 }
 
 
-/* =========================================================
-   CONTROLES TACTILES
-========================================================= */
+/* =====================================================
+   BOUTONS DIRECTION
+===================================================== */
 
 document.querySelectorAll(
-    ".arrow"
+".arrow"
 ).forEach(button=>{
 
-    const dir =
-        button.dataset.dir;
+const dir=
+button.dataset.dir;
 
 
-    function down(e){
+function down(e){
 
-        e.preventDefault();
+e.preventDefault();
 
-        touchDirection[dir] = true;
+touchDirection[dir]=true;
 
-    }
-
-
-    function up(e){
-
-        e.preventDefault();
-
-        touchDirection[dir] = false;
-
-    }
+}
 
 
-    button.addEventListener(
-        "mousedown",
-        down
-    );
+function up(e){
 
-    button.addEventListener(
-        "mouseup",
-        up
-    );
+e.preventDefault();
 
-    button.addEventListener(
-        "mouseleave",
-        up
-    );
+touchDirection[dir]=false;
 
-    button.addEventListener(
-        "touchstart",
-        down,
-        {passive:false}
-    );
+}
 
-    button.addEventListener(
-        "touchend",
-        up,
-        {passive:false}
-    );
+
+button.addEventListener(
+"mousedown",
+down
+);
+
+button.addEventListener(
+"mouseup",
+up
+);
+
+button.addEventListener(
+"mouseleave",
+up
+);
+
+button.addEventListener(
+"touchstart",
+down,
+{passive:false}
+);
+
+button.addEventListener(
+"touchend",
+up,
+{passive:false}
+);
 
 });
 
 
-/* =========================================================
+/* =====================================================
    JOYSTICK
-========================================================= */
+===================================================== */
 
 function joystickMove(x,y){
 
-    const rect =
-        joystick.getBoundingClientRect();
+const rect=
+joystick.getBoundingClientRect();
+
+const cx=
+rect.left+
+rect.width/2;
+
+const cy=
+rect.top+
+rect.height/2;
+
+let dx=x-cx;
+
+let dy=y-cy;
+
+const max=34;
+
+const distance=
+Math.sqrt(
+dx*dx+dy*dy
+);
 
 
-    const cx =
-        rect.left +
-        rect.width/2;
+if(distance>max){
+
+dx=dx/distance*max;
+
+dy=dy/distance*max;
+
+}
 
 
-    const cy =
-        rect.top +
-        rect.height/2;
+joyX=dx/max;
+
+joyY=dy/max;
 
 
-    let dx = x-cx;
-    let dy = y-cy;
+knob.style.left=
+(
+rect.width/2-
+21+
+dx
+)+"px";
 
-
-    const max = 34;
-
-
-    const distance =
-        Math.sqrt(
-            dx*dx + dy*dy
-        );
-
-
-    if(distance > max){
-
-        dx =
-            dx/distance*max;
-
-        dy =
-            dy/distance*max;
-
-    }
-
-
-    joyX = dx/max;
-    joyY = dy/max;
-
-
-    knob.style.left =
-        (
-            rect.width/2 -
-            21 +
-            dx
-        ) + "px";
-
-
-    knob.style.top =
-        (
-            rect.height/2 -
-            21 +
-            dy
-        ) + "px";
+knob.style.top=
+(
+rect.height/2-
+21+
+dy
+)+"px";
 
 }
 
 
 function joystickReset(){
 
-    joyX = 0;
-    joyY = 0;
-    joyActive = false;
+joyX=0;
 
-    knob.style.left = "32px";
-    knob.style.top = "32px";
+joyY=0;
+
+joyActive=false;
+
+knob.style.left="32px";
+
+knob.style.top="32px";
 
 }
 
 
 joystick.addEventListener(
-    "mousedown",
-    e=>{
+"mousedown",
+e=>{
 
-        joyActive = true;
+joyActive=true;
 
-        joystickMove(
-            e.clientX,
-            e.clientY
-        );
+joystickMove(
+e.clientX,
+e.clientY
+);
 
-    }
+}
 );
 
 
 document.addEventListener(
-    "mousemove",
-    e=>{
+"mousemove",
+e=>{
 
-        if(joyActive){
+if(joyActive){
 
-            joystickMove(
-                e.clientX,
-                e.clientY
-            );
+joystickMove(
+e.clientX,
+e.clientY
+);
 
-        }
+}
 
-    }
+}
 );
 
 
 document.addEventListener(
-    "mouseup",
-    joystickReset
+"mouseup",
+joystickReset
 );
 
 
-/* =========================================================
-   BOUCLE DU JEU
-========================================================= */
+/* =====================================================
+   BOUCLE JEU
+===================================================== */
 
-let lastFrameTime = 0;
-
-let lastLogicTime = 0;
+let lastFrameTime=0;
 
 
 function gameLoop(){
 
-    movePlayer();
+movePlayer();
 
 
-    for(const enemy of enemies)
-        moveEnemy(enemy);
+for(
+const enemy of enemies
+)
+moveEnemy(enemy);
 
 
-    checkEnemyCollision();
+checkEnemyCollision();
 
-    updateStage();
+updateStage();
 
-    updateDisplay();
+updateDisplay();
 
-    drawMap();
+drawMap();
 
-    drawPlayer();
-
-
-    for(const enemy of enemies)
-        drawEnemy(enemy);
+drawPlayer();
 
 
-    check30Minutes();
+for(
+const enemy of enemies
+)
+drawEnemy(enemy);
+
+
+check30Minutes();
 
 }
 
 
-/*
-   Boucle FPS.
-
-   IMPORTANT :
-   setTimeout n'est PAS utilisé pour limiter
-   les FPS du jeu.
-
-   requestAnimationFrame est utilisé et on
-   ignore les images trop rapprochées.
-
-   Cela permet de choisir 30/60/90/120/180/
-   240/360 sans bloquer artificiellement
-   le jeu à 60.
-*/
+/* =====================================================
+   BOUCLE FPS
+===================================================== */
 
 function loop(timestamp){
 
-    if(!running)
-        return;
+if(!running)
+return;
+
+if(paused||levelPause)
+return;
 
 
-    if(paused || levelPause){
-
-        return;
-
-    }
-
-
-    const interval =
-        fpsLimit === 0
-        ? 0
-        : 1000 / fpsLimit;
+const interval=
+fpsLimit===0
+?0
+:1000/fpsLimit;
 
 
-    /*
-       Illimité.
-    */
+if(
+fpsLimit===0||
+timestamp-lastFrameTime>=interval
+){
 
-    if(
-        fpsLimit === 0 ||
-        timestamp -
-        lastFrameTime >=
-        interval
-    ){
+lastFrameTime=timestamp;
 
-        lastFrameTime =
-            timestamp;
-
-
-        gameLoop();
-
-    }
-
-
-    updateFPSDisplay();
-
-
-    requestAnimationFrame(
-        loop
-    );
+gameLoop();
 
 }
 
 
-/* =========================================================
-   CHARGEMENT
-========================================================= */
+updateFPSDisplay();
+
+requestAnimationFrame(loop);
+
+}
+
+
+/* =====================================================
+   DEMARRAGE
+===================================================== */
 
 loadSettings();
 
