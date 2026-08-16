@@ -172,10 +172,6 @@ input,select{
     padding:9px;
     text-align:left;
     outline:none;
-    -webkit-user-select:none;
-    user-select:none;
-    -webkit-touch-callout:none;
-    touch-action:manipulation;
 }
 
 .keyButton.waiting{
@@ -252,7 +248,7 @@ input,select{
 
 .side{
     width:155px;
-    height:410px;
+    height:440px;
     flex-shrink:0;
     background:#111;
     border:3px solid #e32626;
@@ -290,6 +286,10 @@ input,select{
     margin-top:3px;
     font-weight:bold;
     font-size:13px;
+}
+
+.healthValue{
+    color:#ff4b4b;
 }
 
 #center{
@@ -727,9 +727,7 @@ canvas{
 
 <body>
 
-<!-- =====================================================
-     ACCUEIL
-===================================================== -->
+<!-- ================= ACCUEIL ================= -->
 
 <div id="launcher">
 
@@ -809,7 +807,7 @@ canvas{
 
     </div>
 
-    <!-- PARAMETRES -->
+    <!-- ================= PARAMETRES ================= -->
 
     <div class="box" id="settings">
 
@@ -838,32 +836,28 @@ canvas{
 
         <div class="keyGrid">
 
-            <button
-                class="keyButton"
+            <button class="keyButton"
                 data-player="1"
                 data-action="up"
                 type="button">
                 Avancer : <b id="p1up">Z</b>
             </button>
 
-            <button
-                class="keyButton"
+            <button class="keyButton"
                 data-player="1"
                 data-action="down"
                 type="button">
                 Reculer : <b id="p1down">S</b>
             </button>
 
-            <button
-                class="keyButton"
+            <button class="keyButton"
                 data-player="1"
                 data-action="left"
                 type="button">
                 Gauche : <b id="p1left">Q</b>
             </button>
 
-            <button
-                class="keyButton"
+            <button class="keyButton"
                 data-player="1"
                 data-action="right"
                 type="button">
@@ -876,32 +870,28 @@ canvas{
 
         <div class="keyGrid">
 
-            <button
-                class="keyButton"
+            <button class="keyButton"
                 data-player="2"
                 data-action="up"
                 type="button">
                 Avancer : <b id="p2up">↑</b>
             </button>
 
-            <button
-                class="keyButton"
+            <button class="keyButton"
                 data-player="2"
                 data-action="down"
                 type="button">
                 Reculer : <b id="p2down">↓</b>
             </button>
 
-            <button
-                class="keyButton"
+            <button class="keyButton"
                 data-player="2"
                 data-action="left"
                 type="button">
                 Gauche : <b id="p2left">←</b>
             </button>
 
-            <button
-                class="keyButton"
+            <button class="keyButton"
                 data-player="2"
                 data-action="right"
                 type="button">
@@ -932,9 +922,7 @@ canvas{
 
 </div>
 
-<!-- =====================================================
-     JEU
-===================================================== -->
+<!-- ================= JEU ================= -->
 
 <div id="game">
 
@@ -968,29 +956,49 @@ canvas{
 
                 <div class="info">
                     <div class="small">PSEUDO</div>
-                    <div class="value" id="sideName1">Joueur 1</div>
+                    <div class="value" id="sideName1">
+                        Joueur 1
+                    </div>
+                </div>
+
+                <div class="info">
+                    <div class="small">VIE</div>
+                    <div class="value healthValue">
+                        ❤️ <span id="sideHealth1">100</span>
+                    </div>
                 </div>
 
                 <div class="info">
                     <div class="small">PROGRESSION</div>
-                    <div class="value" id="sideTime1">00:00</div>
+                    <div class="value" id="sideTime1">
+                        00:00
+                    </div>
                 </div>
 
                 <div class="info">
                     <div class="small">NIVEAU</div>
-                    <div class="value" id="sideStage1">1</div>
+                    <div class="value" id="sideStage1">
+                        1
+                    </div>
                 </div>
 
                 <div class="info">
                     <div class="small">ÉTAT</div>
-                    <div class="value" id="state1">EN JEU</div>
+                    <div class="value" id="state1">
+                        EN JEU
+                    </div>
                 </div>
 
             </div>
 
             <div class="info">
+
                 <div class="small">SCORE</div>
-                <div class="value" id="score1">0</div>
+
+                <div class="value" id="score1">
+                    0
+                </div>
+
             </div>
 
         </div>
@@ -999,10 +1007,25 @@ canvas{
 
             <div id="topBar">
 
-                <span>⏱️ <span id="timer">00:00</span></span>
-                <span>🏆 <span id="score">0</span></span>
-                <span>👹 <span id="enemyCount">1</span></span>
-                <span>NIVEAU <span id="stage">1</span></span>
+                <span>
+                    ⏱️ <span id="timer">00:00</span>
+                </span>
+
+                <span>
+                    ❤️ <span id="health">100</span>
+                </span>
+
+                <span>
+                    🏆 <span id="score">0</span>
+                </span>
+
+                <span>
+                    👹 <span id="enemyCount">1</span>
+                </span>
+
+                <span>
+                    NIVEAU <span id="stage">1</span>
+                </span>
 
             </div>
 
@@ -1023,35 +1046,84 @@ canvas{
                 </div>
 
                 <div class="info">
-                    <div class="small">PSEUDO</div>
-                    <div class="value" id="sideName2">-</div>
+
+                    <div class="small">
+                        PSEUDO
+                    </div>
+
+                    <div class="value" id="sideName2">
+                        -
+                    </div>
+
                 </div>
 
                 <div class="info">
-                    <div class="small">PROGRESSION</div>
-                    <div class="value" id="sideTime2">00:00</div>
+
+                    <div class="small">
+                        VIE
+                    </div>
+
+                    <div class="value healthValue">
+                        ❤️ <span id="sideHealth2">100</span>
+                    </div>
+
                 </div>
 
                 <div class="info">
-                    <div class="small">NIVEAU</div>
-                    <div class="value" id="sideStage2">1</div>
+
+                    <div class="small">
+                        PROGRESSION
+                    </div>
+
+                    <div class="value" id="sideTime2">
+                        00:00
+                    </div>
+
                 </div>
 
                 <div class="info">
-                    <div class="small">ÉTAT</div>
-                    <div class="value" id="state2">EN ATTENTE</div>
+
+                    <div class="small">
+                        NIVEAU
+                    </div>
+
+                    <div class="value" id="sideStage2">
+                        1
+                    </div>
+
+                </div>
+
+                <div class="info">
+
+                    <div class="small">
+                        ÉTAT
+                    </div>
+
+                    <div class="value" id="state2">
+                        EN ATTENTE
+                    </div>
+
                 </div>
 
             </div>
 
             <div class="info">
-                <div class="small">SCORE</div>
-                <div class="value" id="score2">0</div>
+
+                <div class="small">
+                    SCORE
+                </div>
+
+                <div class="value" id="score2">
+                    0
+                </div>
+
             </div>
 
         </div>
 
     </div>
+
+    <!-- CONTROLES -->
 
     <div id="controls">
 
@@ -1074,7 +1146,7 @@ canvas{
 
 </div>
 
-<!-- PAUSE -->
+<!-- ================= PAUSE ================= -->
 
 <div class="overlay" id="pauseOverlay">
 
@@ -1090,7 +1162,7 @@ canvas{
 
 </div>
 
-<!-- NIVEAU -->
+<!-- ================= NIVEAU ================= -->
 
 <div class="overlay" id="levelOverlay">
 
@@ -1104,7 +1176,7 @@ canvas{
 
 </div>
 
-<!-- GAME OVER -->
+<!-- ================= GAME OVER ================= -->
 
 <div class="overlay" id="gameOver">
 
@@ -1163,7 +1235,7 @@ canvas.width=cols*tile;
 canvas.height=rows*tile;
 
 /* =====================================================
-   ETAT
+   VARIABLES
 ===================================================== */
 
 let mode="solo";
@@ -1181,6 +1253,8 @@ let levelPause=false;
 let fpsLimit=60;
 let changingKey=null;
 
+/* TOUCHES */
+
 let keys={
     1:{
         up:"z",
@@ -1188,6 +1262,7 @@ let keys={
         left:"q",
         right:"d"
     },
+
     2:{
         up:"arrowup",
         down:"arrowdown",
@@ -1196,22 +1271,33 @@ let keys={
     }
 };
 
+/* JOUEURS */
+
 let players={
+
     1:{
         time:0,
         startTime:0,
         score:0,
         stage:1,
-        playing:false
+        health:100,
+        playing:false,
+        lastDamage:0
     },
+
     2:{
         time:0,
         startTime:0,
         score:0,
         stage:1,
-        playing:false
+        health:100,
+        playing:false,
+        lastDamage:0
     }
+
 };
+
+/* PERSONNAGE */
 
 let player={
     x:0,
@@ -1220,7 +1306,14 @@ let player={
     walk:0
 };
 
+/* ENNEMIS */
+
 let enemies=[];
+
+/*
+    Les méchants commencent tout en bas
+    du labyrinthe.
+*/
 
 const enemyPositions=[
     [3,19],
@@ -1232,6 +1325,71 @@ const enemyPositions=[
     [12,19],
     [15,19],
     [19,19]
+];
+
+/* POULETS */
+
+let chickens=[];
+
+/*
+    Positions des morceaux de poulet.
+    Ils sont placés dans des endroits
+    accessibles du labyrinthe.
+*/
+
+const chickenPositions=[
+
+    [2,1],
+    [5,1],
+    [8,1],
+    [12,1],
+    [16,1],
+
+    [1,3],
+    [6,3],
+    [10,3],
+    [14,3],
+    [18,3],
+
+    [5,5],
+    [9,5],
+    [13,5],
+    [17,5],
+
+    [2,7],
+    [7,7],
+    [11,7],
+    [15,7],
+
+    [5,9],
+    [9,9],
+    [13,9],
+    [17,9],
+
+    [2,11],
+    [6,11],
+    [10,11],
+    [15,11],
+
+    [5,13],
+    [9,13],
+    [13,13],
+    [17,13],
+
+    [2,15],
+    [7,15],
+    [11,15],
+    [16,15],
+
+    [3,17],
+    [8,17],
+    [12,17],
+    [17,17],
+
+    [4,19],
+    [10,19],
+    [16,19]
+
 ];
 
 const pressed={};
@@ -1252,6 +1410,13 @@ let lastFrameTime=0;
 let fpsFrames=0;
 let fpsCounterStart=0;
 
+/* Empêche de reprendre des dégâts
+   à chaque frame */
+
+const DAMAGE_COOLDOWN=650;
+
+/* Slogans */
+
 const slogans=[
     "« Cours. Survis. Ne te fais jamais attraper. »",
     "« Chaque seconde compte. »",
@@ -1265,15 +1430,22 @@ const slogans=[
 ];
 
 /* =====================================================
-   ACCUEIL
+   MODE SOLO / DUO
 ===================================================== */
 
 const soloButton=document.getElementById("solo");
 const duoButton=document.getElementById("duo");
 const player2Box=document.getElementById("player2Box");
 
-soloButton.addEventListener("click",()=>setMode("solo"));
-duoButton.addEventListener("click",()=>setMode("duo"));
+soloButton.addEventListener(
+    "click",
+    ()=>setMode("solo")
+);
+
+duoButton.addEventListener(
+    "click",
+    ()=>setMode("duo")
+);
 
 function setMode(newMode){
 
@@ -1285,11 +1457,13 @@ function setMode(newMode){
     if(mode==="solo"){
 
         soloButton.classList.add("active");
+
         player2Box.style.display="none";
 
     }else{
 
         duoButton.classList.add("active");
+
         player2Box.style.display="block";
     }
 }
@@ -1299,18 +1473,30 @@ function setMode(newMode){
 ===================================================== */
 
 document.getElementById("settingsBtn")
-.addEventListener("click",openSettings);
+.addEventListener(
+    "click",
+    openSettings
+);
 
 document.getElementById("backSettings")
-.addEventListener("click",closeSettings);
+.addEventListener(
+    "click",
+    closeSettings
+);
 
 document.getElementById("saveSettings")
-.addEventListener("click",saveSettings);
+.addEventListener(
+    "click",
+    saveSettings
+);
 
 function openSettings(){
 
-    document.getElementById("home").style.display="none";
-    document.getElementById("settings").style.display="block";
+    document.getElementById("home")
+    .style.display="none";
+
+    document.getElementById("settings")
+    .style.display="block";
 }
 
 function closeSettings(){
@@ -1322,8 +1508,11 @@ function closeSettings(){
         button.classList.remove("waiting");
     });
 
-    document.getElementById("settings").style.display="none";
-    document.getElementById("home").style.display="block";
+    document.getElementById("settings")
+    .style.display="none";
+
+    document.getElementById("home")
+    .style.display="block";
 }
 
 function displayKey(key){
@@ -1389,15 +1578,22 @@ function loadSettings(){
             const data=JSON.parse(savedKeys);
 
             if(data[1]){
-                keys[1]={...keys[1],...data[1]};
+                keys[1]={
+                    ...keys[1],
+                    ...data[1]
+                };
             }
 
             if(data[2]){
-                keys[2]={...keys[2],...data[2]};
+                keys[2]={
+                    ...keys[2],
+                    ...data[2]
+                };
             }
         }
 
     }catch(error){
+
         console.log(error);
     }
 
@@ -1408,13 +1604,17 @@ function loadSettings(){
 
         const value=Number(savedFPS);
 
-        if([30,60,90,120,180,240,360,0].includes(value)){
+        if(
+            [30,60,90,120,180,240,360,0]
+            .includes(value)
+        ){
+
             fpsLimit=value;
         }
     }
 
-    document.getElementById("fpsSelect").value=
-        String(fpsLimit);
+    document.getElementById("fpsSelect")
+    .value=String(fpsLimit);
 
     refreshKeys();
 }
@@ -1422,7 +1622,10 @@ function loadSettings(){
 function saveSettings(){
 
     fpsLimit=
-        Number(document.getElementById("fpsSelect").value);
+        Number(
+            document.getElementById("fpsSelect")
+            .value
+        );
 
     localStorage.setItem(
         "pacmanFPS",
@@ -1435,21 +1638,21 @@ function saveSettings(){
     );
 
     refreshKeys();
+
     closeSettings();
 }
 
 /* =====================================================
-   BOUTONS TOUCHES
-   CORRECTION TELEPHONE
+   CHANGEMENT DES TOUCHES
 ===================================================== */
 
 document.querySelectorAll(".keyButton")
 .forEach(button=>{
 
-    /* Empêche complètement le menu Copier/Coller */
     button.addEventListener(
         "contextmenu",
         function(e){
+
             e.preventDefault();
         }
     );
@@ -1457,6 +1660,7 @@ document.querySelectorAll(".keyButton")
     button.addEventListener(
         "selectstart",
         function(e){
+
             e.preventDefault();
         }
     );
@@ -1464,6 +1668,7 @@ document.querySelectorAll(".keyButton")
     button.addEventListener(
         "dragstart",
         function(e){
+
             e.preventDefault();
         }
     );
@@ -1482,7 +1687,10 @@ document.querySelectorAll(".keyButton")
             this.classList.add("waiting");
 
             changingKey={
-                player:Number(this.dataset.player),
+                player:Number(
+                    this.dataset.player
+                ),
+
                 action:this.dataset.action
             };
         }
@@ -1494,56 +1702,65 @@ document.querySelectorAll(".keyButton")
 ===================================================== */
 
 document.addEventListener(
-"keydown",
-function(e){
+    "keydown",
+    function(e){
 
-    if(changingKey){
+        if(changingKey){
 
-        e.preventDefault();
-        e.stopPropagation();
+            e.preventDefault();
+            e.stopPropagation();
 
-        keys[changingKey.player][changingKey.action]=
-            e.key.toLowerCase();
+            keys[changingKey.player]
+            [changingKey.action]=
+                e.key.toLowerCase();
 
-        localStorage.setItem(
-            "pacmanKeys",
-            JSON.stringify(keys)
-        );
+            localStorage.setItem(
+                "pacmanKeys",
+                JSON.stringify(keys)
+            );
 
-        changingKey=null;
+            changingKey=null;
 
-        document.querySelectorAll(".keyButton")
-        .forEach(b=>{
-            b.classList.remove("waiting");
-        });
+            document.querySelectorAll(".keyButton")
+            .forEach(b=>{
+                b.classList.remove("waiting");
+            });
 
-        refreshKeys();
+            refreshKeys();
 
-        return;
-    }
+            return;
+        }
 
-    pressed[e.key.toLowerCase()]=true;
+        pressed[
+            e.key.toLowerCase()
+        ]=true;
 
-    if(
-        running &&
-        (e.code==="Space" || e.key==="Escape")
-    ){
+        if(
+            running &&
+            (
+                e.code==="Space" ||
+                e.key==="Escape"
+            )
+        ){
 
-        e.preventDefault();
-        togglePause();
-    }
+            e.preventDefault();
 
-},
-true
+            togglePause();
+        }
+
+    },
+    true
 );
 
 document.addEventListener(
-"keyup",
-function(e){
+    "keyup",
+    function(e){
 
-    pressed[e.key.toLowerCase()]=false;
+        pressed[
+            e.key.toLowerCase()
+        ]=false;
 
-}
+    }
 );
 
 /* =====================================================
@@ -1551,27 +1768,35 @@ function(e){
 ===================================================== */
 
 document.getElementById("playBtn")
-.addEventListener("click",startGame);
+.addEventListener(
+    "click",
+    startGame
+);
 
 function startGame(){
 
     name1=
-        document.getElementById("name1").value.trim()
+        document.getElementById("name1")
+        .value.trim()
         ||"Joueur 1";
 
     name2=
-        document.getElementById("name2").value.trim()
+        document.getElementById("name2")
+        .value.trim()
         ||"Joueur 2";
 
     language=
-        document.getElementById("language").value;
+        document.getElementById("language")
+        .value;
 
     document.getElementById("sideName1")
     .textContent=name1;
 
     document.getElementById("sideName2")
     .textContent=
-        mode==="duo"?name2:"-";
+        mode==="duo"
+        ?name2
+        :"-";
 
     document.getElementById("launcher")
     .style.display="none";
@@ -1589,32 +1814,44 @@ function startGame(){
 function initGame(){
 
     players={
+
         1:{
             time:0,
             startTime:performance.now(),
             score:0,
             stage:1,
-            playing:true
+            health:100,
+            playing:true,
+            lastDamage:0
         },
+
         2:{
             time:0,
             startTime:0,
             score:0,
             stage:1,
-            playing:false
+            health:100,
+            playing:false,
+            lastDamage:0
         }
+
     };
 
     activePlayer=1;
+
     running=true;
     paused=false;
     levelPause=false;
 
     findPlayerStart();
+
     createEnemiesForStage();
+
+    createChickens();
 
     updatePanels();
     updateDisplay();
+
     changeSlogan();
 
     lastFrameTime=performance.now();
@@ -1626,7 +1863,7 @@ function initGame(){
 }
 
 /* =====================================================
-   JOUEUR
+   POSITION DU JOUEUR
 ===================================================== */
 
 function findPlayerStart(){
@@ -1649,24 +1886,25 @@ function findPlayerStart(){
     }
 }
 
-function directionPressed(action){
-
-    return pressed[
-        keys[activePlayer][action]
-    ]===true;
-}
+/* =====================================================
+   COLLISION MURS
+===================================================== */
 
 function wall(x,y){
 
-    const col=Math.floor(x/tile);
-    const row=Math.floor(y/tile);
+    const col=
+        Math.floor(x/tile);
+
+    const row=
+        Math.floor(y/tile);
 
     if(
-        col<0||
-        col>=cols||
-        row<0||
+        col<0 ||
+        col>=cols ||
+        row<0 ||
         row>=rows
     ){
+
         return true;
     }
 
@@ -1678,12 +1916,27 @@ function canMove(x,y){
     const size=8;
 
     return(
-        !wall(x-size,y-size)&&
-        !wall(x+size,y-size)&&
-        !wall(x-size,y+size)&&
+        !wall(x-size,y-size) &&
+        !wall(x+size,y-size) &&
+        !wall(x-size,y+size) &&
         !wall(x+size,y+size)
     );
 }
+
+/* =====================================================
+   DIRECTION
+===================================================== */
+
+function directionPressed(action){
+
+    return pressed[
+        keys[activePlayer][action]
+    ]===true;
+}
+
+/* =====================================================
+   JOUEUR
+===================================================== */
 
 function movePlayer(){
 
@@ -1691,29 +1944,42 @@ function movePlayer(){
     let dy=0;
 
     if(
-        directionPressed("up")||
+        directionPressed("up") ||
         touchDirection.up
-    )dy--;
+    ){
+
+        dy--;
+    }
 
     if(
-        directionPressed("down")||
+        directionPressed("down") ||
         touchDirection.down
-    )dy++;
+    ){
+
+        dy++;
+    }
 
     if(
-        directionPressed("left")||
+        directionPressed("left") ||
         touchDirection.left
-    )dx--;
+    ){
+
+        dx--;
+    }
 
     if(
-        directionPressed("right")||
+        directionPressed("right") ||
         touchDirection.right
-    )dx++;
+    ){
+
+        dx++;
+    }
 
     dx+=joyX;
     dy+=joyY;
 
-    const length=Math.sqrt(dx*dx+dy*dy);
+    const length=
+        Math.sqrt(dx*dx+dy*dy);
 
     if(length>0){
 
@@ -1728,11 +1994,25 @@ function movePlayer(){
         players[activePlayer].score+=.03;
     }
 
-    if(canMove(player.x+dx,player.y))
-        player.x+=dx;
+    if(
+        canMove(
+            player.x+dx,
+            player.y
+        )
+    ){
 
-    if(canMove(player.x,player.y+dy))
+        player.x+=dx;
+    }
+
+    if(
+        canMove(
+            player.x,
+            player.y+dy
+        )
+    ){
+
         player.y+=dy;
+    }
 }
 
 /* =====================================================
@@ -1743,44 +2023,65 @@ function createEnemiesForStage(){
 
     enemies=[];
 
-    const count=Math.min(
-        players[activePlayer].stage,
-        enemyPositions.length
-    );
+    const count=
+        Math.min(
+            players[activePlayer].stage,
+            enemyPositions.length
+        );
 
     for(let i=0;i<count;i++){
 
-        const pos=enemyPositions[i];
+        const pos=
+            enemyPositions[i];
 
         enemies.push({
 
             x:pos[0]*tile+tile/2,
+
             y:pos[1]*tile+tile/2,
 
             targetX:player.x,
+
             targetY:player.y,
 
-            speed:2.7+
-                players[activePlayer].stage*.12,
+            speed:
+                2.7+
+                players[activePlayer]
+                .stage*.12,
 
             nextPath:0
         });
     }
 }
 
+/* =====================================================
+   IA ENNEMI
+===================================================== */
+
 function findPath(enemy){
 
-    const sx=Math.floor(enemy.x/tile);
-    const sy=Math.floor(enemy.y/tile);
+    const sx=
+        Math.floor(enemy.x/tile);
 
-    const tx=Math.floor(player.x/tile);
-    const ty=Math.floor(player.y/tile);
+    const sy=
+        Math.floor(enemy.y/tile);
 
-    const queue=[[sx,sy]];
+    const tx=
+        Math.floor(player.x/tile);
+
+    const ty=
+        Math.floor(player.y/tile);
+
+    const queue=[
+        [sx,sy]
+    ];
+
     const visited=new Set();
+
     const parent=new Map();
 
-    const start=sx+","+sy;
+    const start=
+        sx+","+sy;
 
     visited.add(start);
 
@@ -1793,7 +2094,8 @@ function findPath(enemy){
 
     while(queue.length){
 
-        const current=queue.shift();
+        const current=
+            queue.shift();
 
         const x=current[0];
         const y=current[1];
@@ -1804,17 +2106,31 @@ function findPath(enemy){
             const ny=y+d[1];
 
             if(
-                nx<0||
-                ny<0||
-                nx>=cols||
+                nx<0 ||
+                ny<0 ||
+                nx>=cols ||
                 ny>=rows
-            )continue;
+            ){
 
-            if(map[ny][nx]==="#")continue;
+                continue;
+            }
 
-            const key=nx+","+ny;
+            if(
+                map[ny][nx]==="#"
+            ){
 
-            if(visited.has(key))continue;
+                continue;
+            }
+
+            const key=
+                nx+","+ny;
+
+            if(
+                visited.has(key)
+            ){
+
+                continue;
+            }
 
             visited.add(key);
 
@@ -1823,29 +2139,49 @@ function findPath(enemy){
                 x+","+y
             );
 
-            if(nx===tx&&ny===ty){
+            if(
+                nx===tx &&
+                ny===ty
+            ){
 
                 let currentKey=key;
+
                 const path=[];
 
-                while(currentKey!==start){
+                while(
+                    currentKey!==start
+                ){
 
-                    path.unshift(currentKey);
-                    currentKey=parent.get(currentKey);
+                    path.unshift(
+                        currentKey
+                    );
+
+                    currentKey=
+                        parent.get(
+                            currentKey
+                        );
                 }
 
                 if(path.length){
 
-                    const next=path[0].split(",");
+                    const next=
+                        path[0]
+                        .split(",");
 
                     return{
+
                         x:Number(next[0]),
+
                         y:Number(next[1])
+
                     };
                 }
             }
 
-            queue.push([nx,ny]);
+            queue.push([
+                nx,
+                ny
+            ]);
         }
     }
 
@@ -1854,11 +2190,15 @@ function findPath(enemy){
 
 function moveEnemy(enemy){
 
-    const now=performance.now();
+    const now=
+        performance.now();
 
-    if(now>=enemy.nextPath){
+    if(
+        now>=enemy.nextPath
+    ){
 
-        const next=findPath(enemy);
+        const next=
+            findPath(enemy);
 
         if(next){
 
@@ -1869,39 +2209,319 @@ function moveEnemy(enemy){
                 next.y*tile+tile/2;
         }
 
-        enemy.nextPath=now+70;
+        /*
+          Le méchant recalcule souvent
+          le chemin pour éviter de rester bloqué.
+        */
+
+        enemy.nextPath=
+            now+60;
     }
 
-    const dx=enemy.targetX-enemy.x;
-    const dy=enemy.targetY-enemy.y;
+    const dx=
+        enemy.targetX-enemy.x;
 
-    const distance=Math.sqrt(dx*dx+dy*dy);
+    const dy=
+        enemy.targetY-enemy.y;
+
+    const distance=
+        Math.sqrt(
+            dx*dx+dy*dy
+        );
 
     if(distance>.5){
 
         const movement=
-            Math.min(enemy.speed,distance);
+            Math.min(
+                enemy.speed,
+                distance
+            );
 
-        enemy.x+=dx/distance*movement;
-        enemy.y+=dy/distance*movement;
+        enemy.x+=
+            dx/distance*movement;
+
+        enemy.y+=
+            dy/distance*movement;
     }
 }
 
+/* =====================================================
+   🍗 POULETS
+===================================================== */
+
+function createChickens(){
+
+    chickens=[];
+
+    for(const pos of chickenPositions){
+
+        /*
+          On ne place pas le poulet
+          dans un mur.
+        */
+
+        if(
+            map[pos[1]] &&
+            map[pos[1]][pos[0]]!="#"
+        ){
+
+            chickens.push({
+
+                x:pos[0]*tile+tile/2,
+
+                y:pos[1]*tile+tile/2,
+
+                collected:false
+            });
+        }
+    }
+}
+
+/* =====================================================
+   🍗 RAMASSER UN POULET
+===================================================== */
+
+function checkChickenCollision(){
+
+    for(const chicken of chickens){
+
+        if(chicken.collected)
+            continue;
+
+        const dx=
+            player.x-chicken.x;
+
+        const dy=
+            player.y-chicken.y;
+
+        const distance=
+            Math.sqrt(
+                dx*dx+dy*dy
+            );
+
+        if(distance<18){
+
+            chicken.collected=true;
+
+            players[activePlayer].health=
+                Math.min(
+                    100,
+                    players[activePlayer].health+10
+                );
+
+            players[activePlayer].score+=25;
+
+            updateDisplay();
+        }
+    }
+}
+
+/* =====================================================
+   👹 DEGATS DU MECHANT
+===================================================== */
+
 function checkEnemyCollision(){
+
+    const now=
+        performance.now();
+
+    const p=
+        players[activePlayer];
+
+    /*
+      Un contact ne retire pas 20 PV
+      60 fois par seconde.
+
+      Il y a un petit délai entre
+      deux dégâts.
+    */
+
+    if(
+        now-p.lastDamage<
+        DAMAGE_COOLDOWN
+    ){
+
+        return;
+    }
 
     for(const enemy of enemies){
 
-        const dx=player.x-enemy.x;
-        const dy=player.y-enemy.y;
+        const dx=
+            player.x-enemy.x;
 
-        const distance=Math.sqrt(dx*dx+dy*dy);
+        const dy=
+            player.y-enemy.y;
+
+        const distance=
+            Math.sqrt(
+                dx*dx+dy*dy
+            );
 
         if(distance<23){
 
-            caught();
+            p.lastDamage=now;
+
+            p.health=
+                Math.max(
+                    0,
+                    p.health-20
+                );
+
+            updateDisplay();
+
+            /*
+              Si le joueur n'a plus de vie,
+              il est éliminé.
+            */
+
+            if(p.health<=0){
+
+                playerLost();
+
+                return;
+            }
+
+            /*
+              Petit recul après avoir
+              reçu un coup.
+            */
+
+            pushPlayerAway(enemy);
+
             return;
         }
     }
+}
+
+/* =====================================================
+   RECUL DU JOUEUR
+===================================================== */
+
+function pushPlayerAway(enemy){
+
+    const dx=
+        player.x-enemy.x;
+
+    const dy=
+        player.y-enemy.y;
+
+    const distance=
+        Math.sqrt(
+            dx*dx+dy*dy
+        );
+
+    if(distance>0){
+
+        const push=25;
+
+        const nx=dx/distance;
+        const ny=dy/distance;
+
+        const newX=
+            player.x+nx*push;
+
+        const newY=
+            player.y+ny*push;
+
+        if(
+            canMove(
+                newX,
+                player.y
+            )
+        ){
+
+            player.x=newX;
+        }
+
+        if(
+            canMove(
+                player.x,
+                newY
+            )
+        ){
+
+            player.y=newY;
+        }
+    }
+}
+
+/* =====================================================
+   PERTE DU JOUEUR
+===================================================== */
+
+function playerLost(){
+
+    saveCurrentTime();
+
+    players[activePlayer].playing=false;
+
+    if(mode==="solo"){
+
+        endGame(
+            name1+
+            " n'a plus de vie !"
+        );
+
+        return;
+    }
+
+    /*
+      DUO :
+
+      Joueur 1 perd
+      -> Joueur 2 joue.
+
+      Joueur 2 perd
+      -> Joueur 1 rejoue.
+
+      Chaque joueur garde :
+      - son temps
+      - son score
+      - son niveau
+      - sa vie
+    */
+
+    activePlayer=
+        activePlayer===1
+        ?2
+        :1;
+
+    players[activePlayer].playing=true;
+
+    players[activePlayer].startTime=
+        performance.now();
+
+    /*
+      Quand un joueur revient,
+      il récupère 100 PV.
+    */
+
+    players[activePlayer].health=100;
+
+    /*
+      On replace le personnage
+      en haut du labyrinthe.
+    */
+
+    findPlayerStart();
+
+    /*
+      Les méchants reviennent
+      tout en bas.
+    */
+
+    createEnemiesForStage();
+
+    /*
+      Les poulets sont recréés
+      pour le nouveau tour.
+    */
+
+    createChickens();
+
+    updatePanels();
+    updateDisplay();
+    changeSlogan();
 }
 
 /* =====================================================
@@ -1917,29 +2537,44 @@ function getTime(id){
 
     return p.time+
         Math.floor(
-            (performance.now()-p.startTime)/1000
+            (
+                performance.now()-
+                p.startTime
+            )/1000
         );
 }
 
 function saveCurrentTime(){
 
-    const p=players[activePlayer];
+    const p=
+        players[activePlayer];
 
     if(p.playing){
 
-        p.time=getTime(activePlayer);
-        p.startTime=performance.now();
+        p.time=
+            getTime(activePlayer);
+
+        p.startTime=
+            performance.now();
     }
 }
 
+/* =====================================================
+   NIVEAUX
+===================================================== */
+
 function updateStage(){
 
-    const currentTime=getTime(activePlayer);
+    const currentTime=
+        getTime(activePlayer);
 
     const newStage=
-        Math.floor(currentTime/30)+1;
+        Math.floor(
+            currentTime/30
+        )+1;
 
-    const p=players[activePlayer];
+    const p=
+        players[activePlayer];
 
     if(newStage>p.stage){
 
@@ -1961,12 +2596,24 @@ function showLevel(level){
 
     let text;
 
-    if(language==="fr")
-        text="PASSAGE AU NIVEAU "+level;
-    else if(language==="ar")
-        text="الانتقال إلى المستوى "+level;
-    else
-        text="PASSAGE TO LEVEL "+level;
+    if(language==="fr"){
+
+        text=
+            "PASSAGE AU NIVEAU "
+            +level;
+
+    }else if(language==="ar"){
+
+        text=
+            "الانتقال إلى المستوى "
+            +level;
+
+    }else{
+
+        text=
+            "PASSAGE TO LEVEL "
+            +level;
+    }
 
     document.getElementById("levelText")
     .textContent=text;
@@ -1984,52 +2631,25 @@ function showLevel(level){
 
         levelPause=false;
 
-        lastFrameTime=performance.now();
+        lastFrameTime=
+            performance.now();
 
         requestAnimationFrame(loop);
 
     },1600);
 }
 
-function caught(){
-
-    if(mode==="solo"){
-
-        saveCurrentTime();
-
-        endGame(name1+" a été attrapé !");
-
-    }else{
-
-        saveCurrentTime();
-
-        players[activePlayer].playing=false;
-
-        activePlayer=
-            activePlayer===1?2:1;
-
-        players[activePlayer].playing=true;
-
-        players[activePlayer].startTime=
-            performance.now();
-
-        findPlayerStart();
-
-        createEnemiesForStage();
-
-        updatePanels();
-        updateDisplay();
-        changeSlogan();
-    }
-}
-
 function check30Minutes(){
 
-    if(getTime(activePlayer)>=1800){
+    if(
+        getTime(activePlayer)>=1800
+    ){
 
         saveCurrentTime();
 
-        endGame("30 minutes atteintes !");
+        endGame(
+            "30 minutes atteintes !"
+        );
     }
 }
 
@@ -2039,18 +2659,27 @@ function check30Minutes(){
 
 function formatTime(seconds){
 
-    const minutes=Math.floor(seconds/60);
-    const sec=seconds%60;
+    const minutes=
+        Math.floor(seconds/60);
 
-    return String(minutes).padStart(2,"0")
-        +":"+
-        String(sec).padStart(2,"0");
+    const sec=
+        seconds%60;
+
+    return String(minutes)
+        .padStart(2,"0")
+        +":"
+        +
+        String(sec)
+        .padStart(2,"0");
 }
 
 function updatePanels(){
 
-    const panel1=document.getElementById("panel1");
-    const panel2=document.getElementById("panel2");
+    const panel1=
+        document.getElementById("panel1");
+
+    const panel2=
+        document.getElementById("panel2");
 
     panel1.classList.remove("active");
     panel2.classList.remove("active");
@@ -2064,7 +2693,9 @@ function updatePanels(){
 
         document.getElementById("state2")
         .textContent=
-            mode==="duo"?"EN ATTENTE":"MODE SOLO";
+            mode==="duo"
+            ?"EN ATTENTE"
+            :"MODE SOLO";
 
     }else{
 
@@ -2080,50 +2711,123 @@ function updatePanels(){
 
 function updateDisplay(){
 
-    document.getElementById("sideTime1")
-    .textContent=formatTime(getTime(1));
+    /*
+      Joueur 1
+    */
 
-    document.getElementById("sideTime2")
-    .textContent=formatTime(getTime(2));
+    document.getElementById("sideTime1")
+    .textContent=
+        formatTime(
+            getTime(1)
+        );
+
+    document.getElementById("sideHealth1")
+    .textContent=
+        players[1].health;
 
     document.getElementById("sideStage1")
-    .textContent=players[1].stage;
-
-    document.getElementById("sideStage2")
-    .textContent=players[2].stage;
+    .textContent=
+        players[1].stage;
 
     document.getElementById("score1")
-    .textContent=Math.floor(players[1].score);
+    .textContent=
+        Math.floor(
+            players[1].score
+        );
+
+    /*
+      Joueur 2
+    */
+
+    document.getElementById("sideTime2")
+    .textContent=
+        formatTime(
+            getTime(2)
+        );
+
+    document.getElementById("sideHealth2")
+    .textContent=
+        players[2].health;
+
+    document.getElementById("sideStage2")
+    .textContent=
+        players[2].stage;
 
     document.getElementById("score2")
-    .textContent=Math.floor(players[2].score);
+    .textContent=
+        Math.floor(
+            players[2].score
+        );
+
+    /*
+      Barre du haut
+    */
 
     document.getElementById("timer")
-    .textContent=formatTime(getTime(activePlayer));
+    .textContent=
+        formatTime(
+            getTime(activePlayer)
+        );
+
+    document.getElementById("health")
+    .textContent=
+        players[activePlayer].health;
 
     document.getElementById("score")
     .textContent=
-        Math.floor(players[activePlayer].score);
+        Math.floor(
+            players[activePlayer].score
+        );
 
     document.getElementById("stage")
-    .textContent=players[activePlayer].stage;
+    .textContent=
+        players[activePlayer].stage;
 
     document.getElementById("enemyCount")
-    .textContent=enemies.length;
+    .textContent=
+        enemies.length;
+
+    /*
+      Couleur de la vie
+    */
+
+    const health=
+        players[activePlayer].health;
+
+    const healthElement=
+        document.getElementById("health");
+
+    if(health<=20){
+
+        healthElement.style.color="#ff2222";
+
+    }else if(health<=50){
+
+        healthElement.style.color="#ffaa00";
+
+    }else{
+
+        healthElement.style.color="#00ff66";
+    }
 }
 
 function changeSlogan(){
 
     const index=
-        (players[activePlayer].stage-1)
-        %slogans.length;
+        (
+            players[activePlayer]
+            .stage-1
+        )
+        %
+        slogans.length;
 
     document.getElementById("gameSlogan")
-    .textContent=slogans[index];
+    .textContent=
+        slogans[index];
 }
 
 /* =====================================================
-   DESSIN
+   DESSIN DE LA MAP
 ===================================================== */
 
 function drawMap(){
@@ -2156,13 +2860,99 @@ function drawMap(){
     }
 }
 
+/* =====================================================
+   DESSIN POULET 🍗
+===================================================== */
+
+function drawChicken(chicken){
+
+    if(chicken.collected)
+        return;
+
+    ctx.save();
+
+    ctx.translate(
+        chicken.x,
+        chicken.y
+    );
+
+    /*
+      Petit morceau de poulet
+      très simple pour garder
+      le jeu extrêmement léger.
+    */
+
+    ctx.fillStyle="#e9b36b";
+
+    ctx.beginPath();
+
+    ctx.arc(
+        -2,
+        0,
+        7,
+        0,
+        Math.PI*2
+    );
+
+    ctx.fill();
+
+    ctx.fillStyle="#fff0c8";
+
+    ctx.beginPath();
+
+    ctx.arc(
+        4,
+        -3,
+        4,
+        0,
+        Math.PI*2
+    );
+
+    ctx.fill();
+
+    /*
+      Petit os
+    */
+
+    ctx.strokeStyle="#f5e4bd";
+
+    ctx.lineWidth=3;
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        4,
+        2
+    );
+
+    ctx.lineTo(
+        10,
+        7
+    );
+
+    ctx.stroke();
+
+    ctx.restore();
+}
+
+/* =====================================================
+   DESSIN PERSONNAGE
+===================================================== */
+
 function drawPlayer(){
 
     ctx.save();
 
-    ctx.translate(player.x,player.y);
+    ctx.translate(
+        player.x,
+        player.y
+    );
 
     ctx.fillStyle="#00aaff";
+
+    /*
+      Tête
+    */
 
     ctx.beginPath();
 
@@ -2176,6 +2966,10 @@ function drawPlayer(){
 
     ctx.fill();
 
+    /*
+      Corps
+    */
+
     ctx.fillRect(
         -9,
         2,
@@ -2183,33 +2977,64 @@ function drawPlayer(){
         15
     );
 
+    /*
+      Jambes animées
+    */
+
     const movement=
-        Math.sin(player.walk)*7;
+        Math.sin(
+            player.walk
+        )*7;
 
     ctx.strokeStyle="#00aaff";
+
     ctx.lineWidth=5;
+
     ctx.lineCap="round";
 
     ctx.beginPath();
 
-    ctx.moveTo(-4,16);
-    ctx.lineTo(-7,27+movement);
+    ctx.moveTo(
+        -4,
+        16
+    );
+
+    ctx.lineTo(
+        -7,
+        27+movement
+    );
+
     ctx.stroke();
 
     ctx.beginPath();
 
-    ctx.moveTo(4,16);
-    ctx.lineTo(7,27-movement);
+    ctx.moveTo(
+        4,
+        16
+    );
+
+    ctx.lineTo(
+        7,
+        27-movement
+    );
+
     ctx.stroke();
 
     ctx.restore();
 }
 
+/* =====================================================
+   DESSIN MECHANT
+===================================================== */
+
 function drawEnemy(enemy){
 
     ctx.save();
 
-    ctx.translate(enemy.x,enemy.y);
+    ctx.translate(
+        enemy.x,
+        enemy.y
+    );
 
     ctx.fillStyle="#e32626";
 
@@ -2225,43 +3050,100 @@ function drawEnemy(enemy){
 
     ctx.fill();
 
+    /*
+      Yeux
+    */
+
     ctx.fillStyle="white";
 
     ctx.beginPath();
 
-    ctx.arc(-6,-4,4,0,Math.PI*2);
+    ctx.arc(
+        -6,
+        -4,
+        4,
+        0,
+        Math.PI*2
+    );
+
     ctx.fill();
 
     ctx.beginPath();
 
-    ctx.arc(6,-4,4,0,Math.PI*2);
+    ctx.arc(
+        6,
+        -4,
+        4,
+        0,
+        Math.PI*2
+    );
+
     ctx.fill();
+
+    /*
+      Pupilles
+    */
 
     ctx.fillStyle="black";
 
     ctx.beginPath();
 
-    ctx.arc(-6,-3,2,0,Math.PI*2);
+    ctx.arc(
+        -6,
+        -3,
+        2,
+        0,
+        Math.PI*2
+    );
+
     ctx.fill();
 
     ctx.beginPath();
 
-    ctx.arc(6,-3,2,0,Math.PI*2);
+    ctx.arc(
+        6,
+        -3,
+        2,
+        0,
+        Math.PI*2
+    );
+
     ctx.fill();
 
+    /*
+      Sourcils méchants
+    */
+
     ctx.strokeStyle="black";
+
     ctx.lineWidth=3;
 
     ctx.beginPath();
 
-    ctx.moveTo(-11,-9);
-    ctx.lineTo(-3,-6);
+    ctx.moveTo(
+        -11,
+        -9
+    );
+
+    ctx.lineTo(
+        -3,
+        -6
+    );
+
     ctx.stroke();
 
     ctx.beginPath();
 
-    ctx.moveTo(11,-9);
-    ctx.lineTo(3,-6);
+    ctx.moveTo(
+        11,
+        -9
+    );
+
+    ctx.lineTo(
+        3,
+        -6
+    );
+
     ctx.stroke();
 
     ctx.restore();
@@ -2272,15 +3154,26 @@ function drawEnemy(enemy){
 ===================================================== */
 
 document.getElementById("pauseButton")
-.addEventListener("click",togglePause);
+.addEventListener(
+    "click",
+    togglePause
+);
 
 document.getElementById("resumeButton")
-.addEventListener("click",togglePause);
+.addEventListener(
+    "click",
+    togglePause
+);
 
 function togglePause(){
 
-    if(!running||levelPause)
+    if(
+        !running ||
+        levelPause
+    ){
+
         return;
+    }
 
     paused=!paused;
 
@@ -2288,24 +3181,32 @@ function togglePause(){
 
         saveCurrentTime();
 
-        document.getElementById("pauseOverlay")
-        .style.display="flex";
+        document.getElementById(
+            "pauseOverlay"
+        ).style.display="flex";
 
-        document.getElementById("pauseButton")
-        .textContent="▶ REPRENDRE";
+        document.getElementById(
+            "pauseButton"
+        ).textContent=
+            "▶ REPRENDRE";
 
     }else{
 
-        players[activePlayer].startTime=
+        players[activePlayer]
+        .startTime=
             performance.now();
 
-        document.getElementById("pauseOverlay")
-        .style.display="none";
+        document.getElementById(
+            "pauseOverlay"
+        ).style.display="none";
 
-        document.getElementById("pauseButton")
-        .textContent="⏸ PAUSE";
+        document.getElementById(
+            "pauseButton"
+        ).textContent=
+            "⏸ PAUSE";
 
-        lastFrameTime=performance.now();
+        lastFrameTime=
+            performance.now();
 
         requestAnimationFrame(loop);
     }
@@ -2316,21 +3217,28 @@ function togglePause(){
 ===================================================== */
 
 document.getElementById("restartButton")
-.addEventListener("click",()=>{
-    location.reload();
-});
+.addEventListener(
+    "click",
+    ()=>{
+        location.reload();
+    }
+);
 
 function endGame(message){
 
     running=false;
+
     paused=false;
+
     levelPause=false;
 
-    document.getElementById("gameOverText")
-    .textContent=message;
+    document.getElementById(
+        "gameOverText"
+    ).textContent=message;
 
-    document.getElementById("gameOver")
-    .style.display="flex";
+    document.getElementById(
+        "gameOver"
+    ).style.display="flex";
 }
 
 /* =====================================================
@@ -2340,69 +3248,125 @@ function endGame(message){
 document.querySelectorAll(".arrow")
 .forEach(button=>{
 
-    const direction=button.dataset.dir;
+    const direction=
+        button.dataset.dir;
 
     function start(e){
 
         e.preventDefault();
 
-        touchDirection[direction]=true;
+        touchDirection[
+            direction
+        ]=true;
 
-        button.classList.add("active");
+        button.classList.add(
+            "active"
+        );
     }
 
     function stop(e){
 
         e.preventDefault();
 
-        touchDirection[direction]=false;
+        touchDirection[
+            direction
+        ]=false;
 
-        button.classList.remove("active");
+        button.classList.remove(
+            "active"
+        );
     }
 
-    button.addEventListener("pointerdown",start);
-    button.addEventListener("pointerup",stop);
-    button.addEventListener("pointercancel",stop);
-    button.addEventListener("pointerleave",stop);
+    button.addEventListener(
+        "pointerdown",
+        start
+    );
+
+    button.addEventListener(
+        "pointerup",
+        stop
+    );
+
+    button.addEventListener(
+        "pointercancel",
+        stop
+    );
+
+    button.addEventListener(
+        "pointerleave",
+        stop
+    );
 });
 
 /* =====================================================
    JOYSTICK
 ===================================================== */
 
-const joystick=document.getElementById("joystick");
-const knob=document.getElementById("knob");
+const joystick=
+    document.getElementById(
+        "joystick"
+    );
+
+const knob=
+    document.getElementById(
+        "knob"
+    );
 
 function joystickMove(x,y){
 
-    const rect=joystick.getBoundingClientRect();
+    const rect=
+        joystick.getBoundingClientRect();
 
-    const centerX=rect.left+rect.width/2;
-    const centerY=rect.top+rect.height/2;
+    const centerX=
+        rect.left+
+        rect.width/2;
 
-    let dx=x-centerX;
-    let dy=y-centerY;
+    const centerY=
+        rect.top+
+        rect.height/2;
 
-    const max=rect.width*.31;
+    let dx=
+        x-centerX;
 
-    const distance=Math.sqrt(dx*dx+dy*dy);
+    let dy=
+        y-centerY;
+
+    const max=
+        rect.width*.31;
+
+    const distance=
+        Math.sqrt(
+            dx*dx+dy*dy
+        );
 
     if(distance>max){
 
-        dx=dx/distance*max;
-        dy=dy/distance*max;
+        dx=
+            dx/distance*max;
+
+        dy=
+            dy/distance*max;
     }
 
     joyX=dx/max;
     joyY=dy/max;
 
-    const knobSize=knob.offsetWidth;
+    const knobSize=
+        knob.offsetWidth;
 
     knob.style.left=
-        (rect.width/2-knobSize/2+dx)+"px";
+        (
+            rect.width/2-
+            knobSize/2+
+            dx
+        )+"px";
 
     knob.style.top=
-        (rect.height/2-knobSize/2+dy)+"px";
+        (
+            rect.height/2-
+            knobSize/2+
+            dy
+        )+"px";
 }
 
 function joystickReset(){
@@ -2411,58 +3375,73 @@ function joystickReset(){
     joyY=0;
     joyActive=false;
 
-    const rect=joystick.getBoundingClientRect();
-    const knobSize=knob.offsetWidth;
+    const rect=
+        joystick.getBoundingClientRect();
+
+    const knobSize=
+        knob.offsetWidth;
 
     knob.style.left=
-        (rect.width/2-knobSize/2)+"px";
+        (
+            rect.width/2-
+            knobSize/2
+        )+"px";
 
     knob.style.top=
-        (rect.height/2-knobSize/2)+"px";
+        (
+            rect.height/2-
+            knobSize/2
+        )+"px";
 }
 
 joystick.addEventListener(
-"pointerdown",
-function(e){
+    "pointerdown",
+    function(e){
 
-    e.preventDefault();
+        e.preventDefault();
 
-    joyActive=true;
+        joyActive=true;
 
-    joystick.setPointerCapture(e.pointerId);
+        joystick.setPointerCapture(
+            e.pointerId
+        );
 
-    joystickMove(
-        e.clientX,
-        e.clientY
-    );
-});
-
-joystick.addEventListener(
-"pointermove",
-function(e){
-
-    if(!joyActive)return;
-
-    e.preventDefault();
-
-    joystickMove(
-        e.clientX,
-        e.clientY
-    );
-});
+        joystickMove(
+            e.clientX,
+            e.clientY
+        );
+    }
+);
 
 joystick.addEventListener(
-"pointerup",
-function(e){
+    "pointermove",
+    function(e){
 
-    e.preventDefault();
+        if(!joyActive)
+            return;
 
-    joystickReset();
-});
+        e.preventDefault();
+
+        joystickMove(
+            e.clientX,
+            e.clientY
+        );
+    }
+);
 
 joystick.addEventListener(
-"pointercancel",
-joystickReset
+    "pointerup",
+    function(e){
+
+        e.preventDefault();
+
+        joystickReset();
+    }
+);
+
+joystick.addEventListener(
+    "pointercancel",
+    joystickReset
 );
 
 /* =====================================================
@@ -2473,54 +3452,114 @@ function updateFPS(){
 
     fpsFrames++;
 
-    const now=performance.now();
+    const now=
+        performance.now();
 
-    if(now-fpsCounterStart>=500){
+    if(
+        now-fpsCounterStart>=500
+    ){
 
-        const fps=Math.round(
-            fpsFrames/
-            ((now-fpsCounterStart)/1000)
-        );
+        const fps=
+            Math.round(
+                fpsFrames/
+                (
+                    (now-fpsCounterStart)
+                    /1000
+                )
+            );
 
-        document.getElementById("fps")
-        .textContent=fps;
+        document.getElementById(
+            "fps"
+        ).textContent=fps;
 
         fpsFrames=0;
+
         fpsCounterStart=now;
     }
 }
 
 /* =====================================================
-   BOUCLE
+   BOUCLE DE JEU
 ===================================================== */
 
 function gameUpdate(){
 
     movePlayer();
 
-    for(const enemy of enemies)
+    for(const enemy of enemies){
+
         moveEnemy(enemy);
+    }
+
+    /*
+      Vérification des dégâts.
+    */
 
     checkEnemyCollision();
 
+    /*
+      Vérification des poulets.
+    */
+
+    checkChickenCollision();
+
+    /*
+      Niveaux.
+    */
+
     updateStage();
+
+    /*
+      Affichage.
+    */
 
     updateDisplay();
 
+    /*
+      Dessin.
+    */
+
     drawMap();
+
+    /*
+      Poulets.
+    */
+
+    for(const chicken of chickens){
+
+        drawChicken(chicken);
+    }
+
+    /*
+      Joueur.
+    */
+
     drawPlayer();
 
-    for(const enemy of enemies)
+    /*
+      Méchants.
+    */
+
+    for(const enemy of enemies){
+
         drawEnemy(enemy);
+    }
 
     check30Minutes();
 }
 
 function loop(timestamp){
 
-    if(!running)return;
+    if(!running)
+        return;
 
-    if(paused||levelPause)return;
+    if(
+        paused ||
+        levelPause
+    ){
+
+        return;
+    }
 
     const interval=
         fpsLimit===0
@@ -2528,40 +3567,51 @@ function loop(timestamp){
         :1000/fpsLimit;
 
     if(
-        fpsLimit===0||
+        fpsLimit===0 ||
         timestamp-lastFrameTime>=interval
     ){
 
-        lastFrameTime=timestamp;
+        lastFrameTime=
+            timestamp;
 
         gameUpdate();
     }
 
     updateFPS();
 
-    requestAnimationFrame(loop);
+    requestAnimationFrame(
+        loop
+    );
 }
 
 /* =====================================================
-   DESACTIVER MENU CONTEXTUEL SUR LE JEU
+   MENU CONTEXTUEL
 ===================================================== */
 
 document.addEventListener(
-"contextmenu",
-function(e){
+    "contextmenu",
+    function(e){
 
-    if(
-        e.target.closest(".keyButton")||
-        e.target.closest(".arrow")||
-        e.target.closest("#joystick")||
-        e.target.closest("canvas")
-    ){
+        if(
+            e.target.closest(
+                ".keyButton"
+            ) ||
+            e.target.closest(
+                ".arrow"
+            ) ||
+            e.target.closest(
+                "#joystick"
+            ) ||
+            e.target.closest(
+                "canvas"
+            )
+        ){
 
-        e.preventDefault();
-    }
+            e.preventDefault();
+        }
 
-},
-false
+    },
+    false
 );
 
 /* =====================================================
