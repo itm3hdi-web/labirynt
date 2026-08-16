@@ -155,7 +155,6 @@ select{
     display:flex;
     flex-direction:column;
     justify-content:space-between;
-    transition:.2s;
 }
 
 .sidePanel.active{
@@ -321,7 +320,48 @@ canvas{
     top:38px;
 }
 
-/* ================= FIN ================= */
+/* ================= MESSAGE NIVEAU ================= */
+
+#levelMessage{
+    position:fixed;
+    inset:0;
+    display:none;
+    justify-content:center;
+    align-items:center;
+    background:rgba(0,0,0,.72);
+    z-index:150;
+    pointer-events:none;
+}
+
+#levelMessageBox{
+    text-align:center;
+    padding:35px 55px;
+    background:#111;
+    border:3px solid #00aaff;
+    border-radius:15px;
+    box-shadow:0 0 35px rgba(0,170,255,.5);
+    animation:levelPop .3s ease;
+}
+
+#levelMessageText{
+    margin:0;
+    color:#00aaff;
+    font-size:34px;
+    font-weight:bold;
+}
+
+@keyframes levelPop{
+    from{
+        transform:scale(.7);
+        opacity:0;
+    }
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+
+/* ================= GAME OVER ================= */
 
 #gameOver{
     display:none;
@@ -385,87 +425,83 @@ canvas{
 
 <div id="launcher">
 
-    <div class="launcherBox">
+<div class="launcherBox">
 
-        <div class="gameTitle">
-            Pac-Man 2.0
-        </div>
+<div class="gameTitle">
+Pac-Man 2.0
+</div>
 
-        <div class="slogan">
-            « Cours. Survis. Ne te fais jamais attraper. »
-        </div>
+<div class="slogan">
+« Cours. Survis. Ne te fais jamais attraper. »
+</div>
 
-        <label>Pseudo joueur 1</label>
+<label>Pseudo joueur 1</label>
 
-        <input
-            id="player1Name"
-            type="text"
-            maxlength="15"
-            placeholder="Ton pseudo"
-        >
+<input
+id="player1Name"
+type="text"
+maxlength="15"
+placeholder="Ton pseudo"
+>
 
-        <label>Langue</label>
+<label>Langue</label>
 
-        <select id="language">
-            <option>Français</option>
-            <option>English</option>
-            <option>Español</option>
-            <option>العربية</option>
-        </select>
+<select id="language">
+<option value="fr">Français</option>
+<option value="ar">العربية</option>
+<option value="es">Español</option>
+</select>
 
-        <label>Région</label>
+<label>Région</label>
 
-        <select id="region">
-            <option>Maroc</option>
-            <option>France</option>
-            <option>Espagne</option>
-            <option>États-Unis</option>
-            <option>Royaume-Uni</option>
-            <option>Autre</option>
-        </select>
+<select id="region">
+<option>Maroc</option>
+<option>France</option>
+<option>Espagne</option>
+<option>États-Unis</option>
+<option>Royaume-Uni</option>
+<option>Autre</option>
+</select>
 
-        <label>Mode de jeu</label>
+<label>Mode de jeu</label>
 
-        <div class="mode">
+<div class="mode">
 
-            <button
-                id="soloButton"
-                class="active"
-                onclick="selectMode('solo')"
-            >
-                👤 Solo
-            </button>
+<button
+id="soloButton"
+class="active"
+onclick="selectMode('solo')">
+👤 Solo
+</button>
 
-            <button
-                id="duoButton"
-                onclick="selectMode('duo')"
-            >
-                👥 Duo
-            </button>
+<button
+id="duoButton"
+onclick="selectMode('duo')">
+👥 Duo
+</button>
 
-        </div>
+</div>
 
-        <div id="player2Box">
+<div id="player2Box">
 
-            <label>Pseudo joueur 2</label>
+<label>Pseudo joueur 2</label>
 
-            <input
-                id="player2Name"
-                type="text"
-                maxlength="15"
-                placeholder="Pseudo joueur 2"
-            >
+<input
+id="player2Name"
+type="text"
+maxlength="15"
+placeholder="Pseudo joueur 2"
+>
 
-        </div>
+</div>
 
-        <button
-            id="startButton"
-            onclick="startGame()"
-        >
-            JOUER
-        </button>
+<button
+id="startButton"
+onclick="startGame()">
+JOUER
+</button>
 
-    </div>
+</div>
 </div>
 
 
@@ -473,296 +509,278 @@ canvas{
 
 <div id="game">
 
-    <div id="titleArea">
+<div id="titleArea">
 
-        <h1>Pac-Man 2.0</h1>
+<h1>Pac-Man 2.0</h1>
 
-        <p id="gameSlogan">
-            « Cours. Survis. Ne te fais jamais attraper. »
-        </p>
+<p id="gameSlogan">
+« Cours. Survis. Ne te fais jamais attraper. »
+</p>
 
-    </div>
+</div>
 
 
-    <div id="mainArea">
+<div id="mainArea">
 
-        <!-- JOUEUR 1 -->
+<!-- JOUEUR 1 -->
 
-        <div
-            id="panel1"
-            class="sidePanel active"
-        >
+<div
+id="panel1"
+class="sidePanel active">
 
-            <div>
+<div>
 
-                <div class="sideTitle">
-                    JOUEUR 1
-                </div>
+<div class="sideTitle">
+JOUEUR 1
+</div>
 
-                <div class="infoBox">
+<div class="infoBox">
 
-                    <div class="infoLabel">
-                        PSEUDO
-                    </div>
+<div class="infoLabel">
+PSEUDO
+</div>
 
-                    <div
-                        id="sidePlayer1"
-                        class="infoValue"
-                    >
-                        Joueur 1
-                    </div>
+<div
+id="sidePlayer1"
+class="infoValue">
+Joueur 1
+</div>
 
-                </div>
+</div>
 
-                <div class="infoBox">
+<div class="infoBox">
 
-                    <div class="infoLabel">
-                        PROGRESSION
-                    </div>
+<div class="infoLabel">
+PROGRESSION
+</div>
 
-                    <div
-                        id="time1Side"
-                        class="infoValue"
-                    >
-                        00:00
-                    </div>
+<div
+id="time1Side"
+class="infoValue">
+00:00
+</div>
 
-                </div>
+</div>
 
-                <div class="infoBox">
+<div class="infoBox">
 
-                    <div class="infoLabel">
-                        STAGE
-                    </div>
+<div class="infoLabel">
+NIVEAU
+</div>
 
-                    <div
-                        id="stage1Side"
-                        class="infoValue"
-                    >
-                        1
-                    </div>
+<div
+id="stage1Side"
+class="infoValue">
+1
+</div>
 
-                </div>
+</div>
 
-                <div class="infoBox">
+<div class="infoBox">
 
-                    <div class="infoLabel">
-                        ÉTAT
-                    </div>
+<div class="infoLabel">
+ÉTAT
+</div>
 
-                    <div
-                        id="state1"
-                        class="infoValue"
-                    >
-                        EN JEU
-                    </div>
+<div
+id="state1"
+class="infoValue">
+EN JEU
+</div>
 
-                </div>
+</div>
 
-            </div>
+</div>
 
-            <div class="infoBox">
+<div class="infoBox">
 
-                <div class="infoLabel">
-                    SCORE
-                </div>
+<div class="infoLabel">
+SCORE
+</div>
 
-                <div
-                    id="score1"
-                    class="infoValue"
-                >
-                    0
-                </div>
+<div
+id="score1"
+class="infoValue">
+0
+</div>
 
-            </div>
+</div>
 
-        </div>
+</div>
 
 
-        <!-- CENTRE -->
+<!-- CENTRE -->
 
-        <div id="centerArea">
+<div id="centerArea">
 
-            <div id="topBar">
+<div id="topBar">
 
-                <div>
-                    ⏱️
-                    <span id="timer">
-                        00:00
-                    </span>
-                </div>
+<div>
+⏱️
+<span id="timer">00:00</span>
+</div>
 
-                <div>
-                    🏆
-                    <span id="mainScore">
-                        0
-                    </span>
-                </div>
+<div>
+🏆
+<span id="mainScore">0</span>
+</div>
 
-                <div>
-                    👹
-                    <span id="enemyCount">
-                        1
-                    </span>
-                </div>
+<div>
+👹
+<span id="enemyCount">1</span>
+</div>
 
-                <div>
-                    STAGE
-                    <span id="stage">
-                        1
-                    </span>
-                </div>
+<div>
+NIVEAU
+<span id="stage">1</span>
+</div>
 
-            </div>
+</div>
 
-            <div id="canvasContainer">
+<div id="canvasContainer">
 
-                <canvas id="canvas"></canvas>
+<canvas id="canvas"></canvas>
 
-            </div>
+</div>
 
-        </div>
+</div>
 
 
-        <!-- JOUEUR 2 -->
+<!-- JOUEUR 2 -->
 
-        <div
-            id="panel2"
-            class="sidePanel inactive"
-        >
+<div
+id="panel2"
+class="sidePanel inactive">
 
-            <div>
+<div>
 
-                <div class="sideTitle">
-                    JOUEUR 2
-                </div>
+<div class="sideTitle">
+JOUEUR 2
+</div>
 
-                <div class="infoBox">
+<div class="infoBox">
 
-                    <div class="infoLabel">
-                        PSEUDO
-                    </div>
+<div class="infoLabel">
+PSEUDO
+</div>
 
-                    <div
-                        id="sidePlayer2"
-                        class="infoValue"
-                    >
-                        -
-                    </div>
+<div
+id="sidePlayer2"
+class="infoValue">
+-
+</div>
 
-                </div>
+</div>
 
-                <div class="infoBox">
+<div class="infoBox">
 
-                    <div class="infoLabel">
-                        PROGRESSION
-                    </div>
+<div class="infoLabel">
+PROGRESSION
+</div>
 
-                    <div
-                        id="time2Side"
-                        class="infoValue"
-                    >
-                        00:00
-                    </div>
+<div
+id="time2Side"
+class="infoValue">
+00:00
+</div>
 
-                </div>
+</div>
 
-                <div class="infoBox">
+<div class="infoBox">
 
-                    <div class="infoLabel">
-                        STAGE
-                    </div>
+<div class="infoLabel">
+NIVEAU
+</div>
 
-                    <div
-                        id="stage2Side"
-                        class="infoValue"
-                    >
-                        1
-                    </div>
+<div
+id="stage2Side"
+class="infoValue">
+1
+</div>
 
-                </div>
+</div>
 
-                <div class="infoBox">
+<div class="infoBox">
 
-                    <div class="infoLabel">
-                        ÉTAT
-                    </div>
+<div class="infoLabel">
+ÉTAT
+</div>
 
-                    <div
-                        id="state2"
-                        class="infoValue"
-                    >
-                        EN ATTENTE
-                    </div>
+<div
+id="state2"
+class="infoValue">
+EN ATTENTE
+</div>
 
-                </div>
+</div>
 
-            </div>
+</div>
 
-            <div class="infoBox">
+<div class="infoBox">
 
-                <div class="infoLabel">
-                    SCORE
-                </div>
+<div class="infoLabel">
+SCORE
+</div>
 
-                <div
-                    id="score2"
-                    class="infoValue"
-                >
-                    0
-                </div>
+<div
+id="score2"
+class="infoValue">
+0
+</div>
 
-            </div>
+</div>
 
-        </div>
+</div>
 
-    </div>
+</div>
 
 
-    <!-- CONTROLES -->
+<!-- ================= CONTROLES ================= -->
 
-    <div id="controls">
+<div id="controls">
 
-        <div id="arrowControls">
+<div id="arrowControls">
 
-            <div
-                class="arrow up"
-                data-direction="up"
-            >
-                ▲
-            </div>
+<div class="arrow up" data-direction="up">
+▲
+</div>
 
-            <div
-                class="arrow down"
-                data-direction="down"
-            >
-                ▼
-            </div>
+<div class="arrow down" data-direction="down">
+▼
+</div>
 
-            <div
-                class="arrow left"
-                data-direction="left"
-            >
-                ◀
-            </div>
+<div class="arrow left" data-direction="left">
+◀
+</div>
 
-            <div
-                class="arrow right"
-                data-direction="right"
-            >
-                ▶
-            </div>
+<div class="arrow right" data-direction="right">
+▶
+</div>
 
-        </div>
+</div>
 
+<div id="joystick">
 
-        <div id="joystick">
+<div id="joystickKnob"></div>
 
-            <div id="joystickKnob"></div>
+</div>
 
-        </div>
+</div>
 
-    </div>
+</div>
+
+
+<!-- ================= MESSAGE NIVEAU ================= -->
+
+<div id="levelMessage">
+
+<div id="levelMessageBox">
+
+<h2 id="levelMessageText">
+PASSAGE AU NIVEAU 2
+</h2>
+
+</div>
 
 </div>
 
@@ -771,21 +789,21 @@ canvas{
 
 <div id="gameOver">
 
-    <div class="gameOverBox">
+<div class="gameOverBox">
 
-        <h2 id="gameOverTitle">
-            FIN DE LA PARTIE
-        </h2>
+<h2 id="gameOverTitle">
+GAME OVER
+</h2>
 
-        <div id="loserText">
-            Partie terminée.
-        </div>
+<div id="loserText">
+Partie terminée.
+</div>
 
-        <button onclick="location.reload()">
-            REJOUER
-        </button>
+<button onclick="location.reload()">
+REJOUER
+</button>
 
-    </div>
+</div>
 
 </div>
 
@@ -793,7 +811,7 @@ canvas{
 <script>
 
 /* =====================================================
-   MODE
+MODE
 ===================================================== */
 
 let selectedMode="solo";
@@ -801,168 +819,160 @@ let selectedMode="solo";
 let player1Name="";
 let player2Name="";
 
+let selectedLanguage="fr";
+
 let activePlayer=1;
+
+const MAX_TIME=1800;
 
 
 /* =====================================================
-   PROGRESSION DES JOUEURS
+JOUEURS
 ===================================================== */
 
 let players={
 
-    1:{
-        time:0,
-        score:0,
-        stage:1,
-        running:false,
-        lastStart:0
-    },
+1:{
+time:0,
+score:0,
+stage:1,
+running:false,
+lastStart:0
+},
 
-    2:{
-        time:0,
-        score:0,
-        stage:1,
-        running:false,
-        lastStart:0
-    }
+2:{
+time:0,
+score:0,
+stage:1,
+running:false,
+lastStart:0
+}
 
 };
 
 
-const MAX_TIME=1800;
-
-let gameRunning=false;
-
-let lastEnemyHit=0;
-
-
 /* =====================================================
-   SLOGANS
+SLOGANS
 ===================================================== */
 
 const slogans=[
 
-    "« Cours. Survis. Ne te fais jamais attraper. »",
+"« Cours. Survis. Ne te fais jamais attraper. »",
 
-    "« Plus vite que la peur. Plus fort que la chasse. »",
+"« Plus vite que la peur. Plus fort que la chasse. »",
 
-    "« Ils te poursuivent. Toi, tu ne t'arrêtes jamais. »",
+"« Ils te poursuivent. Toi, tu ne t'arrêtes jamais. »",
 
-    "« Une erreur et la chasse recommence. »",
+"« Une erreur et la chasse recommence. »",
 
-    "« Le labyrinthe n'a aucune pitié. »",
+"« Le labyrinthe n'a aucune pitié. »",
 
-    "« Chaque seconde compte. »",
+"« Chaque seconde compte. »",
 
-    "« Ils arrivent. COURS ! »",
+"« Ils arrivent. COURS ! »",
 
-    "« Tu peux fuir... mais pas éternellement. »"
+"« Tu peux fuir... mais pas éternellement. »"
 
 ];
 
 
 /* =====================================================
-   ATELIER
+MODE SOLO / DUO
 ===================================================== */
 
 function selectMode(mode){
 
-    selectedMode=mode;
+selectedMode=mode;
 
-    document
-    .getElementById("soloButton")
-    .classList.remove("active");
+document
+.getElementById("soloButton")
+.classList.remove("active");
 
-    document
-    .getElementById("duoButton")
-    .classList.remove("active");
+document
+.getElementById("duoButton")
+.classList.remove("active");
 
+if(mode==="solo"){
 
-    if(mode==="solo"){
+document
+.getElementById("soloButton")
+.classList.add("active");
 
-        document
-        .getElementById("soloButton")
-        .classList.add("active");
+document
+.getElementById("player2Box")
+.style.display="none";
 
-        document
-        .getElementById("player2Box")
-        .style.display="none";
+}else{
 
-    }else{
+document
+.getElementById("duoButton")
+.classList.add("active");
 
-        document
-        .getElementById("duoButton")
-        .classList.add("active");
+document
+.getElementById("player2Box")
+.style.display="block";
 
-        document
-        .getElementById("player2Box")
-        .style.display="block";
-
-    }
+}
 
 }
 
 
 /* =====================================================
-   DÉMARRER
+DÉMARRER
 ===================================================== */
 
 function startGame(){
 
-    player1Name=
-    document
-    .getElementById("player1Name")
-    .value
-    .trim();
+player1Name=
+document
+.getElementById("player1Name")
+.value.trim();
 
+player2Name=
+document
+.getElementById("player2Name")
+.value.trim();
 
-    player2Name=
-    document
-    .getElementById("player2Name")
-    .value
-    .trim();
+selectedLanguage=
+document
+.getElementById("language")
+.value;
 
+if(!player1Name)
+player1Name="Joueur 1";
 
-    if(!player1Name)
-        player1Name="Joueur 1";
+if(
+selectedMode==="duo" &&
+!player2Name
+)
+player2Name="Joueur 2";
 
+document
+.getElementById("sidePlayer1")
+.textContent=player1Name;
 
-    if(
-        selectedMode==="duo" &&
-        !player2Name
-    )
-        player2Name="Joueur 2";
+document
+.getElementById("sidePlayer2")
+.textContent=
+selectedMode==="duo"
+?player2Name
+:"-";
 
+document
+.getElementById("launcher")
+.style.display="none";
 
-    document
-    .getElementById("sidePlayer1")
-    .textContent=player1Name;
+document
+.getElementById("game")
+.style.display="block";
 
+initGame();
 
-    document
-    .getElementById("sidePlayer2")
-    .textContent=
-        selectedMode==="duo"
-        ?player2Name
-        :"-";
-
-
-    document
-    .getElementById("launcher")
-    .style.display="none";
-
-
-    document
-    .getElementById("game")
-    .style.display="block";
-
-
-    initGame();
 }
 
 
 /* =====================================================
-   MAP
+MAP
 ===================================================== */
 
 const canvas=
@@ -971,708 +981,708 @@ document.getElementById("canvas");
 const ctx=
 canvas.getContext("2d");
 
-
 const tile=32;
-
-
-/*
-   P = position du joueur.
-   Il est tout en haut du labyrinthe.
-*/
 
 const map=[
 
-    "#####################",
-    "#P....#.......#....#",
-    "#.###.#.#####.#.###.#",
-    "#.....#...#...#.....#",
-    "#####.###.#.###.#####",
-    "#.........#.........#",
-    "#.###.#########.###.#",
-    "#...#....#....#...#.#",
-    "###.#.##.#.##.#.#.#.#",
-    "#...#.#.......#.#...#",
-    "#.###.#.#######.###.#",
-    "#.....#....#....#...#",
-    "#####.###.#.###.#####",
-    "#.........#.........#",
-    "#.###.#########.###.#",
-    "#.....#.......#.....#",
-    "###.#.#.#####.#.#.###",
-    "#...#...#...#...#...#",
-    "#.#######.#.#######.#",
-    "#...................#",
-    "#####################"
+"#####################",
+"#P....#.......#....#",
+"#.###.#.#####.#.###.#",
+"#.....#...#...#.....#",
+"#####.###.#.###.#####",
+"#.........#.........#",
+"#.###.#########.###.#",
+"#...#....#....#...#.#",
+"###.#.##.#.##.#.#.#.#",
+"#...#.#.......#.#...#",
+"#.###.#.#######.###.#",
+"#.....#....#....#...#",
+"#####.###.#.###.#####",
+"#.........#.........#",
+"#.###.#########.###.#",
+"#.....#.......#.....#",
+"###.#.#.#####.#.#.###",
+"#...#...#...#...#...#",
+"#.#######.#.#######.#",
+"#...................#",
+"#####################"
 
 ];
 
-
 const rows=map.length;
-
 const cols=map[0].length;
 
-
-canvas.width=
-cols*tile;
-
-canvas.height=
-rows*tile;
+canvas.width=cols*tile;
+canvas.height=rows*tile;
 
 
 /* =====================================================
-   JOUEUR
+JOUEUR
 ===================================================== */
 
 let player={
-    x:0,
-    y:0,
-    speed:5,
-    walk:0
+x:0,
+y:0,
+speed:5,
+walk:0
 };
 
 
 /* =====================================================
-   ENNEMIS
+POSITIONS DES MÉCHANTS
+TOUS EN BAS
 ===================================================== */
-
-/*
-   IMPORTANT :
-
-   Les ennemis commencent TOUS EN BAS.
-
-   La ligne 19 est la dernière grande
-   ligne jouable avant le mur du bas.
-
-   Positions :
-   x=3
-   x=10
-   x=17
-
-   Donc :
-   - ennemi 1 = bas gauche
-   - ennemi 2 = bas centre
-   - ennemi 3 = bas droite
-   etc.
-
-   Ils ne commencent plus au milieu.
-*/
 
 const enemyStarts=[
 
-    [3,19],
-    [10,19],
-    [17,19],
-
-    [1,19],
-    [5,19],
-    [8,19],
-    [12,19],
-    [15,19],
-    [19,19]
+[3,19],
+[10,19],
+[17,19],
+[1,19],
+[5,19],
+[8,19],
+[12,19],
+[15,19],
+[19,19]
 
 ];
 
-
 let enemies=[];
+
+let gameRunning=false;
+
+let lastEnemyHit=0;
 
 
 /* =====================================================
-   INITIALISATION
+INITIALISATION
 ===================================================== */
 
 function initGame(){
 
-    players={
+players={
 
-        1:{
-            time:0,
-            score:0,
-            stage:1,
-            running:false,
-            lastStart:0
-        },
+1:{
+time:0,
+score:0,
+stage:1,
+running:true,
+lastStart:Date.now()
+},
 
-        2:{
-            time:0,
-            score:0,
-            stage:1,
-            running:false,
-            lastStart:0
-        }
+2:{
+time:0,
+score:0,
+stage:1,
+running:false,
+lastStart:0
+}
 
-    };
+};
 
+activePlayer=1;
 
-    activePlayer=1;
+enemies=[];
 
+gameRunning=true;
 
-    players[1].running=true;
+resetPlayerPosition();
 
-    players[1].lastStart=
-        Date.now();
+createEnemy();
 
+updatePanels();
 
-    enemies=[];
+updateAllDisplays();
 
+updateSlogan();
 
-    gameRunning=true;
+requestAnimationFrame(gameLoop);
 
-
-    resetPlayerPosition();
-
-
-    /*
-       Premier méchant :
-       tout en bas.
-    */
-
-    createEnemy();
-
-
-    updatePanels();
-
-    updateAllDisplays();
-
-    updateSlogan();
-
-
-    requestAnimationFrame(gameLoop);
 }
 
 
 /* =====================================================
-   POSITION DU JOUEUR
+POSITION JOUEUR
 ===================================================== */
 
 function resetPlayerPosition(){
 
-    for(
-        let y=0;
-        y<rows;
-        y++
-    ){
+for(let y=0;y<rows;y++){
 
-        for(
-            let x=0;
-            x<cols;
-            x++
-        ){
+for(let x=0;x<cols;x++){
 
-            if(map[y][x]==="P"){
+if(map[y][x]==="P"){
 
-                player.x=
-                    x*tile+tile/2;
+player.x=
+x*tile+
+tile/2;
 
-                player.y=
-                    y*tile+tile/2;
+player.y=
+y*tile+
+tile/2;
 
-                return;
-            }
+return;
 
-        }
+}
 
-    }
+}
+
+}
 
 }
 
 
 /* =====================================================
-   RESET DES ENNEMIS
+CRÉER MÉCHANT
+===================================================== */
+
+function createEnemy(){
+
+const index=enemies.length;
+
+const pos=
+enemyStarts[
+index%enemyStarts.length
+];
+
+enemies.push({
+
+x:
+pos[0]*tile+
+tile/2,
+
+y:
+pos[1]*tile+
+tile/2,
+
+speed:
+2.8+
+players[activePlayer].stage*.15
+
+});
+
+}
+
+
+/* =====================================================
+RESET ENNEMIS
 ===================================================== */
 
 function resetEnemies(){
 
-    enemies.forEach(
-        (enemy,index)=>{
+enemies.forEach(
+(enemy,index)=>{
 
-            /*
-               On remet chaque ennemi
-               en bas du labyrinthe.
-            */
+const pos=
+enemyStarts[
+index%enemyStarts.length
+];
 
-            const pos=
-                enemyStarts[
-                    index%
-                    enemyStarts.length
-                ];
+enemy.x=
+pos[0]*tile+
+tile/2;
 
+enemy.y=
+pos[1]*tile+
+tile/2;
 
-            enemy.x=
-                pos[0]*tile+
-                tile/2;
+enemy.speed=
+2.8+
+players[activePlayer].stage*.15;
 
-
-            enemy.y=
-                pos[1]*tile+
-                tile/2;
-
-
-            enemy.speed=
-                2.8+
-                players[
-                    activePlayer
-                ].stage*.15;
-
-        }
-    );
+}
+);
 
 }
 
 
 /* =====================================================
-   TEMPS
+TEMPS
 ===================================================== */
 
 function getPlayerTime(id){
 
-    let p=players[id];
+const p=players[id];
 
+if(p.running){
 
-    if(p.running){
+return p.time+
+Math.floor(
+(Date.now()-p.lastStart)/1000
+);
 
-        return p.time+
-        Math.floor(
-            (
-                Date.now()-
-                p.lastStart
-            )/1000
-        );
-
-    }
-
-
-    return p.time;
 }
 
+return p.time;
 
-/* =====================================================
-   SAUVEGARDER LE JOUEUR
-===================================================== */
+}
+
 
 function saveActivePlayer(){
 
-    const p=
-        players[activePlayer];
+const p=
+players[activePlayer];
 
+if(p.running){
 
-    if(p.running){
+p.time+=
+Math.floor(
+(Date.now()-p.lastStart)/1000
+);
 
-        p.time+=
-        Math.floor(
-            (
-                Date.now()-
-                p.lastStart
-            )/1000
-        );
+p.lastStart=Date.now();
 
-
-        p.lastStart=
-            Date.now();
-
-    }
+}
 
 }
 
 
 /* =====================================================
-   CHANGER DE JOUEUR
+CHANGEMENT DE JOUEUR
 ===================================================== */
 
 function switchPlayer(){
 
-    /*
-       Sauvegarde du joueur actuel.
-    */
+saveActivePlayer();
 
-    saveActivePlayer();
+players[
+activePlayer
+].running=false;
 
+activePlayer=
+activePlayer===1
+?2
+:1;
 
-    /*
-       Son temps s'arrête.
-    */
+players[
+activePlayer
+].running=true;
 
-    players[
-        activePlayer
-    ].running=false;
+players[
+activePlayer
+].lastStart=Date.now();
 
+resetPlayerPosition();
 
-    /*
-       Changement.
-    */
+resetEnemies();
 
-    if(activePlayer===1)
-        activePlayer=2;
+resetControls();
 
-    else
-        activePlayer=1;
+updatePanels();
 
+updateAllDisplays();
 
-    /*
-       Le nouveau joueur reprend
-       SON propre chrono.
-    */
+updateSlogan();
 
-    players[
-        activePlayer
-    ].running=true;
-
-
-    players[
-        activePlayer
-    ].lastStart=
-        Date.now();
-
-
-    /*
-       Le personnage revient en haut.
-    */
-
-    resetPlayerPosition();
-
-
-    /*
-       ET TOUS LES MÉCHANTS
-       reviennent en bas.
-    */
-
-    resetEnemies();
-
-
-    resetControls();
-
-
-    updatePanels();
-
-    updateAllDisplays();
-
-    updateSlogan();
 }
 
 
 /* =====================================================
-   PANNEAUX
+MESSAGE DE NIVEAU
+===================================================== */
+
+function showLevelMessage(level){
+
+let text="";
+
+if(selectedLanguage==="fr"){
+
+text=
+"PASSAGE AU NIVEAU "+
+level;
+
+}
+
+else if(selectedLanguage==="ar"){
+
+text=
+"الانتقال إلى المستوى "+
+level;
+
+}
+
+else if(selectedLanguage==="es"){
+
+/*
+Espagnol demandé :
+message en anglais.
+*/
+
+text=
+"LEVEL "+
+level;
+
+}
+
+
+document
+.getElementById("levelMessageText")
+.textContent=text;
+
+document
+.getElementById("levelMessage")
+.style.display="flex";
+
+
+setTimeout(()=>{
+
+document
+.getElementById("levelMessage")
+.style.display="none";
+
+},1800);
+
+}
+
+
+/* =====================================================
+STAGE
+===================================================== */
+
+function updatePlayerStage(){
+
+const p=
+players[activePlayer];
+
+const currentTime=
+getPlayerTime(activePlayer);
+
+const newStage=
+Math.floor(
+currentTime/30
+)+1;
+
+
+/*
+Si le niveau change :
+on affiche le message.
+*/
+
+if(newStage!==p.stage){
+
+p.stage=newStage;
+
+
+/*
+Ajout d'un méchant
+à chaque niveau.
+*/
+
+while(
+enemies.length<p.stage
+){
+
+createEnemy();
+
+}
+
+
+for(
+const enemy of enemies
+){
+
+enemy.speed=
+2.8+
+p.stage*.15;
+
+}
+
+
+showLevelMessage(
+newStage
+);
+
+updateSlogan();
+
+}
+
+
+/*
+Sécurité :
+le nombre de méchants
+correspond au niveau.
+*/
+
+while(
+enemies.length<p.stage
+){
+
+createEnemy();
+
+}
+
+while(
+enemies.length>p.stage
+){
+
+enemies.pop();
+
+}
+
+}
+
+
+/* =====================================================
+PANNEAUX
 ===================================================== */
 
 function updatePanels(){
 
-    const panel1=
-        document.getElementById("panel1");
+const panel1=
+document.getElementById("panel1");
 
-    const panel2=
-        document.getElementById("panel2");
+const panel2=
+document.getElementById("panel2");
 
+const state1=
+document.getElementById("state1");
 
-    const state1=
-        document.getElementById("state1");
+const state2=
+document.getElementById("state2");
 
-    const state2=
-        document.getElementById("state2");
+panel1.classList.remove(
+"active",
+"inactive"
+);
 
+panel2.classList.remove(
+"active",
+"inactive"
+);
 
-    panel1.classList.remove(
-        "active",
-        "inactive"
-    );
+if(selectedMode==="solo"){
 
-    panel2.classList.remove(
-        "active",
-        "inactive"
-    );
+panel1.classList.add("active");
+panel2.classList.add("inactive");
 
+state1.textContent="EN JEU";
+state2.textContent="MODE SOLO";
 
-    if(selectedMode==="solo"){
+return;
 
-        panel1.classList.add("active");
+}
 
-        panel2.classList.add("inactive");
+if(activePlayer===1){
 
-        state1.textContent="EN JEU";
+panel1.classList.add("active");
+panel2.classList.add("inactive");
 
-        state2.textContent="MODE SOLO";
+state1.textContent="EN JEU";
+state2.textContent="EN ATTENTE";
 
-        return;
-    }
+}else{
 
+panel1.classList.add("inactive");
+panel2.classList.add("active");
 
-    if(activePlayer===1){
+state1.textContent="EN ATTENTE";
+state2.textContent="EN JEU";
 
-        panel1.classList.add("active");
-
-        panel2.classList.add("inactive");
-
-        state1.textContent="EN JEU";
-
-        state2.textContent="EN ATTENTE";
-
-    }else{
-
-        panel1.classList.add("inactive");
-
-        panel2.classList.add("active");
-
-        state1.textContent="EN ATTENTE";
-
-        state2.textContent="EN JEU";
-
-    }
+}
 
 }
 
 
 /* =====================================================
-   FORMAT TEMPS
+FORMAT TEMPS
 ===================================================== */
 
 function formatTime(seconds){
 
-    seconds=
-        Math.floor(seconds);
+seconds=Math.floor(seconds);
 
+const min=
+Math.floor(seconds/60);
 
-    const min=
-        Math.floor(
-            seconds/60
-        );
+const sec=
+seconds%60;
 
-
-    const sec=
-        seconds%60;
-
-
-    return(
-        String(min).padStart(2,"0")
-        +":"
-        +
-        String(sec).padStart(2,"0")
-    );
+return(
+String(min).padStart(2,"0")
++
+":"
++
+String(sec).padStart(2,"0")
+);
 
 }
 
 
 /* =====================================================
-   AFFICHAGE
+AFFICHAGE
 ===================================================== */
 
 function updateAllDisplays(){
 
-    const p1=players[1];
+document
+.getElementById("score1")
+.textContent=
+Math.floor(players[1].score);
 
-    const p2=players[2];
+document
+.getElementById("score2")
+.textContent=
+Math.floor(players[2].score);
 
+document
+.getElementById("time1Side")
+.textContent=
+formatTime(
+getPlayerTime(1)
+);
 
-    document
-    .getElementById("score1")
-    .textContent=
-        Math.floor(p1.score);
+document
+.getElementById("time2Side")
+.textContent=
+formatTime(
+getPlayerTime(2)
+);
 
+document
+.getElementById("stage1Side")
+.textContent=
+players[1].stage;
 
-    document
-    .getElementById("score2")
-    .textContent=
-        Math.floor(p2.score);
+document
+.getElementById("stage2Side")
+.textContent=
+players[2].stage;
 
+const current=
+players[activePlayer];
 
-    document
-    .getElementById("time1Side")
-    .textContent=
-        formatTime(
-            getPlayerTime(1)
-        );
+document
+.getElementById("timer")
+.textContent=
+formatTime(
+getPlayerTime(activePlayer)
+);
 
+document
+.getElementById("mainScore")
+.textContent=
+Math.floor(current.score);
 
-    document
-    .getElementById("time2Side")
-    .textContent=
-        formatTime(
-            getPlayerTime(2)
-        );
+document
+.getElementById("stage")
+.textContent=
+current.stage;
 
+document
+.getElementById("enemyCount")
+.textContent=
+enemies.length;
 
-    document
-    .getElementById("stage1Side")
-    .textContent=
-        p1.stage;
-
-
-    document
-    .getElementById("stage2Side")
-    .textContent=
-        p2.stage;
-
-
-    const current=
-        players[activePlayer];
-
-
-    document
-    .getElementById("timer")
-    .textContent=
-        formatTime(
-            getPlayerTime(
-                activePlayer
-            )
-        );
-
-
-    document
-    .getElementById("mainScore")
-    .textContent=
-        Math.floor(
-            current.score
-        );
-
-
-    document
-    .getElementById("stage")
-    .textContent=
-        current.stage;
-
-
-    document
-    .getElementById("enemyCount")
-    .textContent=
-        enemies.length;
 }
 
 
 /* =====================================================
-   SLOGAN
+SLOGAN
 ===================================================== */
 
 function updateSlogan(){
 
-    const p=
-        players[activePlayer];
+const p=
+players[activePlayer];
 
+document
+.getElementById("gameSlogan")
+.textContent=
+slogans[
+(p.stage-1)%
+slogans.length
+];
 
-    const slogan=
-        slogans[
-            (p.stage-1)%
-            slogans.length
-        ];
-
-
-    document
-    .getElementById("gameSlogan")
-    .textContent=
-        slogan;
 }
 
 
 /* =====================================================
-   MURS
+COLLISION MURS
 ===================================================== */
 
 function isWall(x,y){
 
-    const col=
-        Math.floor(
-            x/tile
-        );
+const col=
+Math.floor(x/tile);
 
+const row=
+Math.floor(y/tile);
 
-    const row=
-        Math.floor(
-            y/tile
-        );
+if(
+row<0||
+row>=rows||
+col<0||
+col>=cols
+)
+return true;
 
+return map[row][col]==="#";
 
-    if(
-        row<0 ||
-        row>=rows ||
-        col<0 ||
-        col>=cols
-    )
-        return true;
-
-
-    return map[row][col]==="#";
 }
 
 
 function canMove(x,y){
 
-    const size=8;
+const size=8;
 
+return(
 
-    return(
-        !isWall(
-            x-size,
-            y-size
-        )&&
-        !isWall(
-            x+size,
-            y-size
-        )&&
-        !isWall(
-            x-size,
-            y+size
-        )&&
-        !isWall(
-            x+size,
-            y+size
-        )
-    );
+!isWall(x-size,y-size)&&
+!isWall(x+size,y-size)&&
+!isWall(x-size,y+size)&&
+!isWall(x+size,y+size)
+
+);
 
 }
 
 
 /* =====================================================
-   CLAVIER
+CLAVIER
 ===================================================== */
 
 const keys={};
 
-
 document.addEventListener(
-    "keydown",
-    e=>{
-        keys[
-            e.key.toLowerCase()
-        ]=true;
-    }
+"keydown",
+e=>{
+keys[
+e.key.toLowerCase()
+]=true;
+}
 );
 
-
 document.addEventListener(
-    "keyup",
-    e=>{
-        keys[
-            e.key.toLowerCase()
-        ]=false;
-    }
+"keyup",
+e=>{
+keys[
+e.key.toLowerCase()
+]=false;
+}
 );
 
 
 /* =====================================================
-   CONTROLES
+CONTROLES
 ===================================================== */
 
 const controlKeys={
-
-    up:false,
-    down:false,
-    left:false,
-    right:false
-
+up:false,
+down:false,
+left:false,
+right:false
 };
 
 
 /* =====================================================
-   JOYSTICK
+JOYSTICK
 ===================================================== */
 
 const joystick=
-    document.getElementById(
-        "joystick"
-    );
-
+document.getElementById("joystick");
 
 const joystickKnob=
-    document.getElementById(
-        "joystickKnob"
-    );
-
+document.getElementById("joystickKnob");
 
 let joystickActive=false;
 
@@ -1682,1417 +1692,938 @@ let joystickY=0;
 
 
 function moveJoystick(
-    clientX,
-    clientY
+clientX,
+clientY
 ){
 
-    const rect=
-        joystick.getBoundingClientRect();
+const rect=
+joystick.getBoundingClientRect();
 
+const cx=
+rect.left+
+rect.width/2;
 
-    const cx=
-        rect.left+
-        rect.width/2;
+const cy=
+rect.top+
+rect.height/2;
 
+let dx=
+clientX-cx;
 
-    const cy=
-        rect.top+
-        rect.height/2;
+let dy=
+clientY-cy;
 
+const max=38;
 
-    let dx=
-        clientX-cx;
+const distance=
+Math.sqrt(dx*dx+dy*dy);
 
+if(distance>max){
 
-    let dy=
-        clientY-cy;
+dx=dx/distance*max;
+dy=dy/distance*max;
 
+}
 
-    const max=38;
+joystickKnob.style.left=
+(
+rect.width/2-
+21+
+dx
+)+"px";
 
+joystickKnob.style.top=
+(
+rect.height/2-
+21+
+dy
+)+"px";
 
-    const distance=
-        Math.sqrt(
-            dx*dx+
-            dy*dy
-        );
+joystickX=dx/max;
+joystickY=dy/max;
 
-
-    if(distance>max){
-
-        dx=
-            dx/distance*max;
-
-        dy=
-            dy/distance*max;
-    }
-
-
-    joystickKnob.style.left=
-        (
-            rect.width/2-
-            21+
-            dx
-        )+"px";
-
-
-    joystickKnob.style.top=
-        (
-            rect.height/2-
-            21+
-            dy
-        )+"px";
-
-
-    joystickX=
-        dx/max;
-
-
-    joystickY=
-        dy/max;
 }
 
 
 function resetJoystick(){
 
-    joystickActive=false;
+joystickActive=false;
 
-    joystickX=0;
+joystickX=0;
+joystickY=0;
 
-    joystickY=0;
+joystickKnob.style.left="38px";
+joystickKnob.style.top="38px";
 
-
-    joystickKnob.style.left=
-        "38px";
-
-
-    joystickKnob.style.top=
-        "38px";
 }
 
 
 joystick.addEventListener(
-    "mousedown",
-    e=>{
+"mousedown",
+e=>{
 
-        joystickActive=true;
+joystickActive=true;
 
-        moveJoystick(
-            e.clientX,
-            e.clientY
-        );
+moveJoystick(
+e.clientX,
+e.clientY
+);
 
-    }
+}
 );
 
 
 document.addEventListener(
-    "mousemove",
-    e=>{
+"mousemove",
+e=>{
 
-        if(!joystickActive)
-            return;
+if(!joystickActive)
+return;
 
+moveJoystick(
+e.clientX,
+e.clientY
+);
 
-        moveJoystick(
-            e.clientX,
-            e.clientY
-        );
-
-    }
+}
 );
 
 
 document.addEventListener(
-    "mouseup",
-    ()=>{
+"mouseup",
+()=>{
 
-        if(joystickActive)
-            resetJoystick();
+if(joystickActive)
+resetJoystick();
 
-    }
+}
+);
+
+
+/* TOUCH */
+
+joystick.addEventListener(
+"touchstart",
+e=>{
+
+e.preventDefault();
+
+joystickActive=true;
+
+const t=e.touches[0];
+
+moveJoystick(
+t.clientX,
+t.clientY
+);
+
+},
+{passive:false}
 );
 
 
 joystick.addEventListener(
-    "touchstart",
-    e=>{
+"touchmove",
+e=>{
 
-        e.preventDefault();
+e.preventDefault();
 
-        joystickActive=true;
+if(!joystickActive)
+return;
 
-        const t=
-            e.touches[0];
+const t=e.touches[0];
 
+moveJoystick(
+t.clientX,
+t.clientY
+);
 
-        moveJoystick(
-            t.clientX,
-            t.clientY
-        );
-
-    },
-    {
-        passive:false
-    }
+},
+{passive:false}
 );
 
 
 joystick.addEventListener(
-    "touchmove",
-    e=>{
+"touchend",
+e=>{
 
-        e.preventDefault();
+e.preventDefault();
 
-        if(!joystickActive)
-            return;
+resetJoystick();
 
-
-        const t=
-            e.touches[0];
-
-
-        moveJoystick(
-            t.clientX,
-            t.clientY
-        );
-
-    },
-    {
-        passive:false
-    }
-);
-
-
-joystick.addEventListener(
-    "touchend",
-    e=>{
-
-        e.preventDefault();
-
-        resetJoystick();
-
-    },
-    {
-        passive:false
-    }
+},
+{passive:false}
 );
 
 
 /* =====================================================
-   BOUTONS FLÈCHES
+BOUTONS
 ===================================================== */
 
 document
 .querySelectorAll(".arrow")
 .forEach(button=>{
 
-    const direction=
-        button.dataset.direction;
+const direction=
+button.dataset.direction;
 
+const start=()=>{
+controlKeys[direction]=true;
+};
 
-    const start=()=>{
+const stop=()=>{
+controlKeys[direction]=false;
+};
 
-        controlKeys[
-            direction
-        ]=true;
+button.addEventListener(
+"mousedown",
+start
+);
 
-    };
+button.addEventListener(
+"mouseup",
+stop
+);
 
+button.addEventListener(
+"mouseleave",
+stop
+);
 
-    const stop=()=>{
+button.addEventListener(
+"touchstart",
+e=>{
 
-        controlKeys[
-            direction
-        ]=false;
+e.preventDefault();
+start();
 
-    };
+},
+{passive:false}
+);
 
+button.addEventListener(
+"touchend",
+e=>{
 
-    button.addEventListener(
-        "mousedown",
-        start
-    );
+e.preventDefault();
+stop();
 
-
-    button.addEventListener(
-        "mouseup",
-        stop
-    );
-
-
-    button.addEventListener(
-        "mouseleave",
-        stop
-    );
-
-
-    button.addEventListener(
-        "touchstart",
-        e=>{
-
-            e.preventDefault();
-
-            start();
-
-        },
-        {
-            passive:false
-        }
-    );
-
-
-    button.addEventListener(
-        "touchend",
-        e=>{
-
-            e.preventDefault();
-
-            stop();
-
-        },
-        {
-            passive:false
-        }
-    );
+},
+{passive:false}
+);
 
 });
 
 
 function resetControls(){
 
-    controlKeys.up=false;
+controlKeys.up=false;
+controlKeys.down=false;
+controlKeys.left=false;
+controlKeys.right=false;
 
-    controlKeys.down=false;
+resetJoystick();
 
-    controlKeys.left=false;
-
-    controlKeys.right=false;
-
-    resetJoystick();
 }
 
 
 /* =====================================================
-   MOUVEMENT JOUEUR
+MOUVEMENT JOUEUR
 ===================================================== */
 
 function movePlayer(){
 
-    let dx=0;
+let dx=0;
+let dy=0;
 
-    let dy=0;
+if(
+keys["arrowup"]||
+keys["z"]||
+keys["w"]||
+controlKeys.up
+)
+dy-=1;
 
+if(
+keys["arrowdown"]||
+keys["s"]||
+controlKeys.down
+)
+dy+=1;
 
-    if(
-        keys["arrowup"]||
-        keys["z"]||
-        keys["w"]||
-        controlKeys.up
-    )
-        dy-=1;
+if(
+keys["arrowleft"]||
+keys["q"]||
+keys["a"]||
+controlKeys.left
+)
+dx-=1;
 
+if(
+keys["arrowright"]||
+keys["d"]||
+controlKeys.right
+)
+dx+=1;
 
-    if(
-        keys["arrowdown"]||
-        keys["s"]||
-        controlKeys.down
-    )
-        dy+=1;
+dx+=joystickX;
+dy+=joystickY;
 
+const length=
+Math.sqrt(dx*dx+dy*dy);
 
-    if(
-        keys["arrowleft"]||
-        keys["q"]||
-        keys["a"]||
-        controlKeys.left
-    )
-        dx-=1;
+if(length>0){
 
+dx/=length;
+dy/=length;
 
-    if(
-        keys["arrowright"]||
-        keys["d"]||
-        controlKeys.right
-    )
-        dx+=1;
+dx*=player.speed;
+dy*=player.speed;
 
+player.walk+=.4;
 
-    dx+=joystickX;
+players[
+activePlayer
+].score+=.03;
 
-    dy+=joystickY;
+}
 
+if(
+canMove(
+player.x+dx,
+player.y
+)
+)
+player.x+=dx;
 
-    const length=
-        Math.sqrt(
-            dx*dx+
-            dy*dy
-        );
-
-
-    if(length>0){
-
-        dx/=length;
-
-        dy/=length;
-
-
-        dx*=player.speed;
-
-        dy*=player.speed;
-
-
-        player.walk+=.4;
-
-
-        players[
-            activePlayer
-        ].score+=.03;
-
-    }
-
-
-    if(
-        canMove(
-            player.x+dx,
-            player.y
-        )
-    )
-        player.x+=dx;
-
-
-    if(
-        canMove(
-            player.x,
-            player.y+dy
-        )
-    )
-        player.y+=dy;
+if(
+canMove(
+player.x,
+player.y+dy
+)
+)
+player.y+=dy;
 
 }
 
 
 /* =====================================================
-   CRÉER UN MÉCHANT
-===================================================== */
-
-function createEnemy(){
-
-    const index=
-        enemies.length;
-
-
-    /*
-       IMPORTANT :
-
-       On prend une position dans
-       enemyStarts.
-
-       Toutes les positions sont
-       en bas du labyrinthe.
-    */
-
-    const pos=
-        enemyStarts[
-            index%
-            enemyStarts.length
-        ];
-
-
-    enemies.push({
-
-        x:
-            pos[0]*tile+
-            tile/2,
-
-        y:
-            pos[1]*tile+
-            tile/2,
-
-        speed:
-            2.8+
-            players[
-                activePlayer
-            ].stage*.15
-
-    });
-
-}
-
-
-/* =====================================================
-   PATHFINDING
+PATHFINDING
 ===================================================== */
 
 function findPath(enemy){
 
-    const sx=
-        Math.floor(
-            enemy.x/tile
-        );
+const sx=
+Math.floor(enemy.x/tile);
 
+const sy=
+Math.floor(enemy.y/tile);
 
-    const sy=
-        Math.floor(
-            enemy.y/tile
-        );
+const tx=
+Math.floor(player.x/tile);
 
+const ty=
+Math.floor(player.y/tile);
 
-    const tx=
-        Math.floor(
-            player.x/tile
-        );
+const queue=[
+[sx,sy]
+];
 
+const visited=
+new Set();
 
-    const ty=
-        Math.floor(
-            player.y/tile
-        );
+const parent=
+new Map();
 
+visited.add(
+sx+","+sy
+);
 
-    const queue=[
-        [sx,sy]
-    ];
+const dirs=[
+[1,0],
+[-1,0],
+[0,1],
+[0,-1]
+];
 
+let found=false;
 
-    const visited=
-        new Set();
+while(queue.length){
 
+const [x,y]=
+queue.shift();
 
-    const parent=
-        new Map();
+if(
+x===tx&&
+y===ty
+){
 
+found=true;
+break;
 
-    visited.add(
-        sx+","+sy
-    );
+}
 
+for(
+const [dx,dy]
+of dirs
+){
 
-    const dirs=[
+const nx=x+dx;
+const ny=y+dy;
 
-        [1,0],
-        [-1,0],
-        [0,1],
-        [0,-1]
+if(
+nx<0||
+ny<0||
+nx>=cols||
+ny>=rows
+)
+continue;
 
-    ];
+if(
+map[ny][nx]==="#"
+)
+continue;
 
+const key=
+nx+","+ny;
 
-    let found=false;
+if(
+visited.has(key)
+)
+continue;
 
+visited.add(key);
 
-    while(queue.length){
+parent.set(
+key,
+x+","+y
+);
 
-        const [x,y]=
-            queue.shift();
+queue.push([
+nx,
+ny
+]);
 
+}
 
-        if(
-            x===tx &&
-            y===ty
-        ){
+}
 
-            found=true;
+if(!found)
+return null;
 
-            break;
-        }
+let current=
+tx+","+ty;
 
+const path=[];
 
-        for(
-            const [dx,dy]
-            of dirs
-        ){
+while(
+current!==
+sx+","+sy
+){
 
-            const nx=x+dx;
+path.unshift(current);
 
-            const ny=y+dy;
+current=
+parent.get(current);
 
+if(!current)
+return null;
 
-            if(
-                nx<0||
-                ny<0||
-                nx>=cols||
-                ny>=rows
-            )
-                continue;
+}
 
+if(!path.length)
+return null;
 
-            if(
-                map[ny][nx]==="#"
-            )
-                continue;
+const next=
+path[0].split(",");
 
-
-            const key=
-                nx+","+ny;
-
-
-            if(
-                visited.has(key)
-            )
-                continue;
-
-
-            visited.add(key);
-
-
-            parent.set(
-                key,
-                x+","+y
-            );
-
-
-            queue.push([
-                nx,
-                ny
-            ]);
-
-        }
-
-    }
-
-
-    if(!found)
-        return null;
-
-
-    let current=
-        tx+","+ty;
-
-
-    const path=[];
-
-
-    while(
-        current!==
-        sx+","+sy
-    ){
-
-        path.unshift(current);
-
-
-        current=
-            parent.get(
-                current
-            );
-
-
-        if(!current)
-            return null;
-
-    }
-
-
-    if(!path.length)
-        return null;
-
-
-    const next=
-        path[0].split(",");
-
-
-    return{
-
-        x:Number(next[0]),
-
-        y:Number(next[1])
-
-    };
+return{
+x:Number(next[0]),
+y:Number(next[1])
+};
 
 }
 
 
 /* =====================================================
-   MOUVEMENT MÉCHANT
+MOUVEMENT MÉCHANT
 ===================================================== */
 
 function moveEnemy(enemy){
 
-    const next=
-        findPath(enemy);
+const next=
+findPath(enemy);
 
+if(!next)
+return;
 
-    if(!next)
-        return;
+const targetX=
+next.x*tile+
+tile/2;
 
+const targetY=
+next.y*tile+
+tile/2;
 
-    const targetX=
-        next.x*tile+
-        tile/2;
+const dx=
+targetX-enemy.x;
 
+const dy=
+targetY-enemy.y;
 
-    const targetY=
-        next.y*tile+
-        tile/2;
+const distance=
+Math.sqrt(dx*dx+dy*dy);
 
+if(distance>1){
 
-    const dx=
-        targetX-
-        enemy.x;
+const move=
+Math.min(
+enemy.speed,
+distance
+);
 
+enemy.x+=
+dx/distance*
+move;
 
-    const dy=
-        targetY-
-        enemy.y;
+enemy.y+=
+dy/distance*
+move;
 
-
-    const distance=
-        Math.sqrt(
-            dx*dx+
-            dy*dy
-        );
-
-
-    if(distance>1){
-
-        const move=
-            Math.min(
-                enemy.speed,
-                distance
-            );
-
-
-        enemy.x+=
-            dx/distance*
-            move;
-
-
-        enemy.y+=
-            dy/distance*
-            move;
-
-    }
+}
 
 }
 
 
 /* =====================================================
-   STAGE
-===================================================== */
-
-function updatePlayerStage(){
-
-    const p=
-        players[
-            activePlayer
-        ];
-
-
-    const currentTime=
-        getPlayerTime(
-            activePlayer
-        );
-
-
-    const newStage=
-        Math.floor(
-            currentTime/30
-        )+1;
-
-
-    if(
-        newStage!==p.stage
-    ){
-
-        p.stage=
-            newStage;
-
-
-        /*
-           Une tête supplémentaire
-           toutes les 30 secondes.
-        */
-
-        while(
-            enemies.length<
-            p.stage
-        ){
-
-            createEnemy();
-
-        }
-
-
-        for(
-            const enemy
-            of enemies
-        ){
-
-            enemy.speed=
-                2.8+
-                p.stage*.15;
-
-        }
-
-
-        updateSlogan();
-
-    }
-
-
-    if(
-        enemies.length!==
-        p.stage
-    ){
-
-        while(
-            enemies.length<
-            p.stage
-        )
-            createEnemy();
-
-
-        while(
-            enemies.length>
-            p.stage
-        )
-            enemies.pop();
-
-    }
-
-}
-
-
-/* =====================================================
-   COLLISION
+COLLISION MÉCHANT
 ===================================================== */
 
 function checkCollision(){
 
-    const now=
-        Date.now();
+const now=Date.now();
 
+if(
+now-lastEnemyHit<800
+)
+return;
 
-    if(
-        now-lastEnemyHit<
-        800
-    )
-        return;
+for(
+const enemy of enemies
+){
 
+const dx=
+player.x-enemy.x;
 
-    for(
-        const enemy
-        of enemies
-    ){
+const dy=
+player.y-enemy.y;
 
-        const dx=
-            player.x-
-            enemy.x;
+const distance=
+Math.sqrt(dx*dx+dy*dy);
 
+if(distance<23){
 
-        const dy=
-            player.y-
-            enemy.y;
+lastEnemyHit=now;
 
+playerCaught();
 
-        const distance=
-            Math.sqrt(
-                dx*dx+
-                dy*dy
-            );
+return;
 
+}
 
-        if(distance<23){
-
-            lastEnemyHit=
-                now;
-
-
-            playerCaught();
-
-            return;
-
-        }
-
-    }
+}
 
 }
 
 
 /* =====================================================
-   JOUEUR ATTRAPÉ
+JOUEUR ATTRAPÉ
 ===================================================== */
 
 function playerCaught(){
 
-    if(selectedMode==="solo"){
+if(selectedMode==="solo"){
 
-        saveActivePlayer();
+saveActivePlayer();
 
+loseGame(
+player1Name+
+" a été attrapé !"
+);
 
-        loseGame(
-            player1Name+
-            " a été attrapé !"
-        );
+return;
 
+}
 
-        return;
-
-    }
-
-
-    switchPlayer();
+switchPlayer();
 
 }
 
 
 /* =====================================================
-   DESSIN MAP
+DESSIN MAP
 ===================================================== */
 
 function drawMap(){
 
-    for(
-        let y=0;
-        y<rows;
-        y++
-    ){
+for(let y=0;y<rows;y++){
 
-        for(
-            let x=0;
-            x<cols;
-            x++
-        ){
+for(let x=0;x<cols;x++){
 
-            if(
-                map[y][x]==="#"
-            ){
+if(map[y][x]==="#"){
 
-                ctx.fillStyle=
-                    "#123bff";
+ctx.fillStyle="#123bff";
 
+ctx.fillRect(
+x*tile,
+y*tile,
+tile,
+tile
+);
 
-                ctx.fillRect(
-                    x*tile,
-                    y*tile,
-                    tile,
-                    tile
-                );
+ctx.strokeStyle="#3155ff";
 
+ctx.strokeRect(
+x*tile+1,
+y*tile+1,
+tile-2,
+tile-2
+);
 
-                ctx.strokeStyle=
-                    "#3155ff";
+}else{
 
+ctx.fillStyle="#050505";
 
-                ctx.strokeRect(
-                    x*tile+1,
-                    y*tile+1,
-                    tile-2,
-                    tile-2
-                );
+ctx.fillRect(
+x*tile,
+y*tile,
+tile,
+tile
+);
 
-            }else{
+}
 
-                ctx.fillStyle=
-                    "#050505";
+}
 
-
-                ctx.fillRect(
-                    x*tile,
-                    y*tile,
-                    tile,
-                    tile
-                );
-
-            }
-
-        }
-
-    }
+}
 
 }
 
 
 /* =====================================================
-   DESSIN JOUEUR
+DESSIN JOUEUR
 ===================================================== */
 
 function drawPlayer(){
 
-    ctx.save();
+ctx.save();
 
+ctx.translate(
+player.x,
+player.y
+);
 
-    ctx.translate(
-        player.x,
-        player.y
-    );
+ctx.fillStyle="#00aaff";
 
+/* tête */
 
-    ctx.fillStyle=
-        "#00aaff";
+ctx.beginPath();
 
+ctx.arc(
+0,
+-7,
+9,
+0,
+Math.PI*2
+);
 
-    /* TÊTE */
+ctx.fill();
 
-    ctx.beginPath();
+/* corps */
 
-    ctx.arc(
-        0,
-        -7,
-        9,
-        0,
-        Math.PI*2
-    );
+ctx.fillRect(
+-9,
+2,
+18,
+15
+);
 
-    ctx.fill();
+/* bras */
 
+ctx.strokeStyle="#00aaff";
+ctx.lineWidth=5;
+ctx.lineCap="round";
 
-    /* CORPS */
+const arm=
+Math.sin(player.walk)*5;
 
-    ctx.fillRect(
-        -9,
-        2,
-        18,
-        15
-    );
+ctx.beginPath();
 
+ctx.moveTo(-7,5);
+ctx.lineTo(-12,12+arm);
 
-    /* BRAS */
+ctx.stroke();
 
-    ctx.strokeStyle=
-        "#00aaff";
+ctx.beginPath();
 
-    ctx.lineWidth=5;
+ctx.moveTo(7,5);
+ctx.lineTo(12,12-arm);
 
-    ctx.lineCap="round";
+ctx.stroke();
 
+/* jambes */
 
-    const arm=
-        Math.sin(
-            player.walk
-        )*5;
+const leg=
+Math.sin(player.walk)*7;
 
+ctx.beginPath();
 
-    ctx.beginPath();
+ctx.moveTo(-4,16);
+ctx.lineTo(-7,27+leg);
 
-    ctx.moveTo(
-        -7,
-        5
-    );
+ctx.stroke();
 
-    ctx.lineTo(
-        -12,
-        12+arm
-    );
+ctx.beginPath();
 
-    ctx.stroke();
+ctx.moveTo(4,16);
+ctx.lineTo(7,27-leg);
 
+ctx.stroke();
 
-    ctx.beginPath();
-
-    ctx.moveTo(
-        7,
-        5
-    );
-
-    ctx.lineTo(
-        12,
-        12-arm
-    );
-
-    ctx.stroke();
-
-
-    /* JAMBES */
-
-    const leg=
-        Math.sin(
-            player.walk
-        )*7;
-
-
-    ctx.beginPath();
-
-    ctx.moveTo(
-        -4,
-        16
-    );
-
-    ctx.lineTo(
-        -7,
-        27+leg
-    );
-
-    ctx.stroke();
-
-
-    ctx.beginPath();
-
-    ctx.moveTo(
-        4,
-        16
-    );
-
-    ctx.lineTo(
-        7,
-        27-leg
-    );
-
-    ctx.stroke();
-
-
-    ctx.restore();
+ctx.restore();
 
 }
 
 
 /* =====================================================
-   DESSIN MÉCHANT
+DESSIN MÉCHANT
 ===================================================== */
 
 function drawEnemy(enemy){
 
-    ctx.save();
+ctx.save();
 
+ctx.translate(
+enemy.x,
+enemy.y
+);
 
-    ctx.translate(
-        enemy.x,
-        enemy.y
-    );
+ctx.fillStyle="#e32626";
 
+ctx.beginPath();
 
-    ctx.fillStyle=
-        "#e32626";
+ctx.arc(
+0,
+0,
+15,
+0,
+Math.PI*2
+);
 
+ctx.fill();
 
-    ctx.beginPath();
+/* yeux */
 
-    ctx.arc(
-        0,
-        0,
-        15,
-        0,
-        Math.PI*2
-    );
+ctx.fillStyle="white";
 
-    ctx.fill();
+ctx.beginPath();
 
+ctx.arc(
+-6,
+-4,
+4,
+0,
+Math.PI*2
+);
 
-    /* YEUX */
+ctx.fill();
 
-    ctx.fillStyle=
-        "white";
+ctx.beginPath();
 
+ctx.arc(
+6,
+-4,
+4,
+0,
+Math.PI*2
+);
 
-    ctx.beginPath();
+ctx.fill();
 
-    ctx.arc(
-        -6,
-        -4,
-        4,
-        0,
-        Math.PI*2
-    );
+/* pupilles */
 
-    ctx.fill();
+ctx.fillStyle="black";
 
+ctx.beginPath();
 
-    ctx.beginPath();
+ctx.arc(
+-6,
+-3,
+2,
+0,
+Math.PI*2
+);
 
-    ctx.arc(
-        6,
-        -4,
-        4,
-        0,
-        Math.PI*2
-    );
+ctx.fill();
 
-    ctx.fill();
+ctx.beginPath();
 
+ctx.arc(
+6,
+-3,
+2,
+0,
+Math.PI*2
+);
 
-    /* PUPILLES */
+ctx.fill();
 
-    ctx.fillStyle=
-        "black";
+/* sourcils */
 
+ctx.strokeStyle="black";
+ctx.lineWidth=3;
 
-    ctx.beginPath();
+ctx.beginPath();
 
-    ctx.arc(
-        -6,
-        -3,
-        2,
-        0,
-        Math.PI*2
-    );
+ctx.moveTo(-11,-9);
+ctx.lineTo(-3,-6);
 
-    ctx.fill();
+ctx.stroke();
 
+ctx.beginPath();
 
-    ctx.beginPath();
+ctx.moveTo(11,-9);
+ctx.lineTo(3,-6);
 
-    ctx.arc(
-        6,
-        -3,
-        2,
-        0,
-        Math.PI*2
-    );
+ctx.stroke();
 
-    ctx.fill();
+/* bouche */
 
+ctx.beginPath();
 
-    /* SOURCILS */
+ctx.moveTo(-7,8);
 
-    ctx.strokeStyle=
-        "black";
+ctx.quadraticCurveTo(
+0,
+2,
+7,
+8
+);
 
-    ctx.lineWidth=3;
+ctx.stroke();
 
-
-    ctx.beginPath();
-
-    ctx.moveTo(
-        -11,
-        -9
-    );
-
-    ctx.lineTo(
-        -3,
-        -6
-    );
-
-    ctx.stroke();
-
-
-    ctx.beginPath();
-
-    ctx.moveTo(
-        11,
-        -9
-    );
-
-    ctx.lineTo(
-        3,
-        -6
-    );
-
-    ctx.stroke();
-
-
-    /* BOUCHE */
-
-    ctx.beginPath();
-
-    ctx.moveTo(
-        -7,
-        8
-    );
-
-    ctx.quadraticCurveTo(
-        0,
-        2,
-        7,
-        8
-    );
-
-    ctx.stroke();
-
-
-    ctx.restore();
+ctx.restore();
 
 }
 
 
 /* =====================================================
-   GAME OVER
+GAME OVER
 ===================================================== */
 
 function loseGame(message){
 
-    gameRunning=false;
+gameRunning=false;
 
+saveActivePlayer();
 
-    saveActivePlayer();
+resetControls();
 
+document
+.getElementById("gameOverTitle")
+.textContent="GAME OVER";
 
-    resetControls();
+document
+.getElementById("loserText")
+.textContent=message;
 
-
-    document
-    .getElementById(
-        "gameOverTitle"
-    )
-    .textContent=
-        "GAME OVER";
-
-
-    document
-    .getElementById(
-        "loserText"
-    )
-    .textContent=
-        message;
-
-
-    document
-    .getElementById(
-        "gameOver"
-    )
-    .style.display=
-        "flex";
+document
+.getElementById("gameOver")
+.style.display="flex";
 
 }
 
 
 /* =====================================================
-   30 MINUTES
+30 MINUTES
 ===================================================== */
 
 function check30Minutes(){
 
-    if(
-        getPlayerTime(
-            activePlayer
-        )>=MAX_TIME
-    ){
+if(
+getPlayerTime(activePlayer)>=MAX_TIME
+){
 
-        saveActivePlayer();
+saveActivePlayer();
 
+gameRunning=false;
 
-        gameRunning=false;
+resetControls();
 
+document
+.getElementById("gameOverTitle")
+.textContent="🏆 FIN DE LA PARTIE";
 
-        resetControls();
+document
+.getElementById("loserText")
+.textContent=
+"30 minutes atteintes !";
 
+document
+.getElementById("gameOver")
+.style.display="flex";
 
-        const p1Time=
-            formatTime(
-                getPlayerTime(1)
-            );
-
-
-        const p2Time=
-            formatTime(
-                getPlayerTime(2)
-            );
-
-
-        document
-        .getElementById(
-            "gameOverTitle"
-        )
-        .textContent=
-            "🏆 FIN DE LA PARTIE";
-
-
-        if(
-            selectedMode==="duo"
-        ){
-
-            document
-            .getElementById(
-                "loserText"
-            )
-            .textContent=
-
-                player1Name+
-                " : "+
-                p1Time+
-                " | "+
-                Math.floor(
-                    players[1].score
-                )+
-                " pts\n"+
-                player2Name+
-                " : "+
-                p2Time+
-                " | "+
-                Math.floor(
-                    players[2].score
-                )+
-                " pts";
-
-        }else{
-
-            document
-            .getElementById(
-                "loserText"
-            )
-            .textContent=
-
-                player1Name+
-                " : "+
-                p1Time+
-                " | "+
-                Math.floor(
-                    players[1].score
-                )+
-                " points";
-
-        }
-
-
-        document
-        .getElementById(
-            "gameOver"
-        )
-        .style.display=
-            "flex";
-
-    }
+}
 
 }
 
 
 /* =====================================================
-   BOUCLE DU JEU
+BOUCLE
 ===================================================== */
 
 function gameLoop(){
 
-    if(!gameRunning)
-        return;
+if(!gameRunning)
+return;
 
+movePlayer();
 
-    movePlayer();
+for(
+const enemy of enemies
+){
 
+moveEnemy(enemy);
 
-    for(
-        const enemy
-        of enemies
-    ){
+}
 
-        moveEnemy(enemy);
+drawMap();
 
-    }
+drawPlayer();
 
+for(
+const enemy of enemies
+){
 
-    drawMap();
+drawEnemy(enemy);
 
+}
 
-    drawPlayer();
+checkCollision();
 
+updatePlayerStage();
 
-    for(
-        const enemy
-        of enemies
-    ){
+updateAllDisplays();
 
-        drawEnemy(enemy);
+check30Minutes();
 
-    }
+if(gameRunning){
 
+requestAnimationFrame(
+gameLoop
+);
 
-    checkCollision();
-
-
-    updatePlayerStage();
-
-
-    updateAllDisplays();
-
-
-    check30Minutes();
-
-
-    if(gameRunning){
-
-        requestAnimationFrame(
-            gameLoop
-        );
-
-    }
+}
 
 }
 
