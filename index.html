@@ -6,7 +6,6 @@
 <title>Pac-Man 2.0</title>
 
 <style>
-
 * {
     box-sizing: border-box;
 }
@@ -53,7 +52,6 @@ body {
     color: #888;
     font-style: italic;
     margin: 8px 0 25px;
-    min-height: 20px;
 }
 
 label {
@@ -146,7 +144,6 @@ select:focus {
     margin: 4px;
     color: #777;
     font-style: italic;
-    transition: .3s;
 }
 
 /* ================= ZONE PRINCIPALE ================= */
@@ -257,8 +254,6 @@ canvas {
     user-select: none;
 }
 
-/* ================= FLÈCHES ================= */
-
 #arrowControls {
     position: relative;
     width: 135px;
@@ -340,7 +335,6 @@ canvas {
     left: 38px;
     top: 38px;
     cursor: grab;
-    box-shadow: 0 0 15px rgba(23,75,255,.7);
 }
 
 /* ================= GAME OVER ================= */
@@ -380,10 +374,7 @@ canvas {
     cursor: pointer;
 }
 
-/* ================= RESPONSIVE ================= */
-
 @media(max-width:900px) {
-
     .sidePanel {
         display: none;
     }
@@ -400,15 +391,12 @@ canvas {
         transform-origin: bottom left;
     }
 }
-
 </style>
 </head>
 
 <body>
 
-<!-- =====================================================
-     ATELIER
-===================================================== -->
+<!-- ================= ATELIER ================= -->
 
 <div id="launcher">
 
@@ -418,16 +406,11 @@ canvas {
             Pac-Man 2.0
         </div>
 
-        <div
-            id="launcherSlogan"
-            class="slogan"
-        >
+        <div class="slogan">
             « Cours. Survis. Ne te fais jamais attraper. »
         </div>
 
-        <label>
-            Pseudo
-        </label>
+        <label>Pseudo</label>
 
         <input
             id="player1Name"
@@ -436,65 +419,27 @@ canvas {
             placeholder="Ton pseudo"
         >
 
-        <label>
-            Langue
-        </label>
+        <label>Langue</label>
 
         <select id="language">
-
-            <option>
-                Français
-            </option>
-
-            <option>
-                English
-            </option>
-
-            <option>
-                Español
-            </option>
-
-            <option>
-                العربية
-            </option>
-
+            <option>Français</option>
+            <option>English</option>
+            <option>Español</option>
+            <option>العربية</option>
         </select>
 
-        <label>
-            Région
-        </label>
+        <label>Région</label>
 
         <select id="region">
-
-            <option>
-                Maroc
-            </option>
-
-            <option>
-                France
-            </option>
-
-            <option>
-                Espagne
-            </option>
-
-            <option>
-                États-Unis
-            </option>
-
-            <option>
-                Royaume-Uni
-            </option>
-
-            <option>
-                Autre
-            </option>
-
+            <option>Maroc</option>
+            <option>France</option>
+            <option>Espagne</option>
+            <option>États-Unis</option>
+            <option>Royaume-Uni</option>
+            <option>Autre</option>
         </select>
 
-        <label>
-            Mode de jeu
-        </label>
+        <label>Mode de jeu</label>
 
         <div class="mode">
 
@@ -517,9 +462,7 @@ canvas {
 
         <div id="player2Box">
 
-            <label>
-                Pseudo du joueur 2
-            </label>
+            <label>Pseudo du joueur 2</label>
 
             <input
                 id="player2Name"
@@ -542,17 +485,13 @@ canvas {
 </div>
 
 
-<!-- =====================================================
-     JEU
-===================================================== -->
+<!-- ================= JEU ================= -->
 
 <div id="game">
 
     <div id="titleArea">
 
-        <h1>
-            Pac-Man 2.0
-        </h1>
+        <h1>Pac-Man 2.0</h1>
 
         <p id="gameSlogan">
             « Cours. Survis. Ne te fais jamais attraper. »
@@ -563,13 +502,9 @@ canvas {
 
     <div id="mainArea">
 
-
         <!-- JOUEUR 1 -->
 
-        <div
-            id="panel1"
-            class="sidePanel active"
-        >
+        <div id="panel1" class="sidePanel active">
 
             <div>
 
@@ -647,30 +582,22 @@ canvas {
 
                 <div>
                     ⏱️
-                    <span id="timer">
-                        00:00
-                    </span>
+                    <span id="timer">00:00</span>
                 </div>
 
                 <div>
                     🏆
-                    <span id="mainScore">
-                        0
-                    </span>
+                    <span id="mainScore">0</span>
                 </div>
 
                 <div>
                     👹
-                    <span id="enemyCount">
-                        1
-                    </span>
+                    <span id="enemyCount">1</span>
                 </div>
 
                 <div>
                     STAGE
-                    <span id="stage">
-                        1
-                    </span>
+                    <span id="stage">1</span>
                 </div>
 
             </div>
@@ -686,10 +613,7 @@ canvas {
 
         <!-- JOUEUR 2 -->
 
-        <div
-            id="panel2"
-            class="sidePanel inactive"
-        >
+        <div id="panel2" class="sidePanel inactive">
 
             <div>
 
@@ -761,39 +685,25 @@ canvas {
     </div>
 
 
-    <!-- =================================================
-         CONTROLES
-    ================================================= -->
+    <!-- ================= CONTROLES ================= -->
 
     <div id="controls">
 
         <div id="arrowControls">
 
-            <div
-                class="arrow up"
-                data-direction="up"
-            >
+            <div class="arrow up" data-direction="up">
                 ▲
             </div>
 
-            <div
-                class="arrow down"
-                data-direction="down"
-            >
+            <div class="arrow down" data-direction="down">
                 ▼
             </div>
 
-            <div
-                class="arrow left"
-                data-direction="left"
-            >
+            <div class="arrow left" data-direction="left">
                 ◀
             </div>
 
-            <div
-                class="arrow right"
-                data-direction="right"
-            >
+            <div class="arrow right" data-direction="right">
                 ▶
             </div>
 
@@ -811,9 +721,7 @@ canvas {
 </div>
 
 
-<!-- =====================================================
-     GAME OVER
-===================================================== -->
+<!-- ================= GAME OVER ================= -->
 
 <div id="gameOver">
 
@@ -839,7 +747,7 @@ canvas {
 <script>
 
 /* =====================================================
-   VARIABLES
+   VARIABLES DE LA PARTIE
 ===================================================== */
 
 let selectedMode = "solo";
@@ -849,11 +757,32 @@ let player2Name = "";
 
 let activePlayer = 1;
 
-let score = 0;
 
-let stage = 1;
+/*
+   IMPORTANT :
+   Chaque joueur possède maintenant
+   son propre score.
+*/
+
+let score1 = 0;
+let score2 = 0;
+
+
+/*
+   Le temps appartient à la partie entière.
+   Il ne sera JAMAIS remis à zéro
+   lors du changement de joueur.
+*/
 
 let startTime = 0;
+
+
+/*
+   Le stage appartient également
+   à la partie entière.
+*/
+
+let stage = 1;
 
 let gameRunning = false;
 
@@ -861,8 +790,7 @@ let lastEnemyHit = 0;
 
 
 /* =====================================================
-   5 SLOGANS
-   Ils changent à chaque stage
+   SLOGANS
 ===================================================== */
 
 const slogans = [
@@ -892,6 +820,8 @@ const controlKeys = {
     right: false
 
 };
+
+const keys = {};
 
 
 /* =====================================================
@@ -982,7 +912,7 @@ function startGame() {
         .textContent =
         selectedMode === "duo"
             ? player2Name
-            : "Mode Solo";
+            : "-";
 
 
     document
@@ -1003,9 +933,6 @@ function startGame() {
 /* =====================================================
    CLAVIER
 ===================================================== */
-
-const keys = {};
-
 
 document.addEventListener(
     "keydown",
@@ -1073,7 +1000,6 @@ const map = [
 
 
 const rows = map.length;
-
 const cols = map[0].length;
 
 
@@ -1085,17 +1011,14 @@ canvas.height =
 
 
 /* =====================================================
-   PERSONNAGE
+   JOUEUR
 ===================================================== */
 
 let player = {
 
     x: 0,
-
     y: 0,
-
     speed: 5,
-
     walk: 0
 
 };
@@ -1111,19 +1034,12 @@ let enemies = [];
 const enemyStarts = [
 
     [10, 9],
-
     [9, 5],
-
     [11, 15],
-
     [5, 19],
-
     [15, 19],
-
     [19, 9],
-
     [3, 13],
-
     [17, 13]
 
 ];
@@ -1135,9 +1051,16 @@ const enemyStarts = [
 
 function initGame() {
 
-    activePlayer = 1;
+    /*
+       IMPORTANT :
+       Les scores commencent à zéro
+       UNE SEULE FOIS au lancement.
+    */
 
-    score = 0;
+    score1 = 0;
+    score2 = 0;
+
+    activePlayer = 1;
 
     stage = 1;
 
@@ -1146,6 +1069,13 @@ function initGame() {
     gameRunning = true;
 
     lastEnemyHit = 0;
+
+
+    /*
+       Le chrono démarre ici.
+       Cette variable ne sera plus modifiée
+       pendant les changements de joueur.
+    */
 
     startTime = Date.now();
 
@@ -1158,8 +1088,9 @@ function initGame() {
 
     updateSlogan();
 
-    resetControls();
+    updateScoreDisplay();
 
+    resetControls();
 
     requestAnimationFrame(gameLoop);
 
@@ -1190,11 +1121,9 @@ function resetPlayerPosition() {
                     x * tile +
                     tile / 2;
 
-
                 player.y =
                     y * tile +
                     tile / 2;
-
 
                 return;
 
@@ -1208,7 +1137,7 @@ function resetPlayerPosition() {
 
 
 /* =====================================================
-   POSITION DE DÉPART DES MÉCHANTS
+   RESET DES ENNEMIS
 ===================================================== */
 
 function resetEnemies() {
@@ -1218,15 +1147,13 @@ function resetEnemies() {
 
             const pos =
                 enemyStarts[
-                    index %
-                    enemyStarts.length
+                    index % enemyStarts.length
                 ];
 
 
             enemy.x =
                 pos[0] * tile +
                 tile / 2;
-
 
             enemy.y =
                 pos[1] * tile +
@@ -1267,7 +1194,6 @@ function updatePanels() {
         "inactive"
     );
 
-
     panel2.classList.remove(
         "active",
         "inactive"
@@ -1280,11 +1206,9 @@ function updatePanels() {
 
         panel2.classList.add("inactive");
 
-        state1.textContent =
-            "EN JEU";
+        state1.textContent = "EN JEU";
 
-        state2.textContent =
-            "MODE SOLO";
+        state2.textContent = "MODE SOLO";
 
         return;
 
@@ -1297,11 +1221,9 @@ function updatePanels() {
 
         panel2.classList.add("inactive");
 
-        state1.textContent =
-            "EN JEU";
+        state1.textContent = "EN JEU";
 
-        state2.textContent =
-            "EN ATTENTE";
+        state2.textContent = "EN ATTENTE";
 
     }
 
@@ -1311,13 +1233,48 @@ function updatePanels() {
 
         panel2.classList.add("active");
 
-        state1.textContent =
-            "EN ATTENTE";
+        state1.textContent = "EN ATTENTE";
 
-        state2.textContent =
-            "EN JEU";
+        state2.textContent = "EN JEU";
 
     }
+
+}
+
+
+/* =====================================================
+   AFFICHAGE DES SCORES
+===================================================== */
+
+function updateScoreDisplay() {
+
+    document
+        .getElementById("score1")
+        .textContent =
+        Math.floor(score1);
+
+
+    document
+        .getElementById("score2")
+        .textContent =
+        Math.floor(score2);
+
+
+    /*
+       Le score principal montre
+       le score du joueur actuellement actif.
+    */
+
+    const currentScore =
+        activePlayer === 1
+            ? score1
+            : score2;
+
+
+    document
+        .getElementById("mainScore")
+        .textContent =
+        Math.floor(currentScore);
 
 }
 
@@ -1337,7 +1294,8 @@ function updateSlogan() {
 
     document
         .getElementById("gameSlogan")
-        .textContent = slogan;
+        .textContent =
+        slogan;
 
 }
 
@@ -1350,7 +1308,6 @@ function isWall(x, y) {
 
     const col =
         Math.floor(x / tile);
-
 
     const row =
         Math.floor(y / tile);
@@ -1416,11 +1373,11 @@ const joystickKnob =
     document.getElementById("joystickKnob");
 
 
+let joystickActive = false;
+
 let joystickX = 0;
 
 let joystickY = 0;
-
-let joystickActive = false;
 
 
 function moveJoystick(
@@ -1436,7 +1393,6 @@ function moveJoystick(
         rect.left +
         rect.width / 2;
 
-
     const centerY =
         rect.top +
         rect.height / 2;
@@ -1444,7 +1400,6 @@ function moveJoystick(
 
     let dx =
         clientX - centerX;
-
 
     let dy =
         clientY - centerY;
@@ -1467,7 +1422,6 @@ function moveJoystick(
         dx =
             dx / distance *
             maxDistance;
-
 
         dy =
             dy / distance *
@@ -1495,7 +1449,6 @@ function moveJoystick(
     joystickX =
         dx / maxDistance;
 
-
     joystickY =
         dy / maxDistance;
 
@@ -1510,18 +1463,12 @@ function resetJoystick() {
 
     joystickY = 0;
 
+    joystickKnob.style.left = "38px";
 
-    joystickKnob.style.left =
-        "38px";
-
-
-    joystickKnob.style.top =
-        "38px";
+    joystickKnob.style.top = "38px";
 
 }
 
-
-/* SOURIS */
 
 joystick.addEventListener(
     "mousedown",
@@ -1567,8 +1514,6 @@ document.addEventListener(
 );
 
 
-/* TACTILE */
-
 joystick.addEventListener(
     "touchstart",
     function(e) {
@@ -1580,16 +1525,13 @@ joystick.addEventListener(
         const touch =
             e.touches[0];
 
-
         moveJoystick(
             touch.clientX,
             touch.clientY
         );
 
     },
-    {
-        passive: false
-    }
+    { passive: false }
 );
 
 
@@ -1604,16 +1546,13 @@ joystick.addEventListener(
         const touch =
             e.touches[0];
 
-
         moveJoystick(
             touch.clientX,
             touch.clientY
         );
 
     },
-    {
-        passive: false
-    }
+    { passive: false }
 );
 
 
@@ -1626,9 +1565,7 @@ joystick.addEventListener(
         resetJoystick();
 
     },
-    {
-        passive: false
-    }
+    { passive: false }
 );
 
 
@@ -1646,16 +1583,14 @@ document
 
         function start() {
 
-            controlKeys[direction] =
-                true;
+            controlKeys[direction] = true;
 
         }
 
 
         function stop() {
 
-            controlKeys[direction] =
-                false;
+            controlKeys[direction] = false;
 
         }
 
@@ -1665,12 +1600,10 @@ document
             start
         );
 
-
         button.addEventListener(
             "mouseup",
             stop
         );
-
 
         button.addEventListener(
             "mouseleave",
@@ -1687,9 +1620,7 @@ document
                 start();
 
             },
-            {
-                passive: false
-            }
+            { passive: false }
         );
 
 
@@ -1702,9 +1633,7 @@ document
                 stop();
 
             },
-            {
-                passive: false
-            }
+            { passive: false }
         );
 
     });
@@ -1717,11 +1646,8 @@ document
 function resetControls() {
 
     controlKeys.up = false;
-
     controlKeys.down = false;
-
     controlKeys.left = false;
-
     controlKeys.right = false;
 
     resetJoystick();
@@ -1730,26 +1656,21 @@ function resetControls() {
 
 
 /* =====================================================
-   MOUVEMENT JOUEUR
+   MOUVEMENT
 ===================================================== */
 
 function movePlayer() {
 
     let dx = 0;
-
     let dy = 0;
 
-
-    /* CLAVIER */
 
     if (
         keys["arrowup"] ||
         keys["z"] ||
         keys["w"]
     ) {
-
         dy -= 1;
-
     }
 
 
@@ -1757,9 +1678,7 @@ function movePlayer() {
         keys["arrowdown"] ||
         keys["s"]
     ) {
-
         dy += 1;
-
     }
 
 
@@ -1768,9 +1687,7 @@ function movePlayer() {
         keys["q"] ||
         keys["a"]
     ) {
-
         dx -= 1;
-
     }
 
 
@@ -1778,34 +1695,17 @@ function movePlayer() {
         keys["arrowright"] ||
         keys["d"]
     ) {
-
         dx += 1;
-
     }
 
 
-    /* FLÈCHES */
+    if (controlKeys.up) dy -= 1;
+    if (controlKeys.down) dy += 1;
+    if (controlKeys.left) dx -= 1;
+    if (controlKeys.right) dx += 1;
 
-    if (controlKeys.up)
-        dy -= 1;
-
-
-    if (controlKeys.down)
-        dy += 1;
-
-
-    if (controlKeys.left)
-        dx -= 1;
-
-
-    if (controlKeys.right)
-        dx += 1;
-
-
-    /* JOYSTICK */
 
     dx += joystickX;
-
     dy += joystickY;
 
 
@@ -1819,19 +1719,31 @@ function movePlayer() {
     if (length > 0) {
 
         dx /= length;
-
         dy /= length;
 
-
         dx *= player.speed;
-
         dy *= player.speed;
 
 
         player.walk += 0.4;
 
 
-        score += 0.03;
+        /*
+           Le score est ajouté
+           UNIQUEMENT au joueur actif.
+        */
+
+        if (activePlayer === 1) {
+
+            score1 += 0.03;
+
+        }
+
+        else {
+
+            score2 += 0.03;
+
+        }
 
     }
 
@@ -1863,7 +1775,7 @@ function movePlayer() {
 
 
 /* =====================================================
-   CRÉATION MÉCHANT
+   CRÉER UN MÉCHANT
 ===================================================== */
 
 function createEnemy() {
@@ -1909,7 +1821,6 @@ function findPath(enemy) {
             enemy.x / tile
         );
 
-
     const startY =
         Math.floor(
             enemy.y / tile
@@ -1920,7 +1831,6 @@ function findPath(enemy) {
         Math.floor(
             player.x / tile
         );
-
 
     const targetY =
         Math.floor(
@@ -1940,17 +1850,13 @@ function findPath(enemy) {
 
     const queue = [];
 
-    const visited =
-        new Set();
+    const visited = new Set();
 
-    const parent =
-        new Map();
+    const parent = new Map();
 
 
     const startKey =
-        startX +
-        "," +
-        startY;
+        startX + "," + startY;
 
 
     queue.push([
@@ -1965,11 +1871,8 @@ function findPath(enemy) {
     const directions = [
 
         [1, 0],
-
         [-1, 0],
-
         [0, 1],
-
         [0, -1]
 
     ];
@@ -1978,20 +1881,14 @@ function findPath(enemy) {
     let found = false;
 
 
-    while (
-        queue.length > 0
-    ) {
+    while (queue.length > 0) {
 
         const current =
             queue.shift();
 
 
-        const cx =
-            current[0];
-
-
-        const cy =
-            current[1];
+        const cx = current[0];
+        const cy = current[1];
 
 
         if (
@@ -2000,7 +1897,6 @@ function findPath(enemy) {
         ) {
 
             found = true;
-
             break;
 
         }
@@ -2012,7 +1908,6 @@ function findPath(enemy) {
 
             const nx =
                 cx + dir[0];
-
 
             const ny =
                 cy + dir[1];
@@ -2040,9 +1935,7 @@ function findPath(enemy) {
 
 
             const key =
-                nx +
-                "," +
-                ny;
+                nx + "," + ny;
 
 
             if (
@@ -2059,9 +1952,7 @@ function findPath(enemy) {
 
             parent.set(
                 key,
-                cx +
-                "," +
-                cy
+                cx + "," + cy
             );
 
 
@@ -2083,9 +1974,7 @@ function findPath(enemy) {
 
 
     let current =
-        targetX +
-        "," +
-        targetY;
+        targetX + "," + targetY;
 
 
     const path = [];
@@ -2097,10 +1986,8 @@ function findPath(enemy) {
 
         path.unshift(current);
 
-
         current =
             parent.get(current);
-
 
         if (!current) {
 
@@ -2127,7 +2014,6 @@ function findPath(enemy) {
     return {
 
         x: Number(next[0]),
-
         y: Number(next[1])
 
     };
@@ -2145,17 +2031,12 @@ function moveEnemy(enemy) {
         findPath(enemy);
 
 
-    if (!next) {
-
-        return;
-
-    }
+    if (!next) return;
 
 
     const targetX =
         next.x * tile +
         tile / 2;
-
 
     const targetY =
         next.y * tile +
@@ -2164,7 +2045,6 @@ function moveEnemy(enemy) {
 
     const dx =
         targetX - enemy.x;
-
 
     const dy =
         targetY - enemy.y;
@@ -2177,9 +2057,7 @@ function moveEnemy(enemy) {
         );
 
 
-    if (
-        distance > 1
-    ) {
+    if (distance > 1) {
 
         const move =
             Math.min(
@@ -2189,15 +2067,10 @@ function moveEnemy(enemy) {
 
 
         enemy.x +=
-            dx /
-            distance *
-            move;
-
+            dx / distance * move;
 
         enemy.y +=
-            dy /
-            distance *
-            move;
+            dy / distance * move;
 
     }
 
@@ -2229,34 +2102,22 @@ function drawMap() {
                 ctx.fillStyle =
                     "#123bff";
 
-
                 ctx.fillRect(
-
                     x * tile,
-
                     y * tile,
-
                     tile,
-
                     tile
-
                 );
 
 
                 ctx.strokeStyle =
                     "#3155ff";
 
-
                 ctx.strokeRect(
-
                     x * tile + 1,
-
                     y * tile + 1,
-
                     tile - 2,
-
                     tile - 2
-
                 );
 
             }
@@ -2266,17 +2127,11 @@ function drawMap() {
                 ctx.fillStyle =
                     "#050505";
 
-
                 ctx.fillRect(
-
                     x * tile,
-
                     y * tile,
-
                     tile,
-
                     tile
-
                 );
 
             }
@@ -2296,7 +2151,6 @@ function drawPlayer() {
 
     ctx.save();
 
-
     ctx.translate(
         player.x,
         player.y
@@ -2311,21 +2165,13 @@ function drawPlayer() {
 
     ctx.beginPath();
 
-
     ctx.arc(
-
         0,
-
         -7,
-
         9,
-
         0,
-
         Math.PI * 2
-
     );
-
 
     ctx.fill();
 
@@ -2333,15 +2179,10 @@ function drawPlayer() {
     /* CORPS */
 
     ctx.fillRect(
-
         -9,
-
         2,
-
         18,
-
         15
-
     );
 
 
@@ -2350,11 +2191,9 @@ function drawPlayer() {
     ctx.strokeStyle =
         "#00aaff";
 
-
     ctx.lineWidth = 5;
 
-    ctx.lineCap =
-        "round";
+    ctx.lineCap = "round";
 
 
     const arm =
@@ -2365,42 +2204,24 @@ function drawPlayer() {
 
     ctx.beginPath();
 
-
-    ctx.moveTo(
-        -7,
-        5
-    );
-
+    ctx.moveTo(-7, 5);
 
     ctx.lineTo(
-
         -12,
-
         12 + arm
-
     );
-
 
     ctx.stroke();
 
 
     ctx.beginPath();
 
-
-    ctx.moveTo(
-        7,
-        5
-    );
-
+    ctx.moveTo(7, 5);
 
     ctx.lineTo(
-
         12,
-
         12 - arm
-
     );
-
 
     ctx.stroke();
 
@@ -2415,42 +2236,24 @@ function drawPlayer() {
 
     ctx.beginPath();
 
-
-    ctx.moveTo(
-        -4,
-        16
-    );
-
+    ctx.moveTo(-4, 16);
 
     ctx.lineTo(
-
         -7,
-
         27 + leg
-
     );
-
 
     ctx.stroke();
 
 
     ctx.beginPath();
 
-
-    ctx.moveTo(
-        4,
-        16
-    );
-
+    ctx.moveTo(4, 16);
 
     ctx.lineTo(
-
         7,
-
         27 - leg
-
     );
-
 
     ctx.stroke();
 
@@ -2468,7 +2271,6 @@ function drawEnemy(enemy) {
 
     ctx.save();
 
-
     ctx.translate(
         enemy.x,
         enemy.y
@@ -2481,162 +2283,100 @@ function drawEnemy(enemy) {
 
     ctx.beginPath();
 
-
     ctx.arc(
-
         0,
-
         0,
-
         15,
-
         0,
-
         Math.PI * 2
-
     );
-
 
     ctx.fill();
 
 
     /* YEUX */
 
-    ctx.fillStyle =
-        "white";
+    ctx.fillStyle = "white";
 
 
     ctx.beginPath();
 
-
     ctx.arc(
-
         -6,
-
         -4,
-
         4,
-
         0,
-
         Math.PI * 2
-
     );
-
 
     ctx.fill();
 
 
     ctx.beginPath();
 
-
     ctx.arc(
-
         6,
-
         -4,
-
         4,
-
         0,
-
         Math.PI * 2
-
     );
-
 
     ctx.fill();
 
 
     /* PUPILLES */
 
-    ctx.fillStyle =
-        "black";
+    ctx.fillStyle = "black";
 
 
     ctx.beginPath();
 
-
     ctx.arc(
-
         -6,
-
         -3,
-
         2,
-
         0,
-
         Math.PI * 2
-
     );
-
 
     ctx.fill();
 
 
     ctx.beginPath();
 
-
     ctx.arc(
-
         6,
-
         -3,
-
         2,
-
         0,
-
         Math.PI * 2
-
     );
-
 
     ctx.fill();
 
 
     /* SOURCILS */
 
-    ctx.strokeStyle =
-        "black";
-
+    ctx.strokeStyle = "black";
 
     ctx.lineWidth = 3;
 
 
     ctx.beginPath();
 
+    ctx.moveTo(-11, -9);
 
-    ctx.moveTo(
-        -11,
-        -9
-    );
-
-
-    ctx.lineTo(
-        -3,
-        -6
-    );
-
+    ctx.lineTo(-3, -6);
 
     ctx.stroke();
 
 
     ctx.beginPath();
 
+    ctx.moveTo(11, -9);
 
-    ctx.moveTo(
-        11,
-        -9
-    );
-
-
-    ctx.lineTo(
-        3,
-        -6
-    );
-
+    ctx.lineTo(3, -6);
 
     ctx.stroke();
 
@@ -2645,25 +2385,14 @@ function drawEnemy(enemy) {
 
     ctx.beginPath();
 
-
-    ctx.moveTo(
-        -7,
-        8
-    );
-
+    ctx.moveTo(-7, 8);
 
     ctx.quadraticCurveTo(
-
         0,
-
         2,
-
         7,
-
         8
-
     );
-
 
     ctx.stroke();
 
@@ -2703,10 +2432,8 @@ function playerCaught() {
     ) {
 
         loseGame(
-
             player1Name +
             " a été attrapé !"
-
         );
 
         return;
@@ -2714,11 +2441,20 @@ function playerCaught() {
     }
 
 
-    /* DUO */
+    /*
+       DUO
 
-    if (
-        activePlayer === 1
-    ) {
+       RIEN NE SE RÉINITIALISE ICI
+       SAUF LA POSITION.
+
+       Le temps reste le même.
+       Le stage reste le même.
+       Le score 1 reste le même.
+       Le score 2 reste le même.
+    */
+
+
+    if (activePlayer === 1) {
 
         activePlayer = 2;
 
@@ -2731,24 +2467,41 @@ function playerCaught() {
     }
 
 
-    /* LE JOUEUR REVIENT */
+    /*
+       On remet seulement
+       le personnage à son départ.
+    */
 
     resetPlayerPosition();
 
 
-    /* LES MÉCHANTS REVIENNENT */
+    /*
+       On remet les ennemis
+       à leur position de départ.
+    */
 
     resetEnemies();
 
 
-    /* CONTRÔLES */
+    /*
+       Les contrôles sont remis à zéro
+       pour éviter qu'une touche reste bloquée.
+    */
 
     resetControls();
 
 
-    /* PANNEAUX */
+    /*
+       On ne touche surtout PAS à :
+       startTime
+       stage
+       score1
+       score2
+    */
 
     updatePanels();
+
+    updateScoreDisplay();
 
 }
 
@@ -2766,7 +2519,6 @@ function checkCollision() {
         const dx =
             player.x -
             enemy.x;
-
 
         const dy =
             player.y -
@@ -2801,14 +2553,17 @@ function checkCollision() {
 
 function updateStage() {
 
+    /*
+       Le temps écoulé est calculé
+       depuis le début TOTAL de la partie.
+    */
+
     const elapsed =
         Math.floor(
-
             (
                 Date.now() -
                 startTime
             ) / 1000
-
         );
 
 
@@ -2827,8 +2582,7 @@ function updateStage() {
 
 
         /*
-           UNE TÊTE DE PLUS
-           À CHAQUE STAGE
+           Une tête supplémentaire.
         */
 
         createEnemy();
@@ -2844,10 +2598,6 @@ function updateStage() {
 
         }
 
-
-        /*
-           NOUVEAU SLOGAN
-        */
 
         updateSlogan();
 
@@ -2874,18 +2624,23 @@ function updateStage() {
 
 function updateTimer() {
 
+    /*
+       Le chrono utilise toujours
+       le même startTime.
+    */
+
     const elapsed =
         Math.floor(
-
             (
                 Date.now() -
                 startTime
             ) / 1000
-
         );
 
 
-    /* 30 MINUTES */
+    /*
+       30 MINUTES = FIN DE PARTIE
+    */
 
     if (
         elapsed >= 1800
@@ -2925,38 +2680,18 @@ function updateTimer() {
             .padStart(2, "0");
 
 
-    const currentScore =
-        Math.floor(score);
-
-
-    document
-        .getElementById("mainScore")
-        .textContent =
-        currentScore;
-
-
-    document
-        .getElementById("score1")
-        .textContent =
-        currentScore;
-
-
-    document
-        .getElementById("score2")
-        .textContent =
-        currentScore;
+    updateScoreDisplay();
 
 }
 
 
 /* =====================================================
-   PERDU
+   GAME OVER
 ===================================================== */
 
 function loseGame(message) {
 
     gameRunning = false;
-
 
     resetControls();
 
@@ -2982,15 +2717,21 @@ function loseGame(message) {
 
 
 /* =====================================================
-   FIN 30 MINUTES
+   FIN DES 30 MINUTES
 ===================================================== */
 
 function endGame() {
 
     gameRunning = false;
 
-
     resetControls();
+
+
+    const finalScore1 =
+        Math.floor(score1);
+
+    const finalScore2 =
+        Math.floor(score2);
 
 
     document
@@ -2999,10 +2740,38 @@ function endGame() {
         "🏆 FIN DE LA PARTIE";
 
 
-    document
-        .getElementById("loserText")
-        .textContent =
-        "Vous avez survécu pendant 30 minutes !";
+    if (
+        selectedMode === "duo"
+    ) {
+
+        document
+            .getElementById("loserText")
+            .textContent =
+
+            player1Name +
+            " : " +
+            finalScore1 +
+            " points — " +
+
+            player2Name +
+            " : " +
+            finalScore2 +
+            " points";
+
+    }
+
+    else {
+
+        document
+            .getElementById("loserText")
+            .textContent =
+
+            player1Name +
+            " : " +
+            finalScore1 +
+            " points";
+
+    }
 
 
     document
@@ -3040,7 +2809,6 @@ function gameLoop() {
 
     drawMap();
 
-
     drawPlayer();
 
 
@@ -3055,9 +2823,7 @@ function gameLoop() {
 
     checkCollision();
 
-
     updateTimer();
-
 
     updateStage();
 
