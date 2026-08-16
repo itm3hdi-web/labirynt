@@ -2,31 +2,21 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pac-Man 2.0</title>
 
 <style>
-*{
-    box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
-html,body{
+body{
     margin:0;
-    width:100%;
-    height:100%;
-    overflow:hidden;
     background:#050505;
     color:white;
     font-family:Arial,sans-serif;
+    overflow:hidden;
 }
 
-button,input,select{
-    font-family:Arial,sans-serif;
-}
-
-/* =========================
-   ATELIER
-========================= */
+button,input,select{font:inherit}
 
 #launcher{
     position:fixed;
@@ -38,30 +28,29 @@ button,input,select{
     z-index:100;
 }
 
-.launcherBox{
-    width:440px;
+.box{
+    width:450px;
     max-width:94vw;
     max-height:94vh;
     overflow:auto;
-    padding:28px;
+    padding:25px;
     background:#111;
     border:2px solid #174bff;
-    border-radius:16px;
-    box-shadow:0 0 25px rgba(23,75,255,.25);
+    border-radius:15px;
 }
 
-.gameTitle{
+.title{
     text-align:center;
+    color:#00aaff;
     font-size:40px;
     font-weight:bold;
-    color:#00aaff;
 }
 
 .slogan{
     text-align:center;
-    color:#888;
+    color:#777;
     font-style:italic;
-    margin:7px 0 22px;
+    margin:7px 0 20px;
 }
 
 label{
@@ -70,21 +59,13 @@ label{
     margin:12px 0 5px;
 }
 
-input,
-select{
+input,select{
     width:100%;
-    padding:11px;
+    padding:10px;
     background:#222;
     color:white;
     border:1px solid #444;
     border-radius:7px;
-    font-size:15px;
-    outline:none;
-}
-
-input:focus,
-select:focus{
-    border-color:#174bff;
 }
 
 .mode{
@@ -94,7 +75,7 @@ select:focus{
 
 .mode button{
     flex:1;
-    padding:11px;
+    padding:10px;
     background:#222;
     color:white;
     border:1px solid #444;
@@ -106,19 +87,17 @@ select:focus{
     background:#174bff;
 }
 
-#player2Box{
-    display:none;
-}
+#player2Box{display:none}
 
-.launchButtons{
+.actions{
     display:flex;
     gap:8px;
     margin-top:18px;
 }
 
-.launchButtons button{
+.actions button{
     flex:1;
-    padding:13px;
+    padding:12px;
     border:0;
     border-radius:7px;
     color:white;
@@ -126,47 +105,28 @@ select:focus{
     cursor:pointer;
 }
 
-#startButton{
-    background:#008cff;
-}
+#playBtn{background:#008cff}
+#settingsBtn{background:#333}
 
-#settingsButton{
-    background:#333;
-}
-
-/* =========================
-   PARAMETRES
-========================= */
-
-#settings{
-    display:none;
-}
+#settings{display:none}
 
 .settingsTitle{
+    text-align:center;
     color:#00aaff;
-    text-align:center;
-    margin:0 0 15px;
-}
-
-.settingsInfo{
-    color:#777;
-    font-size:12px;
-    text-align:center;
-    line-height:1.5;
 }
 
 .keyGrid{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:7px;
+    gap:8px;
 }
 
 .keyButton{
-    padding:10px;
+    padding:11px;
     background:#222;
+    color:white;
     border:1px solid #444;
     border-radius:7px;
-    color:white;
     cursor:pointer;
     text-align:left;
 }
@@ -177,27 +137,34 @@ select:focus{
 
 .keyButton.waiting{
     background:#174bff;
-    border-color:#8aa0ff;
+    border-color:#fff;
 }
 
 .keyButton b{
     color:#00aaff;
 }
 
-.settingsButtons{
+.help{
+    color:#777;
+    font-size:12px;
+    line-height:1.5;
+    text-align:center;
+}
+
+.settingsActions{
     display:flex;
     gap:8px;
     margin-top:15px;
 }
 
-.settingsButtons button{
+.settingsActions button{
     flex:1;
     padding:11px;
     border:0;
     border-radius:7px;
-    cursor:pointer;
     color:white;
     font-weight:bold;
+    cursor:pointer;
 }
 
 #saveSettings{
@@ -208,9 +175,7 @@ select:focus{
     background:#333;
 }
 
-/* =========================
-   JEU
-========================= */
+/* ================= GAME ================= */
 
 #game{
     display:none;
@@ -219,59 +184,51 @@ select:focus{
 }
 
 #titleArea{
-    height:70px;
+    height:68px;
     text-align:center;
-    padding-top:5px;
 }
 
 #titleArea h1{
-    margin:0;
+    margin:3px 0;
     color:#00aaff;
-    font-size:30px;
 }
 
 #gameSlogan{
-    margin:3px;
+    margin:0;
     color:#777;
-    font-style:italic;
 }
 
 #mainArea{
-    height:calc(100vh - 70px);
+    height:calc(100vh - 68px);
     display:flex;
     justify-content:center;
     align-items:center;
     gap:12px;
 }
 
-.sidePanel{
-    width:170px;
+.side{
+    width:165px;
     height:420px;
     background:#111;
     border:3px solid #e32626;
     border-radius:10px;
-    padding:13px;
+    padding:12px;
     display:flex;
     flex-direction:column;
     justify-content:space-between;
 }
 
-.sidePanel.active{
+.side.active{
     border-color:#19e65c;
-    box-shadow:0 0 15px rgba(25,230,92,.25);
-}
-
-.sidePanel.inactive{
-    border-color:#e32626;
 }
 
 .sideTitle{
     color:#00aaff;
     font-weight:bold;
-    margin-bottom:12px;
+    margin-bottom:10px;
 }
 
-.infoBox{
+.info{
     background:#191919;
     border:1px solid #333;
     border-radius:7px;
@@ -279,18 +236,17 @@ select:focus{
     margin-bottom:7px;
 }
 
-.infoLabel{
+.small{
     color:#777;
     font-size:10px;
 }
 
-.infoValue{
-    font-size:15px;
-    font-weight:bold;
+.value{
     margin-top:3px;
+    font-weight:bold;
 }
 
-#centerArea{
+#center{
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -299,214 +255,143 @@ select:focus{
 #topBar{
     width:672px;
     max-width:70vw;
-    height:48px;
+    height:46px;
     margin-bottom:8px;
     background:#111;
     border:2px solid #174bff;
     border-radius:8px;
     display:flex;
-    justify-content:space-around;
     align-items:center;
+    justify-content:space-around;
     font-weight:bold;
-    font-size:14px;
 }
 
 #canvasContainer{
     border:2px solid #174bff;
     border-radius:7px;
     overflow:hidden;
-    background:#000;
 }
 
 canvas{
     display:block;
 }
 
-/* =========================
-   PAUSE / FPS
-========================= */
-
 #pauseButton{
     position:fixed;
-    top:15px;
     right:15px;
-    z-index:50;
-    padding:10px 16px;
-    border:1px solid #555;
-    border-radius:8px;
+    top:15px;
+    z-index:30;
+    padding:9px 15px;
     background:#191919;
     color:white;
+    border:1px solid #555;
+    border-radius:7px;
     cursor:pointer;
-    font-weight:bold;
-}
-
-#pauseButton:hover{
-    background:#174bff;
 }
 
 #fpsBox{
     position:fixed;
-    top:62px;
     right:15px;
-    z-index:50;
-    padding:7px 10px;
+    top:60px;
+    z-index:30;
     background:#111;
     border:1px solid #333;
+    padding:7px 10px;
     border-radius:7px;
     color:#00ff66;
-    font-size:13px;
     font-weight:bold;
 }
 
-/* =========================
-   CONTROLES
-========================= */
+/* CONTROLES */
 
 #controls{
     position:fixed;
-    left:15px;
     bottom:15px;
+    left:15px;
     width:270px;
-    height:135px;
+    height:125px;
     display:flex;
     align-items:center;
     justify-content:space-between;
     z-index:20;
-    user-select:none;
 }
 
-#arrowControls{
+#arrows{
     position:relative;
-    width:125px;
-    height:125px;
+    width:120px;
+    height:120px;
 }
 
 .arrow{
     position:absolute;
-    width:40px;
-    height:40px;
-    border-radius:9px;
-    border:2px solid white;
-    background:rgba(20,20,20,.9);
-    color:white;
-    font-size:22px;
+    width:38px;
+    height:38px;
     display:flex;
-    justify-content:center;
     align-items:center;
+    justify-content:center;
+    background:#181818;
+    border:2px solid white;
+    border-radius:8px;
     cursor:pointer;
+    user-select:none;
 }
 
 .arrow:active{
     background:#174bff;
 }
 
-.arrow.up{
-    top:0;
-    left:42px;
-}
-
-.arrow.down{
-    bottom:0;
-    left:42px;
-}
-
-.arrow.left{
-    top:42px;
-    left:0;
-}
-
-.arrow.right{
-    top:42px;
-    right:0;
-}
+.up{top:0;left:41px}
+.down{bottom:0;left:41px}
+.left{top:41px;left:0}
+.right{top:41px;right:0}
 
 #joystick{
-    width:115px;
-    height:115px;
+    width:110px;
+    height:110px;
     border-radius:50%;
+    background:#151515;
     border:2px solid #174bff;
-    background:rgba(20,20,20,.75);
     position:relative;
     touch-action:none;
 }
 
-#joystickKnob{
+#knob{
     position:absolute;
     width:42px;
     height:42px;
     border-radius:50%;
     background:#174bff;
-    border:2px solid #74a0ff;
-    left:34px;
-    top:34px;
+    border:2px solid #8aa0ff;
+    left:32px;
+    top:32px;
 }
 
-/* =========================
-   OVERLAYS
-========================= */
+/* OVERLAYS */
 
-#pauseOverlay,
-#levelMessage,
-#gameOver{
+.overlay{
     position:fixed;
     inset:0;
     display:none;
-    justify-content:center;
     align-items:center;
+    justify-content:center;
+    background:rgba(0,0,0,.8);
+    z-index:100;
 }
 
-#pauseOverlay{
-    background:rgba(0,0,0,.68);
-    z-index:140;
-}
-
-#levelMessage{
-    background:rgba(0,0,0,.78);
-    z-index:150;
-}
-
-#gameOver{
-    background:rgba(0,0,0,.9);
-    z-index:200;
-}
-
-.pauseBox,
-#levelMessageBox,
-.gameOverBox{
-    text-align:center;
+.overlayBox{
     background:#111;
+    border:2px solid #174bff;
     border-radius:12px;
     padding:30px 50px;
+    text-align:center;
 }
 
-.pauseBox,
-#levelMessageBox{
-    border:2px solid #174bff;
-}
-
-.gameOverBox{
-    border:3px solid #e32626;
-}
-
-.pauseBox h2{
+.overlayBox h2{
     color:#00aaff;
 }
 
-#levelMessageText{
-    margin:0;
-    color:#00aaff;
-    font-size:32px;
-}
-
-.gameOverBox h2{
-    color:#e32626;
-    font-size:38px;
-    margin:0 0 12px;
-}
-
-.overlayButton{
-    margin-top:18px;
-    padding:11px 25px;
+.overlayBox button{
+    padding:10px 25px;
     border:0;
     border-radius:7px;
     background:#174bff;
@@ -514,54 +399,34 @@ canvas{
     cursor:pointer;
 }
 
-@media(max-width:900px){
+#gameOverBox{
+    border-color:#e32626;
+}
 
-    .sidePanel{
-        display:none;
-    }
-
-    #topBar{
-        width:90vw;
-        max-width:none;
-    }
-
-    #controls{
-        transform:scale(.8);
-        transform-origin:bottom left;
-    }
+#gameOverBox h2{
+    color:#e32626;
 }
 </style>
 </head>
 
 <body>
 
-<!-- =====================================================
-     ATELIER
-===================================================== -->
+<!-- ================= ATELIER ================= -->
 
 <div id="launcher">
 
-    <div class="launcherBox" id="mainLauncher">
+    <div class="box" id="home">
 
-        <div class="gameTitle">
-            Pac-Man 2.0
-        </div>
+        <div class="title">Pac-Man 2.0</div>
 
         <div class="slogan">
             « Cours. Survis. Ne te fais jamais attraper. »
         </div>
 
         <label>Pseudo joueur 1</label>
-
-        <input
-            id="player1Name"
-            type="text"
-            maxlength="15"
-            placeholder="Ton pseudo"
-        >
+        <input id="name1" placeholder="Ton pseudo">
 
         <label>Langue</label>
-
         <select id="language">
             <option value="fr">Français</option>
             <option value="ar">العربية</option>
@@ -569,59 +434,41 @@ canvas{
         </select>
 
         <label>Région</label>
-
         <select id="region">
             <option>Maroc</option>
             <option>France</option>
             <option>Espagne</option>
             <option>États-Unis</option>
-            <option>Royaume-Uni</option>
             <option>Autre</option>
         </select>
 
         <label>Mode</label>
 
         <div class="mode">
-
-            <button
-                id="soloButton"
-                class="active"
-                onclick="selectMode('solo')">
+            <button id="solo" class="active" onclick="setMode('solo')">
                 👤 Solo
             </button>
 
-            <button
-                id="duoButton"
-                onclick="selectMode('duo')">
+            <button id="duo" onclick="setMode('duo')">
                 👥 Duo
             </button>
-
         </div>
 
         <div id="player2Box">
 
             <label>Pseudo joueur 2</label>
 
-            <input
-                id="player2Name"
-                type="text"
-                maxlength="15"
-                placeholder="Pseudo joueur 2"
-            >
+            <input id="name2" placeholder="Pseudo joueur 2">
 
         </div>
 
-        <div class="launchButtons">
+        <div class="actions">
 
-            <button
-                id="settingsButton"
-                onclick="openSettings()">
+            <button id="settingsBtn" onclick="openSettings()">
                 ⚙️ PARAMÈTRES
             </button>
 
-            <button
-                id="startButton"
-                onclick="startGame()">
+            <button id="playBtn" onclick="startGame()">
                 JOUER
             </button>
 
@@ -630,11 +477,9 @@ canvas{
     </div>
 
 
-    <!-- =================================================
-         PARAMETRES
-    ================================================= -->
+    <!-- ================= PARAMETRES ================= -->
 
-    <div class="launcherBox" id="settings">
+    <div class="box" id="settings">
 
         <h2 class="settingsTitle">
             ⚙️ PARAMÈTRES
@@ -642,7 +487,7 @@ canvas{
 
         <label>Limite FPS</label>
 
-        <select id="fpsLimit">
+        <select id="fpsSelect">
             <option value="30">30 FPS</option>
             <option value="60">60 FPS</option>
             <option value="90">90 FPS</option>
@@ -653,50 +498,46 @@ canvas{
             <option value="0">Illimité</option>
         </select>
 
-        <p class="settingsInfo">
-            Choisis la limite d'images par seconde.
-            <br>
-            Illimité laisse le navigateur tourner au maximum.
+        <p class="help">
+            Le compteur FPS du jeu indique maintenant
+            la fréquence sélectionnée pour les modes limités.
+            En mode illimité, il indique les FPS réellement obtenus.
         </p>
 
         <h3>🎮 Joueur 1</h3>
 
         <div class="keyGrid">
 
-            <button
-                class="keyButton"
-                data-player="1"
-                data-action="up">
+            <button class="keyButton"
+                    data-player="1"
+                    data-action="up">
 
                 Avancer :
                 <b id="p1up">Z</b>
 
             </button>
 
-            <button
-                class="keyButton"
-                data-player="1"
-                data-action="down">
+            <button class="keyButton"
+                    data-player="1"
+                    data-action="down">
 
                 Reculer :
                 <b id="p1down">S</b>
 
             </button>
 
-            <button
-                class="keyButton"
-                data-player="1"
-                data-action="left">
+            <button class="keyButton"
+                    data-player="1"
+                    data-action="left">
 
                 Gauche :
                 <b id="p1left">Q</b>
 
             </button>
 
-            <button
-                class="keyButton"
-                data-player="1"
-                data-action="right">
+            <button class="keyButton"
+                    data-player="1"
+                    data-action="right">
 
                 Droite :
                 <b id="p1right">D</b>
@@ -705,44 +546,41 @@ canvas{
 
         </div>
 
+
         <h3>🎮 Joueur 2</h3>
 
         <div class="keyGrid">
 
-            <button
-                class="keyButton"
-                data-player="2"
-                data-action="up">
+            <button class="keyButton"
+                    data-player="2"
+                    data-action="up">
 
                 Avancer :
                 <b id="p2up">↑</b>
 
             </button>
 
-            <button
-                class="keyButton"
-                data-player="2"
-                data-action="down">
+            <button class="keyButton"
+                    data-player="2"
+                    data-action="down">
 
                 Reculer :
                 <b id="p2down">↓</b>
 
             </button>
 
-            <button
-                class="keyButton"
-                data-player="2"
-                data-action="left">
+            <button class="keyButton"
+                    data-player="2"
+                    data-action="left">
 
                 Gauche :
                 <b id="p2left">←</b>
 
             </button>
 
-            <button
-                class="keyButton"
-                data-player="2"
-                data-action="right">
+            <button class="keyButton"
+                    data-player="2"
+                    data-action="right">
 
                 Droite :
                 <b id="p2right">→</b>
@@ -751,24 +589,21 @@ canvas{
 
         </div>
 
-        <p class="settingsInfo">
-            Clique sur une touche puis appuie directement
-            sur la nouvelle touche de ton clavier.
-            <br>
-            Exemple : clique sur Z → appuie sur F8 → F8 est utilisé.
+        <p class="help">
+            🖱️ Clique directement sur la touche affichée,
+            puis appuie sur la nouvelle touche de ton clavier.
+            <br><br>
+            Exemple : <b>Z</b> → clic sur Z → appuie sur <b>A</b>
+            → la touche devient immédiatement <b>A</b>.
         </p>
 
-        <div class="settingsButtons">
+        <div class="settingsActions">
 
-            <button
-                id="saveSettings"
-                onclick="saveSettings()">
+            <button id="saveSettings" onclick="saveSettings()">
                 ✓ ENREGISTRER
             </button>
 
-            <button
-                id="backSettings"
-                onclick="closeSettings()">
+            <button id="backSettings" onclick="closeSettings()">
                 RETOUR
             </button>
 
@@ -779,15 +614,11 @@ canvas{
 </div>
 
 
-<!-- =====================================================
-     JEU
-===================================================== -->
+<!-- ================= JEU ================= -->
 
 <div id="game">
 
-    <button
-        id="pauseButton"
-        onclick="togglePause()">
+    <button id="pauseButton" onclick="togglePause()">
         ⏸ PAUSE
     </button>
 
@@ -805,214 +636,111 @@ canvas{
 
     </div>
 
+
     <div id="mainArea">
 
-        <!-- JOUEUR 1 -->
-
-        <div
-            id="panel1"
-            class="sidePanel active">
+        <div class="side" id="panel1">
 
             <div>
 
-                <div class="sideTitle">
-                    JOUEUR 1
-                </div>
+                <div class="sideTitle">JOUEUR 1</div>
 
-                <div class="infoBox">
-
-                    <div class="infoLabel">
-                        PSEUDO
-                    </div>
-
-                    <div
-                        id="sidePlayer1"
-                        class="infoValue">
+                <div class="info">
+                    <div class="small">PSEUDO</div>
+                    <div class="value" id="sideName1">
                         Joueur 1
                     </div>
-
                 </div>
 
-                <div class="infoBox">
-
-                    <div class="infoLabel">
-                        PROGRESSION
-                    </div>
-
-                    <div
-                        id="time1Side"
-                        class="infoValue">
+                <div class="info">
+                    <div class="small">PROGRESSION</div>
+                    <div class="value" id="sideTime1">
                         00:00
                     </div>
-
                 </div>
 
-                <div class="infoBox">
-
-                    <div class="infoLabel">
-                        NIVEAU
-                    </div>
-
-                    <div
-                        id="stage1Side"
-                        class="infoValue">
+                <div class="info">
+                    <div class="small">NIVEAU</div>
+                    <div class="value" id="sideStage1">
                         1
                     </div>
-
                 </div>
 
-                <div class="infoBox">
-
-                    <div class="infoLabel">
-                        ÉTAT
-                    </div>
-
-                    <div
-                        id="state1"
-                        class="infoValue">
+                <div class="info">
+                    <div class="small">ÉTAT</div>
+                    <div class="value" id="state1">
                         EN JEU
                     </div>
-
                 </div>
 
             </div>
 
-            <div class="infoBox">
-
-                <div class="infoLabel">
-                    SCORE
-                </div>
-
-                <div
-                    id="score1"
-                    class="infoValue">
-                    0
-                </div>
-
+            <div class="info">
+                <div class="small">SCORE</div>
+                <div class="value" id="score1">0</div>
             </div>
 
         </div>
 
 
-        <!-- CENTRE -->
-
-        <div id="centerArea">
+        <div id="center">
 
             <div id="topBar">
 
-                <div>
-                    ⏱️
-                    <span id="timer">00:00</span>
-                </div>
+                <span>⏱️ <span id="timer">00:00</span></span>
 
-                <div>
-                    🏆
-                    <span id="mainScore">0</span>
-                </div>
+                <span>🏆 <span id="score">0</span></span>
 
-                <div>
-                    👹
-                    <span id="enemyCount">1</span>
-                </div>
+                <span>👹 <span id="enemyCount">1</span></span>
 
-                <div>
-                    NIVEAU
-                    <span id="stage">1</span>
-                </div>
+                <span>NIVEAU <span id="stage">1</span></span>
 
             </div>
 
             <div id="canvasContainer">
-
                 <canvas id="canvas"></canvas>
-
             </div>
 
         </div>
 
 
-        <!-- JOUEUR 2 -->
-
-        <div
-            id="panel2"
-            class="sidePanel inactive">
+        <div class="side" id="panel2">
 
             <div>
 
-                <div class="sideTitle">
-                    JOUEUR 2
+                <div class="sideTitle">JOUEUR 2</div>
+
+                <div class="info">
+                    <div class="small">PSEUDO</div>
+                    <div class="value" id="sideName2">-</div>
                 </div>
 
-                <div class="infoBox">
-
-                    <div class="infoLabel">
-                        PSEUDO
-                    </div>
-
-                    <div
-                        id="sidePlayer2"
-                        class="infoValue">
-                        -
-                    </div>
-
-                </div>
-
-                <div class="infoBox">
-
-                    <div class="infoLabel">
-                        PROGRESSION
-                    </div>
-
-                    <div
-                        id="time2Side"
-                        class="infoValue">
+                <div class="info">
+                    <div class="small">PROGRESSION</div>
+                    <div class="value" id="sideTime2">
                         00:00
                     </div>
-
                 </div>
 
-                <div class="infoBox">
-
-                    <div class="infoLabel">
-                        NIVEAU
-                    </div>
-
-                    <div
-                        id="stage2Side"
-                        class="infoValue">
+                <div class="info">
+                    <div class="small">NIVEAU</div>
+                    <div class="value" id="sideStage2">
                         1
                     </div>
-
                 </div>
 
-                <div class="infoBox">
-
-                    <div class="infoLabel">
-                        ÉTAT
-                    </div>
-
-                    <div
-                        id="state2"
-                        class="infoValue">
+                <div class="info">
+                    <div class="small">ÉTAT</div>
+                    <div class="value" id="state2">
                         EN ATTENTE
                     </div>
-
                 </div>
 
             </div>
 
-            <div class="infoBox">
-
-                <div class="infoLabel">
-                    SCORE
-                </div>
-
-                <div
-                    id="score2"
-                    class="infoValue">
-                    0
-                </div>
-
+            <div class="info">
+                <div class="small">SCORE</div>
+                <div class="value" id="score2">0</div>
             </div>
 
         </div>
@@ -1024,38 +752,17 @@ canvas{
 
     <div id="controls">
 
-        <div id="arrowControls">
+        <div id="arrows">
 
-            <div
-                class="arrow up"
-                data-direction="up">
-                ▲
-            </div>
-
-            <div
-                class="arrow down"
-                data-direction="down">
-                ▼
-            </div>
-
-            <div
-                class="arrow left"
-                data-direction="left">
-                ◀
-            </div>
-
-            <div
-                class="arrow right"
-                data-direction="right">
-                ▶
-            </div>
+            <div class="arrow up" data-dir="up">▲</div>
+            <div class="arrow down" data-dir="down">▼</div>
+            <div class="arrow left" data-dir="left">◀</div>
+            <div class="arrow right" data-dir="right">▶</div>
 
         </div>
 
         <div id="joystick">
-
-            <div id="joystickKnob"></div>
-
+            <div id="knob"></div>
         </div>
 
     </div>
@@ -1063,26 +770,16 @@ canvas{
 </div>
 
 
-<!-- =====================================================
-     PAUSE
-===================================================== -->
+<!-- PAUSE -->
 
-<div id="pauseOverlay">
+<div class="overlay" id="pauseOverlay">
 
-    <div class="pauseBox">
+    <div class="overlayBox">
 
         <h2>⏸ JEU EN PAUSE</h2>
 
-        <p>
-            Le jeu est arrêté.
-        </p>
-
-        <button
-            class="overlayButton"
-            onclick="togglePause()">
-
+        <button onclick="togglePause()">
             ▶ CONTINUER
-
         </button>
 
     </div>
@@ -1090,15 +787,13 @@ canvas{
 </div>
 
 
-<!-- =====================================================
-     NIVEAU
-===================================================== -->
+<!-- NIVEAU -->
 
-<div id="levelMessage">
+<div class="overlay" id="levelOverlay">
 
-    <div id="levelMessageBox">
+    <div class="overlayBox">
 
-        <h2 id="levelMessageText">
+        <h2 id="levelText">
             PASSAGE AU NIVEAU 2
         </h2>
 
@@ -1107,28 +802,18 @@ canvas{
 </div>
 
 
-<!-- =====================================================
-     GAME OVER
-===================================================== -->
+<!-- GAME OVER -->
 
-<div id="gameOver">
+<div class="overlay" id="gameOver">
 
-    <div class="gameOverBox">
+    <div class="overlayBox" id="gameOverBox">
 
-        <h2 id="gameOverTitle">
-            GAME OVER
-        </h2>
+        <h2>GAME OVER</h2>
 
-        <div id="loserText">
-            Partie terminée.
-        </div>
+        <p id="gameOverText"></p>
 
-        <button
-            class="overlayButton"
-            onclick="location.reload()">
-
+        <button onclick="location.reload()">
             REJOUER
-
         </button>
 
     </div>
@@ -1138,51 +823,34 @@ canvas{
 
 <script>
 
-/* =====================================================
-   VARIABLES GENERALES
-===================================================== */
+/* =========================================================
+   CONFIGURATION
+========================================================= */
 
-let selectedMode = "solo";
+let mode = "solo";
 
-let selectedLanguage = "fr";
+let language = "fr";
 
-let player1Name = "";
+let name1 = "Joueur 1";
 
-let player2Name = "";
+let name2 = "Joueur 2";
 
 let activePlayer = 1;
 
-let gameRunning = false;
+let running = false;
 
-let manualPaused = false;
+let paused = false;
 
-let levelPaused = false;
+let levelPause = false;
 
-
-/* =====================================================
-   FPS
-===================================================== */
-
-/*
-   0 = illimité
-*/
-
-let fpsLimit = 0;
-
-let lastFrameTime = 0;
-
-let fpsFrames = 0;
-
-let fpsLastTime = performance.now();
-
-let currentFPS = 0;
+let fpsLimit = 60;
 
 
-/* =====================================================
+/* =========================================================
    TOUCHES
-===================================================== */
+========================================================= */
 
-let controls = {
+let keys = {
 
     1:{
         up:"z",
@@ -1201,90 +869,84 @@ let controls = {
 };
 
 
-let waitingForKey = null;
+/*
+   Cette variable contient EXACTEMENT
+   la touche que l'utilisateur est en
+   train de modifier.
+*/
+
+let changingKey = null;
 
 
-/* =====================================================
-   JOUEURS
-===================================================== */
+/* =========================================================
+   ETAT JOUEURS
+========================================================= */
 
 let players = {
 
     1:{
         time:0,
+        startTime:0,
         score:0,
         stage:1,
-        running:false,
-        lastStart:0
+        playing:false
     },
 
     2:{
         time:0,
+        startTime:0,
         score:0,
         stage:1,
-        running:false,
-        lastStart:0
+        playing:false
     }
 
 };
 
 
-/* =====================================================
+/* =========================================================
    SLOGANS
-===================================================== */
+========================================================= */
 
 const slogans = [
-
     "« Cours. Survis. Ne te fais jamais attraper. »",
-
-    "« Plus vite que la peur. »",
-
     "« Chaque seconde compte. »",
-
     "« Ils arrivent. COURS ! »",
-
     "« Ne regarde pas derrière toi. »",
-
     "« Le prochain niveau sera pire. »",
-
     "« Le labyrinthe n'a aucune pitié. »",
-
     "« Tu peux fuir... mais pas éternellement. »",
-
     "« Une erreur et la chasse recommence. »",
-
     "« Montre-leur qui est le plus rapide. »"
-
 ];
 
 
-/* =====================================================
+/* =========================================================
    MAP
-===================================================== */
+========================================================= */
 
 const map = [
 
-    "#####################",
-    "#P....#.......#....#",
-    "#.###.#.#####.#.###.#",
-    "#.....#...#...#.....#",
-    "#####.###.#.###.#####",
-    "#.........#.........#",
-    "#.###.#########.###.#",
-    "#...#....#....#...#.#",
-    "###.#.##.#.##.#.#.#.#",
-    "#...#.#.......#.#...#",
-    "#.###.#.#######.###.#",
-    "#.....#....#....#...#",
-    "#####.###.#.###.#####",
-    "#.........#.........#",
-    "#.###.#########.###.#",
-    "#.....#.......#.....#",
-    "###.#.#.#####.#.#.###",
-    "#...#...#...#...#...#",
-    "#.#######.#.#######.#",
-    "#...................#",
-    "#####################"
+"#####################",
+"#P....#.......#....#",
+"#.###.#.#####.#.###.#",
+"#.....#...#...#.....#",
+"#####.###.#.###.#####",
+"#.........#.........#",
+"#.###.#########.###.#",
+"#...#....#....#...#.#",
+"###.#.##.#.##.#.#.#.#",
+"#...#.#.......#.#...#",
+"#.###.#.#######.###.#",
+"#.....#....#....#...#",
+"#####.###.#.###.#####",
+"#.........#.........#",
+"#.###.#########.###.#",
+"#.....#.......#.....#",
+"###.#.#.#####.#.#.###",
+"#...#...#...#...#...#",
+"#.#######.#.#######.#",
+"#...................#",
+"#####################"
 
 ];
 
@@ -1295,51 +957,39 @@ const rows = map.length;
 const cols = map[0].length;
 
 
-/* =====================================================
+/* =========================================================
    CANVAS
-===================================================== */
+========================================================= */
 
 const canvas =
     document.getElementById("canvas");
 
 const ctx =
-    canvas.getContext(
-        "2d",
-        {
-            alpha:false
-        }
-    );
+    canvas.getContext("2d", {
+        alpha:false
+    });
 
-canvas.width =
-    cols * tile;
-
-canvas.height =
-    rows * tile;
+canvas.width = cols * tile;
+canvas.height = rows * tile;
 
 
-/* =====================================================
-   JOUEUR
-===================================================== */
+/* =========================================================
+   PERSONNAGE
+========================================================= */
 
 let player = {
-
     x:0,
-
     y:0,
-
     speed:5,
-
     walk:0
-
 };
 
 
-/* =====================================================
+/* =========================================================
    ENNEMIS
-===================================================== */
+========================================================= */
 
-const enemyStarts = [
-
+const enemyPositions = [
     [3,19],
     [10,19],
     [17,19],
@@ -1349,99 +999,85 @@ const enemyStarts = [
     [12,19],
     [15,19],
     [19,19]
-
 ];
 
 let enemies = [];
 
-const PATH_INTERVAL = 100;
 
-
-/* =====================================================
+/* =========================================================
    TOUCHES ENFONCEES
-===================================================== */
+========================================================= */
 
-const keys = {};
+const pressed = {};
 
 
-/* =====================================================
-   CONTROLES TACTILES
-===================================================== */
+/* =========================================================
+   CONTROLES ECRAN
+========================================================= */
 
-const controlKeys = {
-
+const touchDirection = {
     up:false,
     down:false,
     left:false,
     right:false
-
 };
 
 
-/* =====================================================
+/* =========================================================
    JOYSTICK
-===================================================== */
+========================================================= */
+
+let joyX = 0;
+let joyY = 0;
+let joyActive = false;
 
 const joystick =
     document.getElementById("joystick");
 
-const joystickKnob =
-    document.getElementById(
-        "joystickKnob"
-    );
-
-let joystickActive = false;
-
-let joystickX = 0;
-
-let joystickY = 0;
+const knob =
+    document.getElementById("knob");
 
 
-/* =====================================================
-   FORMAT TOUCHE
-===================================================== */
+/* =========================================================
+   AFFICHAGE NOM TOUCHE
+========================================================= */
 
-function prettyKey(key){
+function displayKey(key){
 
     const names = {
 
-        "arrowup":"↑",
-
-        "arrowdown":"↓",
-
-        "arrowleft":"←",
-
-        "arrowright":"→",
+        arrowup:"↑",
+        arrowdown:"↓",
+        arrowleft:"←",
+        arrowright:"→",
 
         " ":"ESPACE",
 
-        "escape":"ÉCHAP",
+        escape:"ÉCHAP",
 
-        "enter":"ENTRÉE",
+        enter:"ENTRÉE",
 
-        "control":"CTRL",
+        shift:"SHIFT",
 
-        "shift":"SHIFT",
+        control:"CTRL",
 
-        "alt":"ALT",
+        alt:"ALT",
 
-        "tab":"TAB",
+        tab:"TAB",
 
-        "backspace":"RETOUR",
+        backspace:"RETOUR",
 
-        "capslock":"VERR. MAJ",
+        delete:"SUPPR",
 
-        "delete":"SUPPR",
+        insert:"INSER",
 
-        "insert":"INSER",
+        home:"HOME",
 
-        "home":"HOME",
+        end:"END",
 
-        "end":"END",
+        pageup:"PAGE ↑",
 
-        "pageup":"PAGE ↑",
-
-        "pagedown":"PAGE ↓"
+        pagedown:"PAGE ↓"
 
     };
 
@@ -1451,34 +1087,25 @@ function prettyKey(key){
 }
 
 
-/* =====================================================
-   AFFICHAGE TOUCHES
-===================================================== */
+/* =========================================================
+   AFFICHER LES TOUCHES
+========================================================= */
 
-function updateKeyDisplay(){
+function refreshKeys(){
 
-    for(
-        const p of [1,2]
-    ){
+    for(let p=1;p<=2;p++){
 
         for(
             const action of
             ["up","down","left","right"]
         ){
 
-            const element =
-                document.getElementById(
-                    `p${p}${action}`
+            document.getElementById(
+                `p${p}${action}`
+            ).textContent =
+                displayKey(
+                    keys[p][action]
                 );
-
-            if(element){
-
-                element.textContent =
-                    prettyKey(
-                        controls[p][action]
-                    );
-
-            }
 
         }
 
@@ -1487,15 +1114,15 @@ function updateKeyDisplay(){
 }
 
 
-/* =====================================================
-   CHARGER PARAMETRES
-===================================================== */
+/* =========================================================
+   SAUVEGARDE
+========================================================= */
 
 function loadSettings(){
 
     const savedKeys =
         localStorage.getItem(
-            "pacmanControls"
+            "pacmanKeys"
         );
 
     if(savedKeys){
@@ -1505,216 +1132,195 @@ function loadSettings(){
             const data =
                 JSON.parse(savedKeys);
 
-            if(data[1]){
-
-                controls[1] = {
-                    ...controls[1],
+            if(data[1])
+                keys[1] = {
+                    ...keys[1],
                     ...data[1]
                 };
 
-            }
-
-            if(data[2]){
-
-                controls[2] = {
-                    ...controls[2],
+            if(data[2])
+                keys[2] = {
+                    ...keys[2],
                     ...data[2]
                 };
 
-            }
-
-        }
-        catch(e){
-
-            console.log(
-                "Erreur touches"
-            );
-
-        }
+        }catch(e){}
 
     }
 
 
     const savedFPS =
         localStorage.getItem(
-            "pacmanFPS"
+            "pacmanFPSLimit"
         );
 
-    if(savedFPS !== null){
-
+    if(savedFPS !== null)
         fpsLimit =
             Number(savedFPS);
 
-    }
+
+    document.getElementById(
+        "fpsSelect"
+    ).value =
+        String(fpsLimit);
 
 
-    const fpsSelect =
-        document.getElementById(
-            "fpsLimit"
-        );
-
-    if(fpsSelect){
-
-        fpsSelect.value =
-            String(fpsLimit);
-
-    }
-
-
-    updateKeyDisplay();
+    refreshKeys();
 
 }
 
 
-/* =====================================================
-   SAUVEGARDER PARAMETRES
-===================================================== */
+/* =========================================================
+   FPS
+========================================================= */
 
 function saveSettings(){
 
-    const fpsSelect =
-        document.getElementById(
-            "fpsLimit"
-        );
-
     fpsLimit =
         Number(
-            fpsSelect.value
+            document.getElementById(
+                "fpsSelect"
+            ).value
         );
 
 
     localStorage.setItem(
-        "pacmanFPS",
-        String(fpsLimit)
+        "pacmanFPSLimit",
+        fpsLimit
     );
 
 
     localStorage.setItem(
-        "pacmanControls",
-        JSON.stringify(controls)
+        "pacmanKeys",
+        JSON.stringify(keys)
     );
 
 
-    updateKeyDisplay();
+    refreshKeys();
 
     closeSettings();
 
 }
 
 
-/* =====================================================
-   PARAMETRES
-===================================================== */
+/* =========================================================
+   OUVRIR PARAMETRES
+========================================================= */
 
 function openSettings(){
 
-    document
-        .getElementById("mainLauncher")
-        .style.display="none";
+    document.getElementById(
+        "home"
+    ).style.display = "none";
 
-    document
-        .getElementById("settings")
-        .style.display="block";
+    document.getElementById(
+        "settings"
+    ).style.display = "block";
 
 }
 
+
+/* =========================================================
+   FERMER PARAMETRES
+========================================================= */
 
 function closeSettings(){
 
-    waitingForKey = null;
+    changingKey = null;
 
-    document
-        .querySelectorAll(".keyButton")
-        .forEach(button=>{
+    document.querySelectorAll(
+        ".keyButton"
+    ).forEach(button=>{
+        button.classList.remove(
+            "waiting"
+        );
+    });
 
-            button.classList.remove(
-                "waiting"
-            );
+    refreshKeys();
 
-        });
+    document.getElementById(
+        "settings"
+    ).style.display = "none";
 
-
-    updateKeyDisplay();
-
-
-    document
-        .getElementById("settings")
-        .style.display="none";
-
-    document
-        .getElementById("mainLauncher")
-        .style.display="block";
+    document.getElementById(
+        "home"
+    ).style.display = "block";
 
 }
 
 
-/* =====================================================
-   CHANGER UNE TOUCHE
-===================================================== */
+/* =========================================================
+   CHANGEMENT DE TOUCHE
+========================================================= */
 
-document
-    .querySelectorAll(".keyButton")
-    .forEach(button=>{
+/*
+   IMPORTANT :
 
-        button.addEventListener(
-            "click",
-            ()=>{
+   1. Tu cliques avec la souris sur Z.
+   2. Le bouton Z est sélectionné.
+   3. Tu appuies sur A.
+   4. A devient immédiatement la nouvelle touche.
 
-                document
-                    .querySelectorAll(".keyButton")
-                    .forEach(b=>{
+   Il n'y a aucun bouton F8 ou autre à choisir.
+*/
 
-                        b.classList.remove(
-                            "waiting"
-                        );
+document.querySelectorAll(
+    ".keyButton"
+).forEach(button=>{
 
-                    });
+    button.addEventListener(
+        "click",
+        function(){
 
-
-                button.classList.add(
+            document.querySelectorAll(
+                ".keyButton"
+            ).forEach(b=>{
+                b.classList.remove(
                     "waiting"
                 );
+            });
 
 
-                waitingForKey = {
-
-                    player:
-                        Number(
-                            button.dataset.player
-                        ),
-
-                    action:
-                        button.dataset.action
-
-                };
+            this.classList.add(
+                "waiting"
+            );
 
 
-                button.innerHTML =
-                    "⌨️ APPUIE SUR LA TOUCHE";
+            changingKey = {
 
-            }
-        );
+                player:
+                    Number(
+                        this.dataset.player
+                    ),
 
-    });
+                action:
+                    this.dataset.action
+
+            };
+
+        }
+    );
+
+});
 
 
-/* =====================================================
-   RECUPERER NOUVELLE TOUCHE
-===================================================== */
+/* =========================================================
+   NOUVELLE TOUCHE
+========================================================= */
 
 document.addEventListener(
     "keydown",
     function(e){
 
         /*
-           Si on est en train de
-           choisir une touche.
+           Si on modifie une touche :
+           on prend DIRECTEMENT la touche
+           que l'utilisateur vient d'appuyer.
         */
 
-        if(waitingForKey){
+        if(changingKey){
 
             e.preventDefault();
-
             e.stopPropagation();
 
 
@@ -1723,77 +1329,18 @@ document.addEventListener(
 
 
             const p =
-                waitingForKey.player;
+                changingKey.player;
 
             const action =
-                waitingForKey.action;
+                changingKey.action;
 
 
             /*
-               Si la touche est déjà utilisée
-               par une autre direction du même
-               joueur, on échange les touches.
+               On change directement.
             */
 
-            let oldAction = null;
-
-
-            for(
-                const a of
-                ["up","down","left","right"]
-            ){
-
-                if(
-                    a !== action &&
-                    controls[p][a] === newKey
-                ){
-
-                    oldAction = a;
-
-                    break;
-
-                }
-
-            }
-
-
-            if(oldAction){
-
-                const oldKey =
-                    controls[p][action];
-
-
-                controls[p][action] =
-                    newKey;
-
-
-                controls[p][oldAction] =
-                    oldKey;
-
-            }
-            else{
-
-                controls[p][action] =
-                    newKey;
-
-            }
-
-
-            waitingForKey = null;
-
-
-            document
-                .querySelectorAll(".keyButton")
-                .forEach(b=>{
-
-                    b.classList.remove(
-                        "waiting"
-                    );
-
-                });
-
-
-            updateKeyDisplay();
+            keys[p][action] =
+                newKey;
 
 
             /*
@@ -1801,23 +1348,45 @@ document.addEventListener(
             */
 
             localStorage.setItem(
-                "pacmanControls",
-                JSON.stringify(controls)
+                "pacmanKeys",
+                JSON.stringify(keys)
             );
 
 
+            /*
+               On quitte le mode
+               changement.
+            */
+
+            changingKey = null;
+
+
+            document.querySelectorAll(
+                ".keyButton"
+            ).forEach(b=>{
+                b.classList.remove(
+                    "waiting"
+                );
+            });
+
+
+            refreshKeys();
+
             return;
 
         }
 
 
         /*
-           ESPACE = pause
+           Espace ou Échap = pause
         */
 
         if(
-            e.key === " " &&
-            gameRunning
+            running &&
+            (
+                e.code === "Space" ||
+                e.key === "Escape"
+            )
         ){
 
             e.preventDefault();
@@ -1829,25 +1398,7 @@ document.addEventListener(
         }
 
 
-        /*
-           ESC = pause
-        */
-
-        if(
-            e.key === "Escape" &&
-            gameRunning
-        ){
-
-            e.preventDefault();
-
-            togglePause();
-
-            return;
-
-        }
-
-
-        keys[
+        pressed[
             e.key.toLowerCase()
         ] = true;
 
@@ -1860,7 +1411,7 @@ document.addEventListener(
     "keyup",
     function(e){
 
-        keys[
+        pressed[
             e.key.toLowerCase()
         ] = false;
 
@@ -1868,103 +1419,99 @@ document.addEventListener(
 );
 
 
-/* =====================================================
+/* =========================================================
    MODE
-===================================================== */
+========================================================= */
 
-function selectMode(mode){
+function setMode(newMode){
 
-    selectedMode = mode;
-
-
-    document
-        .getElementById("soloButton")
-        .classList.remove("active");
+    mode = newMode;
 
 
-    document
-        .getElementById("duoButton")
-        .classList.remove("active");
+    document.getElementById(
+        "solo"
+    ).classList.remove("active");
+
+    document.getElementById(
+        "duo"
+    ).classList.remove("active");
 
 
     if(mode === "solo"){
 
-        document
-            .getElementById("soloButton")
-            .classList.add("active");
+        document.getElementById(
+            "solo"
+        ).classList.add("active");
 
 
-        document
-            .getElementById("player2Box")
-            .style.display="none";
+        document.getElementById(
+            "player2Box"
+        ).style.display = "none";
 
     }
     else{
 
-        document
-            .getElementById("duoButton")
-            .classList.add("active");
+        document.getElementById(
+            "duo"
+        ).classList.add("active");
 
 
-        document
-            .getElementById("player2Box")
-            .style.display="block";
+        document.getElementById(
+            "player2Box"
+        ).style.display = "block";
 
     }
 
 }
 
 
-/* =====================================================
-   DEMARRER
-===================================================== */
+/* =========================================================
+   START GAME
+========================================================= */
 
 function startGame(){
 
-    player1Name =
-        document
-        .getElementById("player1Name")
-        .value
-        .trim() ||
+    name1 =
+        document.getElementById(
+            "name1"
+        ).value.trim() ||
         "Joueur 1";
 
 
-    player2Name =
-        document
-        .getElementById("player2Name")
-        .value
-        .trim() ||
+    name2 =
+        document.getElementById(
+            "name2"
+        ).value.trim() ||
         "Joueur 2";
 
 
-    selectedLanguage =
-        document
-        .getElementById("language")
-        .value;
+    language =
+        document.getElementById(
+            "language"
+        ).value;
 
 
-    document
-        .getElementById("sidePlayer1")
-        .textContent =
-        player1Name;
+    document.getElementById(
+        "sideName1"
+    ).textContent = name1;
 
 
-    document
-        .getElementById("sidePlayer2")
-        .textContent =
-        selectedMode === "duo"
-        ? player2Name
+    document.getElementById(
+        "sideName2"
+    ).textContent =
+        mode === "duo"
+        ? name2
         : "-";
 
 
-    document
-        .getElementById("launcher")
-        .style.display="none";
+    document.getElementById(
+        "launcher"
+    ).style.display = "none";
 
 
-    document
-        .getElementById("game")
-        .style.display="block";
+    document.getElementById(
+        "game"
+    ).style.display = "block";
 
 
     initGame();
@@ -1972,9 +1519,9 @@ function startGame(){
 }
 
 
-/* =====================================================
-   INITIALISATION
-===================================================== */
+/* =========================================================
+   INIT GAME
+========================================================= */
 
 function initGame(){
 
@@ -1982,18 +1529,18 @@ function initGame(){
 
         1:{
             time:0,
+            startTime:performance.now(),
             score:0,
             stage:1,
-            running:true,
-            lastStart:Date.now()
+            playing:true
         },
 
         2:{
             time:0,
+            startTime:0,
             score:0,
             stage:1,
-            running:false,
-            lastStart:0
+            playing:false
         }
 
     };
@@ -2001,59 +1548,56 @@ function initGame(){
 
     activePlayer = 1;
 
-    gameRunning = true;
+    running = true;
 
-    manualPaused = false;
+    paused = false;
 
-    levelPaused = false;
+    levelPause = false;
+
+
+    findPlayerStart();
 
     enemies = [];
 
-    resetPlayerPosition();
-
-    createEnemy();
+    createEnemiesForStage();
 
     updatePanels();
 
-    updateAllDisplays();
+    updateDisplay();
 
-    updateSlogan();
+    changeSlogan();
+
+
+    lastLogicTime =
+        performance.now();
 
 
     lastFrameTime =
         performance.now();
 
 
-    fpsFrames = 0;
-
-    fpsLastTime =
+    fpsCounterStart =
         performance.now();
+
+    fpsFrames = 0;
 
 
     requestAnimationFrame(
-        gameLoop
+        loop
     );
 
 }
 
 
-/* =====================================================
-   POSITION JOUEUR
-===================================================== */
+/* =========================================================
+   POSITION DE DEPART
+========================================================= */
 
-function resetPlayerPosition(){
+function findPlayerStart(){
 
-    for(
-        let y=0;
-        y<rows;
-        y++
-    ){
+    for(let y=0;y<rows;y++){
 
-        for(
-            let x=0;
-            x<cols;
-            x++
-        ){
+        for(let x=0;x<cols;x++){
 
             if(map[y][x] === "P"){
 
@@ -2076,159 +1620,113 @@ function resetPlayerPosition(){
 }
 
 
-/* =====================================================
-   CREER ENNEMI
-===================================================== */
+/* =========================================================
+   ENNEMIS
+========================================================= */
 
-function createEnemy(){
+function createEnemiesForStage(){
 
-    const index =
-        enemies.length;
-
-
-    const pos =
-        enemyStarts[
-            index %
-            enemyStarts.length
-        ];
+    enemies = [];
 
 
-    enemies.push({
-
-        x:
-            pos[0] * tile +
-            tile / 2,
-
-        y:
-            pos[1] * tile +
-            tile / 2,
-
-        speed:
-            2.8 +
-            players[activePlayer].stage *
-            .15,
-
-        targetX:
-            player.x,
-
-        targetY:
-            player.y,
-
-        nextPathTime:0
-
-    });
-
-}
+    const count =
+        Math.min(
+            players[activePlayer].stage,
+            enemyPositions.length
+        );
 
 
-/* =====================================================
-   RESET ENNEMIS
-===================================================== */
-
-function resetEnemies(){
-
-    for(
-        let i=0;
-        i<enemies.length;
-        i++
-    ){
+    for(let i=0;i<count;i++){
 
         const pos =
-            enemyStarts[
-                i %
-                enemyStarts.length
-            ];
+            enemyPositions[i];
 
 
-        enemies[i].x =
-            pos[0] * tile +
-            tile / 2;
+        enemies.push({
 
+            x:
+                pos[0] * tile +
+                tile / 2,
 
-        enemies[i].y =
-            pos[1] * tile +
-            tile / 2;
+            y:
+                pos[1] * tile +
+                tile / 2,
 
+            targetX:player.x,
 
-        enemies[i].targetX =
-            player.x;
+            targetY:player.y,
 
+            speed:
+                2.7 +
+                players[activePlayer].stage * .12,
 
-        enemies[i].targetY =
-            player.y;
+            nextPath:0
 
-
-        enemies[i].nextPathTime=0;
+        });
 
     }
 
 }
 
 
-/* =====================================================
-   TEMPS JOUEUR
-===================================================== */
+/* =========================================================
+   TEMPS
+========================================================= */
 
-function getPlayerTime(id){
+function getTime(id){
 
     const p = players[id];
 
 
-    if(p.running){
-
-        return p.time +
-            Math.floor(
-                (Date.now() -
-                 p.lastStart) /
-                1000
-            );
-
-    }
+    if(!p.playing)
+        return p.time;
 
 
-    return p.time;
+    return p.time +
+        Math.floor(
+            (
+                performance.now() -
+                p.startTime
+            ) / 1000
+        );
 
 }
 
 
-/* =====================================================
-   SAUVER PROGRESSION
-===================================================== */
+/* =========================================================
+   SAUVEGARDE TEMPS
+========================================================= */
 
-function saveActivePlayer(){
+function saveCurrentTime(){
 
     const p =
         players[activePlayer];
 
 
-    if(p.running){
+    if(p.playing){
 
-        p.time +=
-            Math.floor(
-                (Date.now() -
-                 p.lastStart) /
-                1000
-            );
+        p.time =
+            getTime(activePlayer);
 
 
-        p.lastStart =
-            Date.now();
+        p.startTime =
+            performance.now();
 
     }
 
 }
 
 
-/* =====================================================
-   CHANGER JOUEUR
-===================================================== */
+/* =========================================================
+   CHANGEMENT JOUEUR
+========================================================= */
 
 function switchPlayer(){
 
-    saveActivePlayer();
+    saveCurrentTime();
 
 
-    players[activePlayer].running =
+    players[activePlayer].playing =
         false;
 
 
@@ -2238,95 +1736,112 @@ function switchPlayer(){
         : 1;
 
 
-    players[activePlayer].running =
+    players[activePlayer].playing =
         true;
 
 
-    players[activePlayer].lastStart =
-        Date.now();
+    players[activePlayer].startTime =
+        performance.now();
 
 
-    resetPlayerPosition();
+    findPlayerStart();
 
-    resetEnemies();
+    createEnemiesForStage();
 
     updatePanels();
 
-    updateAllDisplays();
+    updateDisplay();
 
-    updateSlogan();
+    changeSlogan();
 
 }
 
 
-/* =====================================================
-   NIVEAU
-===================================================== */
+/* =========================================================
+   NIVEAUX
+========================================================= */
 
-function showLevelMessage(level){
+function updateStage(){
 
-    levelPaused = true;
-
-
-    let text;
+    const currentTime =
+        getTime(activePlayer);
 
 
-    if(selectedLanguage === "fr"){
+    const newStage =
+        Math.floor(
+            currentTime / 30
+        ) + 1;
 
-        text =
-            "PASSAGE AU NIVEAU " +
-            level;
+
+    const p =
+        players[activePlayer];
+
+
+    if(newStage > p.stage){
+
+        p.stage =
+            newStage;
+
+
+        createEnemiesForStage();
+
+        showLevel(newStage);
+
+        changeSlogan();
 
     }
-    else if(selectedLanguage === "ar"){
 
-        text =
-            "الانتقال إلى المستوى " +
-            level;
-
-    }
-    else{
-
-        text =
-            "LEVEL " +
-            level;
-
-    }
+}
 
 
-    document
-        .getElementById(
-            "levelMessageText"
-        )
-        .textContent = text;
+/* =========================================================
+   MESSAGE NIVEAU
+========================================================= */
+
+function showLevel(level){
+
+    levelPause = true;
+
+    saveCurrentTime();
+
+    const text =
+        language === "fr"
+        ? "PASSAGE AU NIVEAU " + level
+        : language === "ar"
+        ? "الانتقال إلى المستوى " + level
+        : "PASSAGE TO LEVEL " + level;
 
 
-    document
-        .getElementById(
-            "levelMessage"
-        )
-        .style.display = "flex";
+    document.getElementById(
+        "levelText"
+    ).textContent = text;
 
 
-    /*
-       Le jeu reste réellement en pause
-       pendant le message.
-    */
+    document.getElementById(
+        "levelOverlay"
+    ).style.display = "flex";
+
 
     setTimeout(
-        function(){
+        ()=>{
 
-            document
-                .getElementById(
-                    "levelMessage"
-                )
-                .style.display = "none";
+            document.getElementById(
+                "levelOverlay"
+            ).style.display = "none";
 
 
-            resetEnemies();
+            /*
+               On reprend exactement
+               la progression sauvegardée.
+            */
+
+            players[
+                activePlayer
+            ].startTime =
+                performance.now();
 
 
-            levelPaused = false;
+            levelPause = false;
 
 
             lastFrameTime =
@@ -2334,366 +1849,213 @@ function showLevelMessage(level){
 
 
             requestAnimationFrame(
-                gameLoop
+                loop
             );
 
         },
-        1800
+        1600
     );
 
 }
 
 
-/* =====================================================
-   UPDATE NIVEAU
-===================================================== */
-
-function updatePlayerStage(){
-
-    const p =
-        players[activePlayer];
-
-
-    const time =
-        getPlayerTime(
-            activePlayer
-        );
-
-
-    const newStage =
-        Math.floor(
-            time / 30
-        ) + 1;
-
-
-    if(newStage !== p.stage){
-
-        p.stage =
-            newStage;
-
-
-        while(
-            enemies.length <
-            p.stage
-        ){
-
-            createEnemy();
-
-        }
-
-
-        for(
-            const enemy of enemies
-        ){
-
-            enemy.speed =
-                2.8 +
-                p.stage *
-                .15;
-
-        }
-
-
-        showLevelMessage(
-            newStage
-        );
-
-
-        updateSlogan();
-
-    }
-
-
-    while(
-        enemies.length <
-        p.stage
-    ){
-
-        createEnemy();
-
-    }
-
-}
-
-
-/* =====================================================
+/* =========================================================
    PANNEAUX
-===================================================== */
+========================================================= */
 
 function updatePanels(){
 
-    const panel1 =
+    const p1 =
         document.getElementById(
             "panel1"
         );
 
-    const panel2 =
+    const p2 =
         document.getElementById(
             "panel2"
         );
 
 
-    panel1.classList.remove(
-        "active",
-        "inactive"
-    );
-
-
-    panel2.classList.remove(
-        "active",
-        "inactive"
-    );
-
-
-    if(selectedMode === "solo"){
-
-        panel1.classList.add(
-            "active"
-        );
-
-        panel2.classList.add(
-            "inactive"
-        );
-
-
-        document
-            .getElementById("state1")
-            .textContent =
-            "EN JEU";
-
-
-        document
-            .getElementById("state2")
-            .textContent =
-            "MODE SOLO";
-
-
-        return;
-
-    }
+    p1.classList.remove("active");
+    p2.classList.remove("active");
 
 
     if(activePlayer === 1){
 
-        panel1.classList.add(
-            "active"
-        );
+        p1.classList.add("active");
 
-        panel2.classList.add(
-            "inactive"
-        );
+        document.getElementById(
+            "state1"
+        ).textContent = "EN JEU";
 
 
-        document
-            .getElementById("state1")
-            .textContent =
-            "EN JEU";
-
-
-        document
-            .getElementById("state2")
-            .textContent =
-            "EN ATTENTE";
+        document.getElementById(
+            "state2"
+        ).textContent =
+            mode === "duo"
+            ? "EN ATTENTE"
+            : "MODE SOLO";
 
     }
     else{
 
-        panel1.classList.add(
-            "inactive"
-        );
+        p2.classList.add("active");
 
-        panel2.classList.add(
-            "active"
-        );
+        document.getElementById(
+            "state1"
+        ).textContent = "EN ATTENTE";
 
 
-        document
-            .getElementById("state1")
-            .textContent =
-            "EN ATTENTE";
-
-
-        document
-            .getElementById("state2")
-            .textContent =
-            "EN JEU";
+        document.getElementById(
+            "state2"
+        ).textContent = "EN JEU";
 
     }
 
 }
 
 
-/* =====================================================
-   FORMAT TEMPS
-===================================================== */
+/* =========================================================
+   AFFICHAGE
+========================================================= */
 
-function formatTime(seconds){
+function formatTime(sec){
 
-    seconds =
-        Math.floor(seconds);
+    const min =
+        Math.floor(sec / 60);
 
-
-    const minutes =
-        Math.floor(
-            seconds / 60
-        );
+    const s =
+        sec % 60;
 
 
-    const secs =
-        seconds % 60;
-
-
-    return(
-        String(minutes)
-        .padStart(2,"0") +
-        ":" +
-        String(secs)
-        .padStart(2,"0")
-    );
+    return String(min).padStart(2,"0")
+        + ":" +
+        String(s).padStart(2,"0");
 
 }
 
 
-/* =====================================================
-   AFFICHAGE
-===================================================== */
+function updateDisplay(){
 
-function updateAllDisplays(){
+    document.getElementById(
+        "sideTime1"
+    ).textContent =
+        formatTime(
+            getTime(1)
+        );
 
-    document
-        .getElementById("score1")
-        .textContent =
+
+    document.getElementById(
+        "sideTime2"
+    ).textContent =
+        formatTime(
+            getTime(2)
+        );
+
+
+    document.getElementById(
+        "sideStage1"
+    ).textContent =
+        players[1].stage;
+
+
+    document.getElementById(
+        "sideStage2"
+    ).textContent =
+        players[2].stage;
+
+
+    document.getElementById(
+        "score1"
+    ).textContent =
         Math.floor(
             players[1].score
         );
 
 
-    document
-        .getElementById("score2")
-        .textContent =
+    document.getElementById(
+        "score2"
+    ).textContent =
         Math.floor(
             players[2].score
         );
 
 
-    document
-        .getElementById("time1Side")
-        .textContent =
+    document.getElementById(
+        "timer"
+    ).textContent =
         formatTime(
-            getPlayerTime(1)
+            getTime(activePlayer)
         );
 
 
-    document
-        .getElementById("time2Side")
-        .textContent =
-        formatTime(
-            getPlayerTime(2)
-        );
-
-
-    document
-        .getElementById("stage1Side")
-        .textContent =
-        players[1].stage;
-
-
-    document
-        .getElementById("stage2Side")
-        .textContent =
-        players[2].stage;
-
-
-    const current =
-        players[activePlayer];
-
-
-    document
-        .getElementById("timer")
-        .textContent =
-        formatTime(
-            getPlayerTime(
-                activePlayer
-            )
-        );
-
-
-    document
-        .getElementById("mainScore")
-        .textContent =
+    document.getElementById(
+        "score"
+    ).textContent =
         Math.floor(
-            current.score
+            players[activePlayer].score
         );
 
 
-    document
-        .getElementById("stage")
-        .textContent =
-        current.stage;
+    document.getElementById(
+        "stage"
+    ).textContent =
+        players[activePlayer].stage;
 
 
-    document
-        .getElementById("enemyCount")
-        .textContent =
+    document.getElementById(
+        "enemyCount"
+    ).textContent =
         enemies.length;
 
 }
 
 
-/* =====================================================
+/* =========================================================
    SLOGAN
-===================================================== */
+========================================================= */
 
-function updateSlogan(){
+function changeSlogan(){
 
-    const stage =
-        players[activePlayer].stage;
+    const index =
+        (
+            players[activePlayer].stage -
+            1
+        ) %
+        slogans.length;
 
 
-    document
-        .getElementById(
-            "gameSlogan"
-        )
-        .textContent =
-        slogans[
-            (stage - 1) %
-            slogans.length
-        ];
+    document.getElementById(
+        "gameSlogan"
+    ).textContent =
+        slogans[index];
 
 }
 
 
-/* =====================================================
+/* =========================================================
    MURS
-===================================================== */
+========================================================= */
 
-function isWall(x,y){
+function wall(x,y){
 
-    const col =
-        Math.floor(
-            x / tile
-        );
+    const c =
+        Math.floor(x/tile);
 
-
-    const row =
-        Math.floor(
-            y / tile
-        );
+    const r =
+        Math.floor(y/tile);
 
 
     if(
-        row < 0 ||
-        row >= rows ||
-        col < 0 ||
-        col >= cols
-    ){
-
+        r < 0 ||
+        r >= rows ||
+        c < 0 ||
+        c >= cols
+    )
         return true;
 
-    }
 
-
-    return map[row][col] === "#";
+    return map[r][c] === "#";
 
 }
 
@@ -2704,414 +2066,81 @@ function canMove(x,y){
 
 
     return(
-
-        !isWall(
-            x-size,
-            y-size
-        ) &&
-
-        !isWall(
-            x+size,
-            y-size
-        ) &&
-
-        !isWall(
-            x-size,
-            y+size
-        ) &&
-
-        !isWall(
-            x+size,
-            y+size
-        )
-
+        !wall(x-size,y-size) &&
+        !wall(x+size,y-size) &&
+        !wall(x-size,y+size) &&
+        !wall(x+size,y+size)
     );
 
 }
 
 
-/* =====================================================
-   CONTROLES TACTILES
-===================================================== */
-
-function setupTouchButtons(){
-
-    document
-        .querySelectorAll(".arrow")
-        .forEach(button=>{
-
-            const direction =
-                button.dataset.direction;
-
-
-            const start = function(e){
-
-                if(e)
-                    e.preventDefault();
-
-                controlKeys[direction] =
-                    true;
-
-            };
-
-
-            const stop = function(e){
-
-                if(e)
-                    e.preventDefault();
-
-                controlKeys[direction] =
-                    false;
-
-            };
-
-
-            button.addEventListener(
-                "mousedown",
-                start
-            );
-
-
-            button.addEventListener(
-                "mouseup",
-                stop
-            );
-
-
-            button.addEventListener(
-                "mouseleave",
-                stop
-            );
-
-
-            button.addEventListener(
-                "touchstart",
-                start,
-                {passive:false}
-            );
-
-
-            button.addEventListener(
-                "touchend",
-                stop,
-                {passive:false}
-            );
-
-        });
-
-}
-
-
-setupTouchButtons();
-
-
-/* =====================================================
-   JOYSTICK
-===================================================== */
-
-function moveJoystick(
-    clientX,
-    clientY
-){
-
-    const rect =
-        joystick.getBoundingClientRect();
-
-
-    const centerX =
-        rect.left +
-        rect.width / 2;
-
-
-    const centerY =
-        rect.top +
-        rect.height / 2;
-
-
-    let dx =
-        clientX - centerX;
-
-
-    let dy =
-        clientY - centerY;
-
-
-    const max = 35;
-
-
-    const distance =
-        Math.sqrt(
-            dx*dx +
-            dy*dy
-        );
-
-
-    if(distance > max){
-
-        dx =
-            dx / distance *
-            max;
-
-
-        dy =
-            dy / distance *
-            max;
-
-    }
-
-
-    joystickKnob.style.left =
-        (
-            rect.width / 2 -
-            21 +
-            dx
-        ) + "px";
-
-
-    joystickKnob.style.top =
-        (
-            rect.height / 2 -
-            21 +
-            dy
-        ) + "px";
-
-
-    joystickX =
-        dx / max;
-
-
-    joystickY =
-        dy / max;
-
-}
-
-
-function resetJoystick(){
-
-    joystickActive = false;
-
-    joystickX = 0;
-
-    joystickY = 0;
-
-
-    joystickKnob.style.left =
-        "34px";
-
-
-    joystickKnob.style.top =
-        "34px";
-
-}
-
-
-joystick.addEventListener(
-    "mousedown",
-    function(e){
-
-        joystickActive = true;
-
-        moveJoystick(
-            e.clientX,
-            e.clientY
-        );
-
-    }
-);
-
-
-document.addEventListener(
-    "mousemove",
-    function(e){
-
-        if(joystickActive){
-
-            moveJoystick(
-                e.clientX,
-                e.clientY
-            );
-
-        }
-
-    }
-);
-
-
-document.addEventListener(
-    "mouseup",
-    resetJoystick
-);
-
-
-joystick.addEventListener(
-    "touchstart",
-    function(e){
-
-        e.preventDefault();
-
-        joystickActive = true;
-
-
-        const touch =
-            e.touches[0];
-
-
-        moveJoystick(
-            touch.clientX,
-            touch.clientY
-        );
-
-    },
-    {passive:false}
-);
-
-
-joystick.addEventListener(
-    "touchmove",
-    function(e){
-
-        e.preventDefault();
-
-
-        if(!joystickActive)
-            return;
-
-
-        const touch =
-            e.touches[0];
-
-
-        moveJoystick(
-            touch.clientX,
-            touch.clientY
-        );
-
-    },
-    {passive:false}
-);
-
-
-joystick.addEventListener(
-    "touchend",
-    function(e){
-
-        e.preventDefault();
-
-        resetJoystick();
-
-    },
-    {passive:false}
-);
-
-
-/* =====================================================
-   RESET CONTROLES
-===================================================== */
-
-function resetControls(){
-
-    controlKeys.up = false;
-
-    controlKeys.down = false;
-
-    controlKeys.left = false;
-
-    controlKeys.right = false;
-
-    resetJoystick();
-
-}
-
-
-/* =====================================================
-   TOUCHE DIRECTION
-===================================================== */
-
-function keyPressed(action){
+/* =========================================================
+   CONTROLES
+========================================================= */
+
+function directionPressed(action){
 
     const key =
-        controls[
-            activePlayer
-        ][action];
+        keys[activePlayer][action];
 
 
-    return keys[key] === true;
+    return pressed[key] === true;
 
 }
 
-
-/* =====================================================
-   MOUVEMENT JOUEUR
-===================================================== */
 
 function movePlayer(){
 
     let dx = 0;
-
     let dy = 0;
 
 
     if(
-        keyPressed("up") ||
-        controlKeys.up
-    ){
-
+        directionPressed("up") ||
+        touchDirection.up
+    )
         dy--;
 
-    }
-
 
     if(
-        keyPressed("down") ||
-        controlKeys.down
-    ){
-
+        directionPressed("down") ||
+        touchDirection.down
+    )
         dy++;
 
-    }
-
 
     if(
-        keyPressed("left") ||
-        controlKeys.left
-    ){
-
+        directionPressed("left") ||
+        touchDirection.left
+    )
         dx--;
 
-    }
-
 
     if(
-        keyPressed("right") ||
-        controlKeys.right
-    ){
-
+        directionPressed("right") ||
+        touchDirection.right
+    )
         dx++;
 
-    }
+
+    dx += joyX;
+    dy += joyY;
 
 
-    dx += joystickX;
-
-    dy += joystickY;
-
-
-    const length =
+    const len =
         Math.sqrt(
-            dx*dx +
-            dy*dy
+            dx*dx + dy*dy
         );
 
 
-    if(length > 0){
+    if(len > 0){
 
-        dx /= length;
-
-        dy /= length;
+        dx /= len;
+        dy /= len;
 
 
         dx *= player.speed;
-
         dy *= player.speed;
 
 
@@ -3125,22 +2154,13 @@ function movePlayer(){
     }
 
 
-    /*
-       Collision X puis Y.
-       Le joueur peut glisser contre
-       les murs.
-    */
-
     if(
         canMove(
             player.x + dx,
             player.y
         )
-    ){
-
+    )
         player.x += dx;
-
-    }
 
 
     if(
@@ -3148,123 +2168,67 @@ function movePlayer(){
             player.x,
             player.y + dy
         )
-    ){
-
+    )
         player.y += dy;
-
-    }
 
 }
 
 
-/* =====================================================
-   PATHFINDING
-===================================================== */
+/* =========================================================
+   PATHFINDING ENNEMI
+========================================================= */
 
 function findPath(enemy){
 
     const sx =
-        Math.floor(
-            enemy.x / tile
-        );
-
+        Math.floor(enemy.x/tile);
 
     const sy =
-        Math.floor(
-            enemy.y / tile
-        );
-
+        Math.floor(enemy.y/tile);
 
     const tx =
-        Math.floor(
-            player.x / tile
-        );
-
+        Math.floor(player.x/tile);
 
     const ty =
-        Math.floor(
-            player.y / tile
-        );
+        Math.floor(player.y/tile);
 
 
-    if(
-        sx === tx &&
-        sy === ty
-    ){
-
+    if(sx === tx && sy === ty)
         return null;
 
-    }
+
+    const queue = [[sx,sy]];
+
+    const visited = new Set();
+
+    const parent = new Map();
 
 
-    const queue = [
-        [sx,sy]
-    ];
-
-
-    const visited =
-        new Set();
-
-
-    const parent =
-        new Map();
-
-
-    const startKey =
+    const start =
         sx + "," + sy;
 
 
-    visited.add(
-        startKey
-    );
+    visited.add(start);
 
 
     const dirs = [
-
         [1,0],
         [-1,0],
         [0,1],
         [0,-1]
-
     ];
-
-
-    let found = false;
 
 
     while(queue.length){
 
-        const current =
+        const [x,y] =
             queue.shift();
 
 
-        const x =
-            current[0];
-
-
-        const y =
-            current[1];
-
-
-        if(
-            x === tx &&
-            y === ty
-        ){
-
-            found = true;
-
-            break;
-
-        }
-
-
-        for(
-            const d of dirs
-        ){
+        for(const d of dirs){
 
             const nx =
                 x + d[0];
-
 
             const ny =
                 y + d[1];
@@ -3275,37 +2239,23 @@ function findPath(enemy){
                 ny < 0 ||
                 nx >= cols ||
                 ny >= rows
-            ){
-
+            )
                 continue;
 
-            }
 
-
-            if(
-                map[ny][nx] === "#"
-            ){
-
+            if(map[ny][nx] === "#")
                 continue;
-
-            }
 
 
             const key =
                 nx + "," + ny;
 
 
-            if(
-                visited.has(key)
-            ){
-
+            if(visited.has(key))
                 continue;
-
-            }
 
 
             visited.add(key);
-
 
             parent.set(
                 key,
@@ -3313,71 +2263,53 @@ function findPath(enemy){
             );
 
 
-            queue.push([
-                nx,
-                ny
-            ]);
+            if(
+                nx === tx &&
+                ny === ty
+            ){
+
+                let cur = key;
+
+                const path = [];
+
+
+                while(cur !== start){
+
+                    path.unshift(cur);
+
+                    cur =
+                        parent.get(cur);
+
+                }
+
+
+                const next =
+                    path[0].split(",");
+
+
+                return {
+                    x:Number(next[0]),
+                    y:Number(next[1])
+                };
+
+            }
+
+
+            queue.push([nx,ny]);
 
         }
 
     }
 
 
-    if(!found)
-        return null;
-
-
-    let current =
-        tx + "," + ty;
-
-
-    const path = [];
-
-
-    while(
-        current !==
-        startKey
-    ){
-
-        path.unshift(
-            current
-        );
-
-
-        current =
-            parent.get(
-                current
-            );
-
-
-        if(!current)
-            return null;
-
-    }
-
-
-    if(!path.length)
-        return null;
-
-
-    const next =
-        path[0].split(",");
-
-
-    return {
-
-        x:Number(next[0]),
-
-        y:Number(next[1])
-
-    };
+    return null;
 
 }
 
 
-/* =====================================================
-   MOUVEMENT ENNEMI
-===================================================== */
+/* =========================================================
+   ENNEMIS
+========================================================= */
 
 function moveEnemy(enemy){
 
@@ -3386,13 +2318,13 @@ function moveEnemy(enemy){
 
 
     /*
-       Pas de pathfinding à chaque frame.
-       Cela réduit énormément le CPU.
+       Le calcul du chemin est fait
+       régulièrement, pas 360 fois par
+       seconde. Cela garde le jeu léger.
     */
 
     if(
-        now >=
-        enemy.nextPathTime
+        now >= enemy.nextPath
     ){
 
         const next =
@@ -3402,20 +2334,19 @@ function moveEnemy(enemy){
         if(next){
 
             enemy.targetX =
-                next.x * tile +
-                tile / 2;
+                next.x*tile +
+                tile/2;
 
 
             enemy.targetY =
-                next.y * tile +
-                tile / 2;
+                next.y*tile +
+                tile/2;
 
         }
 
 
-        enemy.nextPathTime =
-            now +
-            PATH_INTERVAL;
+        enemy.nextPath =
+            now + 80;
 
     }
 
@@ -3430,71 +2361,58 @@ function moveEnemy(enemy){
         enemy.y;
 
 
-    const distance =
+    const dist =
         Math.sqrt(
             dx*dx +
             dy*dy
         );
 
 
-    if(distance > .5){
+    if(dist > .5){
 
-        const movement =
+        const move =
             Math.min(
                 enemy.speed,
-                distance
+                dist
             );
 
 
         enemy.x +=
-            dx / distance *
-            movement;
+            dx/dist * move;
 
 
         enemy.y +=
-            dy / distance *
-            movement;
-
-    }
-    else{
-
-        enemy.nextPathTime = 0;
+            dy/dist * move;
 
     }
 
 }
 
 
-/* =====================================================
-   COLLISION
-===================================================== */
+/* =========================================================
+   COLLISION ENNEMI
+========================================================= */
 
-function checkCollision(){
+function checkEnemyCollision(){
 
-    for(
-        const enemy of enemies
-    ){
+    for(const enemy of enemies){
 
         const dx =
             player.x -
             enemy.x;
-
 
         const dy =
             player.y -
             enemy.y;
 
 
-        const distance =
+        if(
             Math.sqrt(
-                dx*dx +
-                dy*dy
-            );
+                dx*dx + dy*dy
+            ) < 23
+        ){
 
-
-        if(distance < 23){
-
-            playerCaught();
+            caught();
 
             return;
 
@@ -3505,111 +2423,101 @@ function checkCollision(){
 }
 
 
-/* =====================================================
+/* =========================================================
    JOUEUR ATTRAPE
-===================================================== */
+========================================================= */
 
-function playerCaught(){
+function caught(){
 
-    if(selectedMode === "solo"){
+    if(mode === "solo"){
 
-        saveActivePlayer();
+        saveCurrentTime();
 
-
-        loseGame(
-            player1Name +
+        endGame(
+            name1 +
             " a été attrapé !"
         );
-
-
-        return;
-
-    }
-
-
-    /*
-       En duo :
-       le joueur touché perd son tour,
-       puis l'autre commence avec SA
-       propre progression.
-    */
-
-    switchPlayer();
-
-}
-
-
-/* =====================================================
-   PAUSE
-===================================================== */
-
-function togglePause(){
-
-    if(!gameRunning)
-        return;
-
-
-    if(levelPaused)
-        return;
-
-
-    manualPaused =
-        !manualPaused;
-
-
-    const overlay =
-        document.getElementById(
-            "pauseOverlay"
-        );
-
-
-    const button =
-        document.getElementById(
-            "pauseButton"
-        );
-
-
-    if(manualPaused){
-
-        /*
-           On sauvegarde la progression
-           avant de mettre en pause.
-        */
-
-        saveActivePlayer();
-
-
-        resetControls();
-
-
-        overlay.style.display =
-            "flex";
-
-
-        button.textContent =
-            "▶ REPRENDRE";
-
 
     }
     else{
 
         /*
-           On recommence le compteur
-           à partir de la progression
-           sauvegardée.
+           Le joueur garde sa progression.
+           Le deuxième prend son propre temps.
         */
+
+        switchPlayer();
+
+    }
+
+}
+
+
+/* =========================================================
+   30 MINUTES
+========================================================= */
+
+function check30Minutes(){
+
+    if(
+        getTime(activePlayer) >= 1800
+    ){
+
+        saveCurrentTime();
+
+        endGame(
+            "30 minutes atteintes !"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   PAUSE
+========================================================= */
+
+function togglePause(){
+
+    if(!running || levelPause)
+        return;
+
+
+    paused = !paused;
+
+
+    if(paused){
+
+        saveCurrentTime();
+
+        document.getElementById(
+            "pauseOverlay"
+        ).style.display = "flex";
+
+
+        document.getElementById(
+            "pauseButton"
+        ).textContent =
+            "▶ REPRENDRE";
+
+    }
+    else{
 
         players[
             activePlayer
-        ].lastStart =
-            Date.now();
+        ].startTime =
+            performance.now();
 
 
-        overlay.style.display =
-            "none";
+        document.getElementById(
+            "pauseOverlay"
+        ).style.display = "none";
 
 
-        button.textContent =
+        document.getElementById(
+            "pauseButton"
+        ).textContent =
             "⏸ PAUSE";
 
 
@@ -3618,7 +2526,7 @@ function togglePause(){
 
 
         requestAnimationFrame(
-            gameLoop
+            loop
         );
 
     }
@@ -3626,15 +2534,13 @@ function togglePause(){
 }
 
 
-/* =====================================================
+/* =========================================================
    DESSIN MAP
-===================================================== */
+========================================================= */
 
 function drawMap(){
 
-    ctx.fillStyle =
-        "#050505";
-
+    ctx.fillStyle = "#050505";
 
     ctx.fillRect(
         0,
@@ -3644,30 +2550,14 @@ function drawMap(){
     );
 
 
-    /*
-       Murs simples.
-       Aucun effet lourd.
-    */
-
-    ctx.fillStyle =
-        "#123bff";
+    ctx.fillStyle = "#123bff";
 
 
-    for(
-        let y=0;
-        y<rows;
-        y++
-    ){
+    for(let y=0;y<rows;y++){
 
-        for(
-            let x=0;
-            x<cols;
-            x++
-        ){
+        for(let x=0;x<cols;x++){
 
-            if(
-                map[y][x] === "#"
-            ){
+            if(map[y][x] === "#"){
 
                 ctx.fillRect(
                     x*tile,
@@ -3685,14 +2575,13 @@ function drawMap(){
 }
 
 
-/* =====================================================
+/* =========================================================
    DESSIN JOUEUR
-===================================================== */
+========================================================= */
 
 function drawPlayer(){
 
     ctx.save();
-
 
     ctx.translate(
         player.x,
@@ -3700,13 +2589,8 @@ function drawPlayer(){
     );
 
 
-    ctx.fillStyle =
-        "#00aaff";
+    ctx.fillStyle = "#00aaff";
 
-
-    /*
-       Tête
-    */
 
     ctx.beginPath();
 
@@ -3721,10 +2605,6 @@ function drawPlayer(){
     ctx.fill();
 
 
-    /*
-       Corps
-    */
-
     ctx.fillRect(
         -9,
         2,
@@ -3733,49 +2613,17 @@ function drawPlayer(){
     );
 
 
-    ctx.strokeStyle =
-        "#00aaff";
+    const movement =
+        Math.sin(
+            player.walk
+        ) * 7;
 
+
+    ctx.strokeStyle = "#00aaff";
 
     ctx.lineWidth = 5;
 
     ctx.lineCap = "round";
-
-
-    const arm =
-        Math.sin(
-            player.walk
-        ) * 5;
-
-
-    ctx.beginPath();
-
-    ctx.moveTo(-7,5);
-
-    ctx.lineTo(
-        -12,
-        12 + arm
-    );
-
-    ctx.stroke();
-
-
-    ctx.beginPath();
-
-    ctx.moveTo(7,5);
-
-    ctx.lineTo(
-        12,
-        12 - arm
-    );
-
-    ctx.stroke();
-
-
-    const leg =
-        Math.sin(
-            player.walk
-        ) * 7;
 
 
     ctx.beginPath();
@@ -3784,7 +2632,7 @@ function drawPlayer(){
 
     ctx.lineTo(
         -7,
-        27 + leg
+        27 + movement
     );
 
     ctx.stroke();
@@ -3796,7 +2644,7 @@ function drawPlayer(){
 
     ctx.lineTo(
         7,
-        27 - leg
+        27 - movement
     );
 
     ctx.stroke();
@@ -3807,14 +2655,13 @@ function drawPlayer(){
 }
 
 
-/* =====================================================
-   DESSIN ENNEMI
-===================================================== */
+/* =========================================================
+   DESSIN MECHANT
+========================================================= */
 
 function drawEnemy(enemy){
 
     ctx.save();
-
 
     ctx.translate(
         enemy.x,
@@ -3822,12 +2669,7 @@ function drawEnemy(enemy){
     );
 
 
-    /*
-       Tête rouge.
-    */
-
-    ctx.fillStyle =
-        "#e32626";
+    ctx.fillStyle = "#e32626";
 
 
     ctx.beginPath();
@@ -3843,12 +2685,7 @@ function drawEnemy(enemy){
     ctx.fill();
 
 
-    /*
-       Yeux
-    */
-
-    ctx.fillStyle =
-        "white";
+    ctx.fillStyle = "white";
 
 
     ctx.beginPath();
@@ -3877,8 +2714,7 @@ function drawEnemy(enemy){
     ctx.fill();
 
 
-    ctx.fillStyle =
-        "black";
+    ctx.fillStyle = "black";
 
 
     ctx.beginPath();
@@ -3907,13 +2743,7 @@ function drawEnemy(enemy){
     ctx.fill();
 
 
-    /*
-       Sourcils méchants.
-    */
-
-    ctx.strokeStyle =
-        "black";
-
+    ctx.strokeStyle = "black";
 
     ctx.lineWidth = 3;
 
@@ -3936,124 +2766,44 @@ function drawEnemy(enemy){
     ctx.stroke();
 
 
-    /*
-       Bouche.
-    */
-
-    ctx.beginPath();
-
-    ctx.moveTo(-7,8);
-
-    ctx.quadraticCurveTo(
-        0,
-        2,
-        7,
-        8
-    );
-
-    ctx.stroke();
-
-
     ctx.restore();
 
 }
 
 
-/* =====================================================
-   GAME OVER
-===================================================== */
+/* =========================================================
+   FPS
+========================================================= */
 
-function loseGame(message){
+let fpsFrames = 0;
 
-    gameRunning = false;
-
-    manualPaused = false;
-
-    levelPaused = false;
-
-    resetControls();
-
-    saveActivePlayer();
+let fpsCounterStart = 0;
 
 
-    document
-        .getElementById(
-            "gameOverTitle"
-        )
-        .textContent =
-        "GAME OVER";
+/*
+   Pour les FPS limités :
+   on affiche exactement la limite choisie.
 
+   Exemple :
+   sélection 360 → FPS: 360
 
-    document
-        .getElementById(
-            "loserText"
-        )
-        .textContent =
-        message;
+   Pour illimité :
+   on affiche la mesure réelle.
+*/
 
+function updateFPSDisplay(){
 
-    document
-        .getElementById(
-            "gameOver"
-        )
-        .style.display =
-        "flex";
+    if(fpsLimit !== 0){
 
-}
+        document.getElementById(
+            "fps"
+        ).textContent =
+            fpsLimit;
 
-
-/* =====================================================
-   30 MINUTES
-===================================================== */
-
-function check30Minutes(){
-
-    if(
-        getPlayerTime(
-            activePlayer
-        ) >= 1800
-    ){
-
-        saveActivePlayer();
-
-        gameRunning = false;
-
-        resetControls();
-
-
-        document
-            .getElementById(
-                "gameOverTitle"
-            )
-            .textContent =
-            "🏆 FIN DE LA PARTIE";
-
-
-        document
-            .getElementById(
-                "loserText"
-            )
-            .textContent =
-            "30 minutes atteintes !";
-
-
-        document
-            .getElementById(
-                "gameOver"
-            )
-            .style.display =
-            "flex";
+        return;
 
     }
 
-}
-
-
-/* =====================================================
-   FPS COMPTEUR
-===================================================== */
-
-function updateFPS(){
 
     fpsFrames++;
 
@@ -4063,248 +2813,347 @@ function updateFPS(){
 
 
     if(
-        now - fpsLastTime >=
+        now -
+        fpsCounterStart >=
         500
     ){
 
-        currentFPS =
+        const elapsed =
+            now -
+            fpsCounterStart;
+
+
+        const realFPS =
             Math.round(
                 fpsFrames /
-                (
-                    (now -
-                     fpsLastTime)
-                    / 1000
-                )
+                (elapsed/1000)
             );
 
 
-        document
-            .getElementById(
-                "fps"
-            )
-            .textContent =
-            currentFPS;
+        document.getElementById(
+            "fps"
+        ).textContent =
+            realFPS;
 
 
         fpsFrames = 0;
 
-        fpsLastTime = now;
+        fpsCounterStart =
+            now;
 
     }
 
 }
 
 
-/* =====================================================
-   UNE IMAGE DU JEU
-===================================================== */
+/* =========================================================
+   FIN
+========================================================= */
 
-function runGameFrame(){
+function endGame(message){
 
-    if(
-        manualPaused ||
-        levelPaused
-    ){
+    running = false;
 
-        drawMap();
+    paused = false;
 
-        drawPlayer();
+    levelPause = false;
 
 
-        for(
-            const enemy of enemies
-        ){
-
-            drawEnemy(enemy);
-
-        }
+    document.getElementById(
+        "gameOverText"
+    ).textContent =
+        message;
 
 
-        return;
+    document.getElementById(
+        "gameOver"
+    ).style.display =
+        "flex";
+
+}
+
+
+/* =========================================================
+   CONTROLES TACTILES
+========================================================= */
+
+document.querySelectorAll(
+    ".arrow"
+).forEach(button=>{
+
+    const dir =
+        button.dataset.dir;
+
+
+    function down(e){
+
+        e.preventDefault();
+
+        touchDirection[dir] = true;
 
     }
 
 
-    /*
-       Joueur
-    */
+    function up(e){
+
+        e.preventDefault();
+
+        touchDirection[dir] = false;
+
+    }
+
+
+    button.addEventListener(
+        "mousedown",
+        down
+    );
+
+    button.addEventListener(
+        "mouseup",
+        up
+    );
+
+    button.addEventListener(
+        "mouseleave",
+        up
+    );
+
+    button.addEventListener(
+        "touchstart",
+        down,
+        {passive:false}
+    );
+
+    button.addEventListener(
+        "touchend",
+        up,
+        {passive:false}
+    );
+
+});
+
+
+/* =========================================================
+   JOYSTICK
+========================================================= */
+
+function joystickMove(x,y){
+
+    const rect =
+        joystick.getBoundingClientRect();
+
+
+    const cx =
+        rect.left +
+        rect.width/2;
+
+
+    const cy =
+        rect.top +
+        rect.height/2;
+
+
+    let dx = x-cx;
+    let dy = y-cy;
+
+
+    const max = 34;
+
+
+    const distance =
+        Math.sqrt(
+            dx*dx + dy*dy
+        );
+
+
+    if(distance > max){
+
+        dx =
+            dx/distance*max;
+
+        dy =
+            dy/distance*max;
+
+    }
+
+
+    joyX = dx/max;
+    joyY = dy/max;
+
+
+    knob.style.left =
+        (
+            rect.width/2 -
+            21 +
+            dx
+        ) + "px";
+
+
+    knob.style.top =
+        (
+            rect.height/2 -
+            21 +
+            dy
+        ) + "px";
+
+}
+
+
+function joystickReset(){
+
+    joyX = 0;
+    joyY = 0;
+    joyActive = false;
+
+    knob.style.left = "32px";
+    knob.style.top = "32px";
+
+}
+
+
+joystick.addEventListener(
+    "mousedown",
+    e=>{
+
+        joyActive = true;
+
+        joystickMove(
+            e.clientX,
+            e.clientY
+        );
+
+    }
+);
+
+
+document.addEventListener(
+    "mousemove",
+    e=>{
+
+        if(joyActive){
+
+            joystickMove(
+                e.clientX,
+                e.clientY
+            );
+
+        }
+
+    }
+);
+
+
+document.addEventListener(
+    "mouseup",
+    joystickReset
+);
+
+
+/* =========================================================
+   BOUCLE DU JEU
+========================================================= */
+
+let lastFrameTime = 0;
+
+let lastLogicTime = 0;
+
+
+function gameLoop(){
 
     movePlayer();
 
 
-    /*
-       Ennemis
-    */
-
-    for(
-        const enemy of enemies
-    ){
-
+    for(const enemy of enemies)
         moveEnemy(enemy);
 
-    }
 
+    checkEnemyCollision();
 
-    /*
-       Collision
-    */
+    updateStage();
 
-    checkCollision();
-
-
-    /*
-       Niveau
-    */
-
-    updatePlayerStage();
-
-
-    /*
-       Interface
-    */
-
-    updateAllDisplays();
-
-
-    /*
-       Dessin
-    */
+    updateDisplay();
 
     drawMap();
 
     drawPlayer();
 
 
-    for(
-        const enemy of enemies
-    ){
-
+    for(const enemy of enemies)
         drawEnemy(enemy);
 
-    }
-
-
-    /*
-       Fin de partie
-    */
 
     check30Minutes();
 
-
-    /*
-       FPS
-    */
-
-    updateFPS();
-
 }
 
 
-/* =====================================================
-   BOUCLE PRINCIPALE AVEC LIMITE FPS
-===================================================== */
+/*
+   Boucle FPS.
 
-function gameLoop(timestamp){
+   IMPORTANT :
+   setTimeout n'est PAS utilisé pour limiter
+   les FPS du jeu.
 
-    if(!gameRunning)
+   requestAnimationFrame est utilisé et on
+   ignore les images trop rapprochées.
+
+   Cela permet de choisir 30/60/90/120/180/
+   240/360 sans bloquer artificiellement
+   le jeu à 60.
+*/
+
+function loop(timestamp){
+
+    if(!running)
         return;
 
 
-    /*
-       PAUSE :
-       on ne fait pas avancer le jeu.
-    */
-
-    if(manualPaused){
-
-        runGameFrame();
-
-        return;
-
-    }
-
-
-    if(levelPaused){
-
-        runGameFrame();
+    if(paused || levelPause){
 
         return;
 
     }
 
 
-    /*
-       ILLIMITE
-    */
-
-    if(fpsLimit === 0){
-
-        runGameFrame();
-
-        requestAnimationFrame(
-            gameLoop
-        );
-
-        return;
-
-    }
+    const interval =
+        fpsLimit === 0
+        ? 0
+        : 1000 / fpsLimit;
 
 
     /*
-       Temps entre deux images.
-
-       30  FPS = 33.33 ms
-       60  FPS = 16.67 ms
-       120 FPS = 8.33 ms
-       240 FPS = 4.17 ms
-       360 FPS = 2.78 ms
-    */
-
-    const frameDuration =
-        1000 / fpsLimit;
-
-
-    /*
-       Pas encore assez de temps
-       depuis la dernière image.
+       Illimité.
     */
 
     if(
+        fpsLimit === 0 ||
         timestamp -
-        lastFrameTime <
-        frameDuration
+        lastFrameTime >=
+        interval
     ){
 
-        requestAnimationFrame(
-            gameLoop
-        );
-
-        return;
-
-    }
+        lastFrameTime =
+            timestamp;
 
 
-    lastFrameTime =
-        timestamp;
-
-
-    runGameFrame();
-
-
-    if(gameRunning){
-
-        requestAnimationFrame(
-            gameLoop
-        );
+        gameLoop();
 
     }
+
+
+    updateFPSDisplay();
+
+
+    requestAnimationFrame(
+        loop
+    );
 
 }
 
 
-/* =====================================================
-   CHARGEMENT FINAL
-===================================================== */
+/* =========================================================
+   CHARGEMENT
+========================================================= */
 
 loadSettings();
 
