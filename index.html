@@ -110,4 +110,162 @@
   }
   .card-img span{
     position:absolute;top:12px;left:12px;
-    font-family:'Helvetica
+    font-family:'Helvetica Neue',Arial,sans-serif;font-size:10px;
+    letter-spacing:.12em;text-transform:uppercase;
+    background:var(--ink);color:var(--cream);padding:5px 9px;
+  }
+  .card-body{padding:18px 18px 20px;}
+  .card-body h3{font-size:17px;font-weight:600;}
+  .card-body p{
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    font-size:13px;color:#6b6154;margin-top:6px;line-height:1.5;
+  }
+  .card-foot{
+    display:flex;justify-content:space-between;align-items:center;
+    margin-top:16px;
+  }
+  .price{font-size:18px;font-weight:600;}
+  .buy{
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    font-size:12px;letter-spacing:.05em;text-transform:uppercase;
+    color:var(--gold-deep);text-decoration:none;border-bottom:1px solid var(--gold-deep);
+    padding-bottom:2px;
+  }
+  .buy:hover{color:var(--ink);border-color:var(--ink);}
+
+  .story{
+    background:var(--ink);color:var(--cream);
+    display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;
+  }
+  .story .eyebrow{color:var(--gold);}
+  .story h2{font-size:clamp(26px,3vw,36px);font-weight:400;margin:10px 0 18px;}
+  .story p{color:#cfc6b7;max-width:48ch;}
+  .story-visual{
+    aspect-ratio:4/3;
+    background:linear-gradient(200deg,#3a3128,#B8935A 120%);
+  }
+
+  footer{
+    padding:50px 6vw 40px;border-top:1px solid var(--line);
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;
+    font-family:'Helvetica Neue',Arial,sans-serif;font-size:13px;color:#6b6154;
+  }
+  footer a{color:var(--ink);text-decoration:none;}
+
+  @media(max-width:800px){
+    .hero{grid-template-columns:1fr;padding-top:40px;}
+    .story{grid-template-columns:1fr;padding:60px 6vw;}
+    header{padding:18px 6vw;}
+    nav a{margin-left:16px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">DAHABI</div>
+  <nav>
+    <a href="#collection">Collection</a>
+    <a href="#histoire">Notre matière</a>
+    <a href="#contact">Commander</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div>
+    <p class="eyebrow">Acier inoxydable · Fait pour durer</p>
+    <h1>Des bijoux qui tiennent leur <em>promesse</em>, pas seulement leur premier jour.</h1>
+    <p>Fini les bijoux qui noircissent après deux douches. Notre acier inoxydable garde son éclat — testé et porté au quotidien, pas juste en photo.</p>
+    <a href="#collection" class="hero-cta">Voir la collection →</a>
+  </div>
+  <div class="hero-visual"><span class="tag">Nouvelle collection</span></div>
+</section>
+
+<div class="strip">
+  <span>Anti-noircissement</span>
+  <span>Livraison Maroc 24–72h</span>
+  <span>Paiement à la livraison</span>
+</div>
+
+<section id="collection">
+  <div class="section-head">
+    <p class="eyebrow">La collection</p>
+    <h2>Chaque pièce, portée et vérifiée avant d'être vendue.</h2>
+  </div>
+  <div class="grid">
+
+    <div class="card">
+      <div class="card-img"><span>Bracelet</span></div>
+      <div class="card-body">
+        <h3>Bracelet chaîne fine — pendentif cœur</h3>
+        <p>Chaîne fine dorée, fermoir ajustable, acier inoxydable.</p>
+        <div class="card-foot">
+          <span class="price">130 DH</span>
+          <a class="buy" href="#contact">Commander</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img"><span>Bague</span></div>
+      <div class="card-body">
+        <h3>Set de 4 bagues empilables</h3>
+        <p>Anneaux fins à combiner, tailles ajustables.</p>
+        <div class="card-foot">
+          <span class="price">154 DH</span>
+          <a class="buy" href="#contact">Commander</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img"><span>Bague</span></div>
+      <div class="card-body">
+        <h3>Chevalière minimaliste</h3>
+        <p>Anneau doré épais, finition mate, unisexe.</p>
+        <div class="card-foot">
+          <span class="price">114 DH</span>
+          <a class="buy" href="#contact">Commander</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img"><span>Bracelet</span></div>
+      <div class="card-body">
+        <h3>Set de bracelets joncs (x6)</h3>
+        <p>Empilables, effet cascade, portés au poignet.</p>
+        <div class="card-foot">
+          <span class="price">214 DH</span>
+          <a class="buy" href="#contact">Commander</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="story" id="histoire">
+  <div>
+    <p class="eyebrow">Pourquoi l'acier inoxydable</p>
+    <h2>La qualité qui se voit après un mois, pas après une photo.</h2>
+    <p>La plupart des bijoux fantaisie noircissent, irritent la peau ou perdent leur couleur en quelques semaines. Nos pièces sont pensées pour être portées tous les jours — douche, sport, plage compris.</p>
+  </div>
+  <div class="story-visual"></div>
+</section>
+
+<section id="contact">
+  <div class="section-head">
+    <p class="eyebrow">Commander</p>
+    <h2>Écrivez-nous, on confirme votre commande en quelques minutes.</h2>
+  </div>
+  <a href="https://wa.me/212600000000" class="hero-cta">Commander sur WhatsApp →</a>
+</section>
+
+<footer>
+  <div>© 2026 DAHABI — Bijoux acier inoxydable, Maroc.</div>
+  <div><a href="https://wa.me/212600000000">WhatsApp</a> · <a href="#collection">Collection</a></div>
+</footer>
+
+</body>
+</html>
