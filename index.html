@@ -4,31 +4,27 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>VÉLORA — Sneakers Maroc</title>
+<title>MHD STORE — Sneakers Premium</title>
 
-<meta name="description"
-content="VÉLORA — Sneakers modernes, lifestyle et running au Maroc. Livraison partout au Maroc et paiement à la livraison.">
+<meta name="description" content="MHD STORE — Sneakers modernes, confortables et tendance au meilleur prix au Maroc.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
 
 :root{
-    --bg:#f5f4f0;
-    --card:#ffffff;
-    --black:#0b0b0c;
-    --text:#111111;
-    --muted:#777777;
-    --line:#e4e2dd;
-    --orange:#e85d04;
-    --green:#16803c;
-    --red:#d62828;
-    --gold:#b58b45;
-    --shadow:0 20px 60px rgba(0,0,0,.08);
-    --radius:24px;
+    --bg:#080808;
+    --card:#111111;
+    --card2:#171717;
+    --text:#ffffff;
+    --muted:#a7a7a7;
+    --line:#292929;
+    --accent:#ffffff;
+    --green:#25D366;
+    --danger:#ff4545;
 }
 
 *{
@@ -51,7 +47,7 @@ body{
 button,
 input,
 select{
-    font:inherit;
+    font-family:inherit;
 }
 
 button{
@@ -63,133 +59,94 @@ a{
     text-decoration:none;
 }
 
-img{
-    max-width:100%;
-    display:block;
-}
-
 /* =========================
-   ANNOUNCEMENT
+   HEADER
 ========================= */
 
-.announcement{
-    height:36px;
-    background:#090909;
-    color:#fff;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:11px;
-    font-weight:700;
-    letter-spacing:.04em;
-    text-align:center;
-    padding:0 15px;
-}
-
-/* =========================
-   NAVBAR
-========================= */
-
-.navbar{
+header{
     position:sticky;
     top:0;
     z-index:1000;
-    height:78px;
-    background:rgba(255,255,255,.9);
-    backdrop-filter:blur(18px);
-    border-bottom:1px solid rgba(0,0,0,.06);
-}
-
-.nav-inner{
-    max-width:1450px;
-    height:100%;
-    margin:auto;
-    padding:0 28px;
+    height:76px;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    gap:30px;
+    padding:0 5%;
+    background:rgba(8,8,8,.88);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid rgba(255,255,255,.08);
 }
 
 .logo{
-    font-size:28px;
+    font-size:25px;
     font-weight:900;
-    letter-spacing:-.09em;
+    letter-spacing:-1px;
 }
 
 .logo span{
-    color:var(--orange);
+    color:#999;
 }
 
-.nav-links{
+nav{
+    display:flex;
+    gap:30px;
+    align-items:center;
+}
+
+nav a{
+    color:#bbb;
+    font-size:14px;
+    font-weight:600;
+    transition:.2s;
+}
+
+nav a:hover{
+    color:#fff;
+}
+
+.header-actions{
     display:flex;
     align-items:center;
-    gap:29px;
+    gap:12px;
 }
 
-.nav-links a{
-    font-size:12px;
-    font-weight:800;
-    position:relative;
-}
-
-.nav-links a:after{
-    content:"";
-    position:absolute;
-    left:0;
-    bottom:-8px;
-    width:0;
-    height:2px;
-    background:var(--orange);
-    transition:.25s;
-}
-
-.nav-links a:hover:after{
-    width:100%;
-}
-
-.nav-actions{
-    display:flex;
-    align-items:center;
-    gap:8px;
-}
-
-.icon{
+.icon-btn{
     width:42px;
     height:42px;
-    border:1px solid var(--line);
-    background:#fff;
     border-radius:50%;
+    border:1px solid #303030;
+    background:#111;
+    color:#fff;
     display:flex;
-    align-items:center;
     justify-content:center;
+    align-items:center;
+    font-size:18px;
     transition:.2s;
-    position:relative;
 }
 
-.icon:hover{
-    background:#111;
-    color:white;
+.icon-btn:hover{
+    background:#fff;
+    color:#000;
     transform:translateY(-2px);
 }
 
 .cart-count{
     position:absolute;
-    right:-2px;
-    top:-2px;
-    width:19px;
-    height:19px;
+    margin-top:-31px;
+    margin-left:28px;
+    background:#fff;
+    color:#000;
+    width:18px;
+    height:18px;
     border-radius:50%;
-    background:var(--orange);
-    color:#fff;
-    font-size:9px;
+    font-size:10px;
     display:flex;
     align-items:center;
     justify-content:center;
     font-weight:900;
 }
 
-.mobile-toggle{
+.mobile-menu{
     display:none;
 }
 
@@ -198,102 +155,103 @@ img{
 ========================= */
 
 .hero{
-    max-width:1450px;
-    margin:auto;
-    padding:20px 28px 0;
-}
-
-.hero-box{
-    min-height:650px;
-    border-radius:34px;
-    overflow:hidden;
-    position:relative;
+    min-height:700px;
     display:flex;
     align-items:center;
-
+    padding:70px 7%;
+    position:relative;
+    overflow:hidden;
     background:
-    linear-gradient(
-        90deg,
-        rgba(0,0,0,.88) 0%,
-        rgba(0,0,0,.58) 40%,
-        rgba(0,0,0,.05) 78%
-    ),
-    url("https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1900&q=90")
-    center/cover;
+        radial-gradient(circle at 80% 30%,rgba(255,255,255,.12),transparent 25%),
+        radial-gradient(circle at 20% 80%,rgba(255,255,255,.05),transparent 25%);
 }
 
 .hero-content{
-    color:#fff;
-    max-width:700px;
-    padding:70px;
+    width:52%;
+    position:relative;
+    z-index:2;
 }
 
-.hero-label{
+.badge{
     display:inline-flex;
-    padding:9px 14px;
-    border:1px solid rgba(255,255,255,.3);
-    background:rgba(255,255,255,.08);
-    backdrop-filter:blur(10px);
-    border-radius:40px;
-    font-size:10px;
-    font-weight:900;
-    letter-spacing:.12em;
-    text-transform:uppercase;
+    padding:9px 15px;
+    border:1px solid #333;
+    border-radius:30px;
+    background:#111;
+    color:#ddd;
+    font-size:12px;
+    font-weight:700;
     margin-bottom:25px;
 }
 
 .hero h1{
-    font-size:clamp(55px,8vw,105px);
-    line-height:.83;
-    letter-spacing:-.085em;
-    margin-bottom:28px;
-}
-
-.hero h1 span{
-    color:#ff6a1a;
-}
-
-.hero-text{
-    max-width:560px;
-    color:rgba(255,255,255,.78);
-    line-height:1.7;
-    font-size:15px;
+    font-size:clamp(52px,7vw,105px);
+    line-height:.9;
+    letter-spacing:-6px;
+    font-weight:900;
     margin-bottom:30px;
 }
 
-.hero-actions{
+.hero h1 span{
+    color:#8e8e8e;
+}
+
+.hero p{
+    max-width:550px;
+    color:#a8a8a8;
+    line-height:1.7;
+    font-size:16px;
+    margin-bottom:35px;
+}
+
+.hero-buttons{
     display:flex;
+    gap:12px;
     flex-wrap:wrap;
-    gap:10px;
 }
 
 .btn{
-    border:0;
-    border-radius:50px;
+    border:none;
+    border-radius:12px;
     padding:15px 23px;
-    font-size:12px;
-    font-weight:900;
+    font-size:14px;
+    font-weight:800;
     transition:.25s;
 }
 
-.btn:hover{
-    transform:translateY(-3px);
-    box-shadow:0 15px 30px rgba(0,0,0,.15);
-}
-
-.btn-black{
-    background:#0b0b0c;
-    color:#fff;
-}
-
-.btn-white{
+.btn-primary{
     background:#fff;
-    color:#111;
+    color:#000;
 }
 
-.btn-orange{
-    background:var(--orange);
-    color:white;
+.btn-primary:hover{
+    transform:translateY(-3px);
+    box-shadow:0 15px 40px rgba(255,255,255,.15);
+}
+
+.btn-secondary{
+    background:#161616;
+    color:#fff;
+    border:1px solid #303030;
+}
+
+.btn-secondary:hover{
+    background:#222;
+}
+
+.hero-shoe{
+    position:absolute;
+    right:2%;
+    width:53%;
+    max-width:750px;
+    transform:rotate(-8deg);
+    filter:drop-shadow(0 40px 50px rgba(0,0,0,.7));
+    animation:floatShoe 5s ease-in-out infinite;
+}
+
+@keyframes floatShoe{
+    0%,100%{transform:rotate(-8deg) translateY(0);}
+    50%{transform:rotate(-5deg) translateY(-15px);}
 }
 
 /* =========================
@@ -301,192 +259,141 @@ img{
 ========================= */
 
 .trust{
-    max-width:1450px;
-    margin:auto;
-    padding:24px 28px;
-}
-
-.trust-grid{
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    background:#fff;
-    border:1px solid var(--line);
-    border-radius:22px;
-    overflow:hidden;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
 }
 
-.trust-card{
-    padding:22px;
-    display:flex;
-    align-items:center;
-    gap:13px;
+.trust-item{
+    padding:28px 20px;
+    text-align:center;
     border-right:1px solid var(--line);
 }
 
-.trust-card:last-child{
-    border-right:0;
+.trust-item:last-child{
+    border-right:none;
 }
 
 .trust-icon{
-    width:43px;
-    height:43px;
-    border-radius:13px;
-    background:#f0efeb;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    font-size:24px;
+    margin-bottom:10px;
 }
 
-.trust-title{
+.trust strong{
+    display:block;
+    font-size:14px;
+    margin-bottom:5px;
+}
+
+.trust span{
+    color:#777;
     font-size:12px;
-    font-weight:900;
-}
-
-.trust-desc{
-    color:#999;
-    font-size:10px;
-    margin-top:3px;
 }
 
 /* =========================
-   GENERAL SECTIONS
+   SECTION
 ========================= */
 
 .section{
-    max-width:1450px;
-    margin:auto;
-    padding:80px 28px;
+    padding:100px 6%;
 }
 
 .section-head{
     display:flex;
-    align-items:flex-end;
+    align-items:end;
     justify-content:space-between;
     gap:30px;
     margin-bottom:35px;
 }
 
-.kicker{
-    color:var(--orange);
-    font-size:10px;
-    font-weight:900;
-    letter-spacing:.13em;
-    text-transform:uppercase;
-    margin-bottom:10px;
-}
-
 .section-title{
-    font-size:clamp(35px,5vw,65px);
-    line-height:.9;
-    letter-spacing:-.07em;
+    font-size:42px;
+    font-weight:900;
+    letter-spacing:-2px;
 }
 
-.section-desc{
-    max-width:500px;
-    color:var(--muted);
-    font-size:13px;
-    line-height:1.8;
+.section-subtitle{
+    color:#777;
+    margin-top:8px;
 }
 
 /* =========================
-   CATEGORY CARDS
+   CATEGORIES
 ========================= */
 
 .categories{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:15px;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:35px;
 }
 
 .category{
-    height:410px;
-    border-radius:25px;
-    overflow:hidden;
-    position:relative;
-    color:white;
-    cursor:pointer;
-}
-
-.category:after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:linear-gradient(
-        0deg,
-        rgba(0,0,0,.8),
-        rgba(0,0,0,0) 65%
-    );
-}
-
-.category img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    transition:.7s;
-}
-
-.category:hover img{
-    transform:scale(1.08);
-}
-
-.category-info{
-    position:absolute;
-    z-index:2;
-    left:23px;
-    bottom:22px;
-}
-
-.category-info h3{
-    font-size:25px;
-    letter-spacing:-.04em;
-}
-
-.category-info p{
-    color:#ddd;
-    font-size:11px;
-    margin-top:5px;
-}
-
-/* =========================
-   SHOP
-========================= */
-
-.shop-controls{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:15px;
-    margin-bottom:25px;
-    flex-wrap:wrap;
-}
-
-.filters{
-    display:flex;
-    flex-wrap:wrap;
-    gap:7px;
-}
-
-.filter{
-    border:1px solid var(--line);
-    background:#fff;
-    padding:10px 15px;
+    border:1px solid #2c2c2c;
+    background:#111;
+    color:#aaa;
+    padding:11px 17px;
     border-radius:30px;
-    font-size:11px;
-    font-weight:900;
+    font-size:13px;
+    font-weight:700;
     transition:.2s;
 }
 
-.filter:hover,
-.filter.active{
+.category:hover,
+.category.active{
+    background:#fff;
+    color:#000;
+    border-color:#fff;
+}
+
+/* =========================
+   TOOLBAR
+========================= */
+
+.toolbar{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:30px;
+    flex-wrap:wrap;
+}
+
+.search-box{
+    position:relative;
+    flex:1;
+    min-width:250px;
+}
+
+.search-box input{
+    width:100%;
+    height:48px;
     background:#111;
+    border:1px solid #292929;
     color:#fff;
+    border-radius:12px;
+    padding:0 45px 0 17px;
+    outline:none;
+}
+
+.search-box input:focus{
+    border-color:#777;
+}
+
+.search-icon{
+    position:absolute;
+    right:16px;
+    top:14px;
 }
 
 .sort{
-    border:1px solid var(--line);
-    border-radius:30px;
-    padding:10px 15px;
-    background:#fff;
+    background:#111;
+    border:1px solid #292929;
+    color:#fff;
+    border-radius:12px;
+    padding:0 15px;
+    min-width:190px;
+    height:48px;
     outline:none;
 }
 
@@ -497,141 +404,132 @@ img{
 .products{
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:17px;
+    gap:20px;
 }
 
 .product{
-    background:#fff;
-    border-radius:24px;
+    background:var(--card);
+    border:1px solid #222;
+    border-radius:20px;
     overflow:hidden;
-    border:1px solid rgba(0,0,0,.04);
+    position:relative;
     transition:.3s;
 }
 
 .product:hover{
-    transform:translateY(-6px);
-    box-shadow:var(--shadow);
+    transform:translateY(-7px);
+    border-color:#3b3b3b;
+    box-shadow:0 25px 60px rgba(0,0,0,.35);
 }
 
-.product-img{
-    height:300px;
-    position:relative;
+.product-image{
+    height:290px;
+    background:#171717;
     overflow:hidden;
-    background:#eee;
+    position:relative;
 }
 
-.product-img img{
+.product-image img{
     width:100%;
     height:100%;
     object-fit:cover;
-    transition:.6s;
+    transition:.5s;
 }
 
-.product:hover .product-img img{
-    transform:scale(1.06);
+.product:hover .product-image img{
+    transform:scale(1.07);
 }
 
-.badge{
+.product-badge{
     position:absolute;
-    z-index:3;
-    left:13px;
     top:13px;
+    left:13px;
+    background:#fff;
+    color:#000;
     padding:7px 10px;
-    border-radius:30px;
-    background:#111;
-    color:#fff;
-    font-size:8px;
+    border-radius:7px;
+    font-size:10px;
     font-weight:900;
-}
-
-.badge.orange{
-    background:var(--orange);
-}
-
-.badge.green{
-    background:var(--green);
+    z-index:2;
 }
 
 .favorite{
     position:absolute;
-    z-index:4;
     top:12px;
     right:12px;
-    width:38px;
-    height:38px;
+    width:37px;
+    height:37px;
     border-radius:50%;
-    border:0;
-    background:rgba(255,255,255,.92);
+    border:1px solid rgba(255,255,255,.15);
+    background:rgba(0,0,0,.5);
+    color:#fff;
+    z-index:2;
     font-size:17px;
 }
 
 .favorite.active{
-    color:#e63946;
+    color:#ff4d67;
 }
 
-.product-body{
-    padding:17px;
+.product-info{
+    padding:18px;
 }
 
-.brand{
-    font-size:9px;
-    font-weight:900;
-    color:#999;
-    letter-spacing:.1em;
+.product-brand{
+    color:#777;
+    font-size:11px;
     text-transform:uppercase;
+    letter-spacing:1px;
+    margin-bottom:6px;
 }
 
 .product-name{
-    font-size:14px;
-    font-weight:900;
-    margin-top:7px;
+    font-size:16px;
+    font-weight:800;
+    margin-bottom:8px;
 }
 
-.product-meta{
-    margin-top:7px;
+.product-description{
     color:#777;
-    font-size:10px;
+    font-size:12px;
     line-height:1.5;
+    height:37px;
+    overflow:hidden;
 }
 
-.stars{
-    margin-top:11px;
-    font-size:10px;
-}
-
-.price-row{
+.product-bottom{
     display:flex;
     align-items:center;
     justify-content:space-between;
-    margin-top:14px;
+    margin-top:18px;
 }
 
 .price{
-    font-size:17px;
+    font-size:18px;
     font-weight:900;
 }
 
 .old-price{
-    color:#aaa;
+    color:#666;
     text-decoration:line-through;
-    font-size:10px;
+    font-size:11px;
     margin-left:5px;
 }
 
-.quick-add{
-    width:39px;
-    height:39px;
-    border:0;
-    border-radius:50%;
-    background:#111;
-    color:#fff;
+.add{
+    border:none;
+    background:#fff;
+    color:#000;
+    width:40px;
+    height:40px;
+    border-radius:10px;
     font-size:20px;
-    transition:.25s;
+    font-weight:900;
+    transition:.2s;
 }
 
-.quick-add:hover{
-    background:var(--orange);
-    transform:rotate(90deg);
+.add:hover{
+    transform:scale(1.08);
 }
 
 /* =========================
@@ -639,278 +537,68 @@ img{
 ========================= */
 
 .promo{
-    max-width:1450px;
-    margin:auto;
-    padding:0 28px 80px;
-}
-
-.promo-box{
-    min-height:360px;
-    border-radius:30px;
-    background:
-    linear-gradient(
-        110deg,
-        #111,
-        #1c1c1c
-    );
-    color:#fff;
-    padding:60px;
-    position:relative;
+    margin:0 6% 90px;
+    min-height:300px;
+    border-radius:25px;
     overflow:hidden;
-}
-
-.promo-box:after{
-    content:"VÉLORA";
-    position:absolute;
-    right:-20px;
-    bottom:-90px;
-    font-size:170px;
-    font-weight:900;
-    color:rgba(255,255,255,.025);
+    position:relative;
+    display:flex;
+    align-items:center;
+    padding:50px;
+    background:
+        linear-gradient(90deg,rgba(0,0,0,.95),rgba(0,0,0,.3)),
+        url("https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=1600&q=85")
+        center/cover;
 }
 
 .promo-content{
-    position:relative;
-    z-index:2;
-    max-width:650px;
+    max-width:500px;
 }
 
 .promo h2{
-    font-size:clamp(40px,5vw,70px);
-    line-height:.9;
-    letter-spacing:-.07em;
-    margin:10px 0 20px;
-}
-
-.promo p{
-    color:#999;
-    line-height:1.7;
-    font-size:13px;
-    margin-bottom:25px;
-}
-
-/* =========================
-   LUXURY FEATURE
-========================= */
-
-.feature{
-    max-width:1450px;
-    margin:auto;
-    padding:0 28px 80px;
-}
-
-.feature-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    min-height:600px;
-    border-radius:30px;
-    overflow:hidden;
-    background:#e7e4dc;
-}
-
-.feature-image{
-    background:
-    url("https://images.unsplash.com/photo-1495555961986-6d4c1ecb7be3?auto=format&fit=crop&w=1400&q=90")
-    center/cover;
-}
-
-.feature-content{
-    padding:70px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-}
-
-.feature-content h2{
-    font-size:clamp(42px,5vw,72px);
-    line-height:.87;
-    letter-spacing:-.08em;
-    margin-bottom:25px;
-}
-
-.feature-content p{
-    max-width:500px;
-    color:#686868;
-    line-height:1.8;
-    font-size:13px;
-    margin-bottom:25px;
-}
-
-/* =========================
-   SIZE GUIDE
-========================= */
-
-.size-section{
-    background:#111;
-    color:white;
-}
-
-.size-box{
-    max-width:1450px;
-    margin:auto;
-    padding:80px 28px;
-}
-
-.size-table{
-    width:100%;
-    margin-top:35px;
-    border-collapse:collapse;
-}
-
-.size-table th,
-.size-table td{
-    border-bottom:1px solid #303030;
-    padding:16px;
-    text-align:left;
-    font-size:12px;
-}
-
-.size-table th{
-    color:#999;
-}
-
-/* =========================
-   REVIEWS
-========================= */
-
-.reviews{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:15px;
-}
-
-.review{
-    background:#fff;
-    border:1px solid var(--line);
-    border-radius:23px;
-    padding:27px;
-}
-
-.review p{
-    color:#666;
-    line-height:1.8;
-    font-size:12px;
-}
-
-.review-stars{
-    margin-bottom:17px;
-}
-
-.reviewer{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    margin-top:22px;
-}
-
-.avatar{
-    width:40px;
-    height:40px;
-    background:#111;
-    color:white;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:12px;
+    font-size:45px;
+    line-height:1;
     font-weight:900;
-}
-
-.reviewer-name{
-    font-size:11px;
-    font-weight:900;
-}
-
-.reviewer-city{
-    color:#999;
-    font-size:9px;
-    margin-top:3px;
-}
-
-/* =========================
-   FAQ
-========================= */
-
-.faq{
-    max-width:900px;
-    margin:auto;
-}
-
-.faq-item{
-    border-bottom:1px solid var(--line);
-}
-
-.faq-button{
-    width:100%;
-    border:0;
-    background:none;
-    padding:22px 0;
-    display:flex;
-    justify-content:space-between;
-    text-align:left;
-    font-weight:900;
-    font-size:13px;
-}
-
-.faq-answer{
-    display:none;
-    color:#777;
-    font-size:12px;
-    line-height:1.8;
-    padding:0 0 22px;
-}
-
-.faq-item.open .faq-answer{
-    display:block;
-}
-
-.faq-item.open .plus{
-    transform:rotate(45deg);
-}
-
-/* =========================
-   NEWSLETTER
-========================= */
-
-.newsletter{
-    background:#111;
-    color:#fff;
-    padding:80px 25px;
-}
-
-.newsletter-inner{
-    max-width:800px;
-    margin:auto;
-    text-align:center;
-}
-
-.newsletter h2{
-    font-size:50px;
-    letter-spacing:-.07em;
     margin-bottom:15px;
 }
 
-.newsletter p{
-    color:#888;
-    font-size:13px;
+.promo p{
+    color:#bbb;
+    line-height:1.6;
     margin-bottom:25px;
 }
 
-.newsletter-form{
-    max-width:550px;
-    margin:auto;
-    background:white;
-    border-radius:50px;
-    padding:6px;
-    display:flex;
+/* =========================
+   WHY US
+========================= */
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
 }
 
-.newsletter-form input{
-    flex:1;
-    border:0;
-    outline:0;
-    padding:0 18px;
-    min-width:0;
+.feature{
+    background:#101010;
+    border:1px solid #222;
+    padding:35px;
+    border-radius:20px;
+}
+
+.feature-icon{
+    font-size:30px;
+    margin-bottom:20px;
+}
+
+.feature h3{
+    font-size:18px;
+    margin-bottom:10px;
+}
+
+.feature p{
+    color:#777;
+    line-height:1.7;
+    font-size:13px;
 }
 
 /* =========================
@@ -918,58 +606,53 @@ img{
 ========================= */
 
 footer{
-    background:#111;
-    color:white;
-    border-top:1px solid #292929;
+    border-top:1px solid #222;
+    padding:60px 6% 30px;
 }
 
 .footer-grid{
-    max-width:1450px;
-    margin:auto;
-    padding:60px 28px;
     display:grid;
     grid-template-columns:2fr 1fr 1fr 1fr;
-    gap:50px;
+    gap:40px;
+    margin-bottom:60px;
 }
 
-.footer-logo{
-    font-size:25px;
+.footer-brand h2{
+    font-size:28px;
     font-weight:900;
+    margin-bottom:15px;
 }
 
-.footer-text{
-    max-width:330px;
+.footer-brand p{
     color:#777;
-    font-size:11px;
-    line-height:1.8;
-    margin-top:14px;
+    max-width:350px;
+    line-height:1.7;
+    font-size:13px;
 }
 
 .footer-col h4{
-    font-size:11px;
     margin-bottom:18px;
 }
 
 .footer-col a{
     display:block;
     color:#777;
-    font-size:11px;
+    font-size:13px;
     margin-bottom:12px;
 }
 
 .footer-col a:hover{
-    color:white;
+    color:#fff;
 }
 
-.footer-bottom{
-    max-width:1450px;
-    margin:auto;
-    padding:20px 28px;
-    border-top:1px solid #292929;
-    color:#666;
-    font-size:9px;
+.copyright{
+    padding-top:25px;
+    border-top:1px solid #222;
+    color:#555;
+    font-size:12px;
     display:flex;
     justify-content:space-between;
+    gap:20px;
 }
 
 /* =========================
@@ -979,120 +662,122 @@ footer{
 .overlay{
     position:fixed;
     inset:0;
-    z-index:1999;
-    background:rgba(0,0,0,.5);
-    backdrop-filter:blur(5px);
-    opacity:0;
-    visibility:hidden;
-    transition:.3s;
+    background:rgba(0,0,0,.65);
+    z-index:1500;
+    display:none;
 }
 
 .overlay.show{
-    opacity:1;
-    visibility:visible;
+    display:block;
 }
 
 .cart{
     position:fixed;
-    z-index:2000;
+    right:-430px;
     top:0;
-    right:0;
-    width:min(480px,100%);
     height:100vh;
-    background:white;
-    transform:translateX(100%);
-    transition:.4s cubic-bezier(.2,.8,.2,1);
+    width:420px;
+    max-width:95%;
+    background:#101010;
+    z-index:2000;
+    border-left:1px solid #292929;
+    padding:25px;
+    transition:.35s;
     display:flex;
     flex-direction:column;
 }
 
-.cart.show{
-    transform:translateX(0);
+.cart.open{
+    right:0;
 }
 
-.cart-head{
-    padding:23px;
-    border-bottom:1px solid var(--line);
+.cart-header{
     display:flex;
     justify-content:space-between;
     align-items:center;
+    padding-bottom:20px;
+    border-bottom:1px solid #292929;
 }
 
-.cart-head h2{
-    font-size:21px;
+.cart-header h2{
+    font-size:22px;
 }
 
 .close{
+    border:none;
+    background:#1b1b1b;
+    color:#fff;
     width:38px;
     height:38px;
-    border:0;
     border-radius:50%;
-    background:#eee;
 }
 
-.cart-list{
+.cart-items{
     flex:1;
     overflow:auto;
-    padding:20px;
+    padding:20px 0;
 }
 
-.empty-cart{
+.empty{
     text-align:center;
-    color:#999;
-    padding:80px 20px;
+    color:#666;
+    padding:60px 20px;
 }
 
 .cart-item{
-    display:grid;
-    grid-template-columns:75px 1fr auto;
+    display:flex;
     gap:12px;
-    padding:15px 0;
-    border-bottom:1px solid var(--line);
+    margin-bottom:18px;
 }
 
 .cart-item img{
     width:75px;
     height:75px;
+    border-radius:10px;
     object-fit:cover;
-    border-radius:14px;
 }
 
-.cart-name{
+.cart-item-info{
+    flex:1;
+}
+
+.cart-item-name{
+    font-size:13px;
+    font-weight:800;
+}
+
+.cart-item-price{
+    color:#aaa;
     font-size:12px;
-    font-weight:900;
-}
-
-.cart-price{
-    font-size:11px;
     margin-top:5px;
 }
 
-.quantity{
+.qty{
     display:flex;
-    align-items:center;
     gap:8px;
-    margin-top:10px;
+    align-items:center;
+    margin-top:9px;
 }
 
-.quantity button{
+.qty button{
+    border:1px solid #333;
+    background:#181818;
+    color:#fff;
     width:25px;
     height:25px;
-    border-radius:50%;
-    border:1px solid var(--line);
-    background:white;
+    border-radius:6px;
 }
 
 .remove{
-    background:none;
-    border:0;
-    color:#d62828;
-    font-size:9px;
-    margin-top:6px;
+    background:none!important;
+    border:none!important;
+    color:#777!important;
+    margin-left:auto;
 }
 
 .cart-footer{
-    padding:20px;
-    border-top:1px solid var(--line);
+    border-top:1px solid #292929;
+    padding-top:20px;
 }
 
 .total{
@@ -1100,40 +785,47 @@ footer{
     justify-content:space-between;
     font-size:19px;
     font-weight:900;
-    margin-bottom:15px;
+    margin-bottom:18px;
+}
+
+.whatsapp-order{
+    width:100%;
+    border:none;
+    background:var(--green);
+    color:#000;
+    border-radius:12px;
+    padding:16px;
+    font-weight:900;
+    font-size:14px;
 }
 
 /* =========================
    PRODUCT MODAL
 ========================= */
 
-.modal-wrap{
+.modal{
     position:fixed;
     inset:0;
+    background:rgba(0,0,0,.75);
     z-index:3000;
-    display:flex;
+    display:none;
     align-items:center;
     justify-content:center;
-    background:rgba(0,0,0,.55);
-    backdrop-filter:blur(8px);
     padding:20px;
-    opacity:0;
-    visibility:hidden;
-    transition:.3s;
 }
 
-.modal-wrap.show{
-    opacity:1;
-    visibility:visible;
+.modal.show{
+    display:flex;
 }
 
-.modal{
-    width:min(950px,100%);
-    max-height:92vh;
+.modal-content{
+    background:#111;
+    border:1px solid #333;
+    border-radius:22px;
+    width:850px;
+    max-width:100%;
+    max-height:90vh;
     overflow:auto;
-    background:white;
-    border-radius:30px;
-    padding:25px;
     position:relative;
 }
 
@@ -1142,24 +834,21 @@ footer{
     right:18px;
     top:18px;
     z-index:5;
+    border:none;
+    background:#000;
+    color:#fff;
     width:40px;
     height:40px;
-    border:0;
     border-radius:50%;
-    background:#eee;
 }
 
-.product-modal{
+.modal-grid{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:35px;
 }
 
 .modal-image{
-    height:550px;
-    border-radius:22px;
-    overflow:hidden;
-    background:#eee;
+    min-height:500px;
 }
 
 .modal-image img{
@@ -1169,114 +858,61 @@ footer{
 }
 
 .modal-info{
-    padding:35px 10px;
+    padding:45px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.modal-info .brand{
+    color:#777;
+    font-size:12px;
+    text-transform:uppercase;
+    margin-bottom:12px;
 }
 
 .modal-info h2{
-    font-size:45px;
-    line-height:.9;
-    letter-spacing:-.07em;
-    margin:10px 0 18px;
+    font-size:35px;
+    margin-bottom:15px;
+}
+
+.modal-info p{
+    color:#888;
+    line-height:1.7;
+    font-size:14px;
+    margin-bottom:20px;
 }
 
 .modal-price{
-    font-size:25px;
+    font-size:30px;
     font-weight:900;
-    margin:20px 0;
-}
-
-.modal-description{
-    color:#777;
-    line-height:1.8;
-    font-size:12px;
+    margin-bottom:20px;
 }
 
 .size-title{
-    font-size:11px;
-    font-weight:900;
-    margin-top:25px;
+    font-size:12px;
+    color:#888;
+    margin-bottom:10px;
 }
 
 .sizes{
     display:flex;
+    gap:8px;
     flex-wrap:wrap;
-    gap:7px;
-    margin:12px 0 25px;
+    margin-bottom:25px;
 }
 
 .size{
-    width:46px;
-    height:40px;
-    border:1px solid var(--line);
-    background:white;
-    border-radius:9px;
-    font-size:11px;
-    font-weight:900;
+    background:#181818;
+    color:#fff;
+    border:1px solid #333;
+    padding:10px 14px;
+    border-radius:8px;
 }
 
-.size.active,
-.size:hover{
-    background:#111;
-    color:white;
-}
-
-/* =========================
-   SEARCH
-========================= */
-
-.search-modal{
-    width:min(700px,100%);
-}
-
-.search-input{
-    width:100%;
-    border:0;
-    border-bottom:2px solid #111;
-    outline:0;
-    padding:18px 0;
-    font-size:24px;
-    margin-top:20px;
-}
-
-.search-result{
-    display:flex;
-    align-items:center;
-    gap:15px;
-    padding:13px 0;
-    border-bottom:1px solid #eee;
-    cursor:pointer;
-}
-
-.search-result img{
-    width:65px;
-    height:65px;
-    border-radius:12px;
-    object-fit:cover;
-}
-
-/* =========================
-   TOAST
-========================= */
-
-.toast{
-    position:fixed;
-    z-index:5000;
-    left:50%;
-    bottom:25px;
-    transform:translate(-50%,120px);
-    background:#111;
-    color:white;
-    border-radius:50px;
-    padding:14px 20px;
-    font-size:11px;
-    font-weight:900;
-    opacity:0;
-    transition:.35s;
-}
-
-.toast.show{
-    transform:translate(-50%,0);
-    opacity:1;
+.size.selected{
+    background:#fff;
+    color:#000;
 }
 
 /* =========================
@@ -1285,19 +921,19 @@ footer{
 
 .whatsapp{
     position:fixed;
-    right:22px;
-    bottom:22px;
+    right:20px;
+    bottom:20px;
     width:58px;
     height:58px;
     border-radius:50%;
-    background:#25d366;
-    color:white;
-    z-index:1500;
+    background:#25D366;
+    color:#000;
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:24px;
-    box-shadow:0 15px 35px rgba(0,0,0,.2);
+    font-size:28px;
+    z-index:1200;
+    box-shadow:0 10px 35px rgba(37,211,102,.25);
     transition:.25s;
 }
 
@@ -1306,283 +942,182 @@ footer{
 }
 
 /* =========================
-   RESPONSIVE
+   TOAST
 ========================= */
 
-@media(max-width:1050px){
+.toast{
+    position:fixed;
+    bottom:25px;
+    left:50%;
+    transform:translate(-50%,100px);
+    background:#fff;
+    color:#000;
+    padding:13px 20px;
+    border-radius:10px;
+    z-index:5000;
+    font-size:13px;
+    font-weight:800;
+    transition:.3s;
+}
 
-    .nav-links{
-        display:none;
-    }
+.toast.show{
+    transform:translate(-50%,0);
+}
 
-    .mobile-toggle{
-        display:flex;
-    }
+/* =========================
+   MOBILE
+========================= */
 
-    .categories,
+@media(max-width:1100px){
+
     .products{
-        grid-template-columns:repeat(2,1fr);
+        grid-template-columns:repeat(3,1fr);
     }
 
-    .trust-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .trust-card:nth-child(2){
-        border-right:0;
-    }
-
-    .trust-card:nth-child(1),
-    .trust-card:nth-child(2){
-        border-bottom:1px solid var(--line);
-    }
-
-    .feature-grid{
-        grid-template-columns:1fr;
-    }
-
-    .feature-image{
-        min-height:450px;
-    }
-
-    .reviews{
-        grid-template-columns:1fr;
-    }
-
-    .footer-grid{
-        grid-template-columns:1fr 1fr;
+    .hero{
+        min-height:600px;
     }
 
 }
 
-@media(max-width:650px){
+@media(max-width:800px){
 
-    .announcement{
-        font-size:8px;
+    header{
+        height:65px;
+        padding:0 18px;
     }
 
-    .navbar{
-        height:68px;
+    nav{
+        display:none;
     }
 
-    .nav-inner{
-        padding:0 14px;
-    }
-
-    .logo{
-        font-size:22px;
-    }
-
-    .icon{
-        width:37px;
-        height:37px;
-        font-size:14px;
+    .mobile-menu{
+        display:flex;
     }
 
     .hero{
-        padding:12px 12px 0;
-    }
-
-    .hero-box{
-        min-height:620px;
-        border-radius:25px;
-        align-items:flex-end;
-
-        background:
-        linear-gradient(
-            0deg,
-            rgba(0,0,0,.9),
-            rgba(0,0,0,.15)
-        ),
-        url("https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1000&q=90")
-        center/cover;
+        min-height:700px;
+        padding:70px 22px;
+        align-items:flex-start;
     }
 
     .hero-content{
-        padding:30px 23px;
+        width:100%;
     }
 
     .hero h1{
         font-size:57px;
+        letter-spacing:-4px;
     }
 
-    .hero-text{
-        font-size:12px;
+    .hero-shoe{
+        width:100%;
+        right:-15%;
+        bottom:20px;
+        opacity:.55;
     }
 
     .trust{
-        padding:15px;
+        grid-template-columns:repeat(2,1fr);
     }
 
-    .trust-card{
-        padding:15px 9px;
-        gap:8px;
-    }
-
-    .trust-icon{
-        width:34px;
-        height:34px;
-        font-size:14px;
-    }
-
-    .trust-title{
-        font-size:9px;
-    }
-
-    .trust-desc{
-        font-size:7px;
+    .trust-item{
+        border-bottom:1px solid #222;
     }
 
     .section{
-        padding:55px 14px;
+        padding:70px 18px;
     }
 
-    .section-head{
-        display:block;
-    }
-
-    .section-desc{
-        margin-top:16px;
-    }
-
-    .categories{
-        grid-template-columns:1fr 1fr;
-        gap:9px;
-    }
-
-    .category{
-        height:270px;
-        border-radius:18px;
-    }
-
-    .category-info{
-        left:15px;
-        bottom:15px;
-    }
-
-    .category-info h3{
-        font-size:17px;
+    .section-title{
+        font-size:32px;
     }
 
     .products{
-        grid-template-columns:1fr 1fr;
-        gap:9px;
+        grid-template-columns:repeat(2,1fr);
+        gap:12px;
     }
 
-    .product{
-        border-radius:17px;
+    .product-image{
+        height:210px;
     }
 
-    .product-img{
-        height:190px;
-    }
-
-    .product-body{
-        padding:11px;
+    .product-info{
+        padding:13px;
     }
 
     .product-name{
-        font-size:11px;
-    }
-
-    .product-meta{
-        font-size:8px;
+        font-size:14px;
     }
 
     .price{
-        font-size:13px;
-    }
-
-    .quick-add{
-        width:34px;
-        height:34px;
+        font-size:16px;
     }
 
     .promo{
-        padding:0 14px 55px;
-    }
-
-    .promo-box{
-        padding:35px 24px;
-        border-radius:22px;
+        margin:0 18px 70px;
+        padding:30px;
     }
 
     .promo h2{
-        font-size:42px;
+        font-size:35px;
     }
 
-    .feature{
-        padding:0 14px 55px;
-    }
-
-    .feature-grid{
-        border-radius:22px;
-    }
-
-    .feature-image{
-        min-height:330px;
-    }
-
-    .feature-content{
-        padding:38px 25px;
-    }
-
-    .size-box{
-        padding:55px 14px;
-        overflow:auto;
-    }
-
-    .size-table{
-        min-width:550px;
-    }
-
-    .newsletter{
-        padding:55px 14px;
-    }
-
-    .newsletter h2{
-        font-size:38px;
+    .features{
+        grid-template-columns:1fr;
     }
 
     .footer-grid{
         grid-template-columns:1fr 1fr;
-        padding:45px 20px;
-        gap:30px;
     }
 
-    .footer-bottom{
-        padding:18px 20px;
-        flex-direction:column;
-        gap:7px;
-    }
-
-    .product-modal{
+    .modal-grid{
         grid-template-columns:1fr;
-        gap:5px;
-    }
-
-    .modal{
-        padding:15px;
-        border-radius:22px;
     }
 
     .modal-image{
-        height:300px;
+        height:320px;
+        min-height:0;
     }
 
     .modal-info{
-        padding:25px 8px;
+        padding:25px;
     }
 
-    .modal-info h2{
-        font-size:35px;
+}
+
+@media(max-width:480px){
+
+    .products{
+        grid-template-columns:repeat(2,1fr);
     }
 
-    .whatsapp{
-        width:52px;
-        height:52px;
-        right:14px;
-        bottom:14px;
+    .product-image{
+        height:170px;
+    }
+
+    .product-description{
+        display:none;
+    }
+
+    .product-bottom{
+        margin-top:12px;
+    }
+
+    .hero h1{
+        font-size:48px;
+    }
+
+    .hero p{
+        font-size:14px;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr;
+    }
+
+    .copyright{
+        flex-direction:column;
     }
 
 }
@@ -1592,2121 +1127,1039 @@ footer{
 
 <body>
 
-<div class="announcement">
-🇲🇦 LIVRAISON PARTOUT AU MAROC • PAIEMENT À LA LIVRAISON • VÉRIFICATION DU COLIS
-</div>
+<!-- =========================
+     HEADER
+========================= -->
 
-<header class="navbar">
+<header>
 
-<div class="nav-inner">
+    <a href="#" class="logo">
+        MHD<span>STORE</span>
+    </a>
 
-<a href="#" class="logo">
-VÉLO<span>RA</span>
-</a>
+    <nav>
+        <a href="#accueil">Accueil</a>
+        <a href="#collection">Collection</a>
+        <a href="#nouveautes">Nouveautés</a>
+        <a href="#contact">Contact</a>
+    </nav>
 
-<nav class="nav-links">
+    <div class="header-actions">
 
-<a href="#nouveautes">Nouveautés</a>
-<a href="#shop">Sneakers</a>
-<a href="#homme">Homme</a>
-<a href="#femme">Femme</a>
-<a href="#premium">Premium</a>
-<a href="#faq">Aide</a>
+        <button class="icon-btn" onclick="focusSearch()">
+            🔎
+        </button>
 
-</nav>
+        <button class="icon-btn" onclick="openCart()">
+            🛒
+            <span class="cart-count" id="cartCount">0</span>
+        </button>
 
-<div class="nav-actions">
+        <button class="icon-btn mobile-menu" onclick="scrollToProducts()">
+            ☰
+        </button>
 
-<button class="icon" onclick="openSearch()">
-⌕
-</button>
-
-<button class="icon" onclick="toggleDark()">
-◐
-</button>
-
-<button class="icon" onclick="openCart()">
-🛒
-<span class="cart-count" id="cartCount">0</span>
-</button>
-
-<button class="icon mobile-toggle" onclick="mobileMenu()">
-☰
-</button>
-
-</div>
-
-</div>
+    </div>
 
 </header>
 
 
-<main>
+<!-- =========================
+     HERO
+========================= -->
 
-<!-- HERO -->
+<section class="hero" id="accueil">
 
-<section class="hero" id="nouveautes">
+    <div class="hero-content">
 
-<div class="hero-box">
+        <div class="badge">
+            ✦ COLLECTION 2026
+        </div>
 
-<div class="hero-content">
+        <h1>
+            WALK<br>
+            <span>YOUR WAY.</span>
+        </h1>
 
-<div class="hero-label">
-NEW COLLECTION — MAROC 2026
-</div>
+        <p>
+            Découvrez les sneakers qui combinent style, confort et
+            tendances modernes. Une sélection pensée pour le marché
+            marocain, avec des prix accessibles de 150 DH à 570 DH.
+        </p>
 
-<h1>
-WEAR<br>
-YOUR<br>
-<span>MOVE.</span>
-</h1>
+        <div class="hero-buttons">
 
-<p class="hero-text">
-Des sneakers modernes inspirées des silhouettes les plus recherchées :
-rétro, running, minimalisme premium et streetwear.
-Des prix pensés pour le marché marocain.
-</p>
+            <a href="#collection" class="btn btn-primary">
+                Découvrir la collection →
+            </a>
 
-<div class="hero-actions">
+            <a href="https://wa.me/212657461342" target="_blank"
+               class="btn btn-secondary">
+                Commander sur WhatsApp
+            </a>
 
-<a href="#shop" class="btn btn-white">
-SHOPPER LA COLLECTION →
-</a>
+        </div>
 
-<a href="#premium" class="btn btn-orange">
-ÉDITION PREMIUM
-</a>
+    </div>
 
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- TRUST -->
-
-<section class="trust">
-
-<div class="trust-grid">
-
-<div class="trust-card">
-
-<div class="trust-icon">
-🚚
-</div>
-
-<div>
-<div class="trust-title">
-Livraison Maroc
-</div>
-
-<div class="trust-desc">
-Partout au Maroc
-</div>
-</div>
-
-</div>
-
-
-<div class="trust-card">
-
-<div class="trust-icon">
-💵
-</div>
-
-<div>
-<div class="trust-title">
-Paiement à la livraison
-</div>
-
-<div class="trust-desc">
-Simple et pratique
-</div>
-</div>
-
-</div>
-
-
-<div class="trust-card">
-
-<div class="trust-icon">
-👟
-</div>
-
-<div>
-<div class="trust-title">
-Tailles 36–46
-</div>
-
-<div class="trust-desc">
-Selon disponibilité
-</div>
-</div>
-
-</div>
-
-
-<div class="trust-card">
-
-<div class="trust-icon">
-💬
-</div>
-
-<div>
-<div class="trust-title">
-Commande WhatsApp
-</div>
-
-<div class="trust-desc">
-Réponse rapide
-</div>
-</div>
-
-</div>
-
-</div>
+    <img
+        class="hero-shoe"
+        src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1100&q=90"
+        alt="Sneaker MHD STORE"
+    >
 
 </section>
 
 
-<!-- CATEGORIES -->
+<!-- =========================
+     TRUST
+========================= -->
+
+<div class="trust">
+
+    <div class="trust-item">
+        <div class="trust-icon">🚚</div>
+        <strong>Livraison Maroc</strong>
+        <span>Expédition rapide</span>
+    </div>
+
+    <div class="trust-item">
+        <div class="trust-icon">💳</div>
+        <strong>Paiement à la livraison</strong>
+        <span>Simple et pratique</span>
+    </div>
+
+    <div class="trust-item">
+        <div class="trust-icon">👟</div>
+        <strong>Styles modernes</strong>
+        <span>Collection tendance</span>
+    </div>
+
+    <div class="trust-item">
+        <div class="trust-icon">💬</div>
+        <strong>Support WhatsApp</strong>
+        <span>06 57 46 13 42</span>
+    </div>
+
+</div>
+
+
+<!-- =========================
+     COLLECTION
+========================= -->
+
+<section class="section" id="collection">
+
+    <div class="section-head">
+
+        <div>
+            <h2 class="section-title">
+                La collection.
+            </h2>
+
+            <p class="section-subtitle">
+                Les modèles les plus faciles à porter au quotidien.
+            </p>
+        </div>
+
+    </div>
+
+
+    <div class="categories">
+
+        <button class="category active" onclick="filterCategory('all',this)">
+            Tous
+        </button>
+
+        <button class="category" onclick="filterCategory('running',this)">
+            Running
+        </button>
+
+        <button class="category" onclick="filterCategory('streetwear',this)">
+            Streetwear
+        </button>
+
+        <button class="category" onclick="filterCategory('premium',this)">
+            Premium
+        </button>
+
+        <button class="category" onclick="filterCategory('casual',this)">
+            Casual
+        </button>
+
+        <button class="category" onclick="filterCategory('new',this)">
+            Nouveautés
+        </button>
+
+    </div>
+
+
+    <div class="toolbar">
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="search"
+                placeholder="Rechercher une sneaker..."
+                oninput="searchProducts()"
+            >
+
+            <span class="search-icon">🔎</span>
+
+        </div>
+
+        <select class="sort" id="sort" onchange="sortProducts()">
+
+            <option value="default">Trier par</option>
+            <option value="low">Prix croissant</option>
+            <option value="high">Prix décroissant</option>
+            <option value="name">Nom A-Z</option>
+
+        </select>
+
+    </div>
+
+
+    <div class="products" id="products"></div>
+
+</section>
+
+
+<!-- =========================
+     PROMO
+========================= -->
+
+<section class="promo" id="nouveautes">
+
+    <div class="promo-content">
+
+        <div class="badge">
+            NOUVELLE COLLECTION
+        </div>
+
+        <h2>
+            Ton style.<br>
+            Ton mouvement.
+        </h2>
+
+        <p>
+            Des silhouettes inspirées du streetwear,
+            du running et du luxe minimaliste.
+        </p>
+
+        <a href="#collection" class="btn btn-primary">
+            Voir les modèles
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     WHY MHD
+========================= -->
 
 <section class="section">
 
-<div class="section-head">
+    <div class="section-head">
 
-<div>
+        <div>
 
-<div class="kicker">
-Shop by style
-</div>
+            <h2 class="section-title">
+                Pourquoi MHD ?
+            </h2>
 
-<h2 class="section-title">
-Trouve ton style.
-</h2>
+            <p class="section-subtitle">
+                Une expérience pensée pour acheter simplement.
+            </p>
 
-</div>
+        </div>
 
-<p class="section-desc">
-Des silhouettes pensées pour les différents usages :
-quotidien, running, rétro et streetwear.
-</p>
+    </div>
 
-</div>
 
+    <div class="features">
 
-<div class="categories">
+        <div class="feature">
 
+            <div class="feature-icon">
+                ⚡
+            </div>
 
-<div class="category" onclick="filterCategory('Lifestyle')">
+            <h3>
+                Commande rapide
+            </h3>
 
-<img
-src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=90"
-alt="Sneakers lifestyle"
->
-
-<div class="category-info">
-
-<h3>Lifestyle</h3>
-
-<p>Everyday sneakers →</p>
-
-</div>
-
-</div>
-
-
-<div class="category" onclick="filterCategory('Running')">
-
-<img
-src="https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=900&q=90"
-alt="Running sneakers"
->
-
-<div class="category-info">
-
-<h3>Running</h3>
-
-<p>Confort & mouvement →</p>
-
-</div>
-
-</div>
-
-
-<div class="category" onclick="filterCategory('Retro')">
-
-<img
-src="https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=900&q=90"
-alt="Retro sneakers"
->
-
-<div class="category-info">
-
-<h3>Retro</h3>
-
-<p>Old school energy →</p>
-
-</div>
-
-</div>
-
-
-<div class="category" onclick="filterCategory('Streetwear')">
-
-<img
-src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=900&q=90"
-alt="Streetwear sneakers"
->
-
-<div class="category-info">
-
-<h3>Streetwear</h3>
-
-<p>Make a statement →</p>
-
-</div>
-
-</div>
-
-
-</div>
-
-</section>
-
-
-<!-- SHOP -->
-
-<section class="section" id="shop">
-
-<div class="section-head">
-
-<div>
-
-<div class="kicker">
-Best sellers
-</div>
-
-<h2 class="section-title">
-Les paires du moment.
-</h2>
-
-</div>
-
-<p class="section-desc">
-Une sélection allant de l'essentiel à la silhouette premium,
-avec des prix de 150 DH à 570 DH.
-</p>
-
-</div>
-
-
-<div class="shop-controls">
-
-<div class="filters">
-
-<button class="filter active"
-onclick="filterProducts('all',this)">
-Tout
-</button>
-
-<button class="filter"
-onclick="filterProducts('Lifestyle',this)">
-Lifestyle
-</button>
-
-<button class="filter"
-onclick="filterProducts('Running',this)">
-Running
-</button>
-
-<button class="filter"
-onclick="filterProducts('Retro',this)">
-Rétro
-</button>
-
-<button class="filter"
-onclick="filterProducts('Streetwear',this)">
-Streetwear
-</button>
-
-<button class="filter"
-onclick="filterProducts('Premium',this)">
-Premium
-</button>
-
-</div>
-
-
-<select class="sort" onchange="sortProducts(this.value)">
-
-<option value="default">
-Trier
-</option>
-
-<option value="low">
-Prix : bas → haut
-</option>
-
-<option value="high">
-Prix : haut → bas
-</option>
-
-<option value="rating">
-Mieux notées
-</option>
-
-</select>
-
-</div>
-
-
-<div class="products" id="products"></div>
-
-</section>
-
-
-<!-- PROMO -->
-
-<section class="promo">
-
-<div class="promo-box">
-
-<div class="promo-content">
-
-<div class="kicker">
-VÉLORA DROP
-</div>
-
-<h2>
-Ton style.<br>
-Ton prix.
-</h2>
-
-<p>
-Des sneakers modernes sans monter à des prix impossibles.
-Profite de notre sélection à partir de 150 DH.
-</p>
-
-<button class="btn btn-orange"
-onclick="copyPromo()">
-COPIER LE CODE : VELORA10
-</button>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- PREMIUM -->
-
-<section class="feature" id="premium">
-
-<div class="feature-grid">
-
-<div class="feature-image"></div>
-
-<div class="feature-content">
-
-<div class="kicker">
-Premium Selection
-</div>
-
-<h2>
-QUIET<br>
-LUXURY.
-</h2>
-
-<p>
-Des silhouettes minimalistes inspirées de l'univers du luxe :
-lignes propres, couleurs neutres, matières visuellement premium
-et esthétique discrète.
-</p>
-
-<a href="#shop"
-class="btn btn-black"
-style="width:max-content">
-DÉCOUVRIR
-</a>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- HOMME -->
-
-<section class="section" id="homme">
-
-<div class="section-head">
-
-<div>
-
-<div class="kicker">
-Homme
-</div>
-
-<h2 class="section-title">
-Pour lui.
-</h2>
-
-</div>
-
-</div>
-
-<div class="products" id="menProducts"></div>
-
-</section>
-
-
-<!-- FEMME -->
-
-<section class="section" id="femme">
-
-<div class="section-head">
-
-<div>
-
-<div class="kicker">
-Femme
-</div>
-
-<h2 class="section-title">
-Pour elle.
-</h2>
-
-</div>
-
-</div>
-
-<div class="products" id="womenProducts"></div>
-
-</section>
-
-
-<!-- SIZE GUIDE -->
-
-<section class="size-section">
-
-<div class="size-box">
-
-<div class="kicker">
-Guide des tailles
-</div>
-
-<h2 class="section-title">
-Quelle taille choisir ?
-</h2>
-
-<table class="size-table">
-
-<thead>
-
-<tr>
-<th>EU</th>
-<th>CM approximatif</th>
-<th>US Homme</th>
-<th>US Femme</th>
-</tr>
-
-</thead>
-
-<tbody>
-
-<tr>
-<td>36</td>
-<td>23.0 cm</td>
-<td>4</td>
-<td>5.5</td>
-</tr>
-
-<tr>
-<td>37</td>
-<td>23.7 cm</td>
-<td>5</td>
-<td>6.5</td>
-</tr>
-
-<tr>
-<td>38</td>
-<td>24.3 cm</td>
-<td>6</td>
-<td>7.5</td>
-</tr>
-
-<tr>
-<td>39</td>
-<td>25.0 cm</td>
-<td>6.5</td>
-<td>8</td>
-</tr>
-
-<tr>
-<td>40</td>
-<td>25.7 cm</td>
-<td>7</td>
-<td>9</td>
-</tr>
-
-<tr>
-<td>41</td>
-<td>26.3 cm</td>
-<td>8</td>
-<td>10</td>
-</tr>
-
-<tr>
-<td>42</td>
-<td>27.0 cm</td>
-<td>8.5</td>
-<td>10.5</td>
-</tr>
-
-<tr>
-<td>43</td>
-<td>27.7 cm</td>
-<td>9.5</td>
-<td>11.5</td>
-</tr>
-
-<tr>
-<td>44</td>
-<td>28.3 cm</td>
-<td>10</td>
-<td>12</td>
-</tr>
-
-<tr>
-<td>45</td>
-<td>29.0 cm</td>
-<td>11</td>
-<td>13</td>
-</tr>
-
-<tr>
-<td>46</td>
-<td>29.7 cm</td>
-<td>12</td>
-<td>14</td>
-</tr>
-
-</tbody>
-
-</table>
-
-</div>
-
-</section>
-
-
-<!-- REVIEWS -->
-
-<section class="section">
-
-<div class="section-head">
-
-<div>
-
-<div class="kicker">
-Community
-</div>
-
-<h2 class="section-title">
-Ils en parlent.
-</h2>
-
-</div>
-
-</div>
-
-
-<div class="reviews">
-
-
-<div class="review">
-
-<div class="review-stars">
-⭐⭐⭐⭐⭐
-</div>
-
-<p>
-« J'aime vraiment le style du site et la paire correspondait
-aux photos. Très bonne expérience. »
-</p>
-
-<div class="reviewer">
-
-<div class="avatar">
-Y
-</div>
-
-<div>
-
-<div class="reviewer-name">
-Yassine
-</div>
-
-<div class="reviewer-city">
-Casablanca
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<div class="review">
-
-<div class="review-stars">
-⭐⭐⭐⭐⭐
-</div>
-
-<p>
-« J'ai pris une paire à 399 DH. La livraison s'est bien passée
-et la taille était bonne. »
-</p>
-
-<div class="reviewer">
-
-<div class="avatar">
-S
-</div>
-
-<div>
-
-<div class="reviewer-name">
-Sara
-</div>
-
-<div class="reviewer-city">
-Rabat
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<div class="review">
-
-<div class="review-stars">
-⭐⭐⭐⭐⭐
-</div>
-
-<p>
-« Le choix est beaucoup plus intéressant que les pages classiques.
-J'ai commandé directement par WhatsApp. »
-</p>
-
-<div class="reviewer">
-
-<div class="avatar">
-A
-</div>
-
-<div>
-
-<div class="reviewer-name">
-Adam
-</div>
-
-<div class="reviewer-city">
-Tanger
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-</div>
-
-</section>
-
-
-<!-- FAQ -->
-
-<section class="section" id="faq">
-
-<div class="section-head">
-
-<div>
-
-<div class="kicker">
-Questions
-</div>
-
-<h2 class="section-title">
-Besoin d'aide ?
-</h2>
-
-</div>
-
-</div>
-
-
-<div class="faq">
-
-
-<div class="faq-item">
-
-<button class="faq-button"
-onclick="toggleFAQ(this)">
-
-Comment commander ?
-
-<span class="plus">+</span>
-
-</button>
-
-<div class="faq-answer">
-
-Choisis ta paire, sélectionne ta taille et ajoute-la au panier.
-Tu peux ensuite envoyer ta commande directement sur WhatsApp.
-
-</div>
-
-</div>
-
-
-<div class="faq-item">
-
-<button class="faq-button"
-onclick="toggleFAQ(this)">
-
-Livrez-vous partout au Maroc ?
-
-<span class="plus">+</span>
-
-</button>
-
-<div class="faq-answer">
-
-La boutique est conçue pour proposer la livraison partout au Maroc.
-Les délais et frais réels doivent être renseignés selon ton transporteur.
-
-</div>
-
-</div>
-
-
-<div class="faq-item">
-
-<button class="faq-button"
-onclick="toggleFAQ(this)">
-
-Puis-je payer à la livraison ?
-
-<span class="plus">+</span>
-
-</button>
-
-<div class="faq-answer">
-
-Oui, le parcours de commande est conçu autour du paiement à la livraison.
-
-</div>
-
-</div>
-
-
-<div class="faq-item">
-
-<button class="faq-button"
-onclick="toggleFAQ(this)">
-
-Comment choisir ma taille ?
-
-<span class="plus">+</span>
-
-</button>
-
-<div class="faq-answer">
-
-Utilise notre tableau de tailles. Si tu hésites entre deux tailles,
-contacte-nous avant la commande.
-
-</div>
-
-</div>
-
-
-</div>
-
-</section>
-
-
-<!-- NEWSLETTER -->
-
-<section class="newsletter">
-
-<div class="newsletter-inner">
-
-<div class="kicker">
-VÉLORA CLUB
-</div>
-
-<h2>
-Nouveautés en premier.
-</h2>
-
-<p>
-Inscris-toi pour recevoir les nouveaux drops et promotions.
-</p>
-
-<form class="newsletter-form"
-onsubmit="newsletter(event)">
-
-<input
-type="email"
-placeholder="Ton email"
-required
->
-
-<button class="btn btn-orange">
-S'INSCRIRE
-</button>
-
-</form>
-
-</div>
-
-</section>
-
-</main>
-
-
-<!-- FOOTER -->
-
-<footer>
-
-<div class="footer-grid">
-
-<div>
-
-<div class="footer-logo">
-VÉLO<span style="color:#e85d04">RA</span>
-</div>
-
-<p class="footer-text">
-Sneakers modernes, style premium et prix accessibles.
-Une boutique pensée pour le marché marocain.
-</p>
-
-</div>
-
-
-<div class="footer-col">
-
-<h4>BOUTIQUE</h4>
-
-<a href="#shop">
-Sneakers
-</a>
-
-<a href="#homme">
-Homme
-</a>
-
-<a href="#femme">
-Femme
-</a>
-
-<a href="#premium">
-Premium
-</a>
-
-</div>
-
-
-<div class="footer-col">
-
-<h4>AIDE</h4>
-
-<a href="#faq">
-FAQ
-</a>
-
-<a href="#">
-Livraison
-</a>
-
-<a href="#">
-Retours
-</a>
-
-<a href="#">
-Guide des tailles
-</a>
-
-</div>
-
-
-<div class="footer-col">
-
-<h4>CONTACT</h4>
-
-<a href="https://wa.me/212600000000"
-target="_blank">
-WhatsApp
-</a>
-
-<a href="mailto:contact@velora.ma">
-Email
-</a>
-
-<a href="#">
-Instagram
-</a>
-
-<a href="#">
-TikTok
-</a>
-
-</div>
-
-</div>
-
-
-<div class="footer-bottom">
-
-<span>
-© 2026 VÉLORA — Maroc
-</span>
-
-<span>
-Sneakers • Style • Mouvement
-</span>
-
-</div>
-
-</footer>
-
-
-<!-- OVERLAY -->
-
-<div class="overlay"
-id="overlay"
-onclick="closeCart()">
-</div>
-
-
-<!-- CART -->
-
-<aside class="cart"
-id="cart">
-
-<div class="cart-head">
-
-<h2>
-Mon panier
-</h2>
-
-<button class="close"
-onclick="closeCart()">
-✕
-</button>
-
-</div>
-
-
-<div class="cart-list"
-id="cartList">
-</div>
-
-
-<div class="cart-footer">
-
-<div class="total">
-
-<span>
-Total
-</span>
-
-<span id="cartTotal">
-0 DH
-</span>
-
-</div>
-
-<button
-class="btn btn-black"
-style="width:100%"
-onclick="whatsappOrder()">
-
-COMMANDER SUR WHATSAPP →
-
-</button>
-
-</div>
-
-</aside>
-
-
-<!-- PRODUCT MODAL -->
-
-<div class="modal-wrap"
-id="productModal">
-
-<div class="modal">
-
-<button class="modal-close"
-onclick="closeProduct()">
-✕
-</button>
-
-
-<div class="product-modal">
-
-<div class="modal-image">
-
-<img
-id="modalImage"
-src=""
-alt=""
->
-
-</div>
-
-
-<div class="modal-info">
-
-<div class="brand"
-id="modalBrand">
-</div>
-
-<h2 id="modalName">
-</h2>
-
-<div id="modalStars">
-</div>
-
-<div class="modal-price"
-id="modalPrice">
-</div>
-
-<p class="modal-description"
-id="modalDescription">
-</p>
-
-
-<div class="size-title">
-CHOISIR LA TAILLE
-</div>
-
-<div class="sizes"
-id="modalSizes">
-
-<button class="size">
-36
-</button>
-
-<button class="size">
-37
-</button>
-
-<button class="size">
-38
-</button>
-
-<button class="size">
-39
-</button>
-
-<button class="size">
-40
-</button>
-
-<button class="size">
-41
-</button>
-
-<button class="size">
-42
-</button>
-
-<button class="size">
-43
-</button>
-
-<button class="size">
-44
-</button>
-
-<button class="size">
-45
-</button>
-
-<button class="size">
-46
-</button>
-
-</div>
-
-
-<button
-class="btn btn-black"
-style="width:100%"
-id="modalAdd">
-
-AJOUTER AU PANIER
-
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- SEARCH -->
-
-<div class="modal-wrap"
-id="searchModal">
-
-<div class="modal search-modal">
-
-<button class="modal-close"
-onclick="closeSearch()">
-✕
-</button>
-
-<div style="padding:35px 10px">
-
-<div class="kicker">
-Recherche
-</div>
-
-<h2 class="section-title">
-Que recherches-tu ?
-</h2>
-
-<input
-class="search-input"
-id="searchInput"
-placeholder="New Balance, running, blanc..."
-oninput="searchProducts(this.value)"
->
-
-<div id="searchResults"
-style="margin-top:20px">
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- WHATSAPP -->
-
-<a
-class="whatsapp"
-href="https://wa.me/212600000000"
-target="_blank"
-title="WhatsApp">
-
-☎
-
-</a>
-
-
-<div class="toast"
-id="toast">
-</div>
-
-
-<script>
-
-/* =====================================================
-   PRODUITS
-===================================================== */
-
-const products = [
-
-{
-id:1,
-name:"NB 530 Silver",
-brand:"NEW BALANCE STYLE",
-category:"Lifestyle",
-gender:"Homme",
-price:449,
-oldPrice:549,
-rating:4.9,
-reviews:126,
-badge:"BEST SELLER",
-image:"https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=900&q=90",
-description:"Silhouette rétro-running argentée inspirée des sneakers 2000s."
-},
-
-{
-id:2,
-name:"NB 530 White",
-brand:"NEW BALANCE STYLE",
-category:"Lifestyle",
-gender:"Femme",
-price:449,
-oldPrice:549,
-rating:4.9,
-reviews:112,
-badge:"TOP",
-image:"https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&w=900&q=90",
-description:"Une silhouette blanche et argentée facile à porter tous les jours."
-},
-
-{
-id:3,
-name:"NB 550 Cream",
-brand:"NEW BALANCE STYLE",
-category:"Retro",
-gender:"Homme",
-price:399,
-oldPrice:499,
-rating:4.8,
-reviews:92,
-badge:"TENDANCE",
-image:"https://images.unsplash.com/photo-1607522370275-f14206abe5d3?auto=format&fit=crop&w=900&q=90",
-description:"Inspirée du basketball rétro avec une esthétique minimaliste."
-},
-
-{
-id:4,
-name:"NB 9060 Grey",
-brand:"NEW BALANCE STYLE",
-category:"Streetwear",
-gender:"Homme",
-price:549,
-oldPrice:649,
-rating:4.9,
-reviews:88,
-badge:"PREMIUM",
-image:"https://images.unsplash.com/photo-1495555961986-6d4c1ecb7be3?auto=format&fit=crop&w=900&q=90",
-description:"Silhouette massive et moderne pour un look streetwear."
-},
-
-{
-id:5,
-name:"Cloud Runner White",
-brand:"VÉLORA RUN",
-category:"Running",
-gender:"Femme",
-price:369,
-oldPrice:449,
-rating:4.7,
-reviews:71,
-badge:"CONFORT",
-image:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=90",
-description:"Sneaker légère pour marcher et rester actif toute la journée."
-},
-
-{
-id:6,
-name:"Cloud Runner Black",
-brand:"VÉLORA RUN",
-category:"Running",
-gender:"Homme",
-price:369,
-oldPrice:449,
-rating:4.7,
-reviews:64,
-badge:"",
-image:"https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=900&q=90",
-description:"Version noire polyvalente avec une silhouette sportive."
-},
-
-{
-id:7,
-name:"Tennis Cream",
-brand:"VÉLORA ESSENTIAL",
-category:"Lifestyle",
-gender:"Femme",
-price:299,
-oldPrice:379,
-rating:4.8,
-reviews:83,
-badge:"NEW",
-image:"https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=900&q=90",
-description:"Sneaker crème minimaliste pour les looks casual."
-},
-
-{
-id:8,
-name:"Tennis Black",
-brand:"VÉLORA ESSENTIAL",
-category:"Lifestyle",
-gender:"Homme",
-price:299,
-oldPrice:379,
-rating:4.7,
-reviews:79,
-badge:"",
-image:"https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=900&q=90",
-description:"Un classique noir facile à associer."
-},
-
-{
-id:9,
-name:"Retro Green",
-brand:"VÉLORA RETRO",
-category:"Retro",
-gender:"Homme",
-price:329,
-oldPrice:399,
-rating:4.8,
-reviews:51,
-badge:"HOT",
-image:"https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=900&q=90",
-description:"Couleurs rétro et silhouette basse inspirée des archives sport."
-},
-
-{
-id:10,
-name:"Retro Burgundy",
-brand:"VÉLORA RETRO",
-category:"Retro",
-gender:"Femme",
-price:329,
-oldPrice:399,
-rating:4.8,
-reviews:43,
-badge:"",
-image:"https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=900&q=90",
-description:"Une couleur profonde pour un style rétro différent."
-},
-
-{
-id:11,
-name:"Street Mono",
-brand:"VÉLORA STREET",
-category:"Streetwear",
-gender:"Homme",
-price:399,
-oldPrice:479,
-rating:4.8,
-reviews:69,
-badge:"HOT",
-image:"https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=900&q=90",
-description:"Volume moderne et esthétique monochrome."
-},
-
-{
-id:12,
-name:"Street Cream",
-brand:"VÉLORA STREET",
-category:"Streetwear",
-gender:"Femme",
-price:399,
-oldPrice:479,
-rating:4.8,
-reviews:54,
-badge:"",
-image:"https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=900&q=90",
-description:"Une silhouette streetwear neutre et polyvalente."
-},
-
-{
-id:13,
-name:"Luxury White",
-brand:"VÉLORA PREMIUM",
-category:"Premium",
-gender:"Homme",
-price:499,
-oldPrice:599,
-rating:4.9,
-reviews:37,
-badge:"PREMIUM",
-image:"https://images.unsplash.com/photo-1495555961986-6d4c1ecb7be3?auto=format&fit=crop&w=900&q=90",
-description:"Design minimaliste inspiré de l'univers quiet luxury."
-},
-
-{
-id:14,
-name:"Luxury Sand",
-brand:"VÉLORA PREMIUM",
-category:"Premium",
-gender:"Femme",
-price:499,
-oldPrice:599,
-rating:4.9,
-reviews:35,
-badge:"PREMIUM",
-image:"https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=900&q=90",
-description:"Nuance sable, lignes propres et look discret."
-},
-
-{
-id:15,
-name:"LP Inspired White",
-brand:"VÉLORA PREMIUM",
-category:"Premium",
-gender:"Homme",
-price:549,
-oldPrice:649,
-rating:4.9,
-reviews:29,
-badge:"LUXURY STYLE",
-image:"https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=900&q=90",
-description:"Silhouette inspirée du minimalisme italien et du quiet luxury."
-},
-
-{
-id:16,
-name:"LP Inspired Beige",
-brand:"VÉLORA PREMIUM",
-category:"Premium",
-gender:"Femme",
-price:549,
-oldPrice:649,
-rating:4.9,
-reviews:31,
-badge:"LUXURY STYLE",
-image:"https://images.unsplash.com/photo-1495555961986-6d4c1ecb7be3?auto=format&fit=crop&w=900&q=90",
-description:"Une sneaker beige élégante pensée pour les looks premium."
-},
-
-{
-id:17,
-name:"Runner Grey",
-brand:"VÉLORA RUN",
-category:"Running",
-gender:"Homme",
-price:349,
-oldPrice:429,
-rating:4.7,
-reviews:41,
-badge:"",
-image:"https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=900&q=90",
-description:"Sneaker sportive grise adaptée au quotidien."
-},
-
-{
-id:18,
-name:"Runner Pink",
-brand:"VÉLORA RUN",
-category:"Running",
-gender:"Femme",
-price:349,
-oldPrice:429,
-rating:4.7,
-reviews:38,
-badge:"NEW",
-image:"https://images.unsplash.com/photo-1495555961986-6d4c1ecb7be3?auto=format&fit=crop&w=900&q=90",
-description:"Une version féminine légère et confortable."
-},
-
-{
-id:19,
-name:"Basic White",
-brand:"VÉLORA BASIC",
-category:"Lifestyle",
-gender:"Homme",
-price:199,
-oldPrice:249,
-rating:4.6,
-reviews:97,
-badge:"149 DH+",
-image:"https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=900&q=90",
-description:"L'essentiel blanc à petit prix."
-},
-
-{
-id:20,
-name:"Basic Black",
-brand:"VÉLORA BASIC",
-category:"Lifestyle",
-gender:"Femme",
-price:199,
-oldPrice:249,
-rating:4.6,
-reviews:82,
-badge:"",
-image:"https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=900&q=90",
-description:"Un modèle simple pour tous les jours."
-},
-
-{
-id:21,
-name:"Retro Navy",
-brand:"VÉLORA RETRO",
-category:"Retro",
-gender:"Homme",
-price:359,
-oldPrice:429,
-rating:4.8,
-reviews:34,
-badge:"",
-image:"https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=900&q=90",
-description:"Navy et blanc pour une esthétique rétro intemporelle."
-},
-
-{
-id:22,
-name:"Retro Pink",
-brand:"VÉLORA RETRO",
-category:"Retro",
-gender:"Femme",
-price:359,
-oldPrice:429,
-rating:4.8,
-reviews:28,
-badge:"",
-image:"https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&w=900&q=90",
-description:"Une interprétation douce du style rétro."
-},
-
-{
-id:23,
-name:"Court White",
-brand:"VÉLORA COURT",
-category:"Lifestyle",
-gender:"Homme",
-price:279,
-oldPrice:349,
-rating:4.7,
-reviews:57,
-badge:"",
-image:"https://images.unsplash.com/photo-1607522370275-f14206abe5d3?auto=format&fit=crop&w=900&q=90",
-description:"Silhouette tennis blanche et minimaliste."
-},
-
-{
-id:24,
-name:"Court Beige",
-brand:"VÉLORA COURT",
-category:"Lifestyle",
-gender:"Femme",
-price:279,
-oldPrice:349,
-rating:4.7,
-reviews:46,
-badge:"",
-image:"https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=900&q=90",
-description:"Un modèle beige simple et facile à porter."
-},
-
-{
-id:25,
-name:"Chunky Grey",
-brand:"VÉLORA STREET",
-category:"Streetwear",
-gender:"Homme",
-price:429,
-oldPrice:529,
-rating:4.8,
-reviews:33,
-badge:"TRENDING",
-image:"https://images.unsplash.com/photo-1495555961986-6d4c1ecb7be3?auto=format&fit=crop&w=900&q=90",
-description:"Volume chunky et semelle imposante pour un look contemporain."
-},
-
-{
-id:26,
-name:"Chunky Cream",
-brand:"VÉLORA STREET",
-category:"Streetwear",
-gender:"Femme",
-price:429,
-oldPrice:529,
-rating:4.8,
-reviews:30,
-badge:"TRENDING",
-image:"https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=900&q=90",
-description:"Une chunky sneaker crème inspirée des tendances actuelles."
-},
-
-{
-id:27,
-name:"Mono Black",
-brand:"VÉLORA PREMIUM",
-category:"Premium",
-gender:"Homme",
-price:570,
-oldPrice:690,
-rating:4.9,
-reviews:22,
-badge:"TOP PREMIUM",
-image:"https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=900&q=90",
-description:"Notre modèle premium noir : discret, moderne et polyvalent."
-},
-
-{
-id:28,
-name:"Mono Cream",
-brand:"VÉLORA PREMIUM",
-category:"Premium",
-gender:"Femme",
-price:570,
-oldPrice:690,
-rating:4.9,
-reviews:21,
-badge:"TOP PREMIUM",
-image:"https://images.unsplash.com/photo-1495555961986-6d4c1ecb7be3?auto=format&fit=crop&w=900&q=90",
-description:"Une esthétique premium monochrome dans une teinte crème."
-},
-
-{
-id:29,
-name:"Daily Grey",
-brand:"VÉLORA DAILY",
-category:"Lifestyle",
-gender:"Homme",
-price:249,
-oldPrice:299,
-rating:4.6,
-reviews:48,
-badge:"",
-image:"https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=900&q=90",
-description:"Une paire abordable pour les journées quotidiennes."
-},
-
-{
-id:30,
-name:"Daily Cream",
-brand:"VÉLORA DAILY",
-category:"Lifestyle",
-gender:"Femme",
-price:249,
-oldPrice:299,
-rating:4.7,
-reviews:44,
-badge:"",
-image:"https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=900&q=90",
-description:"Minimaliste, légère et facile à combiner."
-},
-
-{
-id:31,
-name:"Urban Orange",
-brand:"VÉLORA STREET",
-category:"Streetwear",
-gender:"Homme",
-price:389,
-oldPrice:469,
-rating:4.7,
-reviews:27,
-badge:"DROP",
-image:"https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=900&q=90",
-description:"Une touche orange pour un look urbain plus audacieux."
-},
-
-{
-id:32,
-name:"Urban Rose",
-brand:"VÉLORA STREET",
-category:"Streetwear",
-gender:"Femme",
-price:389,
-oldPrice:469,
-rating:4.7,
-reviews:24,
-badge:"DROP",
-image:"https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&w=900&q=90",
-description:"Rose doux et volume moderne pour un look streetwear."
-}
-
-];
-
-
-/* =====================================================
-   VARIABLES
-===================================================== */
-
-let cart =
-JSON.parse(localStorage.getItem("velora_cart") || "[]");
-
-let favorites =
-JSON.parse(localStorage.getItem("velora_favorites") || "[]");
-
-let currentProducts = [...products];
-
-let selectedProduct = null;
-
-
-/* =====================================================
-   PRODUCT CARD
-===================================================== */
-
-function productCard(product){
-
-    const fav =
-    favorites.includes(product.id);
-
-    return `
-
-    <article class="product">
-
-        <div class="product-img">
-
-            ${
-                product.badge
-                ?
-                `<div class="badge ${
-                    product.badge.includes("TOP")
-                    || product.badge.includes("PREMIUM")
-                    ? "orange"
-                    : ""
-                }">
-                    ${product.badge}
-                </div>`
-                :
-                ""
-            }
-
-            <button
-                class="favorite ${fav ? "active":""}"
-                onclick="toggleFavorite(${product.id},this)"
-            >
-                ${fav ? "♥":"♡"}
-            </button>
-
-            <img
-                src="${product.image}"
-                alt="${product.name}"
-                loading="lazy"
-            >
+            <p>
+                Ajoutez vos modèles au panier et envoyez votre
+                commande directement sur WhatsApp.
+            </p>
 
         </div>
 
 
-        <div class="product-body">
+        <div class="feature">
 
-            <div class="brand">
-                ${product.brand}
+            <div class="feature-icon">
+                💎
             </div>
 
-            <div class="product-name">
-                ${product.name}
+            <h3>
+                Sélection moderne
+            </h3>
+
+            <p>
+                Des modèles inspirés des tendances actuelles,
+                avec une sélection orientée confort et style.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                🇲🇦
             </div>
 
-            <div class="product-meta">
-                ${product.category} • ${product.gender}
+            <h3>
+                Pensé pour le Maroc
+            </h3>
+
+            <p>
+                Prix en dirhams, paiement à la livraison et
+                commande simplifiée pour les clients marocains.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer id="contact">
+
+    <div class="footer-grid">
+
+        <div class="footer-brand">
+
+            <h2>
+                MHD STORE
+            </h2>
+
+            <p>
+                Sneakers modernes et accessibles.
+                Trouvez votre prochaine paire et commandez
+                facilement partout au Maroc.
+            </p>
+
+        </div>
+
+
+        <div class="footer-col">
+
+            <h4>Boutique</h4>
+
+            <a href="#collection">Sneakers</a>
+            <a href="#collection">Nouveautés</a>
+            <a href="#collection">Streetwear</a>
+            <a href="#collection">Premium</a>
+
+        </div>
+
+
+        <div class="footer-col">
+
+            <h4>Contact</h4>
+
+            <a href="tel:+212657461342">
+                06 57 46 13 42
+            </a>
+
+            <a href="https://wa.me/212657461342" target="_blank">
+                WhatsApp
+            </a>
+
+            <a href="https://instagram.com/MHD_STORE" target="_blank">
+                Instagram
+            </a>
+
+        </div>
+
+
+        <div class="footer-col">
+
+            <h4>Informations</h4>
+
+            <a href="#">
+                Livraison
+            </a>
+
+            <a href="#">
+                Paiement
+            </a>
+
+            <a href="#">
+                Conditions
+            </a>
+
+            <a href="#">
+                FAQ
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="copyright">
+
+        <span>
+            © 2026 MHD STORE — Tous droits réservés.
+        </span>
+
+        <span>
+            Sneakers • Maroc • Style
+        </span>
+
+    </div>
+
+</footer>
+
+
+<!-- =========================
+     CART
+========================= -->
+
+<div class="overlay" id="overlay" onclick="closeCart()"></div>
+
+<aside class="cart" id="cart">
+
+    <div class="cart-header">
+
+        <h2>
+            Ton panier
+        </h2>
+
+        <button class="close" onclick="closeCart()">
+            ✕
+        </button>
+
+    </div>
+
+
+    <div class="cart-items" id="cartItems">
+
+        <div class="empty">
+            Ton panier est vide 👟
+        </div>
+
+    </div>
+
+
+    <div class="cart-footer">
+
+        <div class="total">
+
+            <span>Total</span>
+
+            <span id="cartTotal">
+                0 DH
+            </span>
+
+        </div>
+
+        <button class="whatsapp-order" onclick="orderWhatsApp()">
+            Commander sur WhatsApp
+        </button>
+
+    </div>
+
+</aside>
+
+
+<!-- =========================
+     PRODUCT MODAL
+========================= -->
+
+<div class="modal" id="productModal">
+
+    <div class="modal-content">
+
+        <button class="modal-close" onclick="closeProduct()">
+            ✕
+        </button>
+
+        <div class="modal-grid">
+
+            <div class="modal-image">
+
+                <img id="modalImage" src="" alt="">
+
             </div>
 
-            <div class="stars">
-                ⭐ ${product.rating}
-                <span style="color:#aaa">
-                    (${product.reviews})
-                </span>
-            </div>
+            <div class="modal-info">
 
+                <div class="brand" id="modalBrand"></div>
 
-            <div class="price-row">
+                <h2 id="modalName"></h2>
 
-                <div class="price">
+                <p id="modalDescription"></p>
 
-                    ${product.price} DH
+                <div class="modal-price" id="modalPrice"></div>
 
-                    <span class="old-price">
-                        ${product.oldPrice} DH
-                    </span>
+                <div class="size-title">
+                    Choisir une taille
+                </div>
+
+                <div class="sizes" id="sizes">
+
+                    <button class="size" onclick="selectSize(this)">
+                        39
+                    </button>
+
+                    <button class="size" onclick="selectSize(this)">
+                        40
+                    </button>
+
+                    <button class="size" onclick="selectSize(this)">
+                        41
+                    </button>
+
+                    <button class="size" onclick="selectSize(this)">
+                        42
+                    </button>
+
+                    <button class="size" onclick="selectSize(this)">
+                        43
+                    </button>
+
+                    <button class="size" onclick="selectSize(this)">
+                        44
+                    </button>
 
                 </div>
 
-                <button
-                    class="quick-add"
-                    onclick="openProduct(${product.id})"
-                >
-                    +
+                <button class="btn btn-primary" id="modalAdd">
+                    Ajouter au panier
                 </button>
 
             </div>
 
         </div>
 
-    </article>
+    </div>
 
-    `;
+</div>
+
+
+<!-- =========================
+     WHATSAPP
+========================= -->
+
+<a
+    class="whatsapp"
+    href="https://wa.me/212657461342"
+    target="_blank"
+    title="WhatsApp MHD STORE"
+>
+    ☎
+</a>
+
+
+<div class="toast" id="toast">
+    Ajouté au panier ✓
+</div>
+
+
+<script>
+
+/* =========================================
+   PRODUITS
+========================================= */
+
+const productsData = [
+
+{
+id:1,
+name:"Urban Runner Black",
+brand:"MHD Performance",
+price:249,
+category:"running",
+badge:"BEST SELLER",
+image:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=85",
+description:"Une silhouette sportive et polyvalente pour les journées actives."
+},
+
+{
+id:2,
+name:"Cloud Runner White",
+brand:"MHD Performance",
+price:279,
+category:"running",
+badge:"NEW",
+image:"https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=900&q=85",
+description:"Design minimaliste blanc avec une silhouette inspirée du running."
+},
+
+{
+id:3,
+name:"Street Classic",
+brand:"MHD Street",
+price:199,
+category:"streetwear",
+badge:"",
+image:"https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=900&q=85",
+description:"Une sneaker streetwear simple et facile à porter."
+},
+
+{
+id:4,
+name:"Premium White",
+brand:"MHD Premium",
+price:399,
+category:"premium",
+badge:"PREMIUM",
+image:"https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=900&q=85",
+description:"Une silhouette premium minimaliste inspirée du luxe contemporain."
+},
+
+{
+id:5,
+name:"Retro 550 Style",
+brand:"MHD Street",
+price:329,
+category:"streetwear",
+badge:"TREND",
+image:"https://images.unsplash.com/photo-1605348532760-6754d2c6c9f0?auto=format&fit=crop&w=900&q=85",
+description:"Look rétro basket avec une présence forte et moderne."
+},
+
+{
+id:6,
+name:"Minimal Leather",
+brand:"MHD Premium",
+price:449,
+category:"premium",
+badge:"",
+image:"https://images.unsplash.com/photo-1495555961986-6d4c1ecb7be3?auto=format&fit=crop&w=900&q=85",
+description:"Sneaker minimaliste inspirée des silhouettes premium européennes."
+},
+
+{
+id:7,
+name:"Daily Cream",
+brand:"MHD Casual",
+price:229,
+category:"casual",
+badge:"BEST SELLER",
+image:"https://images.unsplash.com/photo-1560769629-975ec94e6a86?auto=format&fit=crop&w=900&q=85",
+description:"Une paire crème polyvalente pour tous les jours."
+},
+
+{
+id:8,
+name:"Runner Grey",
+brand:"MHD Performance",
+price:259,
+category:"running",
+badge:"",
+image:"https://images.unsplash.com/photo-1554135331-6fbd5e2c8b4b?auto=format&fit=crop&w=900&q=85",
+description:"Une sneaker grise sportive pensée pour un usage quotidien."
+},
+
+{
+id:9,
+name:"Luxury Cream",
+brand:"MHD Premium",
+price:570,
+category:"premium",
+badge:"LIMITED",
+image:"https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=900&q=85",
+description:"Silhouette luxe minimaliste avec une finition élégante."
+},
+
+{
+id:10,
+name:"Black Essential",
+brand:"MHD Casual",
+price:179,
+category:"casual",
+badge:"",
+image:"https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=85",
+description:"Une sneaker noire simple, discrète et facile à associer."
+},
+
+{
+id:11,
+name:"Sport Energy",
+brand:"MHD Performance",
+price:289,
+category:"running",
+badge:"NEW",
+image:"https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?auto=format&fit=crop&w=900&q=85",
+description:"Une silhouette sportive dynamique pour un look moderne."
+},
+
+{
+id:12,
+name:"Street Shadow",
+brand:"MHD Street",
+price:239,
+category:"streetwear",
+badge:"",
+image:"https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=900&q=85",
+description:"Sneaker sombre inspirée de l'esthétique streetwear."
+},
+
+{
+id:13,
+name:"Clean White",
+brand:"MHD Casual",
+price:219,
+category:"casual",
+badge:"HOT",
+image:"https://images.unsplash.com/photo-1562183241-b937e95585b6?auto=format&fit=crop&w=900&q=85",
+description:"Une paire blanche intemporelle pour un style propre."
+},
+
+{
+id:14,
+name:"Premium Sand",
+brand:"MHD Premium",
+price:499,
+category:"premium",
+badge:"PREMIUM",
+image:"https://images.unsplash.com/photo-1520256862855-398228c41684?auto=format&fit=crop&w=900&q=85",
+description:"Une silhouette beige premium inspirée du minimalisme."
+},
+
+{
+id:15,
+name:"Retro Court",
+brand:"MHD Street",
+price:299,
+category:"streetwear",
+badge:"",
+image:"https://images.unsplash.com/photo-1579338559194-a162d19bf842?auto=format&fit=crop&w=900&q=85",
+description:"Un look court rétro adapté au streetwear moderne."
+},
+
+{
+id:16,
+name:"Runner Black Pro",
+brand:"MHD Performance",
+price:349,
+category:"new",
+badge:"NEW",
+image:"https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&w=900&q=85",
+description:"Une silhouette moderne pensée pour les amateurs de sneakers sport."
+},
+
+{
+id:17,
+name:"Urban Beige",
+brand:"MHD Casual",
+price:249,
+category:"casual",
+badge:"",
+image:"https://images.unsplash.com/photo-1520256862855-398228c41684?auto=format&fit=crop&w=900&q=85",
+description:"Beige neutre et silhouette moderne pour les tenues quotidiennes."
+},
+
+{
+id:18,
+name:"Monochrome Black",
+brand:"MHD Premium",
+price:429,
+category:"premium",
+badge:"",
+image:"https://images.unsplash.com/photo-1554135331-6fbd5e2c8b4b?auto=format&fit=crop&w=900&q=85",
+description:"Une sneaker monochrome au look premium et contemporain."
+},
+
+{
+id:19,
+name:"Street White",
+brand:"MHD Street",
+price:259,
+category:"new",
+badge:"NEW",
+image:"https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=900&q=85",
+description:"Une silhouette blanche inspirée des tendances streetwear."
+},
+
+{
+id:20,
+name:"Essential Grey",
+brand:"MHD Casual",
+price:199,
+category:"casual",
+badge:"",
+image:"https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=900&q=85",
+description:"Une paire grise polyvalente pour un style quotidien."
 }
 
-
-/* =====================================================
-   RENDER
-===================================================== */
-
-function renderProducts(list=currentProducts){
-
-    const container =
-    document.getElementById("products");
-
-    container.innerHTML =
-    list.map(productCard).join("");
-
-}
+];
 
 
-function renderGender(){
+/* =========================================
+   VARIABLES
+========================================= */
 
-    const men =
-    products
-    .filter(p=>p.gender==="Homme")
-    .slice(0,8);
+let products = [...productsData];
 
-    const women =
-    products
-    .filter(p=>p.gender==="Femme")
-    .slice(0,8);
+let cart = [];
 
-    document.getElementById("menProducts")
-    .innerHTML =
-    men.map(productCard).join("");
-
-    document.getElementById("womenProducts")
-    .innerHTML =
-    women.map(productCard).join("");
-
-}
+let currentCategory = "all";
 
 
-/* =====================================================
-   FILTER
-===================================================== */
+/* =========================================
+   AFFICHER PRODUITS
+========================================= */
 
-function filterProducts(category,button){
+function renderProducts(){
 
-    document
-    .querySelectorAll(".filter")
-    .forEach(b=>b.classList.remove("active"));
+    const container = document.getElementById("products");
 
-    if(button){
-        button.classList.add("active");
-    }
+    let filtered = [...products];
 
-    if(category==="all"){
-        currentProducts=[...products];
-    }
-    else{
-        currentProducts =
-        products.filter(p=>p.category===category);
-    }
-
-    renderProducts(currentProducts);
-
-    document
-    .getElementById("shop")
-    .scrollIntoView({
-        behavior:"smooth"
-    });
-
-}
-
-
-function filterCategory(category){
-
-    const button =
-    [...document.querySelectorAll(".filter")]
-    .find(
-        b =>
-        b.textContent.trim()
+    const search =
+        document.getElementById("search").value
         .toLowerCase()
-        === category.toLowerCase()
-    );
+        .trim();
 
-    filterProducts(category,button);
+    if(search){
+
+        filtered = filtered.filter(product =>
+
+            product.name.toLowerCase().includes(search) ||
+            product.brand.toLowerCase().includes(search)
+
+        );
+
+    }
+
+    if(currentCategory !== "all"){
+
+        filtered = filtered.filter(product =>
+
+            product.category === currentCategory
+
+        );
+
+    }
+
+    const sort =
+        document.getElementById("sort").value;
+
+    if(sort === "low"){
+
+        filtered.sort((a,b)=>a.price-b.price);
+
+    }
+
+    if(sort === "high"){
+
+        filtered.sort((a,b)=>b.price-a.price);
+
+    }
+
+    if(sort === "name"){
+
+        filtered.sort((a,b)=>
+            a.name.localeCompare(b.name)
+        );
+
+    }
+
+
+    if(filtered.length === 0){
+
+        container.innerHTML = `
+            <div style="
+                grid-column:1/-1;
+                padding:80px;
+                text-align:center;
+                color:#666;
+            ">
+                <div style="font-size:40px;margin-bottom:15px;">
+                    👟
+                </div>
+                Aucun modèle trouvé.
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML = filtered.map(product => `
+
+        <article class="product">
+
+            <div class="product-image">
+
+                ${
+                    product.badge
+                    ?
+                    `<div class="product-badge">
+                        ${product.badge}
+                    </div>`
+                    :
+                    ""
+                }
+
+                <button
+                    class="favorite"
+                    onclick="toggleFavorite(this)"
+                >
+                    ♡
+                </button>
+
+                <img
+                    src="${product.image}"
+                    alt="${product.name}"
+                    loading="lazy"
+                    onclick="openProduct(${product.id})"
+                >
+
+            </div>
+
+
+            <div class="product-info">
+
+                <div class="product-brand">
+                    ${product.brand}
+                </div>
+
+                <div class="product-name">
+                    ${product.name}
+                </div>
+
+                <div class="product-description">
+                    ${product.description}
+                </div>
+
+
+                <div class="product-bottom">
+
+                    <div>
+
+                        <span class="price">
+                            ${product.price} DH
+                        </span>
+
+                        ${
+                            product.price >= 250
+                            ?
+                            `<span class="old-price">
+                                ${product.price + 80} DH
+                            </span>`
+                            :
+                            ""
+                        }
+
+                    </div>
+
+                    <button
+                        class="add"
+                        onclick="addToCart(${product.id})"
+                        title="Ajouter au panier"
+                    >
+                        +
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+    `).join("");
 
 }
 
 
-/* =====================================================
-   SORT
-===================================================== */
+/* =========================================
+   FILTRE
+========================================= */
 
-function sortProducts(value){
+function filterCategory(category,button){
 
-    let list=[...currentProducts];
-
-    if(value==="low"){
-        list.sort((a,b)=>a.price-b.price);
-    }
-
-    if(value==="high"){
-        list.sort((a,b)=>b.price-a.price);
-    }
-
-    if(value==="rating"){
-        list.sort((a,b)=>b.rating-a.rating);
-    }
-
-    renderProducts(list);
-
-}
-
-
-/* =====================================================
-   FAVORITES
-===================================================== */
-
-function toggleFavorite(id,button){
-
-    if(favorites.includes(id)){
-
-        favorites =
-        favorites.filter(x=>x!==id);
-
-        button.classList.remove("active");
-        button.textContent="♡";
-
-        toast("Retiré des favoris");
-
-    }
-    else{
-
-        favorites.push(id);
-
-        button.classList.add("active");
-        button.textContent="♥";
-
-        toast("Ajouté aux favoris ❤️");
-
-    }
-
-    localStorage.setItem(
-        "velora_favorites",
-        JSON.stringify(favorites)
-    );
-
-}
-
-
-/* =====================================================
-   PRODUCT MODAL
-===================================================== */
-
-function openProduct(id){
-
-    selectedProduct =
-    products.find(p=>p.id===id);
-
-    if(!selectedProduct)return;
-
-    document.getElementById("modalImage").src =
-    selectedProduct.image;
-
-    document.getElementById("modalImage").alt =
-    selectedProduct.name;
-
-    document.getElementById("modalBrand").textContent =
-    selectedProduct.brand;
-
-    document.getElementById("modalName").textContent =
-    selectedProduct.name;
-
-    document.getElementById("modalPrice").textContent =
-    selectedProduct.price+" DH";
-
-    document.getElementById("modalStars").innerHTML =
-    "⭐ "+selectedProduct.rating+
-    " • "+selectedProduct.reviews+" avis";
-
-    document.getElementById("modalDescription").textContent =
-    selectedProduct.description;
-
-    document.getElementById("modalAdd").onclick =
-    ()=>{
-        addToCart(selectedProduct.id);
-        closeProduct();
-    };
+    currentCategory = category;
 
     document
-    .getElementById("productModal")
-    .classList.add("show");
+        .querySelectorAll(".category")
+        .forEach(btn=>btn.classList.remove("active"));
 
-    document.body.style.overflow="hidden";
+    button.classList.add("active");
 
-}
-
-
-function closeProduct(){
-
-    document
-    .getElementById("productModal")
-    .classList.remove("show");
-
-    document.body.style.overflow="";
+    renderProducts();
 
 }
 
 
-/* =====================================================
-   SIZE BUTTONS
-===================================================== */
+/* =========================================
+   RECHERCHE
+========================================= */
 
-document.addEventListener("click",function(e){
+function searchProducts(){
 
-    if(e.target.classList.contains("size")){
+    renderProducts();
 
-        document
-        .querySelectorAll(".size")
-        .forEach(s=>s.classList.remove("active"));
-
-        e.target.classList.add("active");
-
-    }
-
-});
+}
 
 
-/* =====================================================
-   CART
-===================================================== */
+/* =========================================
+   TRI
+========================================= */
+
+function sortProducts(){
+
+    renderProducts();
+
+}
+
+
+/* =========================================
+   PANIER
+========================================= */
 
 function addToCart(id){
 
     const product =
-    products.find(p=>p.id===id);
+        productsData.find(p=>p.id===id);
 
-    if(!product)return;
+    const existing =
+        cart.find(item=>item.id===id);
 
-    const item =
-    cart.find(x=>x.id===id);
+    if(existing){
 
-    if(item){
+        existing.quantity++;
 
-        item.quantity++;
-
-    }
-    else{
+    }else{
 
         cart.push({
-            id:id,
+
+            ...product,
             quantity:1
+
         });
 
     }
 
-    saveCart();
-
     updateCart();
 
-    toast(
-        product.name+" ajouté au panier 🛒"
-    );
-
-}
-
-
-function saveCart(){
-
-    localStorage.setItem(
-        "velora_cart",
-        JSON.stringify(cart)
-    );
+    showToast("Ajouté au panier ✓");
 
 }
 
@@ -3714,120 +2167,93 @@ function saveCart(){
 function updateCart(){
 
     const count =
-    cart.reduce(
-        (sum,item)=>sum+item.quantity,
-        0
-    );
+        cart.reduce(
+            (total,item)=>total+item.quantity,
+            0
+        );
 
-    document.getElementById("cartCount")
-    .textContent=count;
+    document.getElementById("cartCount").textContent =
+        count;
 
-    const list =
-    document.getElementById("cartList");
 
-    if(cart.length===0){
+    const container =
+        document.getElementById("cartItems");
 
-        list.innerHTML=`
 
-        <div class="empty-cart">
+    if(cart.length === 0){
 
-            <div style="font-size:45px">
-                🛒
+        container.innerHTML = `
+            <div class="empty">
+                Ton panier est vide 👟
             </div>
-
-            <p style="margin-top:15px">
-                Ton panier est vide.
-            </p>
-
-        </div>
-
         `;
 
-        document.getElementById("cartTotal")
-        .textContent="0 DH";
+    }else{
 
-        return;
+        container.innerHTML = cart.map(item=>`
+
+            <div class="cart-item">
+
+                <img
+                    src="${item.image}"
+                    alt="${item.name}"
+                >
+
+                <div class="cart-item-info">
+
+                    <div class="cart-item-name">
+                        ${item.name}
+                    </div>
+
+                    <div class="cart-item-price">
+                        ${item.price} DH
+                    </div>
+
+                    <div class="qty">
+
+                        <button
+                            onclick="changeQuantity(${item.id},-1)"
+                        >
+                            −
+                        </button>
+
+                        <span>
+                            ${item.quantity}
+                        </span>
+
+                        <button
+                            onclick="changeQuantity(${item.id},1)"
+                        >
+                            +
+                        </button>
+
+                        <button
+                            class="remove"
+                            onclick="removeFromCart(${item.id})"
+                        >
+                            ✕
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        `).join("");
 
     }
 
 
-    let total=0;
+    const total =
+        cart.reduce(
+            (sum,item)=>
+                sum+(item.price*item.quantity),
+            0
+        );
 
-    list.innerHTML="";
-
-
-    cart.forEach(item=>{
-
-        const product =
-        products.find(p=>p.id===item.id);
-
-        if(!product)return;
-
-        total +=
-        product.price*item.quantity;
-
-
-        list.innerHTML += `
-
-        <div class="cart-item">
-
-            <img
-                src="${product.image}"
-                alt="${product.name}"
-            >
-
-            <div>
-
-                <div class="cart-name">
-                    ${product.name}
-                </div>
-
-                <div class="cart-price">
-                    ${product.price} DH
-                </div>
-
-                <div class="quantity">
-
-                    <button
-                        onclick="changeQuantity(${product.id},-1)"
-                    >
-                        −
-                    </button>
-
-                    <strong>
-                        ${item.quantity}
-                    </strong>
-
-                    <button
-                        onclick="changeQuantity(${product.id},1)"
-                    >
-                        +
-                    </button>
-
-                </div>
-
-                <button
-                    class="remove"
-                    onclick="removeItem(${product.id})"
-                >
-                    Supprimer
-                </button>
-
-            </div>
-
-            <strong>
-                ${product.price*item.quantity} DH
-            </strong>
-
-        </div>
-
-        `;
-
-    });
-
-
-    document.getElementById("cartTotal")
-    .textContent=total+" DH";
+    document.getElementById("cartTotal").textContent =
+        total + " DH";
 
 }
 
@@ -3835,53 +2261,47 @@ function updateCart(){
 function changeQuantity(id,change){
 
     const item =
-    cart.find(x=>x.id===id);
+        cart.find(item=>item.id===id);
 
     if(!item)return;
 
     item.quantity += change;
 
-    if(item.quantity<=0){
+    if(item.quantity <= 0){
 
         cart =
-        cart.filter(x=>x.id!==id);
+            cart.filter(item=>item.id!==id);
 
     }
 
-    saveCart();
     updateCart();
 
 }
 
 
-function removeItem(id){
+function removeFromCart(id){
 
     cart =
-    cart.filter(x=>x.id!==id);
+        cart.filter(item=>item.id!==id);
 
-    saveCart();
     updateCart();
 
 }
 
 
-/* =====================================================
+/* =========================================
    CART OPEN
-===================================================== */
+========================================= */
 
 function openCart(){
 
-    updateCart();
+    document
+        .getElementById("cart")
+        .classList.add("open");
 
     document
-    .getElementById("cart")
-    .classList.add("show");
-
-    document
-    .getElementById("overlay")
-    .classList.add("show");
-
-    document.body.style.overflow="hidden";
+        .getElementById("overlay")
+        .classList.add("show");
 
 }
 
@@ -3889,410 +2309,260 @@ function openCart(){
 function closeCart(){
 
     document
-    .getElementById("cart")
-    .classList.remove("show");
+        .getElementById("cart")
+        .classList.remove("open");
 
     document
-    .getElementById("overlay")
-    .classList.remove("show");
-
-    document.body.style.overflow="";
+        .getElementById("overlay")
+        .classList.remove("show");
 
 }
 
 
-/* =====================================================
-   WHATSAPP
-===================================================== */
+/* =========================================
+   WHATSAPP ORDER
+========================================= */
 
-function whatsappOrder(){
+function orderWhatsApp(){
 
-    if(cart.length===0){
+    if(cart.length === 0){
 
-        toast("Ton panier est vide.");
+        showToast("Ton panier est vide.");
 
         return;
 
     }
 
-    let message =
-    "Bonjour VÉLORA 👟%0A%0A"+
-    "Je souhaite commander :%0A";
 
-    let total=0;
+    let message =
+        "Bonjour MHD STORE 👟%0A%0A" +
+        "Je souhaite commander :%0A";
 
 
     cart.forEach(item=>{
 
-        const product =
-        products.find(p=>p.id===item.id);
-
-        total +=
-        product.price*item.quantity;
-
         message +=
-        "• "+
-        product.name+
-        " x"+
-        item.quantity+
-        " — "+
-        product.price*item.quantity+
-        " DH%0A";
+            "• " +
+            item.name +
+            " x" +
+            item.quantity +
+            " — " +
+            (item.price*item.quantity) +
+            " DH%0A";
 
     });
 
 
+    const total =
+        cart.reduce(
+            (sum,item)=>
+                sum+(item.price*item.quantity),
+            0
+        );
+
+
     message +=
-    "%0ATotal : "+
-    total+
-    " DH%0A%0A"+
-    "Nom : %0A"+
-    "Téléphone : %0A"+
-    "Ville : %0A"+
-    "Taille : ";
+        "%0A💰 Total : " +
+        total +
+        " DH%0A%0A" +
+        "Nom : %0A" +
+        "Ville : %0A" +
+        "Taille : ";
 
 
     window.open(
-        "https://wa.me/212600000000?text="+message,
+        "https://wa.me/212657461342?text="+message,
         "_blank"
     );
 
 }
 
 
-/* =====================================================
-   SEARCH
-===================================================== */
+/* =========================================
+   PRODUCT MODAL
+========================================= */
 
-function openSearch(){
+function openProduct(id){
+
+    const product =
+        productsData.find(p=>p.id===id);
+
+    if(!product)return;
+
+    document.getElementById("modalImage").src =
+        product.image;
+
+    document.getElementById("modalBrand").textContent =
+        product.brand;
+
+    document.getElementById("modalName").textContent =
+        product.name;
+
+    document.getElementById("modalDescription").textContent =
+        product.description;
+
+    document.getElementById("modalPrice").textContent =
+        product.price + " DH";
+
+
+    document.getElementById("modalAdd").onclick =
+        function(){
+
+            addToCart(product.id);
+
+            closeProduct();
+
+        };
+
 
     document
-    .getElementById("searchModal")
-    .classList.add("show");
+        .querySelectorAll(".size")
+        .forEach(size =>
+            size.classList.remove("selected")
+        );
+
+
+    document
+        .getElementById("productModal")
+        .classList.add("show");
+
+}
+
+
+function closeProduct(){
+
+    document
+        .getElementById("productModal")
+        .classList.remove("show");
+
+}
+
+
+function selectSize(button){
+
+    document
+        .querySelectorAll(".size")
+        .forEach(size =>
+            size.classList.remove("selected")
+        );
+
+    button.classList.add("selected");
+
+}
+
+
+/* =========================================
+   FAVORIS
+========================================= */
+
+function toggleFavorite(button){
+
+    button.classList.toggle("active");
+
+    if(button.classList.contains("active")){
+
+        button.textContent="♥";
+
+        showToast("Ajouté aux favoris ♥");
+
+    }else{
+
+        button.textContent="♡";
+
+    }
+
+}
+
+
+/* =========================================
+   SEARCH BUTTON
+========================================= */
+
+function focusSearch(){
+
+    document
+        .getElementById("collection")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
 
     setTimeout(()=>{
+
         document
-        .getElementById("searchInput")
-        .focus();
-    },150);
+            .getElementById("search")
+            .focus();
+
+    },500);
 
 }
 
 
-function closeSearch(){
+/* =========================================
+   MOBILE MENU / SCROLL
+========================================= */
+
+function scrollToProducts(){
 
     document
-    .getElementById("searchModal")
-    .classList.remove("show");
+        .getElementById("collection")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
 
 }
 
 
-function searchProducts(query){
-
-    query =
-    query.toLowerCase().trim();
-
-    const results =
-    products.filter(p=>
-        p.name.toLowerCase().includes(query) ||
-        p.brand.toLowerCase().includes(query) ||
-        p.category.toLowerCase().includes(query) ||
-        p.gender.toLowerCase().includes(query)
-    );
-
-
-    const container =
-    document.getElementById("searchResults");
-
-
-    if(!query){
-
-        container.innerHTML=
-        `<p style="color:#999">
-            Tape le nom d'une paire...
-        </p>`;
-
-        return;
-
-    }
-
-
-    if(results.length===0){
-
-        container.innerHTML=
-        `<p style="color:#999">
-            Aucun produit trouvé.
-        </p>`;
-
-        return;
-
-    }
-
-
-    container.innerHTML =
-    results.map(p=>`
-
-        <div
-            class="search-result"
-            onclick="closeSearch();openProduct(${p.id})"
-        >
-
-            <img
-                src="${p.image}"
-                alt="${p.name}"
-            >
-
-            <div>
-
-                <strong>
-                    ${p.name}
-                </strong>
-
-                <div
-                    style="
-                    color:#999;
-                    font-size:10px;
-                    margin-top:5px"
-                >
-                    ${p.price} DH
-                </div>
-
-            </div>
-
-        </div>
-
-    `).join("");
-
-}
-
-
-/* =====================================================
-   FAQ
-===================================================== */
-
-function toggleFAQ(button){
-
-    button
-    .parentElement
-    .classList.toggle("open");
-
-}
-
-
-/* =====================================================
-   NEWSLETTER
-===================================================== */
-
-function newsletter(e){
-
-    e.preventDefault();
-
-    toast(
-        "Bienvenue dans VÉLORA CLUB 🎉"
-    );
-
-    e.target.reset();
-
-}
-
-
-/* =====================================================
-   PROMO
-===================================================== */
-
-function copyPromo(){
-
-    navigator.clipboard
-    .writeText("VELORA10");
-
-    toast(
-        "Code VELORA10 copié !"
-    );
-
-}
-
-
-/* =====================================================
+/* =========================================
    TOAST
-===================================================== */
+========================================= */
 
 let toastTimer;
 
-function toast(message){
+function showToast(message){
 
-    const element =
-    document.getElementById("toast");
+    const toast =
+        document.getElementById("toast");
 
-    element.textContent=message;
+    toast.textContent =
+        message;
 
-    element.classList.add("show");
+    toast.classList.add("show");
 
     clearTimeout(toastTimer);
 
     toastTimer =
-    setTimeout(()=>{
-        element.classList.remove("show");
-    },2500);
+        setTimeout(()=>{
+
+            toast.classList.remove("show");
+
+        },2200);
 
 }
 
 
-/* =====================================================
-   DARK MODE
-===================================================== */
-
-let dark =
-localStorage.getItem("velora_dark")==="true";
-
-
-function applyDark(){
-
-    if(dark){
-
-        document.documentElement
-        .style.setProperty("--bg","#0a0a0b");
-
-        document.documentElement
-        .style.setProperty("--card","#151515");
-
-        document.documentElement
-        .style.setProperty("--text","#f5f5f5");
-
-        document.documentElement
-        .style.setProperty("--muted","#999");
-
-        document.documentElement
-        .style.setProperty("--line","#303030");
-
-    }
-    else{
-
-        document.documentElement
-        .style.setProperty("--bg","#f5f4f0");
-
-        document.documentElement
-        .style.setProperty("--card","#ffffff");
-
-        document.documentElement
-        .style.setProperty("--text","#111111");
-
-        document.documentElement
-        .style.setProperty("--muted","#777777");
-
-        document.documentElement
-        .style.setProperty("--line","#e4e2dd");
-
-    }
-
-}
-
-
-function toggleDark(){
-
-    dark=!dark;
-
-    localStorage.setItem(
-        "velora_dark",
-        dark
-    );
-
-    applyDark();
-
-    toast(
-        dark
-        ? "Mode sombre activé 🌙"
-        : "Mode clair activé ☀️"
-    );
-
-}
-
-
-/* =====================================================
-   MOBILE MENU
-===================================================== */
-
-function mobileMenu(){
-
-    const nav =
-    document.querySelector(".nav-links");
-
-    if(nav.style.display==="flex"){
-
-        nav.style.display="none";
-
-        return;
-
-    }
-
-    nav.style.position="absolute";
-    nav.style.top="68px";
-    nav.style.left="0";
-    nav.style.right="0";
-    nav.style.background="#fff";
-    nav.style.padding="22px";
-    nav.style.flexDirection="column";
-    nav.style.alignItems="flex-start";
-    nav.style.borderBottom="1px solid #ddd";
-    nav.style.display="flex";
-
-}
-
-
-/* =====================================================
-   OUTSIDE MODAL
-===================================================== */
-
-document
-.getElementById("productModal")
-.addEventListener("click",function(e){
-
-    if(e.target===this){
-        closeProduct();
-    }
-
-});
-
-
-document
-.getElementById("searchModal")
-.addEventListener("click",function(e){
-
-    if(e.target===this){
-        closeSearch();
-    }
-
-});
-
-
-/* =====================================================
-   ESC
-===================================================== */
+/* =========================================
+   ESCAPE
+========================================= */
 
 document.addEventListener("keydown",function(e){
 
-    if(e.key==="Escape"){
+    if(e.key === "Escape"){
 
         closeCart();
         closeProduct();
-        closeSearch();
 
     }
 
 });
 
 
-/* =====================================================
+/* =========================================
    INITIALISATION
-===================================================== */
+========================================= */
 
 renderProducts();
 
-renderGender();
-
 updateCart();
-
-applyDark();
 
 </script>
 
