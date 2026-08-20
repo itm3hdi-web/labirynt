@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DAHABI — Bijoux acier inoxydable</title>
+<title>Jewelry by MHD — Bijoux acier inoxydable</title>
 <style>
   :root{
     --cream:#F7F3EC;
@@ -73,9 +73,8 @@
     border-radius:2px;
     position:relative;overflow:hidden;
   }
-  .hero-visual::after{
-    content:"";position:absolute;inset:0;
-    background:repeating-linear-gradient(115deg, rgba(255,255,255,.10) 0 2px, transparent 2px 40px);
+  .hero-visual img{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
   }
   .hero-visual .tag{
     position:absolute;bottom:24px;left:24px;
@@ -107,6 +106,10 @@
     aspect-ratio:1/1;
     background:linear-gradient(135deg,#EFE7D6,#D9C6A2);
     position:relative;
+    overflow:hidden;
+  }
+  .card-img img{
+    width:100%;height:100%;object-fit:cover;display:block;
   }
   .card-img span{
     position:absolute;top:12px;left:12px;
@@ -163,7 +166,7 @@
 <body>
 
 <header>
-  <div class="logo">DAHABI</div>
+  <div class="logo">Jewelry by MHD</div>
   <nav>
     <a href="#collection">Collection</a>
     <a href="#histoire">Notre matière</a>
@@ -175,10 +178,10 @@
   <div>
     <p class="eyebrow">Acier inoxydable · Fait pour durer</p>
     <h1>Des bijoux qui tiennent leur <em>promesse</em>, pas seulement leur premier jour.</h1>
-    <p>Fini les bijoux qui noircissent après deux douches. Notre acier inoxydable garde son éclat — testé et porté au quotidien, pas juste en photo.</p>
+    <p>Fini les bijoux qui noircissent après deux douches. Notre acier inoxydable 316L garde son éclat — testé et porté au quotidien, pas juste en photo.</p>
     <a href="#collection" class="hero-cta">Voir la collection →</a>
   </div>
-  <div class="hero-visual"><span class="tag">Nouvelle collection</span></div>
+  <div class="hero-visual"><img src="images/parure-fleurs.png" alt="Parure bijoux fleurs"><span class="tag">Nouvelle collection</span></div>
 </section>
 
 <div class="strip">
@@ -195,10 +198,10 @@
   <div class="grid">
 
     <div class="card">
-      <div class="card-img"><span>Bracelet</span></div>
+      <div class="card-img"><img src="images/bracelet-barrette.png" alt="Bracelet barrette ovale strass"><span>Bracelet</span></div>
       <div class="card-body">
-        <h3>Bracelet chaîne fine — pendentif cœur</h3>
-        <p>Chaîne fine dorée, fermoir ajustable, acier inoxydable.</p>
+        <h3>Bracelet barrette ovale sertie</h3>
+        <p>Chaîne fine dorée, barrette ornée de strass, fermoir ajustable, acier inoxydable.</p>
         <div class="card-foot">
           <span class="price">130 DH</span>
           <a class="buy" href="#contact">Commander</a>
@@ -207,36 +210,24 @@
     </div>
 
     <div class="card">
-      <div class="card-img"><span>Bague</span></div>
+      <div class="card-img"><img src="images/bracelet-coeur.png" alt="Bracelet pendentif coeur infini"><span>Bracelet</span></div>
       <div class="card-body">
-        <h3>Set de 4 bagues empilables</h3>
-        <p>Anneaux fins à combiner, tailles ajustables.</p>
+        <h3>Bracelet pendentif cœur & infini</h3>
+        <p>Chaîne fine dorée, breloque cœur sertie et symbole infini, acier inoxydable.</p>
         <div class="card-foot">
-          <span class="price">154 DH</span>
+          <span class="price">120 DH</span>
           <a class="buy" href="#contact">Commander</a>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-img"><span>Bague</span></div>
+      <div class="card-img"><img src="images/parure-fleurs.png" alt="Parure collier et bracelet fleurs"><span>Parure</span></div>
       <div class="card-body">
-        <h3>Chevalière minimaliste</h3>
-        <p>Anneau doré épais, finition mate, unisexe.</p>
+        <h3>Parure fleurs émail bleu — collier & bracelet</h3>
+        <p>Collier et bracelet assortis, motifs fleurs serties émail bleu, acier inoxydable.</p>
         <div class="card-foot">
-          <span class="price">114 DH</span>
-          <a class="buy" href="#contact">Commander</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-img"><span>Bracelet</span></div>
-      <div class="card-body">
-        <h3>Set de bracelets joncs (x6)</h3>
-        <p>Empilables, effet cascade, portés au poignet.</p>
-        <div class="card-foot">
-          <span class="price">214 DH</span>
+          <span class="price">219 DH</span>
           <a class="buy" href="#contact">Commander</a>
         </div>
       </div>
@@ -259,12 +250,13 @@
     <p class="eyebrow">Commander</p>
     <h2>Écrivez-nous, on confirme votre commande en quelques minutes.</h2>
   </div>
-  <a href="https://wa.me/212600000000" class="hero-cta">Commander sur WhatsApp →</a>
+  <a href="https://wa.me/212657461342" class="hero-cta">Commander sur WhatsApp →</a>
+  <a href="https://instagram.com/jewelry.by.mhd" class="hero-cta" style="background:transparent;color:var(--ink);border:1px solid var(--ink);margin-left:12px;">Suivre sur Instagram →</a>
 </section>
 
 <footer>
-  <div>© 2026 DAHABI — Bijoux acier inoxydable, Maroc.</div>
-  <div><a href="https://wa.me/212600000000">WhatsApp</a> · <a href="#collection">Collection</a></div>
+  <div>© 2026 Jewelry by MHD — Bijoux acier inoxydable, Maroc.</div>
+  <div><a href="https://wa.me/212657461342">WhatsApp 06 57 46 13 42</a> · <a href="https://instagram.com/jewelry.by.mhd">Instagram</a> · <a href="#collection">Collection</a></div>
 </footer>
 
 </body>
